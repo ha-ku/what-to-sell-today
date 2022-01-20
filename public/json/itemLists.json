@@ -1,0 +1,5060 @@
+{
+	"companySealList": [
+		{
+			"name": "猎人风味水蜥饼",
+			"cost": 200
+		},
+		{
+			"name": "斑铜矿",
+			"cost": 200
+		},
+		{
+			"name": "沉积岩磨刀石",
+			"cost": 200
+		},
+		{
+			"name": "铅丹",
+			"cost": 200
+		},
+		{
+			"name": "天鹅之羽",
+			"cost": 200
+		},
+		{
+			"name": "雄鹰之羽",
+			"cost": 200
+		},
+		{
+			"name": "灰汁",
+			"cost": 200
+		},
+		{
+			"name": "石灰硫磺合剂",
+			"cost": 200
+		},
+		{
+			"name": "焦炭",
+			"cost": 200
+		},
+		{
+			"name": "兽脂",
+			"cost": 200
+		},
+		{
+			"name": "树汁块",
+			"cost": 200
+		},
+		{
+			"name": "软糊怪肉",
+			"cost": 200
+		},
+		{
+			"name": "1级暗物质",
+			"cost": 12
+		},
+		{
+			"name": "2级暗物质",
+			"cost": 34
+		},
+		{
+			"name": "3级暗物质",
+			"cost": 70
+		},
+		{
+			"name": "4级暗物质",
+			"cost": 138
+		},
+		{
+			"name": "5级暗物质",
+			"cost": 230
+		},
+		{
+			"name": "6级暗物质",
+			"cost": 345
+		},
+		{
+			"name": "7级暗物质",
+			"cost": 575
+		},
+		{
+			"name": "强心剂",
+			"cost": 500
+		},
+		{
+			"name": "高级料酒",
+			"cost": 20
+		},
+		{
+			"name": "纯净水",
+			"cost": 20
+		},
+		{
+			"name": "妖异之血",
+			"cost": 20
+		},
+		{
+			"name": "私用以太之光",
+			"cost": 14470
+		},
+		{
+			"name": "精炼药",
+			"cost": 1500
+		},
+		{
+			"name": "硅化木",
+			"cost": 1500
+		},
+		{
+			"name": "白钨矿",
+			"cost": 1500
+		},
+		{
+			"name": "拉吉克灵沙",
+			"cost": 1500
+		},
+		{
+			"name": "蛟蜥的粗皮",
+			"cost": 1500
+		},
+		{
+			"name": "山羊绒",
+			"cost": 1500
+		},
+		{
+			"name": "金刚砂",
+			"cost": 1500
+		},
+		{
+			"name": "星八角",
+			"cost": 30
+		},
+		{
+			"name": "卫月新薯",
+			"cost": 30
+		},
+		{
+			"name": "皇家可可豆",
+			"cost": 30
+		},
+		{
+			"name": "填鸭胸肉",
+			"cost": 30
+		},
+		{
+			"name": "驱幻晶",
+			"cost": 200
+		},
+		{
+			"name": "黄褐乳胶",
+			"cost": 450
+		},
+		{
+			"name": "塞尔法特尔天然水",
+			"cost": 2500
+		},
+		{
+			"name": "速干密封剂",
+			"cost": 2300
+		},
+		{
+			"name": "硼砂",
+			"cost": 2500
+		},
+		{
+			"name": "织蛛网",
+			"cost": 2250
+		},
+		{
+			"name": "乌兹矿",
+			"cost": 2250
+		},
+		{
+			"name": "拉吉克灵药",
+			"cost": 250
+		},
+		{
+			"name": "皮革蜡油",
+			"cost": 2250
+		},
+		{
+			"name": "烟肉",
+			"cost": 250
+		},
+		{
+			"name": "烘焙咖啡豆",
+			"cost": 250
+		},
+		{
+			"name": "热巧克力",
+			"cost": 900
+		},
+		{
+			"name": "栗子冰糕",
+			"cost": 700
+		},
+		{
+			"name": "凯撒面包",
+			"cost": 550
+		},
+		{
+			"name": "蘑菇沙拉",
+			"cost": 800
+		},
+		{
+			"name": "魔蛇鸟肉丸",
+			"cost": 600
+		},
+		{
+			"name": "精金投斧",
+			"cost": 5000
+		},
+		{
+			"name": "钛合金镜",
+			"cost": 5000
+		},
+		{
+			"name": "破魔箭",
+			"cost": 5000
+		},
+		{
+			"name": "国王饼",
+			"cost": 5000
+		},
+		{
+			"name": "芝麻饼干",
+			"cost": 550
+		},
+		{
+			"name": "玻璃纤维",
+			"cost": 7000
+		},
+		{
+			"name": "阿尔基克薰衣草种子",
+			"cost": 500
+		},
+		{
+			"name": "虚无界风茄种子",
+			"cost": 500
+		},
+		{
+			"name": "幻象棱晶",
+			"cost": 200
+		}
+	],
+	"dyeList": [
+		{
+			"name": "皇室蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "深渊蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "东洲蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "风暴蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "靛青蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "虚空蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "卫月红染剂",
+			"cost": 1
+		},
+		{
+			"name": "果酒红染剂",
+			"cost": 1
+		},
+		{
+			"name": "蜂蜜黄染剂",
+			"cost": 1
+		},
+		{
+			"name": "玉米黄染剂",
+			"cost": 1
+		},
+		{
+			"name": "素雪白染剂",
+			"cost": 1
+		},
+		{
+			"name": "煤烟黑染剂",
+			"cost": 1
+		},
+		{
+			"name": "南瓜橙染剂",
+			"cost": 1
+		},
+		{
+			"name": "沃土棕染剂",
+			"cost": 1
+		},
+		{
+			"name": "日落橙染剂",
+			"cost": 1
+		},
+		{
+			"name": "钴铁棕染剂",
+			"cost": 1
+		},
+		{
+			"name": "猎人绿染剂",
+			"cost": 1
+		},
+		{
+			"name": "魔花绿染剂",
+			"cost": 1
+		},
+		{
+			"name": "口花绿染剂",
+			"cost": 1
+		},
+		{
+			"name": "深林绿染剂",
+			"cost": 1
+		},
+		{
+			"name": "天上蓝染剂",
+			"cost": 1
+		},
+		{
+			"name": "莲花粉染剂",
+			"cost": 1
+		},
+		{
+			"name": "帝王紫染剂",
+			"cost": 1
+		},
+		{
+			"name": "仙子梅染剂",
+			"cost": 1
+		},
+		{
+			"name": "蜂鸟粉染剂",
+			"cost": 1
+		}
+	],
+	"botanyList": [
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 1,
+			"name": "乳胶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "火之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "冰之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "风之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "土之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "雷之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 80,
+			"level": 1,
+			"name": "水之碎晶"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 2,
+			"name": "亚拉戈蜗牛"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 2,
+			"name": "枫树树汁"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 3,
+			"name": "枫木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 4,
+			"name": "桂皮"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 5,
+			"name": "枫树枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 5,
+			"name": "蜂巢"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 6,
+			"name": "白鸡之羽"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 6,
+			"name": "提诺尔卡槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 7,
+			"name": "拉诺西亚香橙"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 7,
+			"name": "拉诺西亚香橙种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 8,
+			"name": "梣木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 9,
+			"name": "可可豆"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 9,
+			"name": "梣树枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 10,
+			"name": "丁香花"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 10,
+			"name": "乌鸦之羽"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "低地葡萄"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "鸡油菌"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "黑麦"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "小麦"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "大蒜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "绿树蟾蜍"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "莫柯草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 11,
+			"name": "人参"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 11,
+			"name": "低地葡萄种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 11,
+			"name": "大蒜球根"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "野洋葱"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "水牛豆"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "榆木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "麦秆"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "薰衣草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 12,
+			"name": "蝰蛇"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 12,
+			"name": "野洋葱球根"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 12,
+			"name": "薰衣草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "库尔札斯胡萝卜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "食人魔南瓜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "拉诺西亚莴苣"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "橄榄"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "腐殖质"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 13,
+			"name": "康乃馨"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 13,
+			"name": "库尔札斯胡萝卜种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 13,
+			"name": "拉诺西亚莴苣种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 13,
+			"name": "橄榄种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 14,
+			"name": "谢尔达莱菠菜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 14,
+			"name": "山栗"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 14,
+			"name": "黑胡椒"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 14,
+			"name": "草棉"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 14,
+			"name": "黑胡椒种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 15,
+			"name": "红宝石番茄"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 15,
+			"name": "高山萝卜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 15,
+			"name": "高原芹"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 15,
+			"name": "马郁兰"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 16,
+			"name": "红辣椒"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 16,
+			"name": "仙女苹果"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 16,
+			"name": "婴猴薄荷"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 16,
+			"name": "红辣椒种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 16,
+			"name": "仙女苹果种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 17,
+			"name": "太阳柠檬"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 17,
+			"name": "小扁豆"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 17,
+			"name": "太阳柠檬种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 18,
+			"name": "仙人掌叶"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 18,
+			"name": "新薯"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 18,
+			"name": "颠茄"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 18,
+			"name": "新薯芽块"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 19,
+			"name": "金钱蘑"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 19,
+			"name": "紫杉原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "火晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "冰晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "风晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "土晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "雷晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "水晶草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "紫杉枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "拉诺西亚幼苗"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "黑衣森林幼苗"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "萨纳兰幼苗"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 20,
+			"name": "白蝎"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 21,
+			"name": "仙子梅"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 21,
+			"name": "胡桃"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 21,
+			"name": "仙子梅种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 22,
+			"name": "贵族葡萄"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 22,
+			"name": "草菇"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 23,
+			"name": "阿拉米格芥子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 23,
+			"name": "诺菲卡槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 23,
+			"name": "阿拉米格芥子种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 24,
+			"name": "生姜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 24,
+			"name": "胡桃原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 24,
+			"name": "甘菊"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 24,
+			"name": "生姜根"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 24,
+			"name": "甘菊种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 25,
+			"name": "糯米"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 25,
+			"name": "多实玉米"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 25,
+			"name": "多实玉米种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 26,
+			"name": "翡翠豆"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 26,
+			"name": "火之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 60,
+			"level": 26,
+			"name": "冰之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 60,
+			"level": 26,
+			"name": "风之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 60,
+			"level": 26,
+			"name": "土之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 60,
+			"level": 26,
+			"name": "雷之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 60,
+			"level": 26,
+			"name": "水之水晶"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 27,
+			"name": "巫茄"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 27,
+			"name": "巫茄种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "中原甘蓝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "蓝色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "红色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "黄色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "灰色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "棕色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "绿色色素"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 28,
+			"name": "紫色色素"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 28,
+			"name": "中原甘蓝种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 29,
+			"name": "陆行鸟之羽"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 30,
+			"name": "鳄梨"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 30,
+			"name": "蚂蟥"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 31,
+			"name": "橡树枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 31,
+			"name": "亚麻"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 31,
+			"name": "亚麻种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 32,
+			"name": "芦荟"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 32,
+			"name": "中原罗勒草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 32,
+			"name": "橡木原木"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 32,
+			"name": "中原罗勒草种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 33,
+			"name": "白松露"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 33,
+			"name": "红血草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 33,
+			"name": "风茄"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 33,
+			"name": "风茄种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 34,
+			"name": "盐韭"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 34,
+			"name": "月桂"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 34,
+			"name": "野鸡之羽"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 35,
+			"name": "龙息椒"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 35,
+			"name": "沙漠番红花"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 35,
+			"name": "狼蛛"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 36,
+			"name": "血红奇异果"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 36,
+			"name": "铁帽橡果"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 36,
+			"name": "血红奇异果种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 37,
+			"name": "艾蒿"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 37,
+			"name": "红木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 38,
+			"name": "球蓟"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 39,
+			"name": "西葫芦"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 39,
+			"name": "百里香"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 39,
+			"name": "肉豆蔻"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 40,
+			"name": "扁桃"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 40,
+			"name": "扁桃种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 41,
+			"name": "撒沟厉鼠尾草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 42,
+			"name": "晶亮苹果"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 42,
+			"name": "黑蝎"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 42,
+			"name": "晶亮苹果种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 43,
+			"name": "罗兰莓"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 43,
+			"name": "罗兰莓种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 44,
+			"name": "槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 45,
+			"name": "毒镖蛙"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 46,
+			"name": "紫檀原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 47,
+			"name": "紫檀枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 48,
+			"name": "萨纳兰茶叶"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 49,
+			"name": "熔岩蟾蜍"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 49,
+			"name": "白妙草"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 50,
+			"name": "旧世界无花果"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 50,
+			"name": "旧世界无花果种子"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "泽梅尔番茄"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "多刺菠萝"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "蜜柠檬"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "黑松露"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "云杉原木"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "蚕茧"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "萨维奈槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "延龄花"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "延龄草的球根"
+		},
+		{
+			"time": 40,
+			"amount": 9,
+			"level": 50,
+			"name": "吸血枝"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 50,
+			"name": "泽梅尔番茄种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 50,
+			"name": "蜜柠檬种子"
+		},
+		{
+			"time": 40,
+			"amount": 1,
+			"level": 50,
+			"name": "多刺菠萝种子"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "无属性水晶"
+		},
+		{
+			"time": 40,
+			"amount": 3,
+			"level": 50,
+			"name": "马兹拉雅草"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 50,
+			"name": "拉诺西亚韭菜"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "谢尔达莱嫩菠菜"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 50,
+			"name": "黄杏"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "鲜血橙"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "竹材"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "水鸟之羽"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "绯红树汁"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "提诺尔卡茶叶"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 50,
+			"name": "暗物质晶簇"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "丝柏原木"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "黑檀原木"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 50,
+			"name": "迷迭香"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 51,
+			"name": "牛肝菌"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 51,
+			"name": "雪松原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 51,
+			"name": "雪松枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 51,
+			"name": "虹棉"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 52,
+			"name": "小包心菜"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 52,
+			"name": "小包心菜种子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 52,
+			"name": "茴香"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 53,
+			"name": "库尔札斯茶叶"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 53,
+			"name": "库尔札斯茶树种子"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 53,
+			"name": "云海洋葱"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 53,
+			"name": "高地小麦"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 54,
+			"name": "龙堡槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 54,
+			"name": "暗栗木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 54,
+			"name": "青麻"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 55,
+			"name": "库尔札斯青葱"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 55,
+			"name": "熔岩甜菜"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 55,
+			"name": "绿宝石豆"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 55,
+			"name": "毛栗子"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 55,
+			"name": "暗栗树枝"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 56,
+			"name": "伊修加德柠檬"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 56,
+			"name": "紫锥花"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 57,
+			"name": "云海香蕉"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 57,
+			"name": "美拉西迪亚芝麻"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 57,
+			"name": "菊蒿"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 58,
+			"name": "阿巴拉提亚槲寄生"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 58,
+			"name": "桦木原木"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 58,
+			"name": "桦树枝"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 58,
+			"name": "芸香"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 59,
+			"name": "伞蘑"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 59,
+			"name": "桦木树汁"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 59,
+			"name": "蒲公英"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 59,
+			"name": "香菜"
+		},
+		{
+			"time": 40,
+			"amount": 7,
+			"level": 60,
+			"name": "卡贝基野菜"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "龙堡红辣椒"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "鲜红罗兰莓"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "棕菇"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 60,
+			"name": "高原小麦"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "香草豆"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "甜扁桃"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "显贵鼠尾草"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "柚木原木"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "金合欢树皮"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 60,
+			"name": "樟木原木"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "樟木古树"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 60,
+			"name": "樟木枝"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "山毛榉树枝"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 60,
+			"name": "淡雪棉"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "雪棉"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "星棉"
+		},
+		{
+			"time": 40,
+			"amount": 20,
+			"level": 60,
+			"name": "赤麻"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "星极花"
+		},
+		{
+			"time": 40,
+			"amount": 5,
+			"level": 60,
+			"name": "树汁结晶"
+		},
+		{
+			"time": 40,
+			"amount": 30,
+			"level": 60,
+			"name": "猫薄荷"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 61,
+			"name": "枇杷"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 61,
+			"name": "山毛榉原木"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 62,
+			"name": "山芋"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 62,
+			"name": "荞麦果实"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 62,
+			"name": "红玉藻"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 63,
+			"name": "落叶松原木"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 63,
+			"name": "红玉棉"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 63,
+			"name": "神圣罗勒草"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 64,
+			"name": "甜菜"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 64,
+			"name": "绿韭葱"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 64,
+			"name": "大豆"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 64,
+			"name": "紫菜"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 64,
+			"name": "松脂"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 65,
+			"name": "葛根"
+		},
+		{
+			"time": 50,
+			"amount": 5,
+			"level": 65,
+			"name": "竹笋"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 65,
+			"name": "香菇"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 65,
+			"name": "孜然"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 65,
+			"name": "松木原木"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 65,
+			"name": "葛藤"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 66,
+			"name": "白萝卜"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 66,
+			"name": "基拉巴尼亚胡萝卜"
+		},
+		{
+			"time": 50,
+			"amount": 5,
+			"level": 66,
+			"name": "莲藕"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 66,
+			"name": "日出甘蓝"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 66,
+			"name": "甜茴香"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 66,
+			"name": "柿子叶"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 67,
+			"name": "柿子"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 67,
+			"name": "红玉海带"
+		},
+		{
+			"time": 50,
+			"amount": 20,
+			"level": 67,
+			"name": "柿木原木"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 68,
+			"name": "长颈骆姜"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 68,
+			"name": "延夏芹"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 68,
+			"name": "香荠"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 68,
+			"name": "鼠曲草"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 68,
+			"name": "繁缕"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 68,
+			"name": "稻槎草"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 69,
+			"name": "多玛茄子"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 69,
+			"name": "玉茧"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "奥萨德梅"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 70,
+			"name": "黑夜胡椒"
+		},
+		{
+			"time": 50,
+			"amount": 15,
+			"level": 70,
+			"name": "榉木原木"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "祝圣罗勒草"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "榧木原木"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "苎麻"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "太阳棉"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "黑柳原木"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "真麻"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "古木树液块"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "乌仑代硬木原木"
+		},
+		{
+			"time": 50,
+			"amount": 3,
+			"level": 70,
+			"name": "延夏棉"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "紫色胡萝卜"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "卷叶芹"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "血番茄"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "仙子苹果"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "油橄榄"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "白橡木原木"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 71,
+			"name": "白麻"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 72,
+			"name": "野园甜菜"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 72,
+			"name": "蚕豆"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 72,
+			"name": "仙果木原木"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 72,
+			"name": "虹茧"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 73,
+			"name": "山地小麦"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 74,
+			"name": "欧薄荷"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 74,
+			"name": "白梣木原木"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 74,
+			"name": "仙子棉"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 75,
+			"name": "皇家葡萄"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 75,
+			"name": "奶油菇"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 75,
+			"name": "大蜜蜂的巢"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 76,
+			"name": "黄新薯"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 76,
+			"name": "琥珀丁香"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 76,
+			"name": "沙柚木原木"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 76,
+			"name": "甜香荠"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 77,
+			"name": "邪衣薰衣草"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 78,
+			"name": "迷雾菠菜"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 78,
+			"name": "香杏"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 78,
+			"name": "邦巴米"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 78,
+			"name": "咖啡豆"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 78,
+			"name": "青柠罗勒草"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 79,
+			"name": "矮人棉"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 79,
+			"name": "虎百合"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 79,
+			"name": "光芒大丁草"
+		},
+		{
+			"time": 60,
+			"amount": 15,
+			"level": 80,
+			"name": "愈疮木原木"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "小柠檬"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "檀香木原木"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "泡茧"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "檀香木树液"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "印茄原木"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "紫草"
+		},
+		{
+			"time": 60,
+			"amount": 3,
+			"level": 80,
+			"name": "帝王蕨菜"
+		}
+	],
+	"miningList": [
+		{
+			"level": 1,
+			"name": "火之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 1,
+			"name": "冰之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 1,
+			"name": "风之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 1,
+			"name": "土之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 1,
+			"name": "雷之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 1,
+			"name": "水之碎晶",
+			"amount": 80,
+			"time": 40
+		},
+		{
+			"level": 2,
+			"name": "铜矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 3,
+			"name": "浑水",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 5,
+			"name": "骨片",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 6,
+			"name": "锡矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 7,
+			"name": "日长石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 7,
+			"name": "天青石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 8,
+			"name": "枯骨",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 9,
+			"name": "锌矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "黑曜石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "黏土",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 11,
+			"name": "细沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 11,
+			"name": "铜沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 12,
+			"name": "岩盐",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 13,
+			"name": "砂岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 14,
+			"name": "铁矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 14,
+			"name": "铁沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 15,
+			"name": "朱砂",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 16,
+			"name": "孔雀石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 17,
+			"name": "石灰岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 17,
+			"name": "榍石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 17,
+			"name": "萤石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 18,
+			"name": "赛黄晶原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 19,
+			"name": "樱贝",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 19,
+			"name": "明矾",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 20,
+			"name": "泥岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 21,
+			"name": "土性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 22,
+			"name": "银沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 23,
+			"name": "火性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 23,
+			"name": "冰性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 24,
+			"name": "风性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 24,
+			"name": "雷性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 24,
+			"name": "发泡水",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "银矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "水性岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "爆弹怪的灰",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "火之水晶",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "冰之水晶",
+			"amount": 60,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "风之水晶",
+			"amount": 60,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "土之水晶",
+			"amount": 60,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "雷之水晶",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "水之水晶",
+			"amount": 60,
+			"time": 40
+		},
+		{
+			"level": 27,
+			"name": "硅砂",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "飞龙黑曜石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "蓝色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "红色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "黄色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "灰色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "棕色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "绿色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "紫色色素",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 29,
+			"name": "硫磺",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "粉砂岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "硝石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "1级拉诺西亚土壤",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "1级黑衣森林土壤",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "1级萨纳兰土壤",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 31,
+			"name": "花岗岩",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 31,
+			"name": "石榴石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 32,
+			"name": "金绿柱石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 33,
+			"name": "透绿柱石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 33,
+			"name": "橄榄石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 33,
+			"name": "秘银沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 34,
+			"name": "秘银矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 34,
+			"name": "紫水晶原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 35,
+			"name": "海蓝石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 36,
+			"name": "碧玺原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 37,
+			"name": "尖晶石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 38,
+			"name": "锆石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 39,
+			"name": "翡翠原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "榴弹怪的灰",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "黑明矾",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "2级拉诺西亚土壤",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "2级黑衣森林土壤",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "2级萨纳兰土壤",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 41,
+			"name": "绿松石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 42,
+			"name": "绿金沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 43,
+			"name": "绿金矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 44,
+			"name": "琥珀原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 45,
+			"name": "大理石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 45,
+			"name": "红电气石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 46,
+			"name": "石蜥蜴的蛋",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 47,
+			"name": "钴铁矿",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 48,
+			"name": "陆龟壳",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 49,
+			"name": "食人魔角",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "黄铜矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "黑石灰岩",
+			"amount": 20,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "金矿",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "玄铁矿",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "星性岩",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "金沙",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "拉诺西亚岩盐",
+			"amount": 9,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "无属性水晶",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "群居蠕虫",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "3级拉诺西亚土壤",
+			"amount": 1,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "3级黑衣森林土壤",
+			"amount": 1,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "3级萨纳兰土壤",
+			"amount": 1,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "钨铁矿",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "自然金",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "红宝石原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "钻石原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "祖母绿原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "黄玉原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "堇青石原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "蓝宝石原石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "暗物质晶簇",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "浮石",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "白金矿",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 50,
+			"name": "石蜥蜴的初蛋",
+			"amount": 5,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "黄铁矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "巨龙黑曜石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "玛瑙原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "灵银沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "土黄石英",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "虎眼石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "辉铜矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "灵银矿",
+			"amount": 20,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "水淙石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "褐铁矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "烟晶原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "龙堡天然水",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "翠绿石英",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "白钛矿",
+			"amount": 20,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "星红石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "星蓝石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 56,
+			"name": "阿巴拉提亚岩盐",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 56,
+			"name": "硬银沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "赤铁矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "蛋白石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "阿巴拉提亚天然水",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "深绯石英",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "硬银矿",
+			"amount": 20,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "白云母",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "红玉髓原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "赤铜矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "黄水晶原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "皇金沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "皇金矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "精金矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "金云母",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "光银矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "菱锌矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "钨华",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "辉金矿",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "绀碧石英",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "青紫石英",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "沸石",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "锂辉石原石",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "星砂砾",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "光银沙",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "陨石",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "枯角",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "红明矾",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "基拉巴尼亚明矾",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "贵橄榄石原石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "真龙黑曜石",
+			"amount": 30,
+			"time": 40
+		},
+		{
+			"level": 61,
+			"name": "硅岩",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 61,
+			"name": "魔铜沙",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 61,
+			"name": "基拉巴尼亚矿泉水",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "板岩",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "蓝晶石原石",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 63,
+			"name": "魔铜矿",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 63,
+			"name": "硅藻土",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 64,
+			"name": "石间清水",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 65,
+			"name": "饼铁矿",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 65,
+			"name": "星尖石原石",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "石青原石",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "翠银沙",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 67,
+			"name": "真沙沙铁",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 68,
+			"name": "翠银矿",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 68,
+			"name": "琅玕原石",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 69,
+			"name": "钯金沙",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 69,
+			"name": "阿拉米格盐",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "辉钼矿",
+			"amount": 30,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "蔷薇辉石原石",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "乌钢石原石",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "粗硝石",
+			"amount": 20,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "黄明矾",
+			"amount": 20,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "钯金矿",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "铬铁矿",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "基拉巴尼亚清水",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "夜铁矿",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "清银矿",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "鹰眼石",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "岩铁",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "太阳神泉水",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "常辉矿",
+			"amount": 5,
+			"time": 50
+		},
+		{
+			"level": 71,
+			"name": "硬泥岩",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 71,
+			"name": "硬金沙",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 72,
+			"name": "硬金矿",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 72,
+			"name": "硬水铝石原石",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 73,
+			"name": "高地天然水",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 74,
+			"name": "灵青岩",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 74,
+			"name": "青金石原石",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 75,
+			"name": "魔银沙",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "凝灰岩",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "三重石原石",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "钛铜沙",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "强发泡水",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 77,
+			"name": "钛铜矿",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 78,
+			"name": "透锂长石原石",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 78,
+			"name": "地下天然水",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 79,
+			"name": "暗银沙",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "暗银矿",
+			"amount": 15,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "黑玛瑙原石",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "重钨矿",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "彩虹晶",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "轻铍矿",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "辉钴铁矿",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "尊紫碎块",
+			"amount": 3,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "灰明矾",
+			"amount": 3,
+			"time": 60
+		}
+	],
+	"huntingList": [
+		{
+			"level": 1,
+			"name": "柔软的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 2,
+			"name": "结实的筋腱",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 3,
+			"name": "尖叫菇",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 4,
+			"name": "蜂蜜",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 5,
+			"name": "牡羊角",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 6,
+			"name": "百兽之血",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 7,
+			"name": "栗鼠肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 8,
+			"name": "不光滑的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 9,
+			"name": "羊后腰肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "柔韧的筋腱",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "蝙蝠牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "妖红花的叶子",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 11,
+			"name": "渡渡鸟胸肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 11,
+			"name": "水母的刺丝囊",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 12,
+			"name": "鼹鼠肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 12,
+			"name": "跳蜥的翅膀",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 13,
+			"name": "蛞蝓的粘液",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 14,
+			"name": "渡渡鸟蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 14,
+			"name": "蝙蝠的翅膀",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 15,
+			"name": "羚羊角",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 15,
+			"name": "古菩猩猩之牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 15,
+			"name": "黄盲头蟹腿",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 16,
+			"name": "小魔精的翅膀",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 17,
+			"name": "水母伞帽",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 18,
+			"name": "山羊的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 19,
+			"name": "渡渡鸟之羽",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 20,
+			"name": "绿陆蟹甲壳",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 21,
+			"name": "羚羊胫肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 22,
+			"name": "陆蟹蟹脚",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 23,
+			"name": "兔蝓的酸液",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 24,
+			"name": "蛛网",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "山羊肩肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "蜘蛛筋腱",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "山羊角",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "黑狼之牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "树精的树汁",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "甲鳞之血",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "巨蟾蜍的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "爆弹怪的灰",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 27,
+			"name": "跳蜥蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "野牛奶",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "鬼鮟鱇肝脏",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 29,
+			"name": "青盲头蟹腿",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 29,
+			"name": "仙人掌的针",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "沙地巨虫之牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "陷阱草的叶子",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 30,
+			"name": "魔界花的卷须",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 31,
+			"name": "蚁酸",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 32,
+			"name": "盗龙腿肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 32,
+			"name": "骏鹰筋腱",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 33,
+			"name": "疣猪的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 34,
+			"name": "毒蜥蜴的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 35,
+			"name": "绵羊毛",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 36,
+			"name": "六识之血",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 37,
+			"name": "黑羊的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 38,
+			"name": "榴弹怪的灰",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 39,
+			"name": "盗龙筋腱",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "大口花的卷须",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 41,
+			"name": "软糊怪肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 42,
+			"name": "石蜥蜴的蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 43,
+			"name": "水牛里脊",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 44,
+			"name": "碧企鹅蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 45,
+			"name": "碧企鹅绵毛",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 46,
+			"name": "冥鬼的翅膀",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 47,
+			"name": "水蜥尾肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 48,
+			"name": "盗龙的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 49,
+			"name": "白鬃毛",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 49,
+			"name": "食人魔角",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "牦牛奶",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "冠恐鸟蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "古鸟的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "寒冰陷阱草的叶子",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "明胶怪的肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "洛夫坦山羊雪花肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "大脚雪人之牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "深瞳之泪",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "熊脂",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "飞龙的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "双足飞龙的翼膜",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "雷蛟鳞",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "长颈驼肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "长颈驼的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 56,
+			"name": "火蛟鳞",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 56,
+			"name": "长颈驼的唾液",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "俄刻阿尼斯蛋",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "巨龙的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 57,
+			"name": "巨龙之牙",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "俄刻阿尼斯肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "魔蛇鸟肉",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "毛虫茧",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "龙鳞",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 58,
+			"name": "龙族之血",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "安菲瑟龙的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "狮鹫的粗皮",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 59,
+			"name": "狮鹫钩爪",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 60,
+			"name": "奇美鬃毛",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 61,
+			"name": "迦迦纳怪鸟蛋",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 61,
+			"name": "姆德斯德角",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "迦迦纳怪鸟的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "犀甲虫甲壳",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "鳞粉",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 63,
+			"name": "红角犀鸟胸肉",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 63,
+			"name": "刺球爆弹怪的刺",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 64,
+			"name": "牛鬼的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 65,
+			"name": "犏牛角",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "草原牛奶",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "犏牛肩肉",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "猛虎的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 67,
+			"name": "刺草鬃毛",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 67,
+			"name": "瞪羚角",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 68,
+			"name": "曼殊师里的毛发",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 68,
+			"name": "魔象的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 69,
+			"name": "长颈骆肉",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 69,
+			"name": "玉茧",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "瞪羚的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "真狮鹫的粗皮",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 70,
+			"name": "岛狼的牙",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 71,
+			"name": "秧鸡胸脯肉",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 71,
+			"name": "斯剑虎的粗皮",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 71,
+			"name": "阱蛇麻的叶子",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 71,
+			"name": "丝蛾的鳞粉",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 72,
+			"name": "绿飘龙的粗皮",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 73,
+			"name": "鹦鹉蛋",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 73,
+			"name": "鹦鹉的羽毛",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 74,
+			"name": "野蛮盗龙的粗皮",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 75,
+			"name": "吸血藤的树汁",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 75,
+			"name": "吸血草杯的卷须",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "力山羊肉",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 77,
+			"name": "力山羊的兽毛",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 77,
+			"name": "缠尾蛟的粗皮",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 78,
+			"name": "海燕的粗皮",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 79,
+			"name": "卡部斯的肉",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 79,
+			"name": "水螅虫的伞盖",
+			"amount": 10,
+			"time": 60
+		}
+	],
+	"fishList": [
+		{
+			"level": 1,
+			"name": "蝲蛄",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 4,
+			"name": "手指虾",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 5,
+			"name": "公主鳟",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 5,
+			"name": "白珊瑚",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 6,
+			"name": "幽暗虾虎",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 7,
+			"name": "皮皮拉鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 8,
+			"name": "红蝲蛄",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 9,
+			"name": "珊瑚蝶",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 10,
+			"name": "黄铜泥鳅",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 11,
+			"name": "白妙鲤",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 14,
+			"name": "虎纹鳕",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 16,
+			"name": "钢盔鲎",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 17,
+			"name": "罗斯利特牡蛎",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 18,
+			"name": "海神刀",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 19,
+			"name": "蓝铃鲑",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 20,
+			"name": "折刀贝",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 21,
+			"name": "海毒鲀",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 23,
+			"name": "暖水鳟",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 24,
+			"name": "黑鳗",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 25,
+			"name": "暗鲈",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 26,
+			"name": "蓝珊瑚",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 27,
+			"name": "比阿纳可鲷鱼",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 28,
+			"name": "黑鳎",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 29,
+			"name": "锤头鲨",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 31,
+			"name": "苍茫鲱",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 32,
+			"name": "灰海金枪鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 34,
+			"name": "满月沙丁鱼",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 36,
+			"name": "白蝶贝",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 38,
+			"name": "威罗迪纳鲤鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 40,
+			"name": "红珊瑚",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 41,
+			"name": "银鲨",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 43,
+			"name": "求雨鱼",
+			"amount": 3,
+			"time": 40
+		},
+		{
+			"level": 44,
+			"name": "黑蝶贝",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 46,
+			"name": "北方狗鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 48,
+			"name": "破云飞鱼",
+			"amount": 7,
+			"time": 40
+		},
+		{
+			"level": 51,
+			"name": "冰战神",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "利齿蛤蜊",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "赤刺",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "蓝螯虾",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 52,
+			"name": "魔角蜗牛",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "麻伊博伊",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 53,
+			"name": "显贵樱鳟",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "蓝天珊瑚",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "凸眼金鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 54,
+			"name": "知识神杜父鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "石蚌",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "瓦努头",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "图丽鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "莫古球球",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "冰神鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 55,
+			"name": "香鱼",
+			"amount": 10,
+			"time": 40
+		},
+		{
+			"level": 56,
+			"name": "多鳍鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 57,
+			"name": "蝴蝶鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 57,
+			"name": "学士贝",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 58,
+			"name": "温泉医生鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 58,
+			"name": "攀岩鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 59,
+			"name": "战舰鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 59,
+			"name": "樱鳟鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 60,
+			"name": "内陆刺鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 60,
+			"name": "落雷鳗",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 61,
+			"name": "高地刺鱼",
+			"amount": 7,
+			"time": 50
+		},
+		{
+			"level": 62,
+			"name": "石楠嘉鱼",
+			"amount": 10,
+			"time": 50
+		},
+		{
+			"level": 63,
+			"name": "海参",
+			"amount": 20,
+			"time": 50
+		},
+		{
+			"level": 64,
+			"name": "藻屑蟹",
+			"amount": 20,
+			"time": 50
+		},
+		{
+			"level": 65,
+			"name": "天幕鱼",
+			"amount": 3,
+			"time": 50
+		},
+		{
+			"level": 66,
+			"name": "菜蛙",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 67,
+			"name": "矶灯笼",
+			"amount": 20,
+			"time": 60
+		},
+		{
+			"level": 68,
+			"name": "刺足龙虾",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 69,
+			"name": "毯子章鱼",
+			"amount": 7,
+			"time": 60
+		},
+		{
+			"level": 70,
+			"name": "条石鲷",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 70,
+			"name": "滑溜狮子鱼",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 70,
+			"name": "薄毯章鱼",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 71,
+			"name": "沙卵",
+			"amount": 7,
+			"time": 60
+		},
+		{
+			"level": 72,
+			"name": "尖枪乌贼",
+			"amount": 7,
+			"time": 60
+		},
+		{
+			"level": 73,
+			"name": "樱桃鲱鱼",
+			"amount": 7,
+			"time": 60
+		},
+		{
+			"level": 74,
+			"name": "柠檬鱼",
+			"amount": 7,
+			"time": 60
+		},
+		{
+			"level": 74,
+			"name": "小小爱神",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 76,
+			"name": "暴食蟹",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 77,
+			"name": "黑色三连星",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 78,
+			"name": "蔷薇虾",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 78,
+			"name": "巨型水虎鱼",
+			"amount": 10,
+			"time": 60
+		},
+		{
+			"level": 79,
+			"name": "食用蚝",
+			"amount": 5,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "贻贝",
+			"amount": 1,
+			"time": 60
+		},
+		{
+			"level": 80,
+			"name": "蓝蟹",
+			"amount": 1,
+			"time": 60
+		}
+	],
+	"allegoryList": [
+		{
+			"name": "工艺馆特制清漆",
+			"cost": 5
+		},
+		{
+			"name": "工艺馆特制研磨剂",
+			"cost": 5
+		},
+		{
+			"name": "工艺馆特制树脂",
+			"cost": 5
+		},
+		{
+			"name": "砂犷兽的粗皮",
+			"cost": 5
+		},
+		{
+			"name": "工艺馆特制明矾",
+			"cost": 5
+		},
+		{
+			"name": "工艺馆特制棉布",
+			"cost": 5
+		},
+		{
+			"name": "工艺馆特制炼金药",
+			"cost": 5
+		},
+		{
+			"name": "矮人铬铁矿",
+			"cost": 10
+		},
+		{
+			"name": "奇人人造树脂",
+			"cost": 10
+		},
+		{
+			"name": "黑风海粘着剂",
+			"cost": 10
+		},
+		{
+			"name": "仙子绵羊毛",
+			"cost": 10
+		},
+		{
+			"name": "古巨蜥的粗皮",
+			"cost": 10
+		},
+		{
+			"name": "干燥高级以太药",
+			"cost": 10
+		},
+		{
+			"name": "栀子",
+			"cost": 20
+		},
+		{
+			"name": "马尾草",
+			"cost": 20
+		},
+		{
+			"name": "奇人研磨剂",
+			"cost": 20
+		},
+		{
+			"name": "轻银矿",
+			"cost": 20
+		},
+		{
+			"name": "灵魂精华",
+			"cost": 20
+		},
+		{
+			"name": "袋狮的粗皮",
+			"cost": 20
+		}
+	],
+	"mapList": [
+		{
+			"name": "陈旧的鞣革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的山羊革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的巨蟾蜍革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的野猪革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的毒蜥蜴革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的古鸟革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的飞龙革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的巨龙革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的迦迦纳怪鸟革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的瞪羚革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的绿飘龙革地图",
+			"cost": 1
+		},
+		{
+			"name": "陈旧的缠尾蛟革地图",
+			"cost": 1
+		}
+	]
+}
