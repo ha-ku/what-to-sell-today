@@ -6,13 +6,18 @@ import parseQuery from "../modules/parseQuery.mjs";
 import {reportEncoder} from "./marketReportTypes.mjs";
 import https from "https";
 import http2 from 'http2';
-import SECRET from '../recaptchaSecretKey';
+
+import process from 'process';
 
 
 const WINDOW_SIZE = 5,
 	DEFAULT_WORLD = 'LuXingNiao',
 	DEFAULT_SERVER = 'ChenXiWangZuo',
 	SORT_QUAL = 'nq';
+const SECRET = {
+	v2: process.env.WTST_RECAPTCHA_KEY_V2,
+	v3: process.env.WTST_RECAPTCHA_KEY_V3
+}
 
 const checkToken = (version, token, host) => {
 	return new Promise((resolve, reject) => {
