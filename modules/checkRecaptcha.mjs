@@ -5,6 +5,7 @@ const SECRET = {
 	v2: process.env.WTST_RECAPTCHA_KEY_V2,
 	v3: process.env.WTST_RECAPTCHA_KEY_V3
 }
+const hosts = process.env.WTST_HOSTS.split(' ');
 
 const checkRecaptcha = (version, token, host) => {
 	return new Promise((resolve, reject) => {
@@ -15,7 +16,7 @@ const checkRecaptcha = (version, token, host) => {
 			res.on('data', chunk => response = response + chunk)
 			res.on('end', () => {
 				const {success, hostname, score, action} = JSON.parse(response);
-				if(hostname !== host || (version === 'v3' && action !== 'marketReport')) {
+				if((hostname !== host && hosts.every(host => !hostname.endsWith(host))) || (version === 'v3' && action !== 'marketReport')) {
 					//onsole.log('invalid recaptcha result for', hostname, ':', action);
 					console.log('invalid recaptcha result', response);
 					reject({code: 400, content: 'invalid recaptcha result'});

@@ -152,3 +152,6 @@ dist
 
 *.bak
 /package-lock.json
+
+# ignore cloudflare function
+/functions
