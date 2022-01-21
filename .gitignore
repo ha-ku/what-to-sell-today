@@ -85,7 +85,9 @@ web_modules/
 
 # Next.js build output
 .next
-out
+/out/**
+!/out
+!/out/_redirects
 
 # Nuxt.js build / generate output
 .nuxt
@@ -127,9 +129,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# next
-/.next/
 
 # webstorm
 /.idea/
