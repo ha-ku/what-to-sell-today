@@ -16,7 +16,7 @@ const checkRecaptcha = (version, token, host) => {
 			res.on('data', chunk => response = response + chunk)
 			res.on('end', () => {
 				const {success, hostname, score, action} = JSON.parse(response);
-				if((hostname !== host && hosts.every(host => !hostname.endsWith(host))) || (version === 'v3' && action !== 'marketReport')) {
+				if(!hostname || (hostname !== host && hosts.every(host => !hostname.endsWith(host))) || (version === 'v3' && action !== 'marketReport')) {
 					//onsole.log('invalid recaptcha result for', hostname, ':', action);
 					console.log('invalid recaptcha result', response);
 					reject({code: 400, content: 'invalid recaptcha result'});
