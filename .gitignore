@@ -152,4 +152,3 @@ dist
 
 *.bak
 /package-lock.json
-/recaptchaSecretKey.js
