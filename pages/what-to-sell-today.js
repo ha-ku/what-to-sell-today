@@ -284,17 +284,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		}
 	}, [isLoading, executeRecaptcha, recaptchaVersion]);
 
-	if(error) {
-		if(retry < RETRY) {
-			setRetry(retry => retry + 1);
-			setTimeout(() => {
-				setError(null);
-				setShouldUpdate(true);
-			}, 2500);
-		}
-		return (<ErrorCover {...{retry, error}}/>);
-	}
-
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
 		name: rep.name,
@@ -311,6 +300,17 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
 		...(rep.level !== undefined ? {level : rep.level} : {} )
 	})), [fullReports]);
+
+	if(error) {
+		if(retry < RETRY) {
+			setRetry(retry => retry + 1);
+			setTimeout(() => {
+				setError(null);
+				setShouldUpdate(true);
+			}, 2500);
+		}
+		return (<ErrorCover {...{retry, error}}/>);
+	}
 
 	return (
 		<>
