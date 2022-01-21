@@ -148,6 +148,7 @@ dist
 !/public/json
 !/public/json/itemLists.json
 !/public/favicon.ico
+!/public/_redirects
 
 *.bak
 /package-lock.json
