@@ -2,7 +2,7 @@ import getReports from "../modules/getReports.mjs";
 import {reportEncoder} from "../avro/marketReportTypes.mjs";
 
 
-export async function marketReport(ctx) {
+export async function onRequest(ctx) {
 	const encoder = reportEncoder(1024);
 	const {readable, writeable} = new TransformStream();
 	const writer = writeable.getWriter();
