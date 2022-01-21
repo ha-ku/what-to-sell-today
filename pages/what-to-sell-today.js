@@ -243,7 +243,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					token,
 					recaptchaVersion: 'v' + recaptchaVersion
 				}
-				let url = `${window.location.origin}/marketReport?${Object.entries(query).filter(pair => pair[1].length).map(pair =>  pair.join('=')).join('&')}`
+				let url = `${window.location.origin.endsWith('pages.dev') ? 'https://aws-cf.ha-ku.cyou' : window.location.origin }/marketReport?${Object.entries(query).filter(pair => pair[1].length).map(pair =>  pair.join('=')).join('&')}`
 				setURL(url);
 				console.log('controller aborted', controller.signal.aborted);
 				window.fetch(url, {signal: controller.signal})
