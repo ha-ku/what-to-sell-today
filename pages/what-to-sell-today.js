@@ -64,7 +64,8 @@ const NONE = '无',
 	}, {}),
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
-	SORTING_ORDER = ['desc', 'asc', null];
+	SORTING_ORDER = ['desc', 'asc', null],
+	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394']
 
 function whatToSellToday({userDarkMode, setUserDarkMode}){
 
@@ -188,6 +189,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	], [itemList, theme]);
 
 	useEffect(() => {
+		const SHA512 = async (message, algorithm = "SHA-512") =>
+			Array.prototype.map
+				.call(
+					new Uint8Array(
+						await crypto.subtle.digest(algorithm, new TextEncoder().encode(message))
+					),
+					(x) => ("0" + x.toString(16)).slice(-2)
+				)
+				.join("");
 		if(isLoading && executeRecaptcha) {
 			console.log('new controller')
 			let decoder = reportDecoder(),
@@ -233,7 +243,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				setRetry(0);
 			})
 
-			const doMarketReport = (token) => {
+			const doMarketReport = async (token) => {
 				let query = {
 					qual: quality,
 					world,
@@ -243,25 +253,26 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					token,
 					recaptchaVersion: 'v' + recaptchaVersion
 				}
-				let url = `${window.location.origin.endsWith('pages.dev') ? 'https://aws-cf.ha-ku.cyou' : window.location.origin }/marketReport?${Object.entries(query).filter(pair => pair[1].length).map(pair =>  pair.join('=')).join('&')}`
+				let origin = window.location.origin;
+				let host = await SHA512(origin.slice(origin.lastIndexOf('.', origin.lastIndexOf('.') - 1) + 1))
+				let url = `${HOSTS.some(h => h === host) ? window.location.origin : 'https://aws-cf.ha-ku.cyou' }/marketReport?${Object.entries(query).filter(pair => pair[1].length).map(pair =>  pair.join('=')).join('&')}`
 				setURL(url);
 				console.log('controller aborted', controller.signal.aborted);
-				window.fetch(url, {signal: controller.signal})
-					.then(response => {
-						console.log('controller aborted', controller.signal.aborted);
-						let reader = response.body.getReader();
-						reader.read().then(function onData({done, value}) {
-							if(done) {
-								decoder.end();
-								return;
-							}
-							decoder.write(value);
-							reader.read().then(onData)
-						})
+				try {
+					let response = await window.fetch(url, {signal: controller.signal})
+					console.log('controller aborted', controller.signal.aborted);
+					let reader = response.body.getReader();
+					reader.read().then(function onData({done, value}) {
+						if (done) {
+							decoder.end();
+							return;
+						}
+						decoder.write(value);
+						reader.read().then(onData)
 					})
-					.catch(err => {
-						setError(err);
-					});
+				} catch(err) {
+					setError(err);
+				};
 			}
 
 			executeRecaptcha('marketReport')
