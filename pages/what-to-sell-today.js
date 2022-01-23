@@ -124,6 +124,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	};
 	const handleServer = ({target: {value}}) => setServer(value);
 	const handleUpdate = () => {
+		console.log('handleUpdate');
 		setShouldUpdate(true);
 	}
 	useHotkeys('f5,alt+r', (event) => {
