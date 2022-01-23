@@ -1,0 +1,5 @@
+{
+	"rewrites": [
+	{ "source": "/", "destination": "/what-to-sell-today" }
+	]
+}
