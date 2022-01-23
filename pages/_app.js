@@ -58,6 +58,7 @@ export default function App({ Component, pageProps }) {
 					reCaptchaKey="6LcSMRkcAAAAALGjPf5wGvQtvTmbhcwi0feTRSYR"
 					language="zh-CN"
 					useRecaptchaNet={true}
+					scriptProps={{async: true, defer: true}}
 				>
 					<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode}/>
 				</GoogleReCaptchaProvider>
