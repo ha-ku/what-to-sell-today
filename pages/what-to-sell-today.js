@@ -343,7 +343,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				world={{value: world, handler: handleWorld}}
 				server={{value: server, handler: handleServer}}
 				priceWindow={{value: priceWindow, handler: handlePriceWindow}}
-				isLoading={{value: isLoading, hanlder: handleUpdate}}
+				isLoading={{value: isLoading, handler: handleUpdate}}
 				sources={sources} listSource={listSource}
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
