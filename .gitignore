@@ -141,12 +141,15 @@ dist
 /public/**
 !/public
 !/public/img
-!/public/img/huijiwiki.svg
-!/public/img/universalis.svg
+!/public/img/**
 !/public/json
 !/public/json/itemLists.json
 !/public/favicon.ico
 !/public/_redirects
+!/public/manifest.json
+!/public/icons
+!/public/icons/**
+
 
 *.bak
 /package-lock.json
