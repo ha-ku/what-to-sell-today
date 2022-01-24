@@ -4,8 +4,9 @@ const withPlugins = require("next-compose-plugins");
 /* const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: false, //process.env.ANALYZE === 'true',
 })*/
+const withPWA = require("next-pwa");
 
-module.exports = withPlugins([], {
+module.exports = withPlugins([withPWA], {
 //module.exports = {
   webpack5: true,
   webpack: (config) => {
