@@ -5,12 +5,17 @@ const withPlugins = require("next-compose-plugins");
 	enabled: false, //process.env.ANALYZE === 'true',
 })*/
 const withPWA = require("next-pwa");
+const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPlugins([withPWA], {
 //module.exports = {
-  webpack5: true,
-  webpack: (config) => {
-    config.resolve.fallback = {
+	pwa: {
+		dest: 'public',
+		runtimeCaching,
+	},
+	webpack5: true,
+	webpack: (config) => {
+		config.resolve.fallback = {
 			"stream": require.resolve("stream-browserify"),
 			"buffer": require.resolve("buffer/"),
 			"util": require.resolve("util/"),
@@ -28,7 +33,7 @@ module.exports = withPlugins([withPWA], {
 			test: /\.svg$/,
 			use: ['@svgr/webpack'],
 		})
-    return config;
-  },
+		return config;
+	},
 //}
 });
