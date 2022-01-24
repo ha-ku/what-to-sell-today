@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.haku.wtst.twa",
+      "sha256_cert_fingerprints": [
+        "5E:F5:EF:EA:EE:FB:42:FF:37:0A:26:89:22:CA:3F:E8:42:82:43:EB:EC:16:13:50:BF:6A:3F:66:5A:B3:5F:14"
+      ]
+    }
+  }
+]

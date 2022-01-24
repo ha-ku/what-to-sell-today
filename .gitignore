@@ -149,6 +149,8 @@ dist
 !/public/manifest.json
 !/public/icons
 !/public/icons/**
+!/public/.well-known
+!/public/.well-known/**
 
 
 *.bak
