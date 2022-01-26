@@ -54,7 +54,6 @@ const fix = (num) => Number(num.toFixed(1)),
 		)
 
 const NONE = '无',
-	RETRY = 3,
 	PRICE_WINDOW = 5,
 	QUALITY = 'nq',
 	WORLD = worlds[0],
@@ -314,7 +313,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	})), [fullReports]);
 
 	if(error) {
-		if(retry < RETRY) {
+		if(retry < 3) {
 			setRetry(retry => retry + 1);
 			setTimeout(() => {
 				setError(null);
