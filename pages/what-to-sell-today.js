@@ -358,7 +358,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						page,
 						onPageChange: handlePage,
 						...(sortModel ? {sortModel} : {})
-					}}/>) : <StyledCircularProgress color="secondary" thickness={4.8}/>}
+					}}/>) : <StyledCircularProgress color="secondary" size={30} thickness={2.7} />}
 			</StyledGridContainer>
 			<Recaptcha
 				sitekey="6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8"
