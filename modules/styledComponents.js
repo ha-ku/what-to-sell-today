@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {Button, CircularProgress, FormControl, FormControlLabel} from "@mui/material";
 
-const StyledCircularProgress = styled(CircularProgress)`
+const StyledCircularProgress = styled((props) => (<CircularProgress color="secondary" size={30} thickness={3.6} {...props}/>))`
 	&& {
 		margin: 12px;
 	}

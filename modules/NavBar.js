@@ -61,7 +61,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 					</TextField>
 				</FormControl>
 				<Typography variant="h6">{sources[listSource].action}什么划算？</Typography>
-				{isLoading ? <StyledCircularProgress color="secondary" size={30} thickness={2.7} /> : null}
+				{isLoading ? <StyledCircularProgress /> : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<HelpIcon onClick={() => setHelp(h => !h)} />
 				<HelpDialog open={help} onClose={() => setHelp(false)}/>

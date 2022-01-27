@@ -3,7 +3,7 @@ import {StyledCircularProgress, StyledLoadingContainer} from "./styledComponents
 const ErrorCover = ({retry, error}) => {
 	return (
 		<StyledLoadingContainer>
-			<StyledCircularProgress color="secondary" />
+			<StyledCircularProgress />
 			<span>出错了，错误代码：{error.code}</span>
 			{
 				retry ?
