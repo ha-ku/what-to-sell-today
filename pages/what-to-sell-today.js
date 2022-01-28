@@ -83,9 +83,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			if(!isLoading) {
 				setTimeout(handleUpdate, 0)
 			}
-			else {
-				setTimeout(handleUpdate, 0)
-			}
 			return value;
 		}, 'source'),
 		[sortModel, handleSort] = useHandler(undefined, gridSort =>
@@ -264,7 +261,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					console.log('controller aborted', controller.signal.aborted);
 					let reader = response.body.getReader();
 					reader.read().then(function onData({done, value}) {
-						if (done || decoder.destroyed) {
+						if(decoder.destroyed) {
+							return;
+						}
+						if (done) {
 							decoder.end();
 							return;
 						}
@@ -292,7 +292,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				request?.abort();
 				setRequest(null);
 				clearTimeout(updateHandlerID);
-				decoder.off('data', doCache);
 				decoder.destroy();
 			}
 		}
