@@ -31,6 +31,11 @@ export default class RateLimiter {
 	}
 
 	handleWaiting(upstream) {
+		if(upstream.queue.length === 0) {
+			clearInterval(upstream.processing);
+			upstream.processing = null;
+			return ;
+		}
 		const startT = new Date().getTime();
 		upstream.history.forEach((value, key) => {
 			if(value < startT ||  key < startT - 30000){
@@ -82,10 +87,6 @@ export default class RateLimiter {
 				else
 					this.queue({args: savedArgs, retry: retry + 1, resolve, reject, urgent: true})
 			})
-			if(upstream.queue.length === 0) {
-				clearInterval(upstream.processing);
-				upstream.processing = null;
-			}
 		} 
 	}
 

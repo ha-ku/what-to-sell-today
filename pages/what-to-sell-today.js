@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo} from 'react';
 import Head from 'next/head';
 
 import { Close as CloseIcon,AccessTime as AccessTimeIcon} from '@mui/icons-material';
-import { MenuItem, FormControlLabel, RadioGroup, Radio, Switch, TextField, Button, Link,
-	Tooltip, IconButton, Drawer, Divider, Typography, Snackbar, useTheme, Box } from '@mui/material';
+import { Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box } from '@mui/material';
 
 import dynamic from "next/dynamic.js";
 const DataGrid = dynamic(() =>
@@ -24,8 +23,8 @@ import useWindowSize from '../modules/useWindowSize';
 import { reportDecoder } from "../avro/marketReportTypes.mjs";
 
 
-import {worlds, worldsName, servers, serversName } from '../modules/worldsAndServers';
-import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledFormControlLabel, StyledGridContainer, StyledCircularProgress, StyledButton, StyledFormControl} from '../modules/styledComponents'
+import {worlds, servers } from '../modules/worldsAndServers';
+import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledGridContainer, StyledCircularProgress } from '../modules/styledComponents'
 import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
@@ -79,17 +78,14 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
 		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
-			if(isLoading) {
-				console.log('restart request');
-				request?.abort();
-				setRequest(null);
-				setShouldUpdate(false);
+			setPage(0);
+			setReports([]);
+			if(!isLoading) {
+				setTimeout(handleUpdate, 0)
 			}
-			setTimeout(() => {
-				setPage(0);
-				setReports([]);
-				handleUpdate();
-			}, 20);
+			else {
+				setTimeout(handleUpdate, 0)
+			}
 			return value;
 		}, 'source'),
 		[sortModel, handleSort] = useHandler(undefined, gridSort =>
@@ -223,7 +219,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				}
 				updateHandlerID = null;
 			}
-			decoder.on('data', (message) => {
+			const doCache = (message) => {
 				console.log(`data: `, message);
 				if(message.err) {
 					if(message.err.code === 403 && recaptchaVersion === 3)
@@ -237,7 +233,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				}
 				cache.push(message);
 				!updateHandlerID ? updateHandlerID = setTimeout(updateHandler, 50) : '';
-			});
+			}
+			decoder.on('data', doCache);
 			decoder.on('end', () => {
 				setShouldUpdate(false);
 				setRequest(null);
@@ -256,7 +253,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				}
 				let origin = window.location.origin;
 				let host = await SHA512(origin.slice(origin.lastIndexOf('.', origin.lastIndexOf('.') - 1) + 1))
-				let url = `${HOSTS.some(h => h === host) ? window.location.origin : 'https://aws-cf.ha-ku.cyou' }/marketReport?${Object.entries(query).filter(pair => pair[1].length).map(pair =>  pair.join('=')).join('&')}`
+				let url = `${HOSTS.some(h => h === host) ? window.location.origin : 'https://aws-cf.ha-ku.cyou' }/marketReport?${
+					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
+						.map(pair =>  pair.join('=')).join('&')
+				}`
 				setURL(url);
 				console.log('controller aborted', controller.signal.aborted);
 				try {
@@ -264,7 +264,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					console.log('controller aborted', controller.signal.aborted);
 					let reader = response.body.getReader();
 					reader.read().then(function onData({done, value}) {
-						if (done) {
+						if (done || decoder.destroyed) {
 							decoder.end();
 							return;
 						}
@@ -273,7 +273,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					})
 				} catch(err) {
 					setError(err);
-				};
+				}
 			}
 
 			executeRecaptcha('marketReport')
@@ -287,14 +287,16 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				})
 				.then(doMarketReport)
 
-
 			return () => {
 				console.log('effect callback');
 				request?.abort();
 				setRequest(null);
+				clearTimeout(updateHandlerID);
+				decoder.off('data', doCache);
+				decoder.destroy();
 			}
 		}
-	}, [isLoading, executeRecaptcha, recaptchaVersion]);
+	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion]);
 
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
