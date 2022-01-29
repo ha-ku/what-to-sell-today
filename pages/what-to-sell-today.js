@@ -92,7 +92,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			, 'sortModel');
 
 	const [isLoading, setShouldUpdate] = useState(true),
-		[request, setRequest] = useState(null),
 		[error, setError] = useState(null),
 		[retry, setRetry] = useState(0),
 		[fetchingURL, setURL] = useState(null);
@@ -198,7 +197,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				controller = new AbortController(),
 				cache = [],
 				updateHandlerID = null;
-			setRequest(controller);
 			const updateHandler = () => {
 				if(cache.length > 0) {
 					setReports(reports => {
@@ -214,7 +212,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					});
 					cache = [];
 				}
-				updateHandlerID = null;
+				updateHandlerID = 0;
 			}
 			const doCache = (message) => {
 				console.log(`data: `, message);
@@ -234,7 +232,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			decoder.on('data', doCache);
 			decoder.on('end', () => {
 				setShouldUpdate(false);
-				setRequest(null);
 				setRetry(0);
 			})
 
@@ -289,9 +286,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 
 			return () => {
 				console.log('effect callback');
-				request?.abort();
-				setRequest(null);
-				clearTimeout(updateHandlerID);
+				controller.abort();
+				if(updateHandlerID) {
+					clearTimeout(updateHandlerID);
+					updateHandler();
+				}
 				decoder.destroy();
 			}
 		}
