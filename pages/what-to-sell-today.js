@@ -196,21 +196,20 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			let decoder = reportDecoder(),
 				controller = new AbortController(),
 				cache = [],
-				updateHandlerID = null;
+				updateHandlerID = 0;
 			const updateHandler = () => {
-				if(cache.length > 0) {
+				if(cache.length) {
 					setReports(reports => {
 						let newRep = [...reports];
-						cache.forEach(rep => {
+						while(cache.length){
+							let rep = cache.pop();
 							let i = reports.findIndex(r => r.ID === rep.ID);
-							if (i === -1)
-								newRep.push(rep);
-							else
-								newRep[i] = rep;
-						})
+							i === -1 ?
+								newRep.push(rep)
+								: newRep[i] = rep;
+						}
 						return newRep;
 					});
-					cache = [];
 				}
 				updateHandlerID = 0;
 			}
