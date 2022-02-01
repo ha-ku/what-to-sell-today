@@ -11,6 +11,7 @@ function useSources(shouldStart, setError) {
 		dye: {target: "染剂", action: "搓", withTime: false, source: JSONSources.dyeList ?? [], category: "生产"},
 		map: {target: "宝图", action: "挖", withTime: false, source: JSONSources.mapList ?? [], category: "采集"},
 		allegory: {target: "奇谭", action: "换", withTime: false, source: JSONSources.allegoryList ?? [], category: "货币"},
+		yellowGathererScrips: {target: "黄票", action: "换", withTime: false, source: JSONSources.yellowGathererScripsList, category: "采集"}
 	};
 	useEffect(() => {
 		if(shouldStart) {

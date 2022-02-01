@@ -39,7 +39,8 @@
     "redis": "^4.0.2",
     "stream-chain": "^2.2.4",
     "stream-json": "^1.7.3",
-    "use-local-storage-state": "^13.0.0"
+    "use-local-storage-state": "^13.0.0",
+    "webpack": "^5.68.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.0.8",

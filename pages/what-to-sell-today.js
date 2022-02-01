@@ -126,7 +126,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		}
 	}, [error]);
 	const { height } = useWindowSize();
-	const pageSize = height ? Math.max(Math.floor((height - 230) / 52), 5) : 5;
+	const pageSize = height ? Math.max(Math.floor((height - 226) / 52), 5) : 5;
 
 	const handlePage = newPage => setPage(newPage);
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
