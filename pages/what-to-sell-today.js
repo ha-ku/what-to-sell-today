@@ -268,7 +268,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						reader.read().then(onData)
 					})
 				} catch(err) {
-					setError(err);
+					if(err.code !== 20)
+						setError(err);
 				}
 			}
 
