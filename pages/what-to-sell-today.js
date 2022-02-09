@@ -1,13 +1,9 @@
-import { useState, useEffect, useMemo} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import Head from 'next/head';
 
-import { Close as CloseIcon,AccessTime as AccessTimeIcon} from '@mui/icons-material';
-import { Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box } from '@mui/material';
+import { Close as CloseIcon, AccessTime as AccessTimeIcon} from '@mui/icons-material';
+import {Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box, useMediaQuery} from '@mui/material';
 
-import dynamic from "next/dynamic.js";
-const DataGrid = dynamic(() =>
-	import("@mui/x-data-grid").then(({DataGrid}) => DataGrid)
-);
 
 import hexToRgba from "hex-to-rgba";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -28,6 +24,7 @@ import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, Styled
 import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
+import PinnableDataGrid from "../modules/PinnableDataGrid";
 
 const fix = (num) => Number(num.toFixed(1)),
 	getDefaultHistPerCost = (params) =>
@@ -126,7 +123,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		}
 	}, [error]);
 	const { height } = useWindowSize();
-	const pageSize = height ? Math.max(Math.floor((height - 226) / 52), 5) : 5;
+	const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
+	const pageSize = height ? Math.max(Math.floor((height - 226) / (isSmallDevice ? 36 : 52) ), 5) : 5;
 
 	const handlePage = newPage => setPage(newPage);
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
@@ -135,26 +133,31 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const handleCopy = ({target: {innerText}}) =>
 		navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
 
-
 	const dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
-	const columns = useMemo(() => [
-		{field: "name", headerName: "物品", width: 300, sortable: false,
+	const columns = [
+		{field: "name", headerName: "物品", width: 230, sortable: false,
 			renderCell: (params) => (<>
-				<StyledIconButton size="small">
-					<Link target="_blank" href={`https://universalis.app/market/${params.id}`} rel="noopener noreferrer">
-						<StyledIcon render={UniIcon} fill={theme.palette.mode === 'dark' ? '#c2d0ff': '#86A2FF'} viewBox="0 0 145.9 68.5"/>
-					</Link>
-				</StyledIconButton>
-				<StyledIconButton size="small">
-					<Link target="_blank" href={`https://ff14.huijiwiki.com/wiki/物品:${params.value}`} rel="noopener noreferrer">
-						<StyledIcon render={HuijiIcon} fill={theme.palette.mode === 'dark' ? '#ffffff' : '#333333'} viewBox="0 0 135.55 61.26"/>
-					</Link>
-				</StyledIconButton>
-				<Button variant="text" onClick={handleCopy} sx={{minWidth: 0}}>{params.value}</Button>
+				<Tooltip placement="bottom-start" sx={{padding: 0}} title={<span>
+					<StyledIconButton size="small">
+						<Link target="_blank" href={`https://universalis.app/market/${params.id}`} rel="noopener noreferrer">
+							<StyledIcon render={UniIcon} fill='#c2d0ff' viewBox="0 0 145.9 68.5"/>
+						</Link>
+					</StyledIconButton>
+					<StyledIconButton size="small">
+						<Link target="_blank" href={`https://ff14.huijiwiki.com/wiki/物品:${params.value}`} rel="noopener noreferrer">
+							<StyledIcon render={HuijiIcon} fill='#ffffff' viewBox="0 0 135.55 61.26"/>
+						</Link>
+					</StyledIconButton>
+				</span>}>
+					<Button variant="text" onClick={handleCopy} sx={{minWidth: 0}}>
+						{params.value.length > 7 ? `${params.value.slice(0, 7)}...` : params.value}
+					</Button>
+				</Tooltip>
 				{itemList.length > 0 && itemList[0].level !== undefined ? ` (${params.getValue(params.id, "level")}级)` : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<Tooltip title={<p>
-					数据上传时间<br />
+					更新于<br />
+					<br />
 					本服：{dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
 					全服：{dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
 				</p>} placement="right">
@@ -179,7 +182,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		{field: "histLow", headerName: "成交均价", width: 119},
 		{field: "histPerCost", headerName: "单位成本价", width: 134, valueGetter: getHistPerCost},
 		{field: "volumns", headerName: "1/3/7日成交", width: 150, sortable: false, renderCell: renderVolumns}
-	], [itemList, theme]);
+	];
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
@@ -349,15 +352,20 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
 				{ !!fetchingURL ?
-					(<DataGrid {...{
-						rows, columns,
-						pageSize,
+					(<PinnableDataGrid sx={{
+						'& .MuiDataGrid-footerContainer': {
+							justifyContent: 'flex-end !important',
+							flexDirection: 'row-reverse'
+						},
+					}} {...{
+						rows, columns, pageSize, page,
 						disableColumnMenu: true,
 						sortingOrder: SORTING_ORDER,
 						onSortModelChange: handleSort,
-						page,
 						onPageChange: handlePage,
-						...(sortModel ? {sortModel} : {})
+						pinnedColumns: {left: ['name']},
+						...(isSmallDevice ? { density: "compact" } : {}),
+						...(sortModel ? { sortModel } : {})
 					}}/>) : <StyledCircularProgress />}
 			</StyledGridContainer>
 			<Recaptcha

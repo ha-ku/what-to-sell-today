@@ -29,10 +29,6 @@ const GlobalStyle = css`
 		padding: 0;
 		box-sizing: border-box;
 	}
-	.MuiDataGrid-root .MuiDataGrid-footerContainer {
-	  	justify-content: flex-end !important;
-	  	flex-direction: row-reverse;
-	}
 `
 
 export default function App({ Component, pageProps }) {
