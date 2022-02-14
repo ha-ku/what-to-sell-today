@@ -26,19 +26,29 @@ const addClassName = (item, key, className) => {
 const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, sx, onSortModelChange, ...props}, ref) => {
 	const hasLeft = !!p?.left?.length,
 		hasRight = !!p?.right?.length;
-	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []};
-	const columnsLeft = pinnedColumns.left.map(key => {
-			let c = columns.find(c => c.field === key);
+	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
+		baseVisibility = columns.recude((acc, key) => {
+			acc[key] = false;
+			return acc;
+		}, {});
+	const columnsLeft = pinnedColumns.left.map(c => {
 			addClassName(c, 'headerClassName', 'Pinnable');
 			addClassName(c, 'cellClassName', 'Pinnable');
 			return c;
 		}),
-		columnsRight = pinnedColumns.right.map(key => {
-			let c = columns.find(c => c.field === key);
+		columnsRight = pinnedColumns.right.map(c => {
 			addClassName(c, 'headerClassName', 'Pinnable');
 			addClassName(c, 'cellClassName', 'Pinnable');
 			return c;
 		}),
+		visibilityLeft = pinnedColumns.left.reduce((acc, key) => {
+			acc[key] = true
+			return acc;
+		}, {...baseVisibility}),
+		visibilityRight = pinnedColumns.right.reduce((acc, key) => {
+			acc[key] = true
+			return acc;
+		}, {...baseVisibility}),
 		cuttedColumns = useMemo(() => columns.map(col =>
 			(columnsLeft.some(c => c === col) || columnsRight.some(c => c === col)) ?
 				{...col, renderCell: () => "", renderHeader: () => ""}
@@ -54,6 +64,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			{...{columns: columnsLeft, rows, pageSize, ...props}}
 			hideFooter
 			disableExtendRowFullWidth
+			columnVisibilityModel={visibilityLeft}
 			sx={{
 				position: 'absolute', top: 0, left: 0, width: '100%',
 				pointerEvents: 'none',
@@ -70,6 +81,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			{...{columns: columnsRight, rows, pageSize, ...props}}
 			hideFooter
 			disableExtendRowFullWidth
+			columnVisibilityModel={visibilityRight}
 			sx={{
 				position: 'absolute', top: 0, right: 0, width: '100%',
 				pointerEvents: 'none',
