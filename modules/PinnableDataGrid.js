@@ -27,32 +27,40 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 	const hasLeft = !!p?.left?.length,
 		hasRight = !!p?.right?.length;
 	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
-		baseVisibility = columns.recude((acc, key) => {
-			acc[key] = false;
+		baseVisibility = columns.reduce((acc, c) => {
+			acc[c.field] = false;
 			return acc;
 		}, {});
-	const columnsLeft = pinnedColumns.left.map(c => {
-			addClassName(c, 'headerClassName', 'Pinnable');
-			addClassName(c, 'cellClassName', 'Pinnable');
+	const columnsLeft = columns.map(c => {
+			if(pinnedColumns.left.includes(c.field)) {
+				let col = {...c}
+				addClassName(col, 'headerClassName', 'Pinnable');
+				addClassName(col, 'cellClassName', 'Pinnable');
+				return col;
+			}
 			return c;
 		}),
-		columnsRight = pinnedColumns.right.map(c => {
-			addClassName(c, 'headerClassName', 'Pinnable');
-			addClassName(c, 'cellClassName', 'Pinnable');
+		columnsRight = columns.map(c => {
+			if(pinnedColumns.right.includes(c.field)) {
+				let col = {...c}
+				addClassName(c, 'headerClassName', 'Pinnable');
+				addClassName(c, 'cellClassName', 'Pinnable');
+				return col;
+			}
 			return c;
 		}),
 		visibilityLeft = pinnedColumns.left.reduce((acc, key) => {
-			acc[key] = true
+			delete acc[key]
 			return acc;
 		}, {...baseVisibility}),
 		visibilityRight = pinnedColumns.right.reduce((acc, key) => {
-			acc[key] = true
+			delete acc[key]
 			return acc;
 		}, {...baseVisibility}),
 		cuttedColumns = useMemo(() => columns.map(col =>
-			(columnsLeft.some(c => c === col) || columnsRight.some(c => c === col)) ?
+			(pinnedColumns.left.some(key => key === col.field) || pinnedColumns.right.some(key => key === col.field)) ?
 				{...col, renderCell: () => "", renderHeader: () => ""}
-				: col), [columns, columnsLeft, columnsRight])
+				: col), [columns, pinnedColumns])
 	const theme = useTheme();
 
 	return (<Box sx={{
@@ -64,7 +72,11 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			{...{columns: columnsLeft, rows, pageSize, ...props}}
 			hideFooter
 			disableExtendRowFullWidth
-			columnVisibilityModel={visibilityLeft}
+			initialState={{
+				columns: {
+					columnVisibilityModel: visibilityLeft
+				}
+			}}
 			sx={{
 				position: 'absolute', top: 0, left: 0, width: '100%',
 				pointerEvents: 'none',
@@ -81,7 +93,11 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			{...{columns: columnsRight, rows, pageSize, ...props}}
 			hideFooter
 			disableExtendRowFullWidth
-			columnVisibilityModel={visibilityRight}
+			initialState={{
+				columns: {
+					columnVisibilityModel: visibilityRight
+				}
+			}}
 			sx={{
 				position: 'absolute', top: 0, right: 0, width: '100%',
 				pointerEvents: 'none',
