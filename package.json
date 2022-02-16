@@ -12,7 +12,7 @@
   "author": "haku",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.16.10",
+    "@babel/core": "^7.17.4",
     "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/server": "^11.4.0",
