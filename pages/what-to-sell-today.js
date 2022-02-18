@@ -151,7 +151,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						{params.value.length > 7 ? `${params.value.slice(0, 7)}...` : params.value}
 					</Button>
 				</Tooltip>
-				{itemList.length > 0 && itemList[0].level !== undefined ? ` (${params.getValue(params.id, "level")}级)` : null}
+				{sources[listSource].withTime ? ` (${params.getValue(params.id, "level")}级)` : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<Tooltip title={<p>
 					更新于<br />
@@ -196,7 +196,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumns", headerName: "1/3/7日成交", width: 150,
 			sortable: false, renderCell: renderVolumns}
-	]), []);
+	]), [sources[listSource].withTime]);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
