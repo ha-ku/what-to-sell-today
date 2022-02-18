@@ -41,7 +41,7 @@
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",
     "use-local-storage-state": "^13.0.0",
-    "webpack": "^5.69.0"
+    "webpack": "^5.69.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.0",
