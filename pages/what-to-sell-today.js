@@ -1,7 +1,12 @@
 import {useState, useEffect, useMemo} from 'react';
 import Head from 'next/head';
 
-import { Close as CloseIcon, AccessTime as AccessTimeIcon} from '@mui/icons-material';
+import {
+	Close as CloseIcon,
+	AccessTime as AccessTimeIcon,
+	ArrowDropUp as ArrowDropUpIcon,
+	ArrowDropDown as ArrowDropDownIcon
+} from '@mui/icons-material';
 import {Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box, useMediaQuery} from '@mui/material';
 
 
@@ -27,27 +32,22 @@ import SettingDrawer from "../modules/SettingDrawer";
 import PinnableDataGrid from "../modules/PinnableDataGrid";
 
 const fix = (num) => Number(num.toFixed(1)),
-	getDefaultHistPerCost = (params) =>
-		params.getValue(params.id, 'defaultHistLow') === NONE ? NONE :
-			fix(params.getValue(params.id, 'defaultHistLow') / params.getValue(params.id, 'cost')),
-	getHistPerCost = (params) =>
-		params.getValue(params.id, 'histLow') === NONE ? NONE :
-			fix(params.getValue(params.id, 'histLow') / params.getValue(params.id, 'cost')),
-	lowestToString = ({price, quantity, seller}) => `${price} ( x${quantity} ${seller})`,
 	lowestComparator = (v1, v2) =>
-		v1 === NONE ? -1 :
-			v2 === NONE ? 1 :
-				v1.split(' ')[0] - v2.split(' ')[0],
-	renderVolumns = (params) =>
-		params.value === NONE ? NONE : (
+		isNaN(v1) ? -1 :
+			isNaN(v2) ? 1 :
+				v1 - v2,
+	noneOrFix = ({value}) => (isNaN(value) || value === null) ? NONE : fix(value),
+	getDetailPrice = ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE,
+	renderVolumns = ({value}) =>
+		value?.length ? (
 			<StyledCellContainer>{
-				params.value.map((_, i) => (
+				value.map((_, i) => (
 					<StyledCellSub key={i}>
-						{params.value[i]}
+						{value[i]}
 					</StyledCellSub>
 				))
 			}</StyledCellContainer>
-		)
+		) : NONE;
 
 const NONE = '无',
 	RETRY = 3,
@@ -61,7 +61,8 @@ const NONE = '无',
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
-	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394']
+	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394'],
+	dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
 
 function whatToSellToday({userDarkMode, setUserDarkMode}){
 
@@ -70,8 +71,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		const window = Number(value)
 		return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
 	}, 'priceWindow'),
-		[world, setWorld] = useLocalStorageState('world', WORLD),
-		[server, setServer] = useLocalStorageState('server', SERVER[WORLD]),
+		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
+		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
 		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
@@ -130,11 +131,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
-	const handleCopy = ({target: {innerText}}) =>
-		navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
-
-	const dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
-	const columns = [
+	const columns = useMemo(() => ([
 		{field: "name", headerName: "物品", width: 230, sortable: false,
 			renderCell: (params) => (<>
 				<Tooltip placement="bottom-start" sx={{padding: 0}} title={<span>
@@ -149,11 +146,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						</Link>
 					</StyledIconButton>
 				</span>}>
-					<Button variant="text" onClick={handleCopy} sx={{minWidth: 0}}>
+					<Button variant="text" onClick={() =>
+						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))} sx={{minWidth: 0}}>
 						{params.value.length > 7 ? `${params.value.slice(0, 7)}...` : params.value}
 					</Button>
 				</Tooltip>
-				{itemList.length > 0 && itemList[0].level !== undefined ? ` (${params.getValue(params.id, "level")}级)` : null}
+				{sources[listSource].withTime ? ` (${params.getValue(params.id, "level")}级)` : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<Tooltip title={<p>
 					更新于<br />
@@ -165,24 +163,40 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				</Tooltip>
 			</>)
 		},
-		...((itemList.length > 0 && itemList[0].level) ? [{field: "level", headerName: "等级", width: 86, hide: true}] : []),
-		{field: "cost", headerName: "成本", width: 62, sortable: false},
-		{field: "defaultLowest", headerName: "本服最低", width: 160, cellClassName: "default-server",
-			headerClassName: "default-server", sortComparator: lowestComparator},
-		{field: "defaultMeanLow", headerName: "平均低价", width: 119, cellClassName: "default-server",
-			headerClassName: "default-server"},
-		{field: "defaultHistLow", headerName: "成交均价", width: 119, cellClassName: "default-server",
-			headerClassName: "default-server"},
-		{field: "defaultHistPerCost", headerName: "单位成本价", width: 134, cellClassName: "default-server",
-			headerClassName: "default-server", valueGetter: getDefaultHistPerCost},
-		{field: "defaultVolumns", headerName: "1/3/7日成交", width: 150, cellClassName: "default-server",
-			headerClassName: "default-server", sortable: false, renderCell: renderVolumns},
-		{field: "lowest", headerName: "全服最低价", width: 160, sortComparator: lowestComparator},
-		{field: "meanLow", headerName: "平均低价", width: 119},
-		{field: "histLow", headerName: "成交均价", width: 119},
-		{field: "histPerCost", headerName: "单位成本价", width: 134, valueGetter: getHistPerCost},
-		{field: "volumns", headerName: "1/3/7日成交", width: 150, sortable: false, renderCell: renderVolumns}
-	];
+		{field: "cost", headerName: "成本", width: 62, sortable: false,
+			valueFormatter: ({value}) => fix(value)},
+		{field: "defaultLowest", headerName: "本服最低", width: 160,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
+		{field: "defaultMeanLow", headerName: "平均低价", width: 119,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultHistLow", headerName: "成交均价", width: 119,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultHistPerCost", headerName: "单位成本价", width: 134,
+			cellClassName: "default-server", headerClassName: "default-server",
+			valueGetter: (params) => {
+				let price = params.getValue(params.id, 'defaultHistLow');
+				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultVolumns", headerName: "1/3/7日成交", width: 150,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortable: false, renderCell: renderVolumns},
+		{field: "lowest", headerName: "全服最低价", width: 160,
+			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
+		{field: "meanLow", headerName: "平均低价", width: 119,
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "histLow", headerName: "成交均价", width: 119,
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "histPerCost", headerName: "单位成本价", width: 134,
+			valueGetter: (params) => {
+				let price = params.getValue(params.id, 'histLow');
+				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "volumns", headerName: "1/3/7日成交", width: 150,
+			sortable: false, renderCell: renderVolumns}
+	]), [sources[listSource].withTime]);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
@@ -302,15 +316,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
 		name: rep.name,
-		cost: fix(rep.cost),
-		defaultLowest: rep.defaultServer[quality]?.lowestPrice ? lowestToString(rep.defaultServer[quality].lowestPrice) : NONE,
-		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice ? fix(rep.defaultServer[quality].meanLowPrice) : NONE,
-		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice ? fix(rep.defaultServer[quality].meanLowHistoryPrice) : 0,
-		defaultVolumns: rep.defaultServer[quality] ? rep.defaultServer[quality].volumns : NONE,
-		lowest: rep[quality]?.lowestPrice ? lowestToString(rep[quality].lowestPrice) : NONE,
-		meanLow: rep[quality]?.meanLowPrice ? fix(rep[quality].meanLowPrice): NONE,
-		histLow: rep[quality]?.meanLowHistoryPrice ? fix(rep[quality].meanLowHistoryPrice) : 0,
-		volumns: rep[quality] ? rep[quality].volumns : NONE,
+		cost: rep.cost,
+		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
+		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
+		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
+		defaultVolumns: rep.defaultServer[quality]?.volumns,
+		lowest: rep[quality]?.lowestPrice,
+		meanLow: rep[quality]?.meanLowPrice,
+		histLow: rep[quality]?.meanLowHistoryPrice,
+		volumns: rep[quality]?.volumns,
 		lastUploadTime: rep.lastUploadTime,
 		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
 		...(rep.level !== undefined ? {level : rep.level} : {} )
@@ -363,6 +377,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						sortingOrder: SORTING_ORDER,
 						onSortModelChange: handleSort,
 						onPageChange: handlePage,
+						components: {
+							ColumnSortedAscendingIcon: ArrowDropUpIcon,
+							ColumnSortedDescendingIcon: ArrowDropDownIcon
+						},
 						pinnedColumns: {left: ['name']},
 						...(isSmallDevice ? { density: "compact" } : {}),
 						...(sortModel ? { sortModel } : {})

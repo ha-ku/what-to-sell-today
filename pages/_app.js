@@ -32,7 +32,7 @@ const GlobalStyle = css`
 `
 
 export default function App({ Component, pageProps }) {
-	const [userDarkMode, setUserDarkMode] = useLocalStorageState('userDarkMode', 'auto');
+	const [userDarkMode, setUserDarkMode] = useLocalStorageState('userDarkMode', {ssr: true, defaultValue: 'auto'});
 	const autoDarkMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
 
 	const theme = createTheme({

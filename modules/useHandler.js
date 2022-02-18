@@ -3,7 +3,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 function useHandler(defaultValue, handler, localStoreKey = "") {
 	const [unStoredState, setUnstoredState] = useState(defaultValue);
-	const [storedState, setStoredState] = useLocalStorageState(localStoreKey, defaultValue);
+	const [storedState, setStoredState] = useLocalStorageState(localStoreKey, {ssr: true, defaultValue});
 	const [state, setState] = localStoreKey.length ? [storedState, setStoredState] : [unStoredState, setUnstoredState];
 	const wrapper = event => {
 		const res = handler(event)
