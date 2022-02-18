@@ -27,27 +27,21 @@ import SettingDrawer from "../modules/SettingDrawer";
 import PinnableDataGrid from "../modules/PinnableDataGrid";
 
 const fix = (num) => Number(num.toFixed(1)),
-	getDefaultHistPerCost = (params) =>
-		params.getValue(params.id, 'defaultHistLow') === NONE ? NONE :
-			fix(params.getValue(params.id, 'defaultHistLow') / params.getValue(params.id, 'cost')),
-	getHistPerCost = (params) =>
-		params.getValue(params.id, 'histLow') === NONE ? NONE :
-			fix(params.getValue(params.id, 'histLow') / params.getValue(params.id, 'cost')),
-	lowestToString = ({price, quantity, seller}) => `${price} ( x${quantity} ${seller})`,
 	lowestComparator = (v1, v2) =>
-		v1 === NONE ? -1 :
-			v2 === NONE ? 1 :
-				v1.split(' ')[0] - v2.split(' ')[0],
-	renderVolumns = (params) =>
-		params.value === NONE ? NONE : (
+		isNaN(v1) ? -1 :
+			isNaN(v2) ? 1 :
+				v1 - v2,
+	noneOrFix = ({value}) => !isNaN(value) ? fix(value) : NONE,
+	renderVolumns = ({value}) =>
+		value?.length ? (
 			<StyledCellContainer>{
-				params.value.map((_, i) => (
+				value.map((_, i) => (
 					<StyledCellSub key={i}>
-						{params.value[i]}
+						{value[i]}
 					</StyledCellSub>
 				))
 			}</StyledCellContainer>
-		)
+		) : NONE;
 
 const NONE = '无',
 	RETRY = 3,
@@ -166,22 +160,39 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			</>)
 		},
 		...((itemList.length > 0 && itemList[0].level) ? [{field: "level", headerName: "等级", width: 86, hide: true}] : []),
-		{field: "cost", headerName: "成本", width: 62, sortable: false},
-		{field: "defaultLowest", headerName: "本服最低", width: 160, cellClassName: "default-server",
-			headerClassName: "default-server", sortComparator: lowestComparator},
-		{field: "defaultMeanLow", headerName: "平均低价", width: 119, cellClassName: "default-server",
-			headerClassName: "default-server"},
-		{field: "defaultHistLow", headerName: "成交均价", width: 119, cellClassName: "default-server",
-			headerClassName: "default-server"},
-		{field: "defaultHistPerCost", headerName: "单位成本价", width: 134, cellClassName: "default-server",
-			headerClassName: "default-server", valueGetter: getDefaultHistPerCost},
-		{field: "defaultVolumns", headerName: "1/3/7日成交", width: 150, cellClassName: "default-server",
-			headerClassName: "default-server", sortable: false, renderCell: renderVolumns},
-		{field: "lowest", headerName: "全服最低价", width: 160, sortComparator: lowestComparator},
-		{field: "meanLow", headerName: "平均低价", width: 119},
-		{field: "histLow", headerName: "成交均价", width: 119},
-		{field: "histPerCost", headerName: "单位成本价", width: 134, valueGetter: getHistPerCost},
-		{field: "volumns", headerName: "1/3/7日成交", width: 150, sortable: false, renderCell: renderVolumns}
+		{field: "cost", headerName: "成本", width: 62, sortable: false,
+			valueFormatter: ({value}) => fix(value)},
+		{field: "defaultLowest", headerName: "本服最低", width: 160,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price), valueFormatter: ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE},
+		{field: "defaultMeanLow", headerName: "平均低价", width: 119,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultHistLow", headerName: "成交均价", width: 119,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultHistPerCost", headerName: "单位成本价", width: 134,
+			cellClassName: "default-server", headerClassName: "default-server",
+			valueGetter: (params) => {
+				let price = params.getValue(params.id, 'defaultHistLow');
+				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "defaultVolumns", headerName: "1/3/7日成交", width: 150,
+			cellClassName: "default-server", headerClassName: "default-server",
+			sortable: false, renderCell: renderVolumns},
+		{field: "lowest", headerName: "全服最低价", width: 160,
+			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price), },
+		{field: "meanLow", headerName: "平均低价", width: 119,
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "histLow", headerName: "成交均价", width: 119,
+			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "histPerCost", headerName: "单位成本价", width: 134,
+			valueGetter: (params) => {
+				let price = params.getValue(params.id, 'histLow');
+				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
+		{field: "volumns", headerName: "1/3/7日成交", width: 150,
+			sortable: false, renderCell: renderVolumns}
 	];
 
 	useEffect(() => {
@@ -302,15 +313,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
 		name: rep.name,
-		cost: fix(rep.cost),
-		defaultLowest: rep.defaultServer[quality]?.lowestPrice ? lowestToString(rep.defaultServer[quality].lowestPrice) : NONE,
-		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice ? fix(rep.defaultServer[quality].meanLowPrice) : NONE,
-		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice ? fix(rep.defaultServer[quality].meanLowHistoryPrice) : 0,
-		defaultVolumns: rep.defaultServer[quality] ? rep.defaultServer[quality].volumns : NONE,
-		lowest: rep[quality]?.lowestPrice ? lowestToString(rep[quality].lowestPrice) : NONE,
-		meanLow: rep[quality]?.meanLowPrice ? fix(rep[quality].meanLowPrice): NONE,
-		histLow: rep[quality]?.meanLowHistoryPrice ? fix(rep[quality].meanLowHistoryPrice) : 0,
-		volumns: rep[quality] ? rep[quality].volumns : NONE,
+		cost: rep.cost,
+		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
+		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
+		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
+		defaultVolumns: rep.defaultServer[quality]?.volumns,
+		lowest: rep[quality]?.lowestPrice,
+		meanLow: rep[quality]?.meanLowPrice,
+		histLow: rep[quality]?.meanLowHistoryPrice,
+		volumns: rep[quality]?.volumns,
 		lastUploadTime: rep.lastUploadTime,
 		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
 		...(rep.level !== undefined ? {level : rep.level} : {} )
