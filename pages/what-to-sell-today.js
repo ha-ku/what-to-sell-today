@@ -31,7 +31,7 @@ const fix = (num) => Number(num.toFixed(1)),
 		isNaN(v1) ? -1 :
 			isNaN(v2) ? 1 :
 				v1 - v2,
-	noneOrFix = ({value}) => !isNaN(value) ? fix(value) : NONE,
+	noneOrFix = ({value}) => (isNaN(value) || value === null) ? NONE : fix(value),
 	renderVolumns = ({value}) =>
 		value?.length ? (
 			<StyledCellContainer>{
