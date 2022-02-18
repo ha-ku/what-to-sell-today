@@ -37,6 +37,7 @@ const fix = (num) => Number(num.toFixed(1)),
 			isNaN(v2) ? 1 :
 				v1 - v2,
 	noneOrFix = ({value}) => (isNaN(value) || value === null) ? NONE : fix(value),
+	getDetailPrice = ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE,
 	renderVolumns = ({value}) =>
 		value?.length ? (
 			<StyledCellContainer>{
@@ -169,7 +170,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			valueFormatter: ({value}) => fix(value)},
 		{field: "defaultLowest", headerName: "本服最低", width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
-			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE},
+			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
 		{field: "defaultMeanLow", headerName: "平均低价", width: 119,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
@@ -186,7 +187,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortable: false, renderCell: renderVolumns},
 		{field: "lowest", headerName: "全服最低价", width: 160,
-			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price), },
+			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
 		{field: "meanLow", headerName: "平均低价", width: 119,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histLow", headerName: "成交均价", width: 119,
