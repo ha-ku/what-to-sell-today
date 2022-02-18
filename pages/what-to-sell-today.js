@@ -164,7 +164,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			valueFormatter: ({value}) => fix(value)},
 		{field: "defaultLowest", headerName: "本服最低", width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
-			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price), valueFormatter: ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE},
+			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE},
 		{field: "defaultMeanLow", headerName: "平均低价", width: 119,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
