@@ -61,7 +61,8 @@ const NONE = '无',
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
-	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394']
+	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394'],
+	dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
 
 function whatToSellToday({userDarkMode, setUserDarkMode}){
 
@@ -130,11 +131,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
-	const handleCopy = ({target: {innerText}}) =>
-		navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
-
-	const dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
-	const columns = [
+	const columns = useMemo(() => ([
 		{field: "name", headerName: "物品", width: 230, sortable: false,
 			renderCell: (params) => (<>
 				<Tooltip placement="bottom-start" sx={{padding: 0}} title={<span>
@@ -149,7 +146,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						</Link>
 					</StyledIconButton>
 				</span>}>
-					<Button variant="text" onClick={handleCopy} sx={{minWidth: 0}}>
+					<Button variant="text" onClick={() =>
+						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))} sx={{minWidth: 0}}>
 						{params.value.length > 7 ? `${params.value.slice(0, 7)}...` : params.value}
 					</Button>
 				</Tooltip>
@@ -165,7 +163,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				</Tooltip>
 			</>)
 		},
-		...((itemList.length > 0 && itemList[0].level) ? [{field: "level", headerName: "等级", width: 86, hide: true}] : []),
 		{field: "cost", headerName: "成本", width: 62, sortable: false,
 			valueFormatter: ({value}) => fix(value)},
 		{field: "defaultLowest", headerName: "本服最低", width: 160,
@@ -199,7 +196,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumns", headerName: "1/3/7日成交", width: 150,
 			sortable: false, renderCell: renderVolumns}
-	];
+	]), []);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
