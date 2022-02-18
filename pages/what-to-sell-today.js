@@ -1,7 +1,12 @@
 import {useState, useEffect, useMemo} from 'react';
 import Head from 'next/head';
 
-import { Close as CloseIcon, AccessTime as AccessTimeIcon} from '@mui/icons-material';
+import {
+	Close as CloseIcon,
+	AccessTime as AccessTimeIcon,
+	ArrowDropUp as ArrowDropUpIcon,
+	ArrowDropDown as ArrowDropDownIcon
+} from '@mui/icons-material';
 import {Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box, useMediaQuery} from '@mui/material';
 
 
@@ -374,6 +379,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						sortingOrder: SORTING_ORDER,
 						onSortModelChange: handleSort,
 						onPageChange: handlePage,
+						components: {
+							ColumnSortedAscendingIcon: ArrowDropUpIcon,
+							ColumnSortedDescendingIcon: ArrowDropDownIcon
+						},
 						pinnedColumns: {left: ['name']},
 						...(isSmallDevice ? { density: "compact" } : {}),
 						...(sortModel ? { sortModel } : {})
