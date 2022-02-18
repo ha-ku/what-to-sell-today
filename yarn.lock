@@ -3866,10 +3866,10 @@ stream-browserify@^3.0.0:
     inherits "~2.0.4"
     readable-stream "^3.5.0"
 
-stream-chain@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.4.tgz#2e5e9858e00d25ebaf7e4339e8328ddcab5facad"
-  integrity sha512-9lsl3YM53V5N/I1C2uJtc3Kavyi3kNYN83VkKb/bMWRk7D9imiFyUPYa0PoZbLohSVOX1mYE9YsmwObZUsth6Q==
+stream-chain@^2.2.4, stream-chain@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.5.tgz#b30967e8f14ee033c5b9a19bbe8a2cba90ba0d09"
+  integrity sha512-1TJmBx6aSWqZ4tx7aTpBDXK0/e2hhcNSTV8+CbFJtDjbb+I1mZ8lHit0Grw9GRT+6JbIrrDd8esncgBi8aBXGA==
 
 stream-json@^1.7.3:
   version "1.7.3"
