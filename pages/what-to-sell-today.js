@@ -71,8 +71,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		const window = Number(value)
 		return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
 	}, 'priceWindow'),
-		[world, setWorld] = useLocalStorageState('world', WORLD),
-		[server, setServer] = useLocalStorageState('server', SERVER[WORLD]),
+		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
+		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
 		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
