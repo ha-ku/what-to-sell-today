@@ -19,7 +19,7 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 		<StyledFormControl>
 			<Typography variant="h5" mb={2}>外观</Typography>
 			<StyledFormControlLabel label="主题" labelPlacement="top" control={
-				<RadioGroup value={userDarkMode.value} onChange={userDarkMode.handler} row>
+				<RadioGroup  color="secondary" value={userDarkMode.value} onChange={userDarkMode.handler} row>
 					<FormControlLabel control={<Radio size="small" />} label="日间" value="light"/>
 					<FormControlLabel control={<Radio size="small" />} label="夜间" value="dark"/>
 					<FormControlLabel control={<Radio size="small" />} label="自动" value="auto"/>
@@ -30,7 +30,7 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 		<StyledFormControl>
 			<Typography variant="h5" mb={2}>即时更新</Typography>
 			<StyledFormControlLabel label="品质" labelPlacement="top" control={
-				<RadioGroup value={quality.value} onChange={quality.handler} row>
+				<RadioGroup  color="secondary" value={quality.value} onChange={quality.handler} row>
 					<FormControlLabel control={<Radio size="small" />} label="HQ" value="hq"/>
 					<FormControlLabel control={<Radio size="small" />} label="NQ" value="nq"/>
 					<FormControlLabel control={<Radio size="small" />} label="所有" value="all"/>
