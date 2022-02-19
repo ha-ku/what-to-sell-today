@@ -24,7 +24,7 @@ import useWindowSize from '../modules/useWindowSize';
 import { reportDecoder } from "../avro/marketReportTypes.mjs";
 
 
-import {worlds, servers } from '../modules/worldsAndServers';
+import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';
 import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledGridContainer, StyledCircularProgress } from '../modules/styledComponents'
 import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
@@ -93,7 +93,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const [isLoading, setShouldUpdate] = useState(true),
 		[error, setError] = useState(null),
 		[retry, setRetry] = useState(0),
-		[fetchingURL, setURL] = useState(null);
+		[fetchingURL, setURL] = useState(null),
+		[queryInfo, setQueryInfo] = useState({
+			worldName: worldsName[worlds.indexOf(world)],
+			serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
+		});
 
 	const [drawer, setDrawer] = useState(false),
 		[clipBarOpen, setClipBarOpen] = useState(false),
@@ -212,6 +216,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				.join("");
 		if(isLoading && executeRecaptcha) {
 			console.log('new controller')
+			setQueryInfo({
+				worldName: worldsName[worlds.indexOf(world)],
+				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
+			})
 			let decoder = reportDecoder(),
 				controller = new AbortController(),
 				cache = [],
@@ -368,13 +376,16 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
 				{ !!fetchingURL ?
-					(<PinnableDataGrid sx={{
+					(<PinnableDataGrid hideFooterSelectedRowCount sx={{
 						'& .MuiDataGrid-footerContainer': {
 							justifyContent: 'flex-end !important',
 							flexDirection: 'row-reverse'
 						},
 						'& .MuiDataGrid-columnHeaderTitleContainer .MuiIconButton-root': {
 							padding: '1px'
+						},
+						'& .MuiDataGrid-footerContainer::before': {
+						content: `"${queryInfo.worldName} ${queryInfo.serverName}"`
 						}
 					}} {...{
 						rows, columns, pageSize, page,
