@@ -30,6 +30,7 @@ import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
 import PinnableDataGrid from "../modules/PinnableDataGrid";
+import useRem from "../modules/useRem";
 
 const fix = (num) => Number(num.toFixed(1)),
 	lowestComparator = (v1, v2) =>
@@ -131,6 +132,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
+	const rem = useRem();
 	const columns = useMemo(() => ([
 		{field: "name", headerName: "物品", width: 230, sortable: false,
 			renderCell: (params) => (<>
@@ -163,18 +165,18 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				</Tooltip>
 			</>)
 		},
-		{field: "cost", headerName: "成本", width: 62, sortable: false,
+		{field: "cost", headerName: "成本", width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => fix(value)},
 		{field: "defaultLowest", headerName: "本服最低", width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
-		{field: "defaultMeanLow", headerName: "平均低价", width: 119,
+		{field: "defaultMeanLow", headerName: "平均低价", width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistLow", headerName: "成交均价", width: 119,
+		{field: "defaultHistLow", headerName: "成交均价", width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistPerCost", headerName: "单位成本价", width: 134,
+		{field: "defaultHistPerCost", headerName: "单位成本价", width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'defaultHistLow');
@@ -185,18 +187,18 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			sortable: false, renderCell: renderVolumns},
 		{field: "lowest", headerName: "全服最低价", width: 160,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
-		{field: "meanLow", headerName: "平均低价", width: 119,
+		{field: "meanLow", headerName: "平均低价", width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histLow", headerName: "成交均价", width: 119,
+		{field: "histLow", headerName: "成交均价", width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histPerCost", headerName: "单位成本价", width: 134,
+		{field: "histPerCost", headerName: "单位成本价", width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'histLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumns", headerName: "1/3/7日成交", width: 150,
 			sortable: false, renderCell: renderVolumns}
-	]), [sources[listSource].withTime]);
+	]), [sources[listSource].withTime, rem]);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
@@ -371,6 +373,9 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 							justifyContent: 'flex-end !important',
 							flexDirection: 'row-reverse'
 						},
+						'& .MuiDataGrid-columnHeaderTitleContainer .MuiIconButton-root': {
+							padding: '1px'
+						}
 					}} {...{
 						rows, columns, pageSize, page,
 						disableColumnMenu: true,
