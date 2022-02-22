@@ -23,7 +23,7 @@ const addClassName = (item, key, className) => {
 	return item;
 }
 
-const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, sx, onSortModelChange, ...props}, ref) => {
+const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, onPageSizeChange, sx, onSortModelChange, ...props}, ref) => {
 	const hasLeft = !!p?.left?.length,
 		hasRight = !!p?.right?.length;
 	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
@@ -63,11 +63,12 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 				: col), [columns, pinnedColumns])
 	const theme = useTheme();
 
+
 	return (<Box sx={{
 		height: '100%', width: '100%',
 		position: 'relative'
 	}}>
-		<DataGrid {...{columns: cuttedColumns, rows, pageSize, sx, onSortModelChange, ...props}} ref={ref}/>
+		<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
 		{ hasLeft ? <DataGrid
 			{...{columns: columnsLeft, rows, pageSize, ...props}}
 			hideFooter
