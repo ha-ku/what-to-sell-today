@@ -130,9 +130,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	}, [error]);
 	const { height } = useWindowSize();
 	const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
-	const pageSize = height ? Math.max(Math.floor((height - 226) / (isSmallDevice ? 36 : 52) ), 5) : 5;
 
-	const handlePage = newPage => setPage(newPage);
+	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / (isSmallDevice ? 36 : 52) ), 5) : 5);
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
@@ -392,7 +391,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						disableColumnMenu: true,
 						sortingOrder: SORTING_ORDER,
 						onSortModelChange: handleSort,
-						onPageChange: handlePage,
+						onPageChange: setPage,
+						onPageSizeChange: setPageSize,
 						components: {
 							ColumnSortedAscendingIcon: ArrowDropUpIcon,
 							ColumnSortedDescendingIcon: ArrowDropDownIcon
