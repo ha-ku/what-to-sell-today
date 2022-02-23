@@ -63,7 +63,7 @@ const NONE = '无',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
 	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394'],
-	dateFormat = Intl.DateTimeFormat('zh-CN', {year:"2-digit", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", hour12: false});
+	dateFormat = Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
 function whatToSellToday({userDarkMode, setUserDarkMode}){
 
