@@ -31,6 +31,7 @@ import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
 import PinnableDataGrid from "../modules/PinnableDataGrid";
 import useRem from "../modules/useRem";
+import LineChart from "../modules/LineChart";
 
 const fix = (num) => Number(num.toFixed(1)),
 	lowestComparator = (v1, v2) =>
@@ -39,16 +40,28 @@ const fix = (num) => Number(num.toFixed(1)),
 				v1 - v2,
 	noneOrFix = ({value}) => (isNaN(value) || value === null) ? NONE : fix(value),
 	getDetailPrice = ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE,
-	renderVolumns = ({value}) =>
-		value?.length ? (
-			<StyledCellContainer>{
-				value.map((_, i) => (
+	renderVolumes = (value, lineProps) =>
+		value?.length ? (<>
+			<Box sx={{
+				position: 'relative',
+				alignSelf: 'flex-start'
+			}}>
+				<Box sx={{
+					position: 'absolute',
+					left: -10,
+					top: 0
+				}}>
+					<LineChart {...lineProps} data={value.map((v, i) => [i, v])} />
+				</Box>
+			</Box>
+			<StyledCellContainer>
+				{[1,3,7].map(i => value[i-1]).map((v, i) => (
 					<StyledCellSub key={i}>
-						{value[i]}
+						{v}
 					</StyledCellSub>
-				))
-			}</StyledCellContainer>
-		) : NONE;
+				))}
+			</StyledCellContainer>
+		</>) : NONE;
 
 const NONE = '无',
 	RETRY = 3,
@@ -69,9 +82,9 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 
 	const [reports, setReports] = useState([]),
 		[priceWindow, handlePriceWindow] = useHandler(PRICE_WINDOW, ({target: {value}}) => {
-		const window = Number(value)
-		return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
-	}, 'priceWindow'),
+			const window = Number(value)
+			return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
+		}, 'priceWindow'),
 		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
 		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
@@ -131,7 +144,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const { height } = useWindowSize();
 	const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
-	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / (isSmallDevice ? 36 : 52) ), 5) : 5);
+	const rowHeight = isSmallDevice ? 36 : 52;
+	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / rowHeight ), 5) : 5);
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
@@ -185,9 +199,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				let price = params.getValue(params.id, 'defaultHistLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumns", headerName: "1/3/7日成交", width: 150,
+		{field: "defaultVolumes", headerName: "1/3/7日成交", width: 150,
 			cellClassName: "default-server", headerClassName: "default-server",
-			sortable: false, renderCell: renderVolumns},
+			sortable: false, renderCell: ({value}) => renderVolumes(value, {
+				height: rowHeight,
+				width: 150,
+				color: theme.palette.secondary.main,
+				darkMode: theme.palette.mode === 'dark'
+			})
+		},
 		{field: "lowest", headerName: "全服最低价", width: 160,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
 		{field: "meanLow", headerName: "平均低价", width: 54 + 4 * 0.875 * rem,
@@ -199,9 +219,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				let price = params.getValue(params.id, 'histLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "volumns", headerName: "1/3/7日成交", width: 150,
-			sortable: false, renderCell: renderVolumns}
-	]), [sources[listSource].withTime, rem]);
+		{field: "volumes", headerName: "1/3/7日成交", width: 150,
+			sortable: false, renderCell: ({value}) => renderVolumes(value, {
+				height: rowHeight,
+				width: 150,
+				color: theme.palette.primary.main,
+				darkMode: theme.palette.mode === 'dark'
+			})
+		}
+	]), [sources[listSource].withTime, rem, theme]);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>
@@ -329,11 +355,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
 		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
 		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
-		defaultVolumns: rep.defaultServer[quality]?.volumns,
+		defaultVolumes: rep.defaultServer[quality]?.volumns,
 		lowest: rep[quality]?.lowestPrice,
 		meanLow: rep[quality]?.meanLowPrice,
 		histLow: rep[quality]?.meanLowHistoryPrice,
-		volumns: rep[quality]?.volumns,
+		volumes: rep[quality]?.volumns,
 		lastUploadTime: rep.lastUploadTime,
 		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
 		...(rep.level !== undefined ? {level : rep.level} : {} )
