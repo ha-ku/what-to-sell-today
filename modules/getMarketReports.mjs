@@ -25,9 +25,18 @@ const rateLimiter = new RateLimiter(13);
 
 async function getServerMarketLists(IDs, server, windowSize, context) {
 	const recent = (hists) => {
-		const DAYS = [1,3,7];
+		const DAYS = [1,2,3,4,5,6,7];
 		const now = new Date().getTime() / 1000;
-		return DAYS.map(day => hists.filter(hist => hist.timestamp > now - day * 86400 ).reduce((acc, a) => acc + a.quantity, 0));
+		const v = hists.reduce((acc, hist) => {
+			while(hist.timestamp < now - DAYS[acc.day] * 86400) {
+				acc.value.push(acc.value[acc.value.length - 1]);
+				acc.day++;
+			}
+			acc.value[acc.value.length - 1] += hist.quantity;
+			return acc;
+		}, {value: [0], day: 0}).value;
+		return v.concat(new Array(DAYS.length - v.length).fill(v[v.length-1]))
+		//return DAYS.map(day => hists.filter(hist => hist.timestamp > now - day * 86400 ).reduce((acc, a) => acc + a.quantity, 0));
 	}
 	IDs[1] = IDs[1] ?? IDs[0];
 	const options = Object.assign({}, REQUEST_OPTIONS, {signal: context.ac.signal});

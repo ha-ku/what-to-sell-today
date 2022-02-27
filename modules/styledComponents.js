@@ -16,6 +16,7 @@ const StyledLoadingContainer = styled.div`
 `;
 const StyledCellContainer = styled.span`
   display: inline-flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
   align-items: center;
