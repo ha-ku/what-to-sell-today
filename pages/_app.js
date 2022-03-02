@@ -9,6 +9,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 //import { ReCaptchaProvider } from "react-recaptcha-x";
 import Script from 'next/script';
+import {SvgDefsProvider} from "../modules/useSvgDefs";
 
 const THEME = {
 	palette: {
@@ -56,7 +57,9 @@ export default function App({ Component, pageProps }) {
 					useRecaptchaNet={true}
 					scriptProps={{async: true, defer: true}}
 				>
-					<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode}/>
+					<SvgDefsProvider>
+						<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode}/>
+					</SvgDefsProvider>
 				</GoogleReCaptchaProvider>
 			</ThemeProvider>
 		</>
