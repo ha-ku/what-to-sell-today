@@ -29,7 +29,7 @@
     "mathjs": "^10.3.0",
     "next": "^12.1.0",
     "next-compose-plugins": "^2.2.1",
-    "next-pwa": "^5.4.4",
+    "next-pwa": "^5.4.5",
     "next-transpile-modules": "^9.0.0",
     "react": "^17.0.2",
     "react-async-script": "^1.2.0",
@@ -41,7 +41,7 @@
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",
     "use-local-storage-state": "^15.0.0",
-    "webpack": "^5.69.1"
+    "webpack": "^5.70.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.0",
