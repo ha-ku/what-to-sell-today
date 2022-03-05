@@ -227,7 +227,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				darkMode: theme.palette.mode === 'dark'
 			})
 		}
-	]), [sources[listSource].withTime, rem, theme]);
+	]), [sources[listSource].withTime, rem, theme, rowHeight]);
 
 	useEffect(() => {
 		const SHA512 = async (message, algorithm = "SHA-512") =>

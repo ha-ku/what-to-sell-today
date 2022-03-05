@@ -11,7 +11,6 @@ const SvgDefsProvider = (props) => {
 			setDefs(defs => new Map([...defs, [id, RenderDef]]))
 		}
 	}, [defs])
-	console.log([...(defs.values())])
 	return (<SvgDefsContext.Provider value={addDef}>
 		<svg style={{display: 'none'}}>
 			{[...(defs.values())].map((RenderDef) => (
