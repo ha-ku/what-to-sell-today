@@ -63,6 +63,10 @@ export default class MyDocument extends Document {
 			<link rel='apple-touch-startup-image' href='/images/apple_splash_640.png' sizes='640x1136' />
 			*/}
 
+            <link
+                href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+                rel="stylesheet"
+            />
             {
               ["www.gstatic.cn", "www.recaptcha.net", "aws-cf.ha-ku.cyou"].map(domain => (<>
                 <link rel="preconnect" href={`https://${domain}`}/>
