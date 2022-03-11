@@ -19,6 +19,7 @@ import UniIcon from '../public/img/universalis.svg';
 
 import useSources from "../modules/useSources";
 import useMixedRecaptcha from "../modules/useMixedRecaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 import useHandler from "../modules/useHandler";
 import useWindowSize from '../modules/useWindowSize';
 import { reportDecoder } from "../avro/marketReportTypes.mjs";
@@ -117,7 +118,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		[page, setPage] = useState(0);
 
 	const theme = useTheme();
-	const [Recaptcha, executeRecaptcha, setRecaptchaVersion, recaptchaVersion] = useMixedRecaptcha(3);
+	const [recaptchaRef, executeRecaptcha, setRecaptchaVersion, recaptchaVersion] = useMixedRecaptcha(3);
 
 	const sources = useSources(!!fetchingURL, setError),
 		itemList = sources[listSource].withTime ?
@@ -417,13 +418,17 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						...(sortModel ? { sortModel } : {})
 					}}/>) : <StyledCircularProgress />}
 			</StyledGridContainer>
-			<Recaptcha
-				sitekey="6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8"
-				badge="bottomright"
-				hl="zh-CN"
-				size="invisible"
-				theme={theme.palette.mode}
-			/>
+			{
+				recaptchaVersion === 3 ? null :
+					<ReCAPTCHA
+						sitekey="6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8"
+						badge="bottomright"
+						hl="zh-CN"
+						size="invisible"
+						theme={theme.palette.mode}
+						ref={recaptchaRef}
+					/>
+			}
 			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message="已拷贝至剪贴板" action={
 				<IconButton size="small" onClick={() => setClipBarOpen(false)} >
 					<CloseIcon fontSize="small"/>
