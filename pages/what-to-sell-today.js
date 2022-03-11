@@ -230,15 +230,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	]), [sources[listSource].withTime, rem, theme, rowHeight]);
 
 	useEffect(() => {
-		const SHA512 = async (message, algorithm = "SHA-512") =>
-			Array.prototype.map
-				.call(
-					new Uint8Array(
-						await crypto.subtle.digest(algorithm, new TextEncoder().encode(message))
-					),
-					(x) => ("0" + x.toString(16)).slice(-2)
-				)
-				.join("");
 		if(isLoading && executeRecaptcha) {
 			console.log('new controller')
 			setQueryInfo({
@@ -296,9 +287,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					token,
 					recaptchaVersion: 'v' + recaptchaVersion
 				}
-				let origin = window.location.origin;
-				let host = await SHA512(origin.slice(origin.lastIndexOf('.', origin.lastIndexOf('.') - 1) + 1))
-				let url = `${HOSTS.some(h => h === host) ? window.location.origin : 'https://aws-cf.ha-ku.cyou' }/marketReport?${
+				let url = `${window.location.origin}/marketReport?${
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
 						.map(pair =>  pair.join('=')).join('&')
 				}`

@@ -1,5 +1,8 @@
 {
 	"rewrites": [
-	{ "source": "/", "destination": "/what-to-sell-today" }
+		{ "source": "/", "destination": "/what-to-sell-today" }
+	],
+	"redirects": [
+		{ "source": "/marketReport", "destination": "https://aws-cf.ha-ku.cyou/marketReport"}
 	]
 }
