@@ -18,8 +18,7 @@ import HuijiIcon from '../public/img/huijiwiki.svg';
 import UniIcon from '../public/img/universalis.svg';
 
 import useSources from "../modules/useSources";
-import useMixedRecaptcha from "../modules/useMixedRecaptcha";
-import ReCAPTCHA from "react-google-recaptcha";
+import MixedRecaptcha from "../modules/MixedRecaptcha";
 import useHandler from "../modules/useHandler";
 import useWindowSize from '../modules/useWindowSize';
 import { reportDecoder } from "../avro/marketReportTypes.mjs";
@@ -118,7 +117,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		[page, setPage] = useState(0);
 
 	const theme = useTheme();
-	const [recaptchaRef, executeRecaptcha, setRecaptchaVersion, recaptchaVersion] = useMixedRecaptcha(3);
+	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
+	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
 	const sources = useSources(!!fetchingURL, setError),
 		itemList = sources[listSource].withTime ?
@@ -241,6 +241,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				controller = new AbortController(),
 				cache = [],
 				updateHandlerID = 0;
+			controller.ts = new Date().getTime();
 			const updateHandler = () => {
 				if(cache.length) {
 					setReports(reports => {
@@ -260,8 +261,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 			const doCache = (message) => {
 				console.log(`data: `, message);
 				if(message.err) {
-					if(message.err.code === 403 && recaptchaVersion === 3)
+					if(message.err.code === 403 && recaptchaVersion === 3) {
+						setExecuteRecaptcha({execute: null});
 						setRecaptchaVersion(2);
+					}
 					else {
 						setError(message.err);
 						setShouldUpdate(false);
@@ -418,17 +421,17 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						...(sortModel ? { sortModel } : {})
 					}}/>) : <StyledCircularProgress />}
 			</StyledGridContainer>
-			{
-				recaptchaVersion === 3 ? null :
-					<ReCAPTCHA
-						sitekey="6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8"
-						badge="bottomright"
-						hl="zh-CN"
-						size="invisible"
-						theme={theme.palette.mode}
-						ref={recaptchaRef}
-					/>
-			}
+			<MixedRecaptcha
+				version={recaptchaVersion}
+				onLoad={setExecuteRecaptcha}
+				v2Props={{
+					sitekey: "6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8",
+					badge: "bottomright",
+					hl: "zh-CN",
+					size: "invisible",
+					theme: theme.palette.mode
+				}}
+			/>
 			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message="已拷贝至剪贴板" action={
 				<IconButton size="small" onClick={() => setClipBarOpen(false)} >
 					<CloseIcon fontSize="small"/>

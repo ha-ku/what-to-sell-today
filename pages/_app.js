@@ -6,7 +6,7 @@ import { CssBaseline } from "@mui/material";
 
 import useLocalStorageState from "use-local-storage-state";
 
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { ReCaptchaProvider } from '../modules/MixedRecaptcha';
 //import { ReCaptchaProvider } from "react-recaptcha-x";
 import Script from 'next/script';
 import {SvgDefsProvider} from "../modules/useSvgDefs";
@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }) {
 			<ThemeProvider theme={theme}>
 				<Script strategy="afterInteractive">{`window.recaptchaOptions = {useRecaptchaNet: true};`}</Script>
 				<CssBaseline />
-				<GoogleReCaptchaProvider
+				<ReCaptchaProvider
 					reCaptchaKey="6LcSMRkcAAAAALGjPf5wGvQtvTmbhcwi0feTRSYR"
 					language="zh-CN"
 					useRecaptchaNet={true}
@@ -60,7 +60,7 @@ export default function App({ Component, pageProps }) {
 					<SvgDefsProvider>
 						<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode}/>
 					</SvgDefsProvider>
-				</GoogleReCaptchaProvider>
+				</ReCaptchaProvider>
 			</ThemeProvider>
 		</>
 	)
