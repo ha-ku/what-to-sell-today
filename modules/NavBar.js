@@ -1,14 +1,13 @@
-import {
-	AppBar,
-	Box,
-	FormControl,
-	IconButton,
-	ListSubheader,
-	MenuItem,
-	TextField,
-	Toolbar,
-	Typography
-} from "@mui/material";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import ListSubheader from '@mui/material/ListSubheader';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from "@mui/material/Typography";
+
 import {Help as HelpIcon, Menu as MenuIcon} from "@mui/icons-material";
 import HelpDialog from "./HelpDialog";
 import {useState} from "react";

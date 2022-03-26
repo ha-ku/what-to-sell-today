@@ -7,7 +7,15 @@ import {
 	ArrowDropUp as ArrowDropUpIcon,
 	ArrowDropDown as ArrowDropDownIcon
 } from '@mui/icons-material';
-import {Button, Link, Tooltip, IconButton, Snackbar, useTheme, Box, useMediaQuery} from '@mui/material';
+
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Snackbar from '@mui/material/Snackbar';
+import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 
 import hexToRgba from "hex-to-rgba";

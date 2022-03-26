@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import {Button, CircularProgress, FormControl, FormControlLabel} from "@mui/material";
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const StyledCircularProgress = styled((props) => (<CircularProgress color="secondary" size={30} thickness={3.6} {...props}/>))`
 	&& {

@@ -1,15 +1,14 @@
 import {StyledButton, StyledFormControl, StyledFormControlLabel} from "./styledComponents";
-import {
-	Divider,
-	Drawer,
-	FormControlLabel,
-	MenuItem,
-	Radio,
-	RadioGroup,
-	Switch,
-	TextField,
-	Typography
-} from "@mui/material";
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
+import Typography from "@mui/material/Typography";
+
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 
 

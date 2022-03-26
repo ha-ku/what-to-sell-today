@@ -1,4 +1,8 @@
-import {Dialog, DialogContent, DialogTitle, Link, Typography} from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Link from '@mui/material/Link';
+import Typography from "@mui/material/Typography";
 
 function HelpDialog(props) {
 	return (
