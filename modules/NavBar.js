@@ -47,7 +47,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 				</IconButton>
 				<Typography variant="h6">今天</Typography>
 				<FormControl>
-					<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} autoWidth={true} size="small" variant="standard">
+					<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard">
 						{Object.keys(headers).reduce((acc, category) => {
 							return acc.concat(
 								(<ListSubheader key={category}>{category}</ListSubheader>),

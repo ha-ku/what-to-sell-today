@@ -1,6 +1,7 @@
 import {forwardRef, useMemo} from "react";
 import dynamic from 'next/dynamic';
-import {Box, useTheme} from "@mui/material";
+import {Box} from "@mui/material";
+import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
 
 const DynamicDataGrid = dynamic(() =>

@@ -14,6 +14,16 @@ module.exports = withPlugins([withPWA], {
 		runtimeCaching,
 	},
 	webpack5: true,
+	experimental: {
+		modularizeImports: {
+			'@mui/material': {
+				transform: '@mui/material/{{member}}'
+			},
+			'@mui/icons-material': {
+				transform: '@mui/icons-material/{{member}}'
+			}
+		}
+	},
 	webpack: (config) => {
 		config.resolve.fallback = {
 			"stream": require.resolve("stream-browserify"),

@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { extractCritical } from '@emotion/server' // change here
+import { Fragment } from "react";
 
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
@@ -63,10 +64,10 @@ export default class MyDocument extends Document {
 			<link rel='apple-touch-startup-image' href='/images/apple_splash_640.png' sizes='640x1136' />
 			*/}
             {
-              ["www.gstatic.cn", "www.recaptcha.net", "aws-cf.ha-ku.cyou"].map(domain => (<>
+              ["www.gstatic.cn", "www.recaptcha.net", "aws-cf.ha-ku.cyou"].map(domain => (<Fragment key={domain}>
                 <link rel="preconnect" href={`https://${domain}`}/>
                 <link rel="dns-prefetch" href={`https://${domain}`}/>
-              </>))
+              </Fragment>))
             }
           </Head>
           <body>
