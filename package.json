@@ -37,6 +37,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.9.7",
     "react-hotkeys-hook": "^3.4.4",
+    "react-localization": "^1.0.18",
     "redis": "^4.0.2",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",

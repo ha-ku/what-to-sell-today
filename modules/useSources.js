@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import strings from "./localization";
 
 function useSources(shouldStart, setError) {
 	const [JSONSources, setJSONSources] = useState({
@@ -13,15 +14,15 @@ function useSources(shouldStart, setError) {
 		yellowGathererScripsList: []
 	});
 	const sources = {
-		companySeal: {target: "军票", action: "换", withTime: false, source: JSONSources.companySealList, category: "货币"},
-		botany: {target: "伐木", action: "砍", withTime: true, source: JSONSources.botanyList, category: "雇员"},
-		mining: {target: "采矿", action: "挖", withTime: true, source: JSONSources.miningList, category: "雇员"},
-		fish: {target: "捕鱼", action: "钓", withTime: true, source: JSONSources.fishList, category: "雇员"},
-		hunting: {target: "战职", action: "带", withTime: true, source: JSONSources.huntingList, category: "雇员"},
-		dye: {target: "染剂", action: "搓", withTime: false, source: JSONSources.dyeList, category: "生产"},
-		map: {target: "宝图", action: "挖", withTime: false, source: JSONSources.mapList, category: "采集"},
-		allegory: {target: "奇谭", action: "换", withTime: false, source: JSONSources.allegoryList, category: "货币"},
-		yellowGathererScrips: {target: "黄票", action: "换", withTime: false, source: JSONSources.yellowGathererScripsList, category: "采集"}
+		companySeal: {target: strings.companySeal, action: strings.companySealAction, withTime: false, source: JSONSources.companySealList, category: strings.categoryCurrency},
+		botany: {target: strings.botany, action: strings.botanyAction, withTime: true, source: JSONSources.botanyList, category: strings.categoryRetainer},
+		mining: {target: strings.mining, action: strings.miningAction, withTime: true, source: JSONSources.miningList, category: strings.categoryRetainer},
+		fish: {target: strings.fish, action: strings.fishAction, withTime: true, source: JSONSources.fishList, category: strings.categoryRetainer},
+		hunting: {target: strings.hunting, action: strings.huntingAction, withTime: true, source: JSONSources.huntingList, category: strings.categoryRetainer},
+		dye: {target: strings.dye, action: strings.dyeAction, withTime: false, source: JSONSources.dyeList, category: strings.categoryCrafting},
+		map: {target: strings.map, action: strings.mapAaction, withTime: false, source: JSONSources.mapList, category: strings.categoryGathering},
+		allegory: {target: strings.allegory, action: strings.allegoryAction, withTime: false, source: JSONSources.allegoryList, category: strings.categoryCurrency},
+		yellowGathererScrips: {target: strings.yellowGathererScrips, action: strings.yellowGathererScripsAction, withTime: false, source: JSONSources.yellowGathererScripsList, category: strings.categoryGathering}
 	};
 	useEffect(() => {
 		if(shouldStart) {

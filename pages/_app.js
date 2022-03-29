@@ -10,6 +10,8 @@ import { ReCaptchaProvider } from '../modules/MixedRecaptcha';
 //import { ReCaptchaProvider } from "react-recaptcha-x";
 import Script from 'next/script';
 import {SvgDefsProvider} from "../modules/useSvgDefs";
+import strings from "../modules/localization";
+
 
 const THEME = {
 	palette: {
@@ -53,7 +55,7 @@ export default function App({ Component, pageProps }) {
 				<CssBaseline />
 				<ReCaptchaProvider
 					reCaptchaKey="6LcSMRkcAAAAALGjPf5wGvQtvTmbhcwi0feTRSYR"
-					language="zh-CN"
+					language={strings.getLanguage() === 'zh' ? "zh-CN" : 'en'}
 					useRecaptchaNet={true}
 					scriptProps={{async: true, defer: true}}
 				>

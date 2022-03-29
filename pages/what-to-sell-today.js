@@ -27,6 +27,7 @@ import { reportDecoder } from "../avro/marketReportTypes.mjs";
 
 import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';
 import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledGridContainer, StyledCircularProgress } from '../modules/styledComponents'
+import strings from '../modules/localization';
 import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
@@ -153,7 +154,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 
 	const rem = useRem();
 	const columns = useMemo(() => ([
-		{field: "name", headerName: "物品", width: 230, sortable: false,
+		{field: "name", headerName: strings.gridItem, width: 230, sortable: false,
 			renderCell: (params) => (<>
 				<Tooltip placement="bottom-start" sx={{padding: 0}} title={<span>
 					<StyledIconButton size="small">
@@ -167,41 +168,51 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 						</Link>
 					</StyledIconButton>
 				</span>}>
-					<Button variant="text" onClick={() =>
-						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))} sx={{minWidth: 0}}>
-						{params.value.length > 7 ? `${params.value.slice(0, 7)}...` : params.value}
+					<Button variant="text" sx={{textTransform: 'initial', minWidth: 0}} onClick={() =>
+						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))}
+					>
+						{strings.formatString(strings.gridItemName, {
+							name: params.value.length > 7 ?
+								`${params.value.slice(0, 7)}...`
+								: params.value,
+							enName: params.getValue(params.id, "enName") ?
+								(params.getValue(params.id, "enName").length > 14 ?
+								`${params.getValue(params.id, "enName").slice(0, 14)}...`
+								: params.getValue(params.id, "enName"))
+								: console.log(params)
+						})}
 					</Button>
 				</Tooltip>
-				{sources[listSource].withTime ? ` (${params.getValue(params.id, "level")}级)` : null}
+				{sources[listSource].withTime ? ` (${strings.formatString(strings.gridLevel, params.getValue(params.id, "level"))})` : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<Tooltip title={<p>
-					更新于<br />
+					{strings.gridUpdateAt}<br />
 					<br />
-					本服：{dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
-					全服：{dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
+					{strings.gridUpdateLocalAt}: {dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
+					{strings.gridUpdateGlobalAt}: {dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
 				</p>} placement="right">
 					<AccessTimeIcon />
 				</Tooltip>
 			</>)
 		},
-		{field: "cost", headerName: "成本", width: 34 + 2 * 0.875 * rem, sortable: false,
+		{field: "cost", headerName: strings.gridCost, width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => fix(value)},
-		{field: "defaultLowest", headerName: "本服最低", width: 160,
+		{field: "defaultLowest", headerName: strings.gridDefaultLowest, width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
-		{field: "defaultMeanLow", headerName: "平均低价", width: 54 + 4 * 0.875 * rem,
+		{field: "defaultMeanLow", headerName: strings.gridDefaultMeanLow, width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistLow", headerName: "成交均价", width: 54 + 4 * 0.875 * rem,
+		{field: "defaultHistLow", headerName: strings.gridDefaultHistLow, width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistPerCost", headerName: "单位成本价", width: 54 + 5 * 0.875 * rem,
+		{field: "defaultHistPerCost", headerName: strings.gridDefaultHistPerCost, width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'defaultHistLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumes", headerName: "1/3/7日成交", width: 150,
+		{field: "defaultVolumes", headerName: strings.gridVolumes, width: 150,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortable: false, renderCell: ({value}) => renderVolumes(value, {
 				height: rowHeight,
@@ -210,18 +221,18 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				darkMode: theme.palette.mode === 'dark'
 			})
 		},
-		{field: "lowest", headerName: "全服最低价", width: 160,
+		{field: "lowest", headerName: strings.gridLowest, width: 160,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
-		{field: "meanLow", headerName: "平均低价", width: 54 + 4 * 0.875 * rem,
+		{field: "meanLow", headerName: strings.gridMeanLow, width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histLow", headerName: "成交均价", width: 54 + 4 * 0.875 * rem,
+		{field: "histLow", headerName: strings.gridHistLow, width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histPerCost", headerName: "单位成本价", width: 54 + 5 * 0.875 * rem,
+		{field: "histPerCost", headerName: strings.gridHistPerCost, width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'histLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "volumes", headerName: "1/3/7日成交", width: 150,
+		{field: "volumes", headerName: strings.gridVolumes, width: 150,
 			sortable: false, renderCell: ({value}) => renderVolumes(value, {
 				height: rowHeight,
 				width: 150,
@@ -345,6 +356,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
 		name: rep.name,
+		enName: rep.enName,
 		cost: rep.cost,
 		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
 		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
@@ -428,12 +440,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				v2Props={{
 					sitekey: "6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8",
 					badge: "bottomright",
-					hl: "zh-CN",
+					hl: strings.getLanguage() === 'zh' ? "zh-CN" : 'en',
 					size: "invisible",
 					theme: theme.palette.mode
 				}}
 			/>
-			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message="已拷贝至剪贴板" action={
+			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={strings.copyHint} action={
 				<IconButton size="small" onClick={() => setClipBarOpen(false)} >
 					<CloseIcon fontSize="small"/>
 				</IconButton>

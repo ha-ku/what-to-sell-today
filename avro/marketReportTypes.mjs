@@ -45,6 +45,7 @@ const REPORT_SCHEMA = {
 	fields: [
 		{name: 'name', type: ['null', 'string'], default: null},
 		{name: 'ID', type: ['null', 'int'], default: null},
+		{name: 'enName', type: ['null', 'string'], default: null},
 		{name: 'lastUploadTime', type: ['null', 'long'], default: null},
 		{name: 'cost', type: ['null', 'float'], default: null},
 		{name: 'nq', type: ['null', 'ServerQualReport'], default: null},

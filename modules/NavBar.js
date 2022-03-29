@@ -14,6 +14,7 @@ import HelpDialog from "./HelpDialog";
 import {useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
 import {StyledCircularProgress} from "./styledComponents";
+import strings from './localization';
 
 function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 	const [help, setHelp] = useState(false),
@@ -45,7 +46,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 				<IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenu}>
 					<MenuIcon />
 				</IconButton>
-				<Typography variant="h6">今天</Typography>
+				<Typography variant="h6" sx={{whiteSpace: 'pre-wrap'}} >{strings.formatString(strings.barPrefix, sources[listSource])}</Typography>
 				<FormControl>
 					<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard">
 						{Object.keys(headers).reduce((acc, category) => {
@@ -60,7 +61,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 						}, [])}
 					</TextField>
 				</FormControl>
-				<Typography variant="h6">{sources[listSource].action}什么划算？</Typography>
+				<Typography variant="h6" sx={{whiteSpace: 'pre-wrap'}} >{strings.formatString(strings.barPostfix, sources[listSource])}</Typography>
 				{isLoading ? <StyledCircularProgress /> : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<HelpIcon onClick={() => setHelp(h => !h)} />

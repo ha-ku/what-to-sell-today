@@ -1,17 +1,15 @@
 import {StyledCircularProgress, StyledLoadingContainer} from "./styledComponents";
+import strings from './localization';
 
 const ErrorCover = ({retry, error}) => {
 	return (
 		<StyledLoadingContainer>
 			<StyledCircularProgress />
-			<span>出错了，错误代码：{error.code}</span>
+			<span>{strings.formatString(strings.errorMsg, error)}</span>
 			{
 				retry ?
-					<span>正在重试...</span>
-					: <>
-						<span>请稍后再试，或联系管理员</span>
-						<span>如果你是管理员那你反省一下</span>
-					</>
+					<span>{strings.errorRetry}</span>
+					: <>{strings.errorRetryFail}</>
 			}
 		</StyledLoadingContainer>
 	);
