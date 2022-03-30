@@ -1,0 +1,102 @@
+{
+  "drawer": {
+    "appearance": "外观",
+    "theme": "主题",
+    "day": "日间",
+    "night": "夜间",
+    "auto": "自动",
+    "autoUpdated": "即时更新",
+    "quality": "品质",
+    "HQ": "HQ",
+    "NQ": "NQ",
+    "all": "所有",
+    "considerTime": "计算探险时间成本",
+    "manualUpdated": "手动更新",
+    "DC": "所在大区",
+    "world": "所在服务器",
+    "averageWindowSize": "平均窗口大小",
+    "update": "更新"
+  },
+  "error": {
+    "msg": "出错了，错误代码：{code}",
+    "retry": "正在重试...",
+    "retryFail": "请稍后再试，或联系管理员"
+  },
+  "grid": {
+    "title": "今天{target}{action}点什么划算？",
+    "item": "物品",
+    "level": " ({level}级)",
+    "updateAt": "更新于",
+    "updateLocalAt": "本服",
+    "updateGlobalAt": "全服",
+    "cost": "成本",
+    "defaultLowest": "本服最低",
+    "defaultMeanLow": "平均低价",
+    "defaultHistLow": "成交均价",
+    "defaultHistPerCost": "单位成本价",
+    "lowest": "全服最低价",
+    "meanLow": "平均低价",
+    "histLow": "成交均价",
+    "histPerCost": "单位成本价",
+    "volumes": "1/3/7日成交",
+    "itemName": "{name}",
+    "copyHint": "已拷贝至剪贴板"
+  },
+  "helper": {
+    "title": "这是什么？",
+    "name": "今天带点什么",
+    "origin": "<name>{nameText}</name>（下称何带）最初是为了解决派雇员探险时不知道带什么的问题，现已拓展到神典石、宝图等一切本质是“资源兑换商品”的选择问题。",
+    "dataOrigin": "何带从<uni>universalis.app</uni>（下称uni）查询物品列表的市场信息，并进行简单的计算后提供给用户以自行选择。因uni的数据最终来源于玩家的游戏内查询，数据更新仍会有一定延迟，因此也希望有更多人一起为uni提交数据。访问<url>{urlText}</url>了解更多uni事宜。",
+    "NGAOrigin": "此nga帖子",
+    "NGAURL": "https://bbs.nga.cn/read.php?tid=22462774&rand=476",
+    "uniOrigin": "此处",
+    "uniURL": "https://universalis.app/about",
+    "other": "如何带故障无法使用，或有增加其他列表的需求，可向开发者反馈。何带使用google recaptcha保护自身。"
+  },
+  "navbar": {
+    "prefix": "今天",
+    "postfix": "{action}什么划算？",
+    "category": {
+      "currency": "货币",
+      "retainer": "雇员",
+      "gathering": "采集",
+      "crafting": "生产"
+    },
+    "companySeal": {
+      "source": "军票",
+      "action": "换"
+    },
+    "botany": {
+      "source": "伐木",
+      "action": "砍"
+    },
+    "mining": {
+      "source": "采矿",
+      "action": "挖"
+    },
+    "fish": {
+      "source": "捕鱼",
+      "action": "钓"
+    },
+    "hunting": {
+      "source": "战职",
+      "action": "带"
+    },
+    "dye": {
+      "source": "染剂",
+      "action": "搓"
+    },
+    "map": {
+      "source": "宝图",
+      "action": "挖"
+    },
+    "allegory": {
+      "source": "奇谭",
+      "action": "换"
+    },
+    "yellowGathererScrips": {
+      "source": "黄票",
+      "action": "换"
+    }
+  }
+}

@@ -7,10 +7,13 @@ import { CssBaseline } from "@mui/material";
 import useLocalStorageState from "use-local-storage-state";
 
 import { ReCaptchaProvider } from '../modules/MixedRecaptcha';
-//import { ReCaptchaProvider } from "react-recaptcha-x";
 import Script from 'next/script';
 import {SvgDefsProvider} from "../modules/useSvgDefs";
-import strings from "../modules/localization";
+import {IntlProvider} from 'react-intl';
+import {useEffect} from "react";
+import ZH_MESSAGE from '../public/locales/zh.json';
+import EN_MESSAGE from '../public/locales/en.json';
+import flatten from 'flat';
 
 
 const THEME = {
@@ -33,10 +36,20 @@ const GlobalStyle = css`
 		box-sizing: border-box;
 	}
 `
+const LOCALE = 'zh';
+const zhMessage = flatten(ZH_MESSAGE);
+const enMessage = flatten(EN_MESSAGE);
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
 	const [userDarkMode, setUserDarkMode] = useLocalStorageState('userDarkMode', {ssr: true, defaultValue: 'auto'});
 	const autoDarkMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
+	const [locale, setLocale] = useLocalStorageState('locale', {ssr: true, defaultValue: LOCALE});
+	const message = locale === 'zh' ? zhMessage : enMessage
+	useEffect(() => {
+		if(navigator.language.startsWith('en')){
+			setLocale('en');
+		}
+	}, []);
 
 	const theme = createTheme({
 		...THEME,
@@ -55,12 +68,14 @@ export default function App({ Component, pageProps }) {
 				<CssBaseline />
 				<ReCaptchaProvider
 					reCaptchaKey="6LcSMRkcAAAAALGjPf5wGvQtvTmbhcwi0feTRSYR"
-					language={strings.getLanguage() === 'zh' ? "zh-CN" : 'en'}
+					language={'zh'}
 					useRecaptchaNet={true}
 					scriptProps={{async: true, defer: true}}
 				>
 					<SvgDefsProvider>
-						<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode}/>
+						<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
+							<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode} setLocale={setLocale}/>
+						</IntlProvider>
 					</SvgDefsProvider>
 				</ReCaptchaProvider>
 			</ThemeProvider>
@@ -68,3 +83,4 @@ export default function App({ Component, pageProps }) {
 	)
 }
 
+export default App;

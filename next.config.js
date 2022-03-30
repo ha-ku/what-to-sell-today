@@ -1,11 +1,11 @@
 const withPlugins = require("next-compose-plugins");
+const withPWA = require("next-pwa");
+const runtimeCaching = require('next-pwa/cache')
 //const withTM = require('next-transpile-modules')(['@mui/icons-material', '@mui/material', '@mui/system']);
 //const withSvgr = require("next-plugin-svgr");
 /* const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: false, //process.env.ANALYZE === 'true',
 })*/
-const withPWA = require("next-pwa");
-const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPlugins([withPWA], {
 //module.exports = {

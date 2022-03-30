@@ -9,14 +9,15 @@ import {
 	Toolbar,
 	Typography
 } from "@mui/material";
-import {Help as HelpIcon, Menu as MenuIcon} from "@mui/icons-material";
+import {Help as HelpIcon, Menu as MenuIcon, Translate as TranslateIcon} from "@mui/icons-material";
 import HelpDialog from "./HelpDialog";
 import {useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
 import {StyledCircularProgress} from "./styledComponents";
-import strings from './localization';
+import useTranslate from "./useTranslate";
 
-function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
+
+function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocale}) {
 	const [help, setHelp] = useState(false),
 		headers = Object.keys(sources).reduce((acc, sourceName) => {
 			const source = sources[sourceName];
@@ -39,6 +40,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 			event.preventDefault();
 		}
 	}, [selectOpen]);
+	const { FormattedMessage, locale } = useTranslate('navbar');
 
 	return (
 		<AppBar position="sticky">
@@ -46,7 +48,9 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 				<IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenu}>
 					<MenuIcon />
 				</IconButton>
-				<Typography variant="h6" sx={{whiteSpace: 'pre-wrap'}} >{strings.formatString(strings.barPrefix, sources[listSource])}</Typography>
+				<Typography variant="h6" sx={{whiteSpace: 'pre'}} >
+					<FormattedMessage id="prefix" values={sources[listSource]} />
+				</Typography>
 				<FormControl>
 					<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard">
 						{Object.keys(headers).reduce((acc, category) => {
@@ -61,10 +65,17 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading}) {
 						}, [])}
 					</TextField>
 				</FormControl>
-				<Typography variant="h6" sx={{whiteSpace: 'pre-wrap'}} >{strings.formatString(strings.barPostfix, sources[listSource])}</Typography>
+				<Typography variant="h6" sx={{whiteSpace: 'pre'}} >
+					<FormattedMessage id="postfix" values={sources[listSource]} />
+				</Typography>
 				{isLoading ? <StyledCircularProgress /> : null}
 				<Box sx={{ flexGrow: 1 }} />
-				<HelpIcon onClick={() => setHelp(h => !h)} />
+				<IconButton aria-label="switch language" onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')} >
+					<TranslateIcon />
+				</IconButton>
+				<IconButton aria-label="about" onClick={() => setHelp(h => !h)} >
+					<HelpIcon />
+				</IconButton>
 				<HelpDialog open={help} onClose={() => setHelp(false)}/>
 			</Toolbar>
 		</AppBar>

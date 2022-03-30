@@ -1,0 +1,102 @@
+{
+  "drawer": {
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "day": "Light",
+    "night": "Dark",
+    "auto": "Auto",
+    "autoUpdated": "Automatically applied",
+    "quality": "Item Quality",
+    "HQ": "HQ",
+    "NQ": "NQ",
+    "all": "All",
+    "considerTime": "Consider time cost?",
+    "manualUpdated": "Manually applied",
+    "DC": "Current DC",
+    "world": "Current world",
+    "averageWindowSize": "Average window size",
+    "update": "update"
+  },
+  "error": {
+    "msg": "Some thing went wrong. Error code: {code}",
+    "retry": "Retrying...",
+    "retryFail": "Please retry later or contact the admin"
+  },
+  "grid": {
+    "title": "What to {action} {target} today?",
+    "item": "Name",
+    "level": " (level {level})",
+    "updateAt": "Updated at",
+    "updateLocalAt": "Current world",
+    "updateGlobalAt": "Whole DC",
+    "cost": "Cost",
+    "defaultLowest": "World min.",
+    "defaultMeanLow": "Min. average",
+    "defaultHistLow": "History min.",
+    "defaultHistPerCost": "Price per cost",
+    "lowest": "DC min.",
+    "meanLow": "Min. average",
+    "histLow": "History min.",
+    "histPerCost": "Price per cost",
+    "volumes": "1/3/7 days transaction",
+    "itemName": "{enName}",
+    "copyHint": "Item name copied!"
+  },
+  "helper": {
+    "title": "What's this?",
+    "name": "What To Sell Today",
+    "origin": "<name>{nameText}</name> (mentioned as WTST below) was developed to help choosing the worthiest item for retainer ventures at the beginning. Now it also supports currency exchanging including timestone, timeworn maps and more.",
+    "dataOrigin": "WTST queries data from <uni>universalis.app</uni> (mentioned as uni below). After simple calculations, WTST provides market statistics for each item and present it to user. Due to the mechanism of uni, the market data may not be fresh enough. Therefore participating in market data gathering for uni is always welcommed. Visit <url>{urlText}</url> to learn more about uni.",
+    "NGAOrigin": "this NGA post",
+    "NGAURL": "https://bbs.nga.cn/read.php?tid=22462774&rand=476",
+    "uniOrigin": "this site",
+    "uniURL": "https://universalis.app/about",
+    "other": "If something went wrong, please contact the developer. Google recaptcha is introduced in WTST for protection purpose."
+  },
+  "navbar": {
+    "prefix": "What to {action} ",
+    "postfix": " today?",
+    "category": {
+      "currency": "currency",
+      "retainer": "retainer",
+      "gathering": "gathering",
+      "crafting": "crafting"
+    },
+    "companySeal": {
+      "source": "Company Seals",
+      "action": "exchange with"
+    },
+    "botany": {
+      "source": "Botanist",
+      "action": "gather for"
+    },
+    "mining": {
+      "source": "Miner",
+      "action": "gather for"
+    },
+    "fish": {
+      "source": "Fisher",
+      "action": "gather for"
+    },
+    "hunting": {
+      "source": "Battlecraft",
+      "action": "collect for"
+    },
+    "dye": {
+      "source": "Dyes",
+      "action": "craft among"
+    },
+    "map": {
+      "source": "Timeworn Maps",
+      "action": "dig among"
+    },
+    "allegory": {
+      "source": "Allegory",
+      "action": "exchange with"
+    },
+    "yellowGathererScrips": {
+      "source": "Yellow Gatherer Scrips",
+      "action": "exchange with"
+    }
+  }
+}

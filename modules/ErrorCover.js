@@ -1,16 +1,22 @@
 import {StyledCircularProgress, StyledLoadingContainer} from "./styledComponents";
-import strings from './localization';
+import useTranslate from "./useTranslate";
 
 const ErrorCover = ({retry, error}) => {
+
+	const { FormattedMessage } = useTranslate('error');
+
 	return (
 		<StyledLoadingContainer>
 			<StyledCircularProgress />
-			<span>{strings.formatString(strings.errorMsg, error)}</span>
-			{
-				retry ?
-					<span>{strings.errorRetry}</span>
-					: <>{strings.errorRetryFail}</>
+			<span>
+				<FormattedMessage id="msg" values={error} />
+			</span>
+			<span>
+			{retry ?
+				<FormattedMessage id="retry" />
+				: <FormattedMessage id="retryFail" />
 			}
+					</span>
 		</StyledLoadingContainer>
 	);
 }

@@ -27,13 +27,14 @@ import { reportDecoder } from "../avro/marketReportTypes.mjs";
 
 import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';
 import {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledGridContainer, StyledCircularProgress } from '../modules/styledComponents'
-import strings from '../modules/localization';
 import ErrorCover from "../modules/ErrorCover";
 import NavBar from "../modules/NavBar";
 import SettingDrawer from "../modules/SettingDrawer";
 import PinnableDataGrid from "../modules/PinnableDataGrid";
 import useRem from "../modules/useRem";
 import LineChart from "../modules/LineChart";
+import useTranslate from "../modules/useTranslate";
+
 
 const fix = (num) => Number(num.toFixed(1)),
 	lowestComparator = (v1, v2) =>
@@ -77,10 +78,9 @@ const NONE = '无',
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
-	HOSTS = ['e6faa6744fbfd5fadfe45dd88b2fc9940be6a585cee47fcb4d0011e1945d6001', 'b65abeda15fa797363ac9525271da0d3a51d8926e57dd030afea8540362f2394'],
 	dateFormat = Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
-function whatToSellToday({userDarkMode, setUserDarkMode}){
+function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
 	const [reports, setReports] = useState([]),
 		[priceWindow, handlePriceWindow] = useHandler(PRICE_WINDOW, ({target: {value}}) => {
@@ -152,9 +152,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
+	const { t ,locale } = useTranslate('grid', [
+		'title', 'item', 'itemName', 'level', 'updateAt', 'updateLocalAt', 'updateGlobalAt', 'cost', 'defaultLowest',
+		'defaultMeanLow', 'defaultHistLow', 'defaultHistPerCost', 'lowest', 'meanLow', 'histLow', 'histPerCost',
+		'volumes', 'itemName', 'copyHint',
+	])
+
 	const rem = useRem();
 	const columns = useMemo(() => ([
-		{field: "name", headerName: strings.gridItem, width: 230, sortable: false,
+		{field: "name", headerName: t('item'), width: 230, sortable: false,
 			renderCell: (params) => (<>
 				<Tooltip placement="bottom-start" sx={{padding: 0}} title={<span>
 					<StyledIconButton size="small">
@@ -171,48 +177,49 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 					<Button variant="text" sx={{textTransform: 'initial', minWidth: 0}} onClick={() =>
 						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))}
 					>
-						{strings.formatString(strings.gridItemName, {
+						{t("itemName", {
 							name: params.value.length > 7 ?
 								`${params.value.slice(0, 7)}...`
 								: params.value,
-							enName: params.getValue(params.id, "enName") ?
-								(params.getValue(params.id, "enName").length > 14 ?
-								`${params.getValue(params.id, "enName").slice(0, 14)}...`
-								: params.getValue(params.id, "enName"))
-								: console.log(params)
+							enName: params.getValue(params.id, "enName").length > 16 ?
+								`${params.getValue(params.id, "enName").slice(0, 13)}...`
+								: params.getValue(params.id, "enName")
 						})}
 					</Button>
 				</Tooltip>
-				{sources[listSource].withTime ? ` (${strings.formatString(strings.gridLevel, params.getValue(params.id, "level"))})` : null}
+				{sources[listSource].withTime ?
+					t("level", {level: params.getValue(params.id, "level")})
+					: null
+				}
 				<Box sx={{ flexGrow: 1 }} />
 				<Tooltip title={<p>
-					{strings.gridUpdateAt}<br />
+					{t("updateAt")}<br />
 					<br />
-					{strings.gridUpdateLocalAt}: {dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
-					{strings.gridUpdateGlobalAt}: {dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
+					{t("updateLocalAt")}: {dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
+					{t("updateGlobalAt")}: {dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
 				</p>} placement="right">
 					<AccessTimeIcon />
 				</Tooltip>
 			</>)
 		},
-		{field: "cost", headerName: strings.gridCost, width: 34 + 2 * 0.875 * rem, sortable: false,
+		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => fix(value)},
-		{field: "defaultLowest", headerName: strings.gridDefaultLowest, width: 160,
+		{field: "defaultLowest", headerName: t('defaultLowest'), width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
-		{field: "defaultMeanLow", headerName: strings.gridDefaultMeanLow, width: 54 + 4 * 0.875 * rem,
+		{field: "defaultMeanLow", headerName: t('defaultMeanLow'), width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistLow", headerName: strings.gridDefaultHistLow, width: 54 + 4 * 0.875 * rem,
+		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistPerCost", headerName: strings.gridDefaultHistPerCost, width: 54 + 5 * 0.875 * rem,
+		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'defaultHistLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumes", headerName: strings.gridVolumes, width: 150,
+		{field: "defaultVolumes", headerName: t('volumes'), width: 150,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortable: false, renderCell: ({value}) => renderVolumes(value, {
 				height: rowHeight,
@@ -221,18 +228,18 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				darkMode: theme.palette.mode === 'dark'
 			})
 		},
-		{field: "lowest", headerName: strings.gridLowest, width: 160,
+		{field: "lowest", headerName: t('lowest'), width: 160,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
-		{field: "meanLow", headerName: strings.gridMeanLow, width: 54 + 4 * 0.875 * rem,
+		{field: "meanLow", headerName: t('meanLow'), width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histLow", headerName: strings.gridHistLow, width: 54 + 4 * 0.875 * rem,
+		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histPerCost", headerName: strings.gridHistPerCost, width: 54 + 5 * 0.875 * rem,
+		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
 				let price = params.getValue(params.id, 'histLow');
 				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "volumes", headerName: strings.gridVolumes, width: 150,
+		{field: "volumes", headerName: t('volumes'), width: 150,
 			sortable: false, renderCell: ({value}) => renderVolumes(value, {
 				height: rowHeight,
 				width: 150,
@@ -385,7 +392,9 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 	return (
 		<>
 			<Head>
-				<title>今天{`${sources[listSource].target}${sources[listSource].action}`}什么划算？</title>
+				<title>
+					{t("title", sources[listSource])}
+				</title>
 			</Head>
 			<NavBar
 				listSource={listSource}
@@ -393,6 +402,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				onMenu={() => setDrawer(d => !d)}
 				sources={sources}
 				isLoading={isLoading}
+				setLocale={setLocale}
 			/>
 			<SettingDrawer
 				open={{value: drawer, handler: () => setDrawer(false)}}
@@ -440,12 +450,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 				v2Props={{
 					sitekey: "6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8",
 					badge: "bottomright",
-					hl: strings.getLanguage() === 'zh' ? "zh-CN" : 'en',
+					hl: locale === 'zh' ? "zh-CN" : 'en',
 					size: "invisible",
 					theme: theme.palette.mode
 				}}
 			/>
-			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={strings.copyHint} action={
+			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={t('copyHint')} action={
 				<IconButton size="small" onClick={() => setClipBarOpen(false)} >
 					<CloseIcon fontSize="small"/>
 				</IconButton>
@@ -453,6 +463,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode}){
 		</>
 	);
 }
+
 
 
 export default whatToSellToday

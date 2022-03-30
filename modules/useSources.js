@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
-import strings from "./localization";
+import useTranslate from "./useTranslate";
 
 function useSources(shouldStart, setError) {
+
+	const { t } = useTranslate('navbar', [
+		...['companySeal', 'botany', 'mining', 'fish', 'hunting', 'dye', 'map', 'allegory', 'yellowGathererScrips']
+			.reduce((acc, key) => [...acc, `${key}.source`, `${key}.action`], []),
+		...['currency', 'retainer', 'gathering', 'crafting'].map(key => `category.${key}`),
+	])
+
 	const [JSONSources, setJSONSources] = useState({
 		companySealList: [],
 		botanyList: [],
@@ -14,15 +21,15 @@ function useSources(shouldStart, setError) {
 		yellowGathererScripsList: []
 	});
 	const sources = {
-		companySeal: {target: strings.companySeal, action: strings.companySealAction, withTime: false, source: JSONSources.companySealList, category: strings.categoryCurrency},
-		botany: {target: strings.botany, action: strings.botanyAction, withTime: true, source: JSONSources.botanyList, category: strings.categoryRetainer},
-		mining: {target: strings.mining, action: strings.miningAction, withTime: true, source: JSONSources.miningList, category: strings.categoryRetainer},
-		fish: {target: strings.fish, action: strings.fishAction, withTime: true, source: JSONSources.fishList, category: strings.categoryRetainer},
-		hunting: {target: strings.hunting, action: strings.huntingAction, withTime: true, source: JSONSources.huntingList, category: strings.categoryRetainer},
-		dye: {target: strings.dye, action: strings.dyeAction, withTime: false, source: JSONSources.dyeList, category: strings.categoryCrafting},
-		map: {target: strings.map, action: strings.mapAaction, withTime: false, source: JSONSources.mapList, category: strings.categoryGathering},
-		allegory: {target: strings.allegory, action: strings.allegoryAction, withTime: false, source: JSONSources.allegoryList, category: strings.categoryCurrency},
-		yellowGathererScrips: {target: strings.yellowGathererScrips, action: strings.yellowGathererScripsAction, withTime: false, source: JSONSources.yellowGathererScripsList, category: strings.categoryGathering}
+		companySeal: {target: t('companySeal.source'), action: t('companySeal.action'), withTime: false, source: JSONSources.companySealList, category: t('category.currency')},
+		botany: {target: t('botany.source'), action: t('botany.action'), withTime: true, source: JSONSources.botanyList, category: t('category.retainer')},
+		mining: {target: t('mining.source'), action: t('mining.action'), withTime: true, source: JSONSources.miningList, category: t('category.retainer')},
+		fish: {target: t('fish.source'), action: t('fish.action'), withTime: true, source: JSONSources.fishList, category: t('category.retainer')},
+		hunting: {target: t('hunting.source'), action: t('hunting.action'), withTime: true, source: JSONSources.huntingList, category: t('category.retainer')},
+		dye: {target: t('dye.source'), action: t('dye.action'), withTime: false, source: JSONSources.dyeList, category: t('category.crafting')},
+		map: {target: t('map.source'), action: t('map.action'), withTime: false, source: JSONSources.mapList, category: t('category.gathering')},
+		allegory: {target: t('allegory.source'), action: t('allegory.action'), withTime: false, source: JSONSources.allegoryList, category: t('category.currency')},
+		yellowGathererScrips: {target: t('yellowGathererScrips.source'), action: t('yellowGathererScrips.action'), withTime: false, source: JSONSources.yellowGathererScripsList, category: t('category.gathering')}
 	};
 	useEffect(() => {
 		if(shouldStart) {
