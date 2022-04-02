@@ -14,11 +14,9 @@ import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
 
 
-function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, sources, listSource}) {
+function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime}) {
 
-	const { t, FormattedMessage } = useTranslate('drawer', [
-		'theme', 'day', 'night', 'auto', 'quality', 'HQ', 'NQ', 'all', 'considerTime', 'DC', 'world', 'averageWindowSize'
-	])
+	const { t, FormattedMessage } = useTranslate('drawer')
 
 	return (<Drawer anchor="left" open={open.value} onClose={open.handler} autoWidth>
 		<StyledFormControl>
@@ -46,7 +44,7 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 				</RadioGroup>
 			} sx={{marginLeft: 0}}/>
 			{
-				sources[listSource].withTime ?
+				withTime ?
 					<StyledFormControlLabel label={t('considerTime')} labelPlacement="top" control={
 						<Switch color="secondary" checked={considerTime.value} onChange={considerTime.handler} sx={{marginLeft: '-12px'}}/>
 					} sx={{marginLeft: 0}}/>

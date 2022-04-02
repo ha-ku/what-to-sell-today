@@ -123,11 +123,13 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
 	const sources = useSources(!!fetchingURL, setError),
-		itemList = sources[listSource].withTime ?
-			sources[listSource].source.map(item => ({...item, cost: (considerTime ? item.time : 60) / item.amount}))
-			: sources[listSource].source,
-		fullReports = itemList.length ?
-			reports.map(report => Object.assign(report, itemList.find(item => item.name === report.name))) : [];
+		fullReports = useMemo(() => {
+			const itemList = sources[listSource].withTime ?
+					sources[listSource].source.map(item => ({...item, cost: (considerTime ? item.time : 60) / item.amount}))
+					: sources[listSource].source;
+			return itemList.length ?
+				reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
+		}, [sources[listSource], reports]);
 
 	const handleWorld = ({target: {value}}) => {
 		setWorld(value);
@@ -152,11 +154,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
-	const { t ,locale } = useTranslate('grid', [
-		'title', 'item', 'itemName', 'level', 'updateAt', 'updateLocalAt', 'updateGlobalAt', 'cost', 'defaultLowest',
-		'defaultMeanLow', 'defaultHistLow', 'defaultHistPerCost', 'lowest', 'meanLow', 'histLow', 'histPerCost',
-		'volumes', 'itemName', 'copyHint',
-	])
+	const { t ,locale } = useTranslate('grid')
 
 	const rem = useRem();
 	const columns = useMemo(() => ([
@@ -411,7 +409,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				server={{value: server, handler: handleServer}}
 				priceWindow={{value: priceWindow, handler: handlePriceWindow}}
 				isLoading={{value: isLoading, handler: handleUpdate}}
-				sources={sources} listSource={listSource}
+				withTime={sources[listSource].withTime}
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
 				{ !!fetchingURL ?

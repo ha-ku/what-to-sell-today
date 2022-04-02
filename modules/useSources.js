@@ -3,11 +3,7 @@ import useTranslate from "./useTranslate";
 
 function useSources(shouldStart, setError) {
 
-	const { t } = useTranslate('navbar', [
-		...['companySeal', 'botany', 'mining', 'fish', 'hunting', 'dye', 'map', 'allegory', 'yellowGathererScrips']
-			.reduce((acc, key) => [...acc, `${key}.source`, `${key}.action`], []),
-		...['currency', 'retainer', 'gathering', 'crafting'].map(key => `category.${key}`),
-	])
+	const { t } = useTranslate('navbar')
 
 	const [JSONSources, setJSONSources] = useState({
 		companySealList: [],

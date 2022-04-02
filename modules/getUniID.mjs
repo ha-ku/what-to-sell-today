@@ -16,7 +16,7 @@ const KEY = "UniID";
 
 function getUniID({ name, ID }) {
 	if(ID !== undefined) {
-		console.log('ID already provided');
+		//console.log('ID already provided');
 		return [ID, {}];
 	}
 	return (client.status === STATUS.CONN ? client.hGet(KEY, b64ncd(name)) : Promise.resolve(null))
