@@ -25,7 +25,7 @@
   "grid": {
     "title": "今天{target}{action}点什么划算？",
     "item": "物品",
-    "level": " ({level}级)",
+    "level": "({level}级)",
     "updateAt": "更新于",
     "updateLocalAt": "本服",
     "updateGlobalAt": "全服",

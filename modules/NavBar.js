@@ -2,18 +2,17 @@ import {
 	AppBar,
 	Box,
 	FormControl,
-	IconButton,
+	IconButton, LinearProgress,
 	ListSubheader,
 	MenuItem,
 	TextField,
 	Toolbar,
-	Typography
+	Typography, useMediaQuery
 } from "@mui/material";
 import {Help as HelpIcon, Menu as MenuIcon, Translate as TranslateIcon} from "@mui/icons-material";
 import HelpDialog from "./HelpDialog";
 import {useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
-import {StyledCircularProgress} from "./styledComponents";
 import useTranslate from "./useTranslate";
 
 
@@ -40,35 +39,40 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 			event.preventDefault();
 		}
 	}, [selectOpen]);
+
 	const { FormattedMessage, locale } = useTranslate('navbar');
 
+	const isMobile = !useMediaQuery(t => t.breakpoints.up('sm'));
+
 	return (
-		<AppBar position="sticky">
+		<AppBar position="sticky" sx={{paddingTop: '4px'}} >
 			<Toolbar>
 				<IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenu}>
 					<MenuIcon />
 				</IconButton>
-				<Typography variant="h6" sx={{whiteSpace: 'pre'}} >
-					<FormattedMessage id="prefix" values={sources[listSource]} />
-				</Typography>
-				<FormControl>
-					<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard">
-						{Object.keys(headers).reduce((acc, category) => {
-							return acc.concat(
-								(<ListSubheader key={category}>{category}</ListSubheader>),
-								Object.keys(headers[category]).map(sourceName => (
-									<MenuItem value={sourceName} key={sourceName}>
-										<Typography variant="h6">{sources[sourceName].target}</Typography>
-									</MenuItem>
-								))
-							)
-						}, [])}
-					</TextField>
-				</FormControl>
-				<Typography variant="h6" sx={{whiteSpace: 'pre'}} >
-					<FormattedMessage id="postfix" values={sources[listSource]} />
-				</Typography>
-				{isLoading ? <StyledCircularProgress /> : null}
+				<Box sx={{display: 'inline-flex', flexDirection: isMobile && locale !=='zh' ? 'column' : 'row'}}>
+					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
+						<FormattedMessage id="prefix" values={sources[listSource]} />
+					</Typography>
+					<FormControl>
+						<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard" sx={{flex: "none"}}>
+							{Object.keys(headers).reduce((acc, category) => {
+								return acc.concat(
+									(<ListSubheader key={category}>{category}</ListSubheader>),
+									Object.keys(headers[category]).map(sourceName => (
+										<MenuItem value={sourceName} key={sourceName}>
+											<Typography variant="h6">{sources[sourceName].target}</Typography>
+										</MenuItem>
+									))
+								)
+							}, [])}
+						</TextField>
+					</FormControl>
+					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
+						<FormattedMessage id="postfix" values={sources[listSource]} />
+					</Typography>
+				</Box>
+				{isLoading ? <LinearProgress color="secondary" sx={{position: "fixed", top: 0, left: 0, width: '100%'}}/> : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<IconButton aria-label="switch language" onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')} >
 					<TranslateIcon />

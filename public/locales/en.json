@@ -25,7 +25,7 @@
   "grid": {
     "title": "What to {action} {target} today?",
     "item": "Name",
-    "level": " (level {level})",
+    "level": "(level {level})",
     "updateAt": "Updated at",
     "updateLocalAt": "Current world",
     "updateGlobalAt": "Whole DC",

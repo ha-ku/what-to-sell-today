@@ -177,14 +177,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 					<Button variant="text" sx={{textTransform: 'initial', minWidth: 0}} onClick={() =>
 						navigator.clipboard.writeText(params.value).then(() => setClipBarOpen(true))}
 					>
-						{t("itemName", {
-							name: params.value.length > 7 ?
-								`${params.value.slice(0, 7)}...`
-								: params.value,
-							enName: params.getValue(params.id, "enName").length > 16 ?
-								`${params.getValue(params.id, "enName").slice(0, 13)}...`
-								: params.getValue(params.id, "enName")
-						})}
+						<Box component="span" sx={{maxWidth: sources[listSource].withTime ? '109px' : '169px', overflow: "hidden", textOverflow: "ellipsis"}}>
+							{t("itemName", {
+								name: params.value,
+								enName: params.getValue(params.id, "enName")
+							})}
+						</Box>
 					</Button>
 				</Tooltip>
 				{sources[listSource].withTime ?
