@@ -14,6 +14,7 @@ import {useEffect} from "react";
 import ZH_MESSAGE from '../public/locales/zh.json';
 import EN_MESSAGE from '../public/locales/en.json';
 import flatten from 'flat';
+import {v3} from "../modules/recaptchaPublicKey";
 
 
 const THEME = {
@@ -67,7 +68,7 @@ const App = ({ Component, pageProps }) => {
 				<Script strategy="afterInteractive">{`window.recaptchaOptions = {useRecaptchaNet: true};`}</Script>
 				<CssBaseline />
 				<ReCaptchaProvider
-					reCaptchaKey="6LcSMRkcAAAAALGjPf5wGvQtvTmbhcwi0feTRSYR"
+					reCaptchaKey={v3}
 					language={'zh'}
 					useRecaptchaNet={true}
 					scriptProps={{async: true, defer: true}}

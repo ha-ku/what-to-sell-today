@@ -34,6 +34,7 @@ import PinnableDataGrid from "../modules/PinnableDataGrid";
 import useRem from "../modules/useRem";
 import LineChart from "../modules/LineChart";
 import useTranslate from "../modules/useTranslate";
+import {v2} from "../modules/recaptchaPublicKey";
 
 
 const fix = (num) => Number(num.toFixed(1)),
@@ -444,7 +445,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				version={recaptchaVersion}
 				onLoad={setExecuteRecaptcha}
 				v2Props={{
-					sitekey: "6LdImA0eAAAAAKhZ7-36jnBNBu34ytwAN5CfNwq8",
+					sitekey: v2,
 					badge: "bottomright",
 					hl: locale === 'zh' ? "zh-CN" : 'en',
 					size: "invisible",
