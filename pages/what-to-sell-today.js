@@ -81,6 +81,8 @@ const NONE = '无',
 	SORTING_ORDER = ['desc', 'asc', null],
 	dateFormat = Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
+const NUMERIC = new RegExp(/^[0-9]*$/);
+
 function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
 	const [reports, setReports] = useState([]),
@@ -131,6 +133,13 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			return itemList.length ?
 				reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
 		}, [sources[listSource], reports]);
+	const [jobInfo, handleJobInfo] = useHandler(Object.assign(...['hunter', 'miner', 'botanist', 'fisher'].map(job => ({
+		[job]: Object.assign(...(
+			job === 'hunter' ? ['averageItemLevel', 'level'] : ['gathering', 'perception', 'level']
+		).map(key => ({[key]: ''})))
+	}))), ({target: {value}}, job, key) =>
+		NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
+	, "jobInfo");
 
 	const handleWorld = ({target: {value}}) => {
 		setWorld(value);
@@ -411,6 +420,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				priceWindow={{value: priceWindow, handler: handlePriceWindow}}
 				isLoading={{value: isLoading, handler: handleUpdate}}
 				withTime={sources[listSource].withTime}
+				jobInfo={{value: jobInfo, handler: handleJobInfo}}
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
 				{ !!fetchingURL ?

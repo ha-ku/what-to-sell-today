@@ -8,13 +8,14 @@ import {
 	RadioGroup,
 	Switch,
 	TextField,
-	Typography
+	Typography,
+	Box
 } from "@mui/material";
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
 
 
-function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime}) {
+function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime, jobInfo}) {
 
 	const { t, FormattedMessage } = useTranslate('drawer')
 
@@ -50,13 +51,26 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 					} sx={{marginLeft: 0}}/>
 					: null
 			}
+			<Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}} >
+				{Object.keys(jobInfo.value).map((job) => (
+					<StyledFormControlLabel label={t(job)} labelPlacement="top" control={
+						<Box key={job} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start'}} >
+							{Object.keys(jobInfo.value[job]).map((key, i) => (
+								<TextField key={key} label={t(key)} value={jobInfo.value[job][key]} onChange={
+									(e) => jobInfo.handler(e, job, key)
+								} variant="outlined" size="small" sx={{width: '90px', marginRight: i === Object.keys(jobInfo.value[job]).length - 1 ? '0px' : '10px'}} />
+							))}
+						</Box>
+					} sx={{marginX: 0}}/>
+				))}
+			</Box>
 		</StyledFormControl>
 		<Divider />
 		<StyledFormControl>
 			<Typography variant="h5" mb={2}>
 				<FormattedMessage id="manualUpdated" />
 			</Typography>
-			<div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
+			<Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
 				<TextField select value={world.value} onChange={world.handler} variant="outlined" label={t('DC')} margin="dense" sx={{marginRight: "10px"}}>{
 					worlds.map((world, i) =>
 						(<MenuItem value={world} key={world}>
@@ -71,8 +85,8 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 						</MenuItem>)
 					)
 				}</TextField>
-			</div>
-			<TextField label={t('averageWindowSize')} value={priceWindow.value} onChange={priceWindow.handler} variant="outlined" margin="dense"/>
+			</Box>
+			<TextField fullWidth label={t('averageWindowSize')} value={priceWindow.value} onChange={priceWindow.handler} variant="outlined" margin="dense"/>
 		</StyledFormControl>
 		<Divider />
 		<StyledButton variant="contained" color="primary" size="large" disabled={isLoading.value} onClick={isLoading.handler}>
