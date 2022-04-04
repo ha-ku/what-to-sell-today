@@ -66,6 +66,11 @@ const fix = (num) => Number(num.toFixed(1)),
 				))}
 			</StyledCellContainer>
 		</>) : NONE;
+const getActualTime = (job, item) => (60 - Math.min(Math.floor(Math.max(job.level-item.level, 0) / 10), 2) * 10)
+const getactualAmount = (job, item) => {
+	const levels = Object.keys(item.amount).map(n => Number(n))
+	return item.amount[Math.max( ...(levels.filter(n => n <= (job.perception ?? job.averageItemLevel))) )]
+}
 
 const NONE = '无',
 	RETRY = 3,
@@ -125,21 +130,40 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
-	const sources = useSources(!!fetchingURL, setError),
-		fullReports = useMemo(() => {
-			const itemList = sources[listSource].withTime ?
-					sources[listSource].source.map(item => ({...item, cost: (considerTime ? item.time : 60) / item.amount}))
-					: sources[listSource].source;
+	const [jobInfo, handleJobInfo] = useHandler({
+			hunting: { averageItemLevel: '', level: ''},
+			mining: { gathering: '', perception: '', level: ''},
+			botany: { gathering: '', perception: '', level: ''},
+			fish: { gathering: '', perception: '', level: ''}
+		}, ({target: {value}}, job, key) =>
+			NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
+		, "jobInfo");
+	const jobNumberInfo = Object.assign(...Object.keys(jobInfo).map(job => ({
+		[job]: Object.assign(...Object.keys(jobInfo[job]).map(key =>({
+			[key]: jobInfo[job][key].length ?
+				Number(jobInfo[job][key])
+				: (key === 'level' ? 90 : Number.MAX_SAFE_INTEGER)
+		})))
+	})))
+	const sources = useSources(!!fetchingURL, setError);
+	let fullReports = useMemo(() => {
+		const job = jobNumberInfo[listSource];
+			const itemList = sources[listSource].source;
 			return itemList.length ?
 				reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
 		}, [sources[listSource], reports]);
-	const [jobInfo, handleJobInfo] = useHandler(Object.assign(...['hunter', 'miner', 'botanist', 'fisher'].map(job => ({
-		[job]: Object.assign(...(
-			job === 'hunter' ? ['averageItemLevel', 'level'] : ['gathering', 'perception', 'level']
-		).map(key => ({[key]: ''})))
-	}))), ({target: {value}}, job, key) =>
-		NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
-	, "jobInfo");
+	fullReports = useMemo(() => {
+		if(sources[listSource].withTime) {
+			const job = jobNumberInfo[listSource];
+			fullReports.filter(item =>
+				(item.level <= job.level) && !(item.threshold > (job.gathering ?? job.averageItemLevel))
+			)
+			fullReports.forEach(item => {
+				item.cost = (considerTime ? getActualTime(job, item) : 60) / getactualAmount(job, item)
+			})
+		}
+		return fullReports;
+	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
 
 	const handleWorld = ({target: {value}}) => {
 		setWorld(value);
@@ -298,7 +322,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 					return;
 				}
 				cache.push(message);
-				!updateHandlerID ? updateHandlerID = setTimeout(updateHandler, 50) : '';
+				!updateHandlerID ? updateHandlerID = setTimeout(updateHandler, 200) : '';
 			}
 			decoder.on('data', doCache);
 			decoder.on('end', () => {
