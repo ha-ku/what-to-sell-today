@@ -1,4 +1,5 @@
 import {useState, useEffect, useMemo} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import Head from 'next/head';
 
 import {
@@ -86,7 +87,6 @@ const NONE = '无',
 	SORTING_ORDER = ['desc', 'asc', null],
 	dateFormat = Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
-const NUMERIC = new RegExp(/^[0-9]*$/);
 
 function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
@@ -130,14 +130,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
-	const [jobInfo, handleJobInfo] = useHandler({
-			hunting: { averageItemLevel: '', level: ''},
-			mining: { gathering: '', perception: '', level: ''},
-			botany: { gathering: '', perception: '', level: ''},
-			fish: { gathering: '', perception: '', level: ''}
-		}, ({target: {value}}, job, key) =>
-			NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
-		, "jobInfo");
+	const [jobInfo, setJobInfo] = useState({
+		botany: {level: '', gathering: '', perception: '', },
+		mining: {level: '', gathering: '', perception: '', },
+		fish: {level: '', gathering: '', perception: '', },
+		hunting: {level: '', averageItemLevel: '', },
+	});
 	const jobNumberInfo = Object.assign(...Object.keys(jobInfo).map(job => ({
 		[job]: Object.assign(...Object.keys(jobInfo[job]).map(key =>({
 			[key]: jobInfo[job][key].length ?
@@ -147,22 +145,22 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	})))
 	const sources = useSources(!!fetchingURL, setError);
 	let fullReports = useMemo(() => {
-		const job = jobNumberInfo[listSource];
-			const itemList = sources[listSource].source;
-			return itemList.length ?
-				reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
-		}, [sources[listSource], reports]);
+		const itemList = sources[listSource].source;
+		return itemList.length ?
+			reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
+	}, [sources[listSource], reports]);
 	fullReports = useMemo(() => {
+		let newFullReports = fullReports;
 		if(sources[listSource].withTime) {
 			const job = jobNumberInfo[listSource];
-			fullReports.filter(item =>
+			newFullReports = newFullReports.filter(item =>
 				(item.level <= job.level) && !(item.threshold > (job.gathering ?? job.averageItemLevel))
 			)
-			fullReports.forEach(item => {
+			newFullReports.forEach(item => {
 				item.cost = (considerTime ? getActualTime(job, item) : 60) / getactualAmount(job, item)
 			})
 		}
-		return fullReports;
+		return newFullReports;
 	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
 
 	const handleWorld = ({target: {value}}) => {
@@ -295,13 +293,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				if(cache.length) {
 					setReports(reports => {
 						let newRep = [...reports];
-						while(cache.length){
-							let rep = cache.pop();
+						cache.forEach((rep) => {
 							let i = reports.findIndex(r => r.ID === rep.ID);
-							i === -1 ?
-								newRep.push(rep)
-								: newRep[i] = rep;
-						}
+							i === -1 ? newRep.push(rep) : newRep[i] = rep;
+						})
+						cache = []
 						return newRep;
 					});
 				}
@@ -310,14 +306,15 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			const doCache = (message) => {
 				console.log(`data: `, message);
 				if(message.err) {
-					if(message.err.code === 403 && recaptchaVersion === 3) {
-						setExecuteRecaptcha({execute: null});
-						setRecaptchaVersion(2);
-					}
-					else {
-						setError(message.err);
-						setShouldUpdate(false);
-					}
+					unstable_batchedUpdates(() => {
+						if (message.err.code === 403 && recaptchaVersion === 3) {
+							setExecuteRecaptcha({execute: null});
+							setRecaptchaVersion(2);
+						} else {
+							setError(message.err);
+							setShouldUpdate(false);
+						}
+					})
 					decoder.destroy();
 					return;
 				}
@@ -326,8 +323,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			}
 			decoder.on('data', doCache);
 			decoder.on('end', () => {
-				setShouldUpdate(false);
-				setRetry(0);
+				unstable_batchedUpdates(() => {
+					setShouldUpdate(false);
+					setRetry(0);
+				})
 			})
 
 			const doMarketReport = async (token) => {
@@ -351,13 +350,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 					console.log('controller aborted', controller.signal.aborted);
 					let reader = response.body.getReader();
 					reader.read().then(function onData({done, value}) {
-						if(decoder.destroyed) {
+						if(decoder.destroyed)
 							return;
-						}
-						if (done) {
-							decoder.end();
-							return;
-						}
+						if (done)
+							return decoder.end();
 						decoder.write(value);
 						reader.read().then(onData)
 					})
@@ -371,9 +367,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				.catch(err => {
 					console.log('recaptcha error:', err);
 					return new Promise((res, rej) => {
-						setTimeout(() => {
-							executeRecaptcha('marketReport').then(res).catch(rej)
-						}, 200)
+						setTimeout(() => executeRecaptcha('marketReport').then(res).catch(rej), 200)
 					})
 				})
 				.then(doMarketReport)
@@ -383,7 +377,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				controller.abort();
 				if(updateHandlerID) {
 					clearTimeout(updateHandlerID);
-					updateHandler();
+					//updateHandler();
 				}
 				decoder.destroy();
 			}
@@ -444,7 +438,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				priceWindow={{value: priceWindow, handler: handlePriceWindow}}
 				isLoading={{value: isLoading, handler: handleUpdate}}
 				withTime={sources[listSource].withTime}
-				jobInfo={{value: jobInfo, handler: handleJobInfo}}
+				jobInfo={{value: jobInfo, handler: setJobInfo}}
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
 				{ !!fetchingURL ?

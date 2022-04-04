@@ -13,13 +13,23 @@ import {
 } from "@mui/material";
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
+import useHandler from "./useHandler";
 
 
-function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime, jobInfo}) {
+const NUMERIC = new RegExp(/^[0-9]*$/);
+
+function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime, jobInfo: externalJobInfo}) {
+
+	const [jobInfo, handleJobInfo] = useHandler(externalJobInfo.value, ({target: {value}}, job, key) =>
+		NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
+	, "jobInfo");
 
 	const { t, FormattedMessage } = useTranslate('drawer')
 
-	return (<Drawer anchor="left" open={open.value} onClose={open.handler} autoWidth>
+	return (<Drawer anchor="left" open={open.value} onClose={() => {
+		externalJobInfo.handler(jobInfo);
+		open.handler();
+	}} autoWidth>
 		<StyledFormControl>
 			<Typography variant="h5" mb={2}>
 				<FormattedMessage id="appearance" />
@@ -52,13 +62,13 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 					: null
 			}
 			<Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}} >
-				{Object.keys(jobInfo.value).map((job) => (
+				{Object.keys(jobInfo).map((job) => (
 					<StyledFormControlLabel label={t(job)} labelPlacement="top" control={
 						<Box key={job} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start'}} >
-							{Object.keys(jobInfo.value[job]).map((key, i) => (
-								<TextField key={key} label={t(key)} value={jobInfo.value[job][key]} onChange={
-									(e) => jobInfo.handler(e, job, key)
-								} variant="outlined" size="small" sx={{width: '90px', marginRight: i === Object.keys(jobInfo.value[job]).length - 1 ? '0px' : '10px'}} />
+							{Object.keys(jobInfo[job]).map((key, i) => (
+								<TextField key={key} label={t(key)} value={jobInfo[job][key]} onChange={
+									(e) => handleJobInfo(e, job, key)
+								} variant="standard" size="small" sx={{width: '100px', marginRight: i === Object.keys(jobInfo[job]).length - 1 ? '0px' : '10px'}} />
 							))}
 						</Box>
 					} sx={{marginX: 0}}/>
@@ -87,11 +97,10 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 				}</TextField>
 			</Box>
 			<TextField fullWidth label={t('averageWindowSize')} value={priceWindow.value} onChange={priceWindow.handler} variant="outlined" margin="dense"/>
+			<StyledButton variant="contained" color="primary" size="large" disabled={isLoading.value} onClick={isLoading.handler}>
+				<FormattedMessage id="update" />
+			</StyledButton>
 		</StyledFormControl>
-		<Divider />
-		<StyledButton variant="contained" color="primary" size="large" disabled={isLoading.value} onClick={isLoading.handler}>
-			<FormattedMessage id="update" />
-		</StyledButton>
 	</Drawer>);
 }
 
