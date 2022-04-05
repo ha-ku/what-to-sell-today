@@ -68,9 +68,9 @@ const fix = (num) => Number(num.toFixed(1)),
 			</StyledCellContainer>
 		</>) : NONE;
 const getActualTime = (job, item) => (60 - Math.min(Math.floor(Math.max(job.level-item.level, 0) / 10), 2) * 10)
-const getactualAmount = (job, item) => {
+const getactualAmount = ({perception, averageItemLevel}, item) => {
 	const levels = Object.keys(item.amount).map(n => Number(n))
-	return item.amount[Math.max( ...(levels.filter(n => n <= (job.perception ?? job.averageItemLevel))) )]
+	return item.amount[Math.max( ...(levels.filter(n => n <= (perception ?? averageItemLevel))) )]
 }
 
 const NONE = '无',
@@ -85,16 +85,13 @@ const NONE = '无',
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
-	dateFormat = Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
+	dateFormat = new Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
 
 function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
 	const [reports, setReports] = useState([]),
-		[priceWindow, handlePriceWindow] = useHandler(PRICE_WINDOW, ({target: {value}}) => {
-			const window = Number(value)
-			return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
-		}, 'priceWindow'),
+		[priceWindow, setPriceWindow] = useLocalStorageState('priceWindow', {ssr: true, defaultValue: PRICE_WINDOW}),
 		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
 		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
@@ -130,29 +127,31 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
-	const [jobInfo, setJobInfo] = useState({
-		botany: {level: '', gathering: '', perception: '', },
-		mining: {level: '', gathering: '', perception: '', },
-		fish: {level: '', gathering: '', perception: '', },
-		hunting: {level: '', averageItemLevel: '', },
+	const [jobInfo, setJobInfo] = useLocalStorageState("jobInfo", {
+		ssr: true,
+		defaultValue: {
+			botany: {level: '', gathering: '', perception: '', },
+			mining: {level: '', gathering: '', perception: '', },
+			fish: {level: '', gathering: '', perception: '', },
+			hunting: {level: '', averageItemLevel: '', },
+		}
 	});
-	const jobNumberInfo = Object.assign(...Object.keys(jobInfo).map(job => ({
-		[job]: Object.assign(...Object.keys(jobInfo[job]).map(key =>({
-			[key]: jobInfo[job][key].length ?
-				Number(jobInfo[job][key])
-				: (key === 'level' ? 90 : Number.MAX_SAFE_INTEGER)
-		})))
-	})))
 	const sources = useSources(!!fetchingURL, setError);
 	let fullReports = useMemo(() => {
+		console.log('pair ID');
 		const itemList = sources[listSource].source;
 		return itemList.length ?
 			reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
 	}, [sources[listSource], reports]);
 	fullReports = useMemo(() => {
+		console.log('recalculate cost')
 		let newFullReports = fullReports;
 		if(sources[listSource].withTime) {
-			const job = jobNumberInfo[listSource];
+			const job = Object.assign(...Object.keys(jobInfo[listSource]).map(key =>({
+				[key]: jobInfo[listSource][key].length ?
+					Number(jobInfo[listSource][key])
+					: Number.MAX_SAFE_INTEGER
+			})));
 			newFullReports = newFullReports.filter(item =>
 				(item.level <= job.level) && !(item.threshold > (job.gathering ?? job.averageItemLevel))
 			)
@@ -162,12 +161,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		}
 		return newFullReports;
 	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
-
-	const handleWorld = ({target: {value}}) => {
-		setWorld(value);
-		setServer(SERVER[value]);
-	};
-	const handleServer = ({target: {value}}) => setServer(value);
 	const handleUpdate = () => {
 		console.log('handleUpdate');
 		setShouldUpdate(true);
@@ -323,10 +316,12 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			}
 			decoder.on('data', doCache);
 			decoder.on('end', () => {
-				unstable_batchedUpdates(() => {
-					setShouldUpdate(false);
-					setRetry(0);
-				})
+				setTimeout(() => {
+					unstable_batchedUpdates(() => {
+						setShouldUpdate(false);
+						setRetry(0);
+					})
+				}, 200)
 			})
 
 			const doMarketReport = async (token) => {
@@ -344,10 +339,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 						.map(pair =>  pair.join('=')).join('&')
 				}`
 				setURL(url);
-				console.log('controller aborted', controller.signal.aborted);
 				try {
 					let response = await window.fetch(url, {signal: controller.signal})
-					console.log('controller aborted', controller.signal.aborted);
 					let reader = response.body.getReader();
 					reader.read().then(function onData({done, value}) {
 						if(decoder.destroyed)
@@ -382,7 +375,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				decoder.destroy();
 			}
 		}
-	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion]);
+	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow]);
 
 	const rows = useMemo(() => fullReports.map((rep) => ({
 		id: rep.ID,
@@ -433,11 +426,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				userDarkMode={{value: userDarkMode, handler: ({target: {value}}) => setUserDarkMode(value)}}
 				quality={{value: quality, handler: handleQuality}}
 				considerTime={{value: considerTime, handler: handleConsiderTime}}
-				world={{value: world, handler: handleWorld}}
-				server={{value: server, handler: handleServer}}
-				priceWindow={{value: priceWindow, handler: handlePriceWindow}}
+				world={{value: world, handler: setWorld}}
+				server={{value: server, handler: setServer}}
+				priceWindow={{value: priceWindow, handler: setPriceWindow}}
 				isLoading={{value: isLoading, handler: handleUpdate}}
-				withTime={sources[listSource].withTime}
 				jobInfo={{value: jobInfo, handler: setJobInfo}}
 			/>
 			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>

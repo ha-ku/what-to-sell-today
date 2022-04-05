@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useMemo} from "react";
 import useTranslate from "./useTranslate";
 
 function useSources(shouldStart, setError) {
@@ -16,7 +16,7 @@ function useSources(shouldStart, setError) {
 		allegoryList: [],
 		yellowGathererScripsList: []
 	});
-	const sources = {
+	const sources = useMemo(() => ({
 		companySeal: {target: t('companySeal.source'), action: t('companySeal.action'), withTime: false, source: JSONSources.companySealList, category: t('category.currency')},
 		botany: {target: t('botany.source'), action: t('botany.action'), withTime: true, source: JSONSources.botanyList, category: t('category.retainer')},
 		mining: {target: t('mining.source'), action: t('mining.action'), withTime: true, source: JSONSources.miningList, category: t('category.retainer')},
@@ -26,7 +26,7 @@ function useSources(shouldStart, setError) {
 		map: {target: t('map.source'), action: t('map.action'), withTime: false, source: JSONSources.mapList, category: t('category.gathering')},
 		allegory: {target: t('allegory.source'), action: t('allegory.action'), withTime: false, source: JSONSources.allegoryList, category: t('category.currency')},
 		yellowGathererScrips: {target: t('yellowGathererScrips.source'), action: t('yellowGathererScrips.action'), withTime: false, source: JSONSources.yellowGathererScripsList, category: t('category.gathering')}
-	};
+	}), [JSONSources, t]);
 	useEffect(() => {
 		if(shouldStart) {
 			import('../public/json/itemLists.json')

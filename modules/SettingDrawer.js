@@ -1,7 +1,8 @@
-import {StyledButton, StyledFormControl, StyledFormControlLabel} from "./styledComponents";
+import {StyledFormControlLabel} from "./styledComponents";
 import {
-	Divider,
 	Drawer,
+	FormLabel,
+	FormControl,
 	FormControlLabel,
 	MenuItem,
 	Radio,
@@ -14,53 +15,76 @@ import {
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
 import useHandler from "./useHandler";
-
+import {useState} from "react";
+const SERVER = worlds.reduce((a, w, i) => {
+		a[w] = servers[i][0];
+		return a;
+	}, {});
 
 const NUMERIC = new RegExp(/^[0-9]*$/);
 
-function SettingDrawer({open, userDarkMode, quality, considerTime, world, server, priceWindow, isLoading, withTime, jobInfo: externalJobInfo}) {
+function SettingDrawer({open, userDarkMode, quality, considerTime, world: extWorld, server: extServer, priceWindow: extPriceWindow, isLoading, jobInfo: extJobInfo}) {
 
-	const [jobInfo, handleJobInfo] = useHandler(externalJobInfo.value, ({target: {value}}, job, key) =>
+	const [jobInfo, handleJobInfo] = useHandler(extJobInfo.value, ({target: {value}}, job, key) =>
 		NUMERIC.test(value) ? (jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} }) : undefined
-	, "jobInfo");
+	);
 
-	const { t, FormattedMessage } = useTranslate('drawer')
+	const { t, FormattedMessage } = useTranslate('drawer');
+
+	const [world, setWorld] = useState(extWorld.value),
+		[server, setServer] = useState(extServer.value),
+		[priceWindow, handlePriceWindow] = useHandler(extPriceWindow.value, ({target: {value}}) => {
+			const window = Number(value)
+			return (value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value;
+		});
+	const handleWorld = ({target: {value}}) => {
+		setWorld(value);
+		setServer(SERVER[value]);
+	};
+	const handleServer = ({target: {value}}) => setServer(value);
 
 	return (<Drawer anchor="left" open={open.value} onClose={() => {
-		externalJobInfo.handler(jobInfo);
+		extJobInfo.handler(jobInfo);
 		open.handler();
-	}} autoWidth>
-		<StyledFormControl>
-			<Typography variant="h5" mb={2}>
-				<FormattedMessage id="appearance" />
-			</Typography>
-			<StyledFormControlLabel label={t('theme')} labelPlacement="top" control={
-				<RadioGroup value={userDarkMode.value} onChange={userDarkMode.handler} row>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('day')} value="light"/>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('night')} value="dark"/>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('auto')} value="auto"/>
-				</RadioGroup>
+		if(!(extWorld.value === world && extServer.value === server && extPriceWindow.value === priceWindow)) {
+			if(extWorld.value !== world) extWorld.handler(world);
+			if(extServer.value !== server) extServer.handler(server);
+			if(extPriceWindow.value !== priceWindow) extPriceWindow.handler(priceWindow);
+			isLoading.handler();
+		}
+	}} autoWidth PaperProps={{sx: {padding: '20px'}}}>
+		<Typography variant="h5" >
+			<FormattedMessage id="appearance" />
+		</Typography>
+		<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+			<FormLabel id="theme-label">{t('theme')}</FormLabel>
+			<RadioGroup value={userDarkMode.value} onChange={userDarkMode.handler} row aria-labelledby="theme-label" >
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('day')} value="light"/>
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('night')} value="dark"/>
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('auto')} value="auto"/>
+			</RadioGroup>
+		</FormControl>
+
+		<Typography variant="h5" mt={3} >
+			<FormattedMessage id="calculationParam" />
+		</Typography>
+		<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+			<FormLabel id="quality-label">{t('quality')}</FormLabel>
+			<RadioGroup value={quality.value} onChange={quality.handler} row aria-labelledby="quality-label" >
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('HQ')} value="hq"/>
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('NQ')} value="nq"/>
+				<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('all')} value="all"/>
+			</RadioGroup>
+			<StyledFormControlLabel label={t('considerTime')} labelPlacement="top" control={
+				<Switch color="secondary" checked={considerTime.value} onChange={considerTime.handler} sx={{marginLeft: '-12px'}}/>
 			} sx={{marginLeft: 0}}/>
-		</StyledFormControl>
-		<Divider />
-		<StyledFormControl>
-			<Typography variant="h5" mb={2}>
-				<FormattedMessage id="autoUpdated" />
-			</Typography>
-			<StyledFormControlLabel label={t('quality')} labelPlacement="top" control={
-				<RadioGroup value={quality.value} onChange={quality.handler} row>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('HQ')} value="hq"/>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('NQ')} value="nq"/>
-					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('all')} value="all"/>
-				</RadioGroup>
-			} sx={{marginLeft: 0}}/>
-			{
-				withTime ?
-					<StyledFormControlLabel label={t('considerTime')} labelPlacement="top" control={
-						<Switch color="secondary" checked={considerTime.value} onChange={considerTime.handler} sx={{marginLeft: '-12px'}}/>
-					} sx={{marginLeft: 0}}/>
-					: null
-			}
+			<TextField fullWidth label={t('averageWindowSize')} value={priceWindow} onChange={handlePriceWindow} variant="standard" margin="dense" sx={{width: '160px'}}/>
+		</FormControl>
+
+		<Typography variant="h5" mt={3} >
+			<FormattedMessage id="retainerInfo" />
+		</Typography>
+		<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 			<Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}} >
 				{Object.keys(jobInfo).map((job) => (
 					<StyledFormControlLabel label={t(job)} labelPlacement="top" control={
@@ -74,33 +98,29 @@ function SettingDrawer({open, userDarkMode, quality, considerTime, world, server
 					} sx={{marginX: 0}}/>
 				))}
 			</Box>
-		</StyledFormControl>
-		<Divider />
-		<StyledFormControl>
-			<Typography variant="h5" mb={2}>
-				<FormattedMessage id="manualUpdated" />
-			</Typography>
+		</FormControl>
+
+		<Typography variant="h5" mt={3} >
+			<FormattedMessage id="characterInfo" />
+		</Typography>
+		<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 			<Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
-				<TextField select value={world.value} onChange={world.handler} variant="outlined" label={t('DC')} margin="dense" sx={{marginRight: "10px"}}>{
+				<TextField select label={t('DC')} value={world} onChange={handleWorld} variant="standard" margin="dense" sx={{marginRight: "10px"}}>{
 					worlds.map((world, i) =>
 						(<MenuItem value={world} key={world}>
 							{worldsName[i]}
 						</MenuItem>)
 					)
 				}</TextField>
-				<TextField select value={server.value} onChange={server.handler} variant="outlined" label={t('world')} margin="dense">{
-					servers[worlds.indexOf(world.value)].map((server, i) =>
+				<TextField select label={t('world')} value={server} onChange={handleServer} variant="standard" margin="dense">{
+					servers[worlds.indexOf(world)].map((server, i) =>
 						(<MenuItem value={server} key={server}>
-							{serversName[worlds.indexOf(world.value)][i]}
+							{serversName[worlds.indexOf(world)][i]}
 						</MenuItem>)
 					)
 				}</TextField>
 			</Box>
-			<TextField fullWidth label={t('averageWindowSize')} value={priceWindow.value} onChange={priceWindow.handler} variant="outlined" margin="dense"/>
-			<StyledButton variant="contained" color="primary" size="large" disabled={isLoading.value} onClick={isLoading.handler}>
-				<FormattedMessage id="update" />
-			</StyledButton>
-		</StyledFormControl>
+		</FormControl>
 	</Drawer>);
 }
 
