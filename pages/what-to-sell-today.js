@@ -35,7 +35,7 @@ import PinnableDataGrid from "../modules/PinnableDataGrid";
 import useRem from "../modules/useRem";
 import LineChart from "../modules/LineChart";
 import useTranslate from "../modules/useTranslate";
-import {v2} from "../modules/recaptchaPublicKey";
+import {v2, v3} from "../modules/recaptchaPublicKey";
 
 
 const fix = (num) => Number(num.toFixed(1)),
@@ -124,8 +124,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		[page, setPage] = useState(0);
 
 	const theme = useTheme();
-	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
-	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 
 	const [jobInfo, setJobInfo] = useLocalStorageState("jobInfo", {
 		ssr: true,
@@ -180,6 +178,21 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
 	const { t ,locale } = useTranslate('grid')
+	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
+	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
+	const [v2Props, v3Props] = useMemo(() => ([
+		{
+			sitekey: v2,
+			badge: "bottomright",
+			hl: locale === 'zh' ? "zh-CN" : 'en',
+			size: "invisible"
+		},{
+			reCaptchaKey: v3,
+			language: locale,
+			useRecaptchaNet: true,
+			scriptProps: {async: true, defer: true},
+		}
+	]), [locale])
 
 	const rem = useRem();
 	const columns = useMemo(() => ([
@@ -464,13 +477,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			<MixedRecaptcha
 				version={recaptchaVersion}
 				onLoad={setExecuteRecaptcha}
-				v2Props={{
-					sitekey: v2,
-					badge: "bottomright",
-					hl: locale === 'zh' ? "zh-CN" : 'en',
-					size: "invisible",
-					theme: theme.palette.mode
-				}}
+				v2Props={v2Props}
+				v3Props={v3Props}
 			/>
 			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={t('copyHint')} action={
 				<IconButton size="small" onClick={() => setClipBarOpen(false)} >

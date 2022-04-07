@@ -1,11 +1,22 @@
 import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState, memo} from "react";
 import { GoogleReCaptchaProvider as ReCaptchaProvider} from 'react-google-recaptcha-v3';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHAv2 from "react-google-recaptcha";
 
+function ReCAPTCHAv3({setExecuteV3}) {
+	const {executeRecaptcha: execute} = useGoogleReCaptcha();
+	useEffect(() => {
+		if(execute) {
+			setExecuteV3({execute});
+		}
+	}, [execute])
+	return null;
+}
 
-function MixedRecaptcha({version, onLoad, v2Props}) {
-	const { executeRecaptcha: executeV3 } = useGoogleReCaptcha();
+function MixedRecaptcha({version, onLoad, v2Props, v3Props}) {
+
+	console.log(`render v${version}`, onLoad, v2Props, v3Props)
+	const [{execute: executeV3}, setExecuteV3] = useState({execute: null});
 	const recaptchaRef = useRef();
 
 	useEffect(() => {
@@ -19,10 +30,11 @@ function MixedRecaptcha({version, onLoad, v2Props}) {
 		}
 	}, [executeV3, recaptchaRef, version])
 
-	return version === 3 ? null
-		: <ReCAPTCHA {...v2Props} ref={recaptchaRef} />
+	return version === 3 ? <ReCaptchaProvider {...v3Props}>
+			<ReCAPTCHAv3 setExecuteV3={setExecuteV3}/>
+		</ReCaptchaProvider>
+		: <ReCAPTCHAv2 {...v2Props} ref={recaptchaRef} isolated />
 }
 
 
-export {ReCaptchaProvider}
-export default MixedRecaptcha
+export default memo(MixedRecaptcha)

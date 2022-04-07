@@ -6,7 +6,6 @@ import { CssBaseline } from "@mui/material";
 
 import useLocalStorageState from "use-local-storage-state";
 
-import { ReCaptchaProvider } from '../modules/MixedRecaptcha';
 import Script from 'next/script';
 import {SvgDefsProvider} from "../modules/useSvgDefs";
 import {IntlProvider} from 'react-intl';
@@ -14,7 +13,6 @@ import {useEffect} from "react";
 import ZH_MESSAGE from '../public/locales/zh.json';
 import EN_MESSAGE from '../public/locales/en.json';
 import flatten from 'flat';
-import {v3} from "../modules/recaptchaPublicKey";
 
 
 const THEME = {
@@ -67,18 +65,11 @@ const App = ({ Component, pageProps }) => {
 			<ThemeProvider theme={theme}>
 				<Script strategy="afterInteractive">{`window.recaptchaOptions = {useRecaptchaNet: true};`}</Script>
 				<CssBaseline />
-				<ReCaptchaProvider
-					reCaptchaKey={v3}
-					language={'zh'}
-					useRecaptchaNet={true}
-					scriptProps={{async: true, defer: true}}
-				>
-					<SvgDefsProvider>
-						<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
-							<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode} setLocale={setLocale}/>
-						</IntlProvider>
-					</SvgDefsProvider>
-				</ReCaptchaProvider>
+				<SvgDefsProvider>
+					<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
+						<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode} setLocale={setLocale}/>
+					</IntlProvider>
+				</SvgDefsProvider>
 			</ThemeProvider>
 		</>
 	)
