@@ -1,9 +1,6 @@
 import {useState, useEffect, useMemo} from "react";
-import useTranslate from "./useTranslate";
 
 function useSources(shouldStart, setError) {
-
-	const { t } = useTranslate('navbar')
 
 	const [JSONSources, setJSONSources] = useState({
 		companySealList: [],
@@ -17,16 +14,16 @@ function useSources(shouldStart, setError) {
 		yellowGathererScripsList: []
 	});
 	const sources = useMemo(() => ({
-		companySeal: {target: t('companySeal.source'), action: t('companySeal.action'), withTime: false, source: JSONSources.companySealList, category: t('category.currency')},
-		botany: {target: t('botany.source'), action: t('botany.action'), withTime: true, source: JSONSources.botanyList, category: t('category.retainer')},
-		mining: {target: t('mining.source'), action: t('mining.action'), withTime: true, source: JSONSources.miningList, category: t('category.retainer')},
-		fish: {target: t('fish.source'), action: t('fish.action'), withTime: true, source: JSONSources.fishList, category: t('category.retainer')},
-		hunting: {target: t('hunting.source'), action: t('hunting.action'), withTime: true, source: JSONSources.huntingList, category: t('category.retainer')},
-		dye: {target: t('dye.source'), action: t('dye.action'), withTime: false, source: JSONSources.dyeList, category: t('category.crafting')},
-		map: {target: t('map.source'), action: t('map.action'), withTime: false, source: JSONSources.mapList, category: t('category.gathering')},
-		allegory: {target: t('allegory.source'), action: t('allegory.action'), withTime: false, source: JSONSources.allegoryList, category: t('category.currency')},
-		yellowGathererScrips: {target: t('yellowGathererScrips.source'), action: t('yellowGathererScrips.action'), withTime: false, source: JSONSources.yellowGathererScripsList, category: t('category.gathering')}
-	}), [JSONSources, t]);
+		companySeal: {target: 'companySeal.source', action: 'companySeal.action', withTime: false, source: JSONSources.companySealList, category: 'category.currency'},
+		botany: {target: 'botany.source', action: 'botany.action', withTime: true, source: JSONSources.botanyList, category: 'category.retainer'},
+		mining: {target: 'mining.source', action: 'mining.action', withTime: true, source: JSONSources.miningList, category: 'category.retainer'},
+		fish: {target: 'fish.source', action: 'fish.action', withTime: true, source: JSONSources.fishList, category: 'category.retainer'},
+		hunting: {target: 'hunting.source', action: 'hunting.action', withTime: true, source: JSONSources.huntingList, category: 'category.retainer'},
+		dye: {target: 'dye.source', action: 'dye.action', withTime: false, source: JSONSources.dyeList, category: 'category.crafting'},
+		map: {target: 'map.source', action: 'map.action', withTime: false, source: JSONSources.mapList, category: 'category.gathering'},
+		allegory: {target: 'allegory.source', action: 'allegory.action', withTime: false, source: JSONSources.allegoryList, category: 'category.currency'},
+		yellowGathererScrips: {target: 'yellowGathererScrips.source', action: 'yellowGathererScrips.action', withTime: false, source: JSONSources.yellowGathererScripsList, category: 'category.gathering'}
+	}), [JSONSources]);
 	useEffect(() => {
 		if(shouldStart) {
 			import('../public/json/itemLists.json')

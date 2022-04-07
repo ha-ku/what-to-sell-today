@@ -40,7 +40,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 		}
 	}, [selectOpen]);
 
-	const { FormattedMessage, locale } = useTranslate('navbar');
+	const { FormattedMessage, locale, t } = useTranslate('navbar');
 
 	const isMobile = !useMediaQuery(t => t.breakpoints.up('sm'));
 
@@ -52,16 +52,16 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 				</IconButton>
 				<Box sx={{display: 'inline-flex', flexDirection: isMobile && locale !=='zh' ? 'column' : 'row'}}>
 					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
-						<FormattedMessage id="prefix" values={sources[listSource]} />
+						<FormattedMessage id="prefix" values={{action: t(sources[listSource].action)}} />
 					</Typography>
 					<FormControl>
 						<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard" sx={{flex: "none"}}>
 							{Object.keys(headers).reduce((acc, category) => {
 								return acc.concat(
-									(<ListSubheader key={category}>{category}</ListSubheader>),
+									(<ListSubheader key={category}>{t(category)}</ListSubheader>),
 									Object.keys(headers[category]).map(sourceName => (
 										<MenuItem value={sourceName} key={sourceName}>
-											<Typography variant="h6">{sources[sourceName].target}</Typography>
+											<Typography variant="h6">{t(sources[sourceName].target)}</Typography>
 										</MenuItem>
 									))
 								)
@@ -69,7 +69,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 						</TextField>
 					</FormControl>
 					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
-						<FormattedMessage id="postfix" values={sources[listSource]} />
+						<FormattedMessage id="postfix" values={{action: t(sources[listSource].action)}} />
 					</Typography>
 				</Box>
 				{isLoading ? <LinearProgress color="secondary" sx={{position: "fixed", top: 0, left: 0, width: '100%'}}/> : null}
