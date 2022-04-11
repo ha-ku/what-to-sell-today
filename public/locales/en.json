@@ -99,12 +99,12 @@
       "source": "Timeworn Maps",
       "action": "dig among"
     },
-    "allegory": {
-      "source": "Allegory",
+    "whiteGathererScrips": {
+      "source": "White Gatherer Scrips",
       "action": "exchange with"
     },
-    "yellowGathererScrips": {
-      "source": "Yellow Gatherer Scrips",
+    "whiteCrafterScrips": {
+      "source": "White Crafter Scrips",
       "action": "exchange with"
     }
   }
