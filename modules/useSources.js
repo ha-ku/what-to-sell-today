@@ -11,7 +11,8 @@ function useSources(shouldStart, setError) {
 		dyeList: [],
 		mapList: [],
 		allegoryList: [],
-		yellowGathererScripsList: []
+		whiteGathererScripsList: [],
+		whiteCrafterScripsList: [],
 	});
 	const sources = useMemo(() => ({
 		companySeal: {target: 'companySeal.source', action: 'companySeal.action', withTime: false, source: JSONSources.companySealList, category: 'category.currency'},
@@ -21,8 +22,8 @@ function useSources(shouldStart, setError) {
 		hunting: {target: 'hunting.source', action: 'hunting.action', withTime: true, source: JSONSources.huntingList, category: 'category.retainer'},
 		dye: {target: 'dye.source', action: 'dye.action', withTime: false, source: JSONSources.dyeList, category: 'category.crafting'},
 		map: {target: 'map.source', action: 'map.action', withTime: false, source: JSONSources.mapList, category: 'category.gathering'},
-		allegory: {target: 'allegory.source', action: 'allegory.action', withTime: false, source: JSONSources.allegoryList, category: 'category.currency'},
-		yellowGathererScrips: {target: 'yellowGathererScrips.source', action: 'yellowGathererScrips.action', withTime: false, source: JSONSources.yellowGathererScripsList, category: 'category.gathering'}
+		whiteGathererScrips: {target: 'whiteGathererScrips.source', action: 'whiteGathererScrips.action', withTime: false, source: JSONSources.whiteGathererScripsList, category: 'category.gathering'},
+		whiteCrafterScrips: {target: 'whiteCrafterScrips.source', action: 'whiteCrafterScrips.action', withTime: false, source: JSONSources.whiteCrafterScripsList, category: 'category.crafting'},
 	}), [JSONSources]);
 	useEffect(() => {
 		if(shouldStart) {

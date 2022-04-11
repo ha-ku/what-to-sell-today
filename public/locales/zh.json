@@ -99,12 +99,12 @@
       "source": "宝图",
       "action": "挖"
     },
-    "allegory": {
-      "source": "奇谭",
+    "whiteGathererScrips": {
+      "source": "白票",
       "action": "换"
     },
-    "yellowGathererScrips": {
-      "source": "黄票",
+    "whiteCrafterScrips": {
+      "source": "白票",
       "action": "换"
     }
   }
