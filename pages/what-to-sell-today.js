@@ -178,6 +178,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
 	const { t ,locale } = useTranslate('grid')
+	const {t: navT} = useTranslate('navbar');
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 	const [v2Props, v3Props] = useMemo(() => ([
@@ -423,7 +424,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		<>
 			<Head>
 				<title>
-					{t("title", sources[listSource])}
+					{t("title", {action: navT(sources[listSource].action), target: navT(sources[listSource].target)})}
 				</title>
 			</Head>
 			<NavBar
