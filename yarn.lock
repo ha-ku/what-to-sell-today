@@ -973,10 +973,10 @@
     "@babel/helper-validator-option" "^7.16.7"
     "@babel/plugin-transform-typescript" "^7.16.7"
 
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.17.2", "@babel/runtime@^7.17.8", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
-  version "7.17.8"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
-  integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.13.10", "@babel/runtime@^7.17.2", "@babel/runtime@^7.17.9", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+  version "7.17.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
+  integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -2209,10 +2209,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-complex.js@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.1.0.tgz#211258e271345213c6f004c0ea90a34eb1e0c753"
-  integrity sha512-RdcrDz7YynXp/YXGwXIZ4MtmxXXniT5WmLFRX93cuXUX+0geWAqB8l1BoLXF+3BkzviVzHlpw27P9ow7MvlcmA==
+complex.js@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.1.1.tgz#0675dac8e464ec431fb2ab7d30f41d889fb25c31"
+  integrity sha512-8njCHOTtFFLtegk6zQo0kkVX1rngygb/KQI6z1qZxlFI3scluC+LVTCFbrkWjBv4vvLlbQ9t88IPMC6k95VTTg==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -3226,13 +3226,13 @@ make-dir@^3.0.2, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@^10.4.3:
-  version "10.4.3"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.3.tgz#456ae944204809e8e8266ff265b1ef724d03f90e"
-  integrity sha512-C50lWorCOplBec9Ik5fzhHuOx4G4+mtdz3r1G2I1/r8yj+CpYFXLXNqTdg59oKmIF1tKcIzpxlC4s2dGL7f3pg==
+mathjs@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.5.0.tgz#f81d0518fe7b4b2a0b85e1125b8ecfc364fb0292"
+  integrity sha512-gRnSY9psN9zgiB2QV9F4XbuX5hwjxY5Ou7qoTFWDbn2vZ3UEs+sjfK/SRg2WP30TNfZWpwlGdp8H1knFJnpFdA==
   dependencies:
-    "@babel/runtime" "^7.17.8"
-    complex.js "^2.1.0"
+    "@babel/runtime" "^7.17.9"
+    complex.js "^2.1.1"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
     fraction.js "^4.2.0"
