@@ -9,7 +9,8 @@ const worlds = [
 	"Mana",
 	'LuXingNiao',
 	'MoGuLi',
-	'MaoXiaoPang'
+	'MaoXiaoPang',
+	'DouDouChai'
 ];
 const worldsName = [
 	"Aether",
@@ -22,7 +23,8 @@ const worldsName = [
 	"Mana",
 	"陆行鸟",
 	"莫古力",
-	"猫小胖"
+	"猫小胖",
+	"豆豆柴"
 ];
 const servers = [
 	[
@@ -137,6 +139,16 @@ const servers = [
 		"HaiMaoChaWu",
 		"RouFengHaiWan",
 		"HuPoYuan"
+	],
+	[
+		'ShuiJingTa',
+		'YinLeiHu',
+		'TaiYangHaiAn',
+		'YiXiuJiaDe',
+		'HongChaChuan',
+		'HuangJinGu',
+		'YueYaWan',
+		'XueSongYuan'
 	]
 ];
 const serversName = [
@@ -226,7 +238,8 @@ const serversName = [
 	],
 	["红玉海", "神意之地", "拉诺西亚", "幻影群岛", "萌芽池", "宇宙和音", "沃仙曦染", "晨曦王座"],
 	['白银乡', '白金幻象', '神拳痕', '潮风亭', '旅人栈桥', '拂晓之间', '龙巢神殿', '梦羽宝境'],
-	['紫水栈桥', '延夏', '静语庄园', '摩杜纳', '海猫茶屋', '柔风海湾', '琥珀原']
+	['紫水栈桥', '延夏', '静语庄园', '摩杜纳', '海猫茶屋', '柔风海湾', '琥珀原'],
+	['水晶塔', '银泪湖', '太阳海岸', '伊修加德', '红茶川', '黄金谷', '月牙湾', '雪松原']
 ];
 
 
