@@ -27,7 +27,7 @@
     "form-data": "^4.0.0",
     "hex-to-rgba": "^2.0.1",
     "https-proxy-agent": "^5.0.1",
-    "mathjs": "^10.4.3",
+    "mathjs": "^10.5.3",
     "next": "^12.1.5",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.2",
