@@ -12,7 +12,7 @@
   "author": "haku",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.17.9",
+    "@babel/core": "^7.18.2",
     "@emotion/css": "^11.9.0",
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
@@ -28,7 +28,7 @@
     "hex-to-rgba": "^2.0.1",
     "https-proxy-agent": "^5.0.1",
     "mathjs": "^10.6.0",
-    "next": "^12.1.5",
+    "next": "^12.1.6",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.2",
     "next-transpile-modules": "^9.0.0",
@@ -39,11 +39,11 @@
     "react-google-recaptcha-v3": "^1.9.7",
     "react-hotkeys-hook": "^3.4.4",
     "react-intl": "^5.25.0",
-    "redis": "^4.0.6",
+    "redis": "^4.1.0",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",
     "use-local-storage-state": "^17.0.1",
-    "webpack": "^5.72.0"
+    "webpack": "^5.72.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
