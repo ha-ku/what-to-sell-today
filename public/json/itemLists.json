@@ -954,7 +954,9 @@
 		{"name":"陈旧的迦迦纳怪鸟革地图","cost":1,"enName":"Timeworn Gaganaskin Map","ID":17835},
 		{"name":"陈旧的瞪羚革地图","cost":1,"enName":"Timeworn Gazelleskin Map","ID":17836},
 		{"name":"陈旧的绿飘龙革地图","cost":1,"enName":"Timeworn Gliderskin Map","ID":26744},
-		{"name":"陈旧的缠尾蛟革地图","cost":1,"enName":"Timeworn Zonureskin Map","ID":26745}
+		{"name":"陈旧的缠尾蛟革地图","cost":1,"enName":"Timeworn Zonureskin Map","ID":26745},
+		{"name":"陈旧的金毗罗鳄革地图","cost":1,"enName":"Timeworn Kumbhiraskin Map","ID":36612},
+		{"name":"陈旧的赛加羚羊革地图","cost":1,"enName":"Timeworn Saigaskin Map","ID":36611}
 	],
 	"whiteGathererScripsList":[
 		{"name":"民兵碎石锤","cost":60,"ID":2544,"enName":"Militia Sledgehammer"},
@@ -1210,5 +1212,12 @@
 		{"name":"名匠魔晶石玖型","cost":250,"ID":33925,"enName":"Craftsman's Competence Materia IX"},
 		{"name":"魔匠魔晶石玖型","cost":250,"ID":33926,"enName":"Craftsman's Cunning Materia IX"},
 		{"name":"巨匠魔晶石玖型","cost":250,"ID":33927,"enName":"Craftsman's Command Materia IX"}
+	],
+	"aphorismList": [
+		{"name":"遗烈乡研磨剂","cost":20,"enName":"Alchemical Abrasive","ID":36219},
+		{"name":"萨维奈绢丝","cost":20,"enName":"Thavnairian Thread","ID":36221},
+		{"name":"两栖犀的粗皮","cost":20,"enName":"Amynodon Hide","ID":36222},
+		{"name":"萨维奈木贼草","cost":20,"enName":"Thavnairian Horsetail","ID":36220},
+		{"name":"遗烈乡骸炭","cost":20,"enName":"Alchemical Charcoal","ID":36218}
 	]
 }

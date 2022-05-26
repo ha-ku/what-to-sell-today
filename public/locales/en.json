@@ -75,6 +75,10 @@
       "source": "Company Seals",
       "action": "exchange with"
     },
+    "aphorism": {
+      "source": "Aphorism Tomestone",
+      "action": "exchange with"
+    },
     "botany": {
       "source": "Botanist",
       "action": "gather for"

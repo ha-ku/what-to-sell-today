@@ -4,6 +4,7 @@ function useSources(shouldStart, setError) {
 
 	const [JSONSources, setJSONSources] = useState({
 		companySealList: [],
+		aphorismList: [],
 		botanyList: [],
 		miningList: [],
 		fishList: [],
@@ -16,6 +17,7 @@ function useSources(shouldStart, setError) {
 	});
 	const sources = useMemo(() => ({
 		companySeal: {target: 'companySeal.source', action: 'companySeal.action', withTime: false, source: JSONSources.companySealList, category: 'category.currency'},
+		aphorism: {target: 'aphorism.source', action: 'aphorism.action', withTime: false, source: JSONSources.aphorismList, category: 'category.currency'},
 		botany: {target: 'botany.source', action: 'botany.action', withTime: true, source: JSONSources.botanyList, category: 'category.retainer'},
 		mining: {target: 'mining.source', action: 'mining.action', withTime: true, source: JSONSources.miningList, category: 'category.retainer'},
 		fish: {target: 'fish.source', action: 'fish.action', withTime: true, source: JSONSources.fishList, category: 'category.retainer'},
