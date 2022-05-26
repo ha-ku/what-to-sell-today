@@ -417,7 +417,6 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				setShouldUpdate(true);
 			}, 2500);
 		}
-		return (<ErrorCover {...{retry: retry < RETRY, error}}/>);
 	}
 
 	return (
@@ -486,6 +485,9 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 					<CloseIcon fontSize="small"/>
 				</IconButton>
 			} />
+			{
+				error ? <ErrorCover {...{retry: retry < RETRY, error}}/> : null
+			}
 		</>
 	);
 }

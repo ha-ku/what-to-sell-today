@@ -9,7 +9,7 @@ const ErrorCover = ({retry, error}) => {
 		<StyledLoadingContainer>
 			<StyledCircularProgress />
 			<span>
-				<FormattedMessage id="msg" values={error} />
+				<FormattedMessage id="msg" values={{code: error.code}} />
 			</span>
 			<span>
 			{retry ?
