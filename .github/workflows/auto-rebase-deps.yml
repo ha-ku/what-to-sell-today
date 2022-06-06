@@ -1,0 +1,13 @@
+name: Auto Rebase Dependencies
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - 'dev-deps'
+    tags:
+      - 'dependencies'
+jobs:
+  do_rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/rebase@v2
