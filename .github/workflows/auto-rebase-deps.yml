@@ -1,0 +1,16 @@
+name: Auto Rebase Dependencies
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - 'dev-deps'
+    tags:
+      - 'dependencies'
+jobs:
+  do_rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1.2.0
+      - uses: nulogy/rebase-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
