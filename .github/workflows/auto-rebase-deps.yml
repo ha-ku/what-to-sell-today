@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: "pascalgn/automerge-action@v0.15.3"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
           MERGE_METHOD: "rebase"
           MERGE_LABELS: "dependencies"
           MERGE_ERROR_FAIL: 1
