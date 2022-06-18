@@ -6,13 +6,14 @@ import {
 	Close as CloseIcon,
 	AccessTime as AccessTimeIcon,
 	ArrowDropUp as ArrowDropUpIcon,
-	ArrowDropDown as ArrowDropDownIcon
+	ArrowDropDown as ArrowDropDownIcon,
+	ArrowDownward as ArrowDownwardIcon,
+	ArrowUpward as ArrowUpwardIcon
 } from '@mui/icons-material';
 import {Button, Link, Tooltip, IconButton, Snackbar, Box, useMediaQuery} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 
 
-import hexToRgba from "hex-to-rgba";
 import { useHotkeys } from "react-hotkeys-hook";
 import useLocalStorageState from "use-local-storage-state";
 
@@ -36,6 +37,10 @@ import useRem from "../modules/useRem";
 import LineChart from "../modules/LineChart";
 import useTranslate from "../modules/useTranslate";
 import {v2, v3} from "../modules/recaptchaPublicKey";
+
+import {colord, extend} from "colord";
+import mixPlugin from "colord/plugins/mix";
+extend([mixPlugin]);
 
 
 const fix = (num) => Number(num.toFixed(1)),
@@ -66,7 +71,15 @@ const fix = (num) => Number(num.toFixed(1)),
 					</StyledCellSub>
 				))}
 			</StyledCellContainer>
-		</>) : NONE;
+		</>) : NONE,
+	renderHistPerCost = (value, upperBound, lowerBound) => (<>
+		{noneOrFix({value})}
+		<Box sx={{ flexGrow: 1 }} />
+		{!value || (value > (upperBound ? upperBound : Number.MAX_SAFE_INTEGER)) ?
+			(<ArrowDownwardIcon color="warning" fontSize="small" />) :
+			((value < (lowerBound ? lowerBound : Number.MAX_SAFE_INTEGER)) ? (<ArrowUpwardIcon color="success" fontSize="small" />) : null)
+		}
+	</>);
 const getActualTime = (job, item) => (60 - Math.min(Math.floor(Math.max(job.level-item.level, 0) / 10), 2) * 10)
 const getactualAmount = ({perception, averageItemLevel}, item) => {
 	const levels = Object.keys(item.amount).map(n => Number(n))
@@ -233,7 +246,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 					{t("updateLocalAt")}: {dateFormat.format(params.getValue(params.id, "defaultLastUploadTime"))}<br />
 					{t("updateGlobalAt")}: {dateFormat.format(params.getValue(params.id, "lastUploadTime"))}
 				</p>} placement="right">
-					<AccessTimeIcon />
+					<AccessTimeIcon sx={{
+						color: colord(theme.palette.text.primary).mix(theme.palette.warning.main,
+								Math.min((new Date().getTime() - params.getValue(params.id, "defaultLastUploadTime")) / 43200000, 1)
+						).toHex()
+					}}/>
 				</Tooltip>
 			</>)
 		},
@@ -247,6 +264,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
+			renderCell: (params) => renderHistPerCost(params.value, params.getValue(params.id, "defaultMeanLow"), params.getValue(params.id, "defaultLowest")?.price),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
@@ -268,6 +286,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		{field: "meanLow", headerName: t('meanLow'), width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
+			renderCell: (params) => renderHistPerCost(params.value, params.getValue(params.id, "meanLow"), params.getValue(params.id, "lowest")?.price),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
@@ -445,7 +464,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				isLoading={{value: isLoading, handler: handleUpdate}}
 				jobInfo={{value: jobInfo, handler: setJobInfo}}
 			/>
-			<StyledGridContainer defaultColor={hexToRgba(theme.palette.secondary.main, 0.2)}>
+			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				{ !!fetchingURL ?
 					(<PinnableDataGrid hideFooterSelectedRowCount sx={{
 						'& .MuiDataGrid-footerContainer': {
