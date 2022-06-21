@@ -1,4 +1,9 @@
 name: Auto Rebase Dependencies
+permissions:
+  contents: write
+  issues: write
+  discussions: write
+  pull-requests: write
 on:
   pull_request:
     types: [opened, reopened]
@@ -12,7 +17,7 @@ jobs:
     steps:
       - uses: "pascalgn/automerge-action@v0.15.3"
         env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_METHOD: "rebase"
           MERGE_LABELS: "dependencies"
           MERGE_ERROR_FAIL: 1
