@@ -20,7 +20,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.5",
     "@mui/system": "^5.8.5",
-    "@mui/x-data-grid": "^5.12.2",
+    "@mui/x-data-grid": "^5.12.3",
     "avsc": "^5.7.4",
     "clsx": "^1.1.1",
     "colord": "^2.9.2",
