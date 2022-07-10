@@ -32,9 +32,9 @@
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.4",
     "next-transpile-modules": "^9.0.0",
-    "react": "^17.0.2",
+    "react": "^18.0.0",
     "react-async-script": "^1.2.0",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.0.0",
     "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.9.8",
     "react-hotkeys-hook": "^3.4.6",
@@ -42,7 +42,7 @@
     "redis": "^4.2.0",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",
-    "use-local-storage-state": "^17.2.0",
+    "use-local-storage-state": "^18.0.0",
     "webpack": "^5.73.0"
   },
   "devDependencies": {

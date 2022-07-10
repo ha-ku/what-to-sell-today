@@ -3,8 +3,8 @@ import { extractCritical } from '@emotion/server' // change here
 import { Fragment } from "react";
 
 export default class MyDocument extends Document {
-  static getInitialProps ({ renderPage }) {
-    const page = renderPage()
+  static async getInitialProps ({ renderPage }) {
+    const page = await renderPage()
     const styles = extractCritical(page.html) // change here
     return { ...page, ...styles }
   }
