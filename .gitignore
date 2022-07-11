@@ -131,7 +131,7 @@ dist
 # webstorm
 /.idea/
 
-# ignore all pages and resources except wts
+# all pages and resources except wts
 /pages/**
 !/pages
 !/pages/_app.js
@@ -158,5 +158,7 @@ dist
 *.bak
 /package-lock.json
 
-# ignore cloudflare function
+# cloudflare function
 /functions
+
+backend/node_modules/

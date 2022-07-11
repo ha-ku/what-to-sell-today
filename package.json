@@ -18,8 +18,8 @@
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
-    "@mui/system": "^5.8.7",
+    "@mui/material": "^5.9.0",
+    "@mui/system": "^5.9.0",
     "@mui/x-data-grid": "^5.13.0",
     "avsc": "^5.7.4",
     "clsx": "^1.2.1",
@@ -28,7 +28,7 @@
     "form-data": "^4.0.0",
     "https-proxy-agent": "^5.0.1",
     "mathjs": "^10.6.4",
-    "next": "^12.2.1",
+    "next": "^12.2.2",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.4",
     "next-transpile-modules": "^9.0.0",
@@ -46,7 +46,7 @@
     "webpack": "^5.73.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.2.1",
+    "@next/bundle-analyzer": "^12.2.2",
     "@svgr/webpack": "^6.0.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
