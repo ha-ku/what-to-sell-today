@@ -24,7 +24,9 @@
     "characterInfo": "Character Information",
     "DC": "Current DC",
     "world": "Current world",
-    "averageWindowSize": "Average window size"
+    "averageWindowSize": "Average window size",
+    "export": "Export",
+    "import": "Import"
   },
   "error": {
     "msg": "Some thing went wrong. Error code: {code}",

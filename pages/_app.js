@@ -44,11 +44,6 @@ const App = ({ Component, pageProps }) => {
 	const autoDarkMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
 	const [locale, setLocale] = useLocalStorageState('locale', {ssr: true, defaultValue: LOCALE});
 	const message = locale === 'zh' ? zhMessage : enMessage
-	useEffect(() => {
-		if(navigator.language.startsWith('en')){
-			setLocale('en');
-		}
-	}, []);
 
 	const theme = createTheme({
 		...THEME,

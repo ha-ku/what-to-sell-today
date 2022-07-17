@@ -24,18 +24,20 @@ const rateLimiter = new RateLimiter(13);
 
 
 async function getServerMarketLists(IDs, server, windowSize, context) {
-	const recent = (hists) => {
+	const recent = (hists, ID) => {
 		const DAYS = [1,2,3,4,5,6,7]
 		const aWeekAgo = new Date().getTime() / 1000 - 604800
+		console.log('hists 5:', ID, hists.slice(0,5).map(hist => ({time: (aWeekAgo + 604800 - hist.timestamp) / 86400, num: hist.quantity})));
 		let v = [0,0,0,0,0,0,0]
 		hists.forEach((hist) => {
 			if(hist.timestamp < aWeekAgo)
 				return;
 			DAYS.forEach(day => {
-				if(hist.timestamp < aWeekAgo + day * 86400)
+				if(hist.timestamp > aWeekAgo + 604800 - day * 86400)
 					v[day - 1] += hist.quantity
 			})
 		})
+		console.log('volumns:', ID, v)
 		return v
 		/*const v = hists.reduce((acc, hist) => {
 			while(hist.timestamp < now - DAYS[acc.day] * 86400) {
@@ -78,9 +80,9 @@ async function getServerMarketLists(IDs, server, windowSize, context) {
 						ID: result.itemID,
 						lastUploadTime: result.lastUploadTime,
 						volumns: {
-							hq: recent(hist.hq),
-							nq: recent(hist.nq),
-							all: recent(hist.all)
+							hq: recent(hist.hq, result.itemID),
+							nq: recent(hist.nq, result.itemID),
+							all: recent(hist.all, result.itemID)
 						},
 						hq: result.hqListings.slice(0, windowSize),
 						nq: result.nqListings.slice(0, windowSize),

@@ -24,7 +24,9 @@
     "characterInfo": "角色信息",
     "DC": "所在大区",
     "world": "所在服务器",
-    "averageWindowSize": "平均窗口大小"
+    "averageWindowSize": "平均窗口大小",
+    "export": "导出设置",
+    "import": "导入设置"
   },
   "error": {
     "msg": "出错了，错误代码：{code}",

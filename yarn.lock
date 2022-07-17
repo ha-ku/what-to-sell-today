@@ -3125,6 +3125,11 @@ intl-messageformat@10.1.1:
     "@formatjs/icu-messageformat-parser" "2.1.4"
     tslib "2.4.0"
 
+iojson@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/iojson/-/iojson-1.0.4.tgz#4fc91d51aaf4efe10b10af29bb6f02a0b2a7e0e2"
+  integrity sha512-ocwQjEfSAzC5nYCNyU0B0Ivmi/4g1aZC9TjjPw1mssl+dI69oVutuRfRj9E75w9v+QogTJ7ukbb0Q0RkFZXBYQ==
+
 is-arguments@^1.0.4:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/is-arguments/-/is-arguments-1.1.1.tgz#15b3f88fda01f2a97fec84ca761a560f123efa9b"

@@ -27,6 +27,7 @@
     "flat": "^5.0.2",
     "form-data": "^4.0.0",
     "https-proxy-agent": "^5.0.1",
+    "iojson": "^1.0.4",
     "mathjs": "^10.6.4",
     "next": "^12.2.2",
     "next-compose-plugins": "^2.2.1",

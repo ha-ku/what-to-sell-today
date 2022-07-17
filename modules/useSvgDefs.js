@@ -12,7 +12,7 @@ const SvgDefsProvider = (props) => {
 		}
 	}, [defs])
 	return (<SvgDefsContext.Provider value={addDef}>
-		<svg style={{display: 'none'}}>
+		<svg style={{visibility: 'hidden', position: 'absolute', zIndex: -1 * Number.MAX_SAFE_INTEGER}}>
 			{[...(defs.values())].map((RenderDef) => (
 				<defs>
 					<RenderDef />

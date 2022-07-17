@@ -98,6 +98,12 @@ const NONE = '无',
 	SOURCE = 'companySeal',
 	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
+	JOB_INFO = {
+		botany: {level: '', gathering: '', perception: '', },
+		mining: {level: '', gathering: '', perception: '', },
+		fish: {level: '', gathering: '', perception: '', },
+		hunting: {level: '', averageItemLevel: '', },
+	},
 	dateFormat = new Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
 
@@ -140,12 +146,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
 	const [jobInfo, setJobInfo] = useLocalStorageState("jobInfo", {
 		ssr: true,
-		defaultValue: {
-			botany: {level: '', gathering: '', perception: '', },
-			mining: {level: '', gathering: '', perception: '', },
-			fish: {level: '', gathering: '', perception: '', },
-			hunting: {level: '', averageItemLevel: '', },
-		}
+		defaultValue: JOB_INFO
 	});
 	const sources = useSources(!!fetchingURL, setError);
 	let fullReports = useMemo(() => {
@@ -463,6 +464,8 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				priceWindow={{value: priceWindow, handler: setPriceWindow}}
 				isLoading={{value: isLoading, handler: handleUpdate}}
 				jobInfo={{value: jobInfo, handler: setJobInfo}}
+				locale={{value: locale, handler: setLocale}}
+				sortModel={{value: sortModel, handler: handleSort}}
 			/>
 			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				{ !!fetchingURL ?
