@@ -83,7 +83,6 @@ function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, qualit
 			let shouldUpdate = false;
 			if(extJobInfo.value !== jobInfo) {
 				extJobInfo.handler(jobInfo);
-				shouldUpdate = true;
 			}
 			if(extWorld.value !== world) {
 				extWorld.handler(world);

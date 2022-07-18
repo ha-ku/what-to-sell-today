@@ -144,19 +144,19 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		}
 		return newFullReports;
 	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
-	useHotkeys('f5,alt+r', (event) => {
-		if(!error) {
+	useHotkeys('f5', (event) => {
+		if(!error && !isLoading) {
 			event.preventDefault();
 			setShouldUpdate(true);
 		}
-	}, [error]);
+	}, [error, isLoading]);
 	const { height } = useWindowSize();
 	const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
 	const rowHeight = isSmallDevice ? 36 : 52;
 	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / rowHeight ), 5) : 5);
-	useHotkeys('left,alt+a', () => setPage(page => Math.max(page-1, 0)));
-	useHotkeys('right,alt+d', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
+	useHotkeys('left', () => setPage(page => Math.max(page-1, 0)));
+	useHotkeys('right', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
 	const { t ,locale } = useTranslate('grid')
 	const {t: navT} = useTranslate('navbar');

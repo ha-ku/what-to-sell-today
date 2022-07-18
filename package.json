@@ -12,13 +12,13 @@
   "author": "haku",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.18.6",
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
+    "@babel/core": "^7.18.10",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.0",
+    "@mui/material": "^5.9.3",
     "@mui/system": "^5.9.0",
-    "@mui/x-data-grid": "^5.13.0",
+    "@mui/x-data-grid": "^5.15.0",
     "avsc": "^5.7.4",
     "clsx": "^1.2.1",
     "colord": "^2.9.2",
@@ -27,10 +27,10 @@
     "https-proxy-agent": "^5.0.1",
     "iojson": "^1.0.4",
     "length-prefixed-stream": "^2.0.0",
-    "mathjs": "^10.6.4",
-    "next": "^12.2.2",
+    "mathjs": "^11.0.0",
+    "next": "^12.2.3",
     "next-compose-plugins": "^2.2.1",
-    "next-pwa": "^5.5.4",
+    "next-pwa": "^5.5.5",
     "next-transpile-modules": "^9.0.0",
     "pbf": "^3.2.1",
     "react": "^18.0.0",
@@ -38,17 +38,17 @@
     "react-dom": "^18.0.0",
     "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.10.0",
-    "react-hotkeys-hook": "^3.4.6",
+    "react-hotkeys-hook": "^3.4.7",
     "react-intl": "^6.0.5",
     "redis": "^4.2.0",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.4",
     "use-local-storage-state": "^18.0.0",
-    "webpack": "^5.73.0"
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.2.2",
-    "@svgr/webpack": "^6.0.0",
+    "@next/bundle-analyzer": "^12.2.3",
+    "@svgr/webpack": "^6.3.1",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
@@ -56,5 +56,8 @@
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.4"
+  },
+  "engines": {
+    "node": ">=14.18.3"
   }
 }
