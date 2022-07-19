@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {Help as HelpIcon, Menu as MenuIcon, Translate as TranslateIcon} from "@mui/icons-material";
 import HelpDialog from "./HelpDialog";
-import {useState} from "react";
+import {memo, useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
 import useTranslate from "./useTranslate";
 
@@ -87,4 +87,4 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 }
 
 
-export default NavBar
+export default memo(NavBar)

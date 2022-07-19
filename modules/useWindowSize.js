@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useDeferredValue} from 'react';
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -16,7 +16,7 @@ function useWindowSize() {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []); 
-  return windowSize;
+  return useDeferredValue(windowSize);
 }
 
 export default useWindowSize;

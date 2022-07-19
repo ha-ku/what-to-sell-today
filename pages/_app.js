@@ -9,10 +9,10 @@ import useLocalStorageState from "use-local-storage-state";
 import Script from 'next/script';
 import {SvgDefsProvider} from "../modules/useSvgDefs";
 import {IntlProvider} from 'react-intl';
-import {useEffect} from "react";
 import ZH_MESSAGE from '../public/locales/zh.json';
 import EN_MESSAGE from '../public/locales/en.json';
 import flatten from 'flat';
+import useHandler from "../modules/useHandler";
 
 
 const THEME = {
@@ -40,7 +40,7 @@ const zhMessage = flatten(ZH_MESSAGE);
 const enMessage = flatten(EN_MESSAGE);
 
 const App = ({ Component, pageProps }) => {
-	const [userDarkMode, setUserDarkMode] = useLocalStorageState('userDarkMode', {ssr: true, defaultValue: 'auto'});
+	const [userDarkMode, handleUserDarkMode] = useHandler('auto', ({target: {value}}) => value, 'userDarkMode')//useLocalStorageState('userDarkMode', {ssr: true, defaultValue: 'auto'});
 	const autoDarkMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
 	const [locale, setLocale] = useLocalStorageState('locale', {ssr: true, defaultValue: LOCALE});
 	const message = locale === 'zh' ? zhMessage : enMessage
@@ -62,7 +62,7 @@ const App = ({ Component, pageProps }) => {
 				<CssBaseline />
 				<SvgDefsProvider>
 					<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
-						<Component {...pageProps} userDarkMode={userDarkMode} setUserDarkMode={setUserDarkMode} setLocale={setLocale}/>
+						<Component {...pageProps} userDarkMode={userDarkMode} handleUserDarkMode={handleUserDarkMode} setLocale={setLocale}/>
 					</IntlProvider>
 				</SvgDefsProvider>
 			</ThemeProvider>

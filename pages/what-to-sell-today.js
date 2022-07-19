@@ -1,5 +1,4 @@
-import {useState, useEffect, useMemo} from 'react';
-import {unstable_batchedUpdates} from 'react-dom';
+import {useState, useEffect, useMemo, useDeferredValue} from 'react';
 import Head from 'next/head';
 
 import {
@@ -107,9 +106,10 @@ const NONE = '无',
 	dateFormat = new Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
 
-function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
+function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
-	const [reports, setReports] = useState([]),
+	const [_reports, setReports] = useState([]),
+		reports = useDeferredValue(_reports),
 		[priceWindow, setPriceWindow] = useLocalStorageState('priceWindow', {ssr: true, defaultValue: PRICE_WINDOW}),
 		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
 		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
@@ -118,9 +118,7 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
 			setPage(0);
 			setReports([]);
-			if(!isLoading) {
-				setTimeout(handleUpdate, 0)
-			}
+			setTimeout(() => setShouldUpdate(true), 0)
 			return value;
 		}, 'source'),
 		[sortModel, handleSort] = useHandler(undefined, gridSort =>
@@ -173,14 +171,10 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 		}
 		return newFullReports;
 	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
-	const handleUpdate = () => {
-		console.log('handleUpdate');
-		setShouldUpdate(true);
-	}
 	useHotkeys('f5,alt+r', (event) => {
 		if(!error) {
 			event.preventDefault();
-			handleUpdate();
+			setShouldUpdate(true);
 		}
 	}, [error]);
 	const { height } = useWindowSize();
@@ -206,6 +200,9 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 			language: locale,
 			useRecaptchaNet: true,
 			scriptProps: {async: true, defer: true},
+			container: {
+				element: 'MixedRecaptcha-badge-container'
+			}
 		}
 	]), [locale])
 
@@ -306,59 +303,46 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 
 	useEffect(() => {
 		if(isLoading && executeRecaptcha) {
-			console.log('new controller')
 			setQueryInfo({
 				worldName: worldsName[worlds.indexOf(world)],
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
 			})
+
 			let decoder = reportDecoder(),
-				controller = new AbortController(),
-				cache = [],
-				updateHandlerID = 0;
-			controller.ts = new Date().getTime();
-			const updateHandler = () => {
-				if(cache.length) {
-					setReports(reports => {
-						let newRep = [...reports];
-						cache.forEach((rep) => {
-							let i = reports.findIndex(r => r.ID === rep.ID);
-							i === -1 ? newRep.push(rep) : newRep[i] = rep;
-						})
-						cache = []
-						return newRep;
-					});
-				}
-				updateHandlerID = 0;
-			}
-			const doCache = (message) => {
+				controller = new AbortController();
+			decoder.on('data', (message) => {
 				console.log(`data: `, message);
 				if(message.err) {
-					unstable_batchedUpdates(() => {
-						if (message.err.code === 403 && recaptchaVersion === 3) {
-							setExecuteRecaptcha({execute: null});
-							setRecaptchaVersion(2);
-						} else {
-							setError(message.err);
-							setShouldUpdate(false);
-						}
-					})
+					if (message.err.code === 403 && recaptchaVersion === 3) {
+						setExecuteRecaptcha({execute: null});
+						setRecaptchaVersion(2);
+					} else {
+						setError(message.err);
+						setShouldUpdate(false);
+					}
 					decoder.destroy();
 					return;
 				}
-				cache.push(message);
-				!updateHandlerID ? updateHandlerID = setTimeout(updateHandler, 200) : '';
-			}
-			decoder.on('data', doCache);
+				setReports(reports => {
+					let newRep = [...reports];
+					let i = reports.findIndex(r => r.ID === message.ID);
+					i === -1 ? newRep.push(message) : newRep[i] = message;
+					return newRep;
+				});
+			});
 			decoder.on('end', () => {
-				setTimeout(() => {
-					unstable_batchedUpdates(() => {
-						setShouldUpdate(false);
-						setRetry(0);
-					})
-				}, 200)
+				setShouldUpdate(false);
+				setRetry(0);
 			})
 
-			const doMarketReport = async (token) => {
+			async function doMarketReport() {
+				let token = await executeRecaptcha('marketReport')
+					.catch(err => {
+						console.log('recaptcha error:', err);
+						return new Promise((res, rej) => {
+							setTimeout(() => executeRecaptcha('marketReport').then(res).catch(rej), 200)
+						})
+					})
 				let query = {
 					qual: quality,
 					world,
@@ -389,23 +373,11 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 						setError(err);
 				}
 			}
-
-			executeRecaptcha('marketReport')
-				.catch(err => {
-					console.log('recaptcha error:', err);
-					return new Promise((res, rej) => {
-						setTimeout(() => executeRecaptcha('marketReport').then(res).catch(rej), 200)
-					})
-				})
-				.then(doMarketReport)
+			doMarketReport()
 
 			return () => {
 				console.log('effect callback');
 				controller.abort();
-				if(updateHandlerID) {
-					clearTimeout(updateHandlerID);
-					//updateHandler();
-				}
 				decoder.destroy();
 			}
 		}
@@ -455,14 +427,14 @@ function whatToSellToday({userDarkMode, setUserDarkMode, setLocale}){
 				setLocale={setLocale}
 			/>
 			<SettingDrawer
-				open={{value: drawer, handler: () => setDrawer(false)}}
-				userDarkMode={{value: userDarkMode, handler: ({target: {value}}) => setUserDarkMode(value)}}
+				open={{value: drawer, handler: setDrawer}}
+				userDarkMode={{value: userDarkMode, handler: handleUserDarkMode}}
 				quality={{value: quality, handler: handleQuality}}
 				considerTime={{value: considerTime, handler: handleConsiderTime}}
 				world={{value: world, handler: setWorld}}
 				server={{value: server, handler: setServer}}
 				priceWindow={{value: priceWindow, handler: setPriceWindow}}
-				isLoading={{value: isLoading, handler: handleUpdate}}
+				isLoading={{handler: setShouldUpdate}}
 				jobInfo={{value: jobInfo, handler: setJobInfo}}
 				locale={{value: locale, handler: setLocale}}
 				sortModel={{value: sortModel, handler: handleSort}}
