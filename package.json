@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.2",
-    "@svgr/webpack": "^6.0.0",
+    "@svgr/webpack": "^6.3.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
