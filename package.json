@@ -19,7 +19,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
-    "@mui/system": "^5.9.0",
+    "@mui/system": "^5.9.1",
     "@mui/x-data-grid": "^5.13.1",
     "avsc": "^5.7.4",
     "clsx": "^1.2.1",
