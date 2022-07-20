@@ -2,7 +2,7 @@ import {
 	AppBar,
 	Box,
 	FormControl,
-	IconButton, LinearProgress,
+	IconButton,
 	ListSubheader,
 	MenuItem,
 	TextField,
@@ -16,7 +16,8 @@ import {useHotkeys} from "react-hotkeys-hook";
 import useTranslate from "./useTranslate";
 
 
-function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocale}) {
+function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
+	//console.log('rerender NavBar');
 	const [help, setHelp] = useState(false),
 		headers = Object.keys(sources).reduce((acc, sourceName) => {
 			const source = sources[sourceName];
@@ -72,7 +73,6 @@ function NavBar({ listSource, handleSource, onMenu, sources, isLoading, setLocal
 						<FormattedMessage id="postfix" values={{action: t(sources[listSource].action)}} />
 					</Typography>
 				</Box>
-				{isLoading ? <LinearProgress color="secondary" sx={{position: "fixed", top: 0, left: 0, width: '100%'}}/> : null}
 				<Box sx={{ flexGrow: 1 }} />
 				<IconButton aria-label="switch language" onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')} >
 					<TranslateIcon />

@@ -1,23 +1,25 @@
 import {StyledCircularProgress, StyledFormControlLabel} from "./styledComponents";
 import {
+	Backdrop,
+	Box,
+	Button,
 	Drawer,
-	FormLabel,
 	FormControl,
 	FormControlLabel,
+	FormLabel,
 	MenuItem,
 	Radio,
 	RadioGroup,
 	Switch,
 	TextField,
-	Typography,
-	Box,
-	Button, Backdrop
+	Typography
 } from "@mui/material";
-import {Restore as RestoreIcon, DownloadForOffline as  DownloadForOfflineIcon } from "@mui/icons-material";
+import {DownloadForOffline as DownloadForOfflineIcon, Restore as RestoreIcon} from "@mui/icons-material";
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
 import {memo, useEffect, useState} from "react";
 import {exportJSON, importJSON} from "./iojson";
+
 const SERVER = worlds.reduce((a, w, i) => {
 		a[w] = servers[i][0];
 		return a;
@@ -31,14 +33,13 @@ const useLocalState = (defaultValue) => {
 	return res;
 }
 function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, quality, considerTime, world: extWorld, server: extServer, priceWindow: extPriceWindow, jobInfo: extJobInfo}) {
-
+	//console.log('rerender SettingDrawer');
 	const { t, FormattedMessage } = useTranslate('drawer');
 
 	const [jobInfo, setJobInfo] = useLocalState(extJobInfo.value),
 		[world, setWorld] = useLocalState(extWorld.value),
 		[server, setServer] = useLocalState(extServer.value),
 		[priceWindow, setPriceWindow] = useLocalState(extPriceWindow.value);
-	console.log('jobInfo', jobInfo === extJobInfo.value ? '===' : '!==', 'extJobInfo.value')
 
 	const handleWorld = ({target: {value}}) => {
 		setWorld(value);
@@ -96,7 +97,7 @@ function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, qualit
 				extPriceWindow.handler(priceWindow);
 				shouldUpdate = true;
 			}
-			open.handler(false);
+			open.handler();
 			shouldUpdate && isLoading.handler(true);
 		}} autoWidth PaperProps={{sx: {padding: '20px'}}}>
 			<Typography variant="h5" >
@@ -200,9 +201,8 @@ function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, qualit
 const areEqual = (p, n) => {
 	if(Object.keys(p).length !== Object.keys(n).length) return false;
 	return Object.keys(p).every(k => {
-		let res = p[k] === n[k] || (p[k].value === n[k].value && p[k].handler === n[k].handler);
-		if(!res) console.log(k, p[k], n[k])
-		return res;
+		//if(!res) console.log(k, p[k], n[k])
+		return p[k] === n[k] || (p[k].value === n[k].value && p[k].handler === n[k].handler);
 	})
 }
 

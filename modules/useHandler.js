@@ -8,7 +8,12 @@ function useHandler(defaultValue, handler, localStoreKey = "") {
 	const wrapper = useCallback((...params) => {
 		const res = handler(...params)
 		if(typeof res !== "undefined"){
-			setState(res);
+			if(Promise.prototype.isPrototypeOf(res)) {
+				res.then(setState)
+			}
+			else {
+				setState(res);
+			}
 		}
 	}, [])
 	return [state, wrapper];

@@ -16,7 +16,7 @@ function ReCAPTCHAv3({setExecuteV3}) {
 
 function MixedRecaptcha({version, onLoad, v2Props, v3Props}) {
 
-	console.log(`render v${version}`, onLoad, v2Props, v3Props)
+	console.log(`rerender MixedRecaptcha v${version}`, onLoad, v2Props, v3Props)
 	const [{execute: executeV3}, setExecuteV3] = useState({execute: null});
 	const recaptchaRef = useRef();
 	const container = v3Props?.container?.element;
@@ -34,7 +34,7 @@ function MixedRecaptcha({version, onLoad, v2Props, v3Props}) {
 
 	return version === 3 ? <ReCaptchaProvider {...v3Props}>
 			<ReCAPTCHAv3 setExecuteV3={setExecuteV3}/>
-			<Box {...(typeof container === 'string' ? {id: container} : {})} sx={{visibility: 'hidden', position: 'absolute', zIndex: -1 * Number.MAX_SAFE_INTEGER, top: 0, left: 0}}></Box>
+			<Box {...(typeof container === 'string' ? {id: container} : {})} ></Box>
 		</ReCaptchaProvider>
 		: <ReCAPTCHAv2 {...v2Props} ref={recaptchaRef} isolated />
 }

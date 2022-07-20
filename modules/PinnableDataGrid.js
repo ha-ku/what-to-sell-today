@@ -1,15 +1,10 @@
-import {forwardRef, useMemo} from "react";
-import dynamic from 'next/dynamic';
+import {forwardRef, useMemo, Suspense, lazy, memo, useDeferredValue} from "react";
 import {Box} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
+import {StyledCircularProgress} from "./styledComponents";
+const DataGrid = lazy(() => import('./DataGrid'));
 
-const DynamicDataGrid = dynamic(() =>
-	import("@mui/x-data-grid").then(({DataGrid}) =>
-		({forwardedRef, ...props}) => <DataGrid ref={forwardedRef} {...props}/>
-	)
-);
-const DataGrid = forwardRef((props, ref) => <DynamicDataGrid forwardedRef={ref} {...props} />)
 const addClassName = (item, key, className) => {
 	switch (typeof item[key]) {
 		case "string":
@@ -25,6 +20,7 @@ const addClassName = (item, key, className) => {
 }
 
 const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, onPageSizeChange, sx, onSortModelChange, ...props}, ref) => {
+	//console.log('rerender PinnableDataGrid');
 	const hasLeft = !!p?.left?.length,
 		hasRight = !!p?.right?.length;
 	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
@@ -32,7 +28,8 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			acc[c.field] = false;
 			return acc;
 		}, {});
-	const columnsLeft = columns.map(c => {
+	const [columnsLeft, columnsRight, initialStateLeft, initialSateRight, cuttedColumns] = useMemo(() => [
+		columns.map(c => {
 			if(pinnedColumns.left.includes(c.field)) {
 				let col = {...c}
 				addClassName(col, 'headerClassName', 'Pinnable');
@@ -41,7 +38,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 			}
 			return c;
 		}),
-		columnsRight = columns.map(c => {
+		columns.map(c => {
 			if(pinnedColumns.right.includes(c.field)) {
 				let col = {...c}
 				addClassName(c, 'headerClassName', 'Pinnable');
@@ -49,80 +46,96 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 				return col;
 			}
 			return c;
-		}),
-		visibilityLeft = pinnedColumns.left.reduce((acc, key) => {
-			delete acc[key]
-			return acc;
-		}, {...baseVisibility}),
-		visibilityRight = pinnedColumns.right.reduce((acc, key) => {
-			delete acc[key]
-			return acc;
-		}, {...baseVisibility}),
-		cuttedColumns = useMemo(() => columns.map(col =>
+		}),{
+			columns: {
+				columnVisibilityModel: pinnedColumns.left.reduce((acc, key) => {
+					delete acc[key]
+					return acc;
+				}, {...baseVisibility})
+			}
+		},{
+			columns: {
+				columnVisibilityModel: pinnedColumns.right.reduce((acc, key) => {
+					delete acc[key]
+					return acc;
+				}, {...baseVisibility})
+			}
+		},
+		columns.map(col =>
 			(pinnedColumns.left.some(key => key === col.field) || pinnedColumns.right.some(key => key === col.field)) ?
-				{...col, renderCell: () => "", renderHeader: () => ""}
-				: col), [columns, pinnedColumns])
-	const theme = useTheme();
+				{...col, renderCell: () => null, renderHeader: () => null}
+				: col
+		),
+	], [columns, p]);
 
+	const theme = useTheme();
+	const [sxLeft, sxRight] = useMemo(() => [
+		{
+			...sx,
+			position: 'absolute', top: 0, left: 0, width: '100%',
+			pointerEvents: 'none',
+			'& .Pinnable': {
+				backgroundColor: theme.palette.background.default,
+				pointerEvents: 'auto'
+			},
+			'& .MuiDataGrid-overlay': {
+				display: 'none'
+			}
+		},
+		{
+			...sx,
+			position: 'absolute', top: 0, right: 0, width: '100%',
+			pointerEvents: 'none',
+			'& .Pinnable': {
+				backgroundColor: theme.palette.background.default,
+				pointerEvents: 'auto'
+			},
+			'& .MuiDataGrid-overlay': {
+				display: 'none'
+			},
+			'& .MuiDataGrid-columnHeadersInner': {
+				flexDirection: 'row-reverse'
+			},
+			'& .MuiDataGrid-row': {
+				flexDirection: 'row-reverse'
+			}
+		}
+	], [sx, theme.palette.background.default]);
+	const rowsLeft = useDeferredValue(rows),
+		rowsRight = useDeferredValue(rows);
 
 	return (<Box sx={{
 		height: '100%', width: '100%',
-		position: 'relative'
+		position: 'relative', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
 	}}>
-		<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
-		{ hasLeft ? <DataGrid
-			{...{columns: columnsLeft, rows, pageSize, ...props}}
-			hideFooter
-			disableExtendRowFullWidth
-			initialState={{
-				columns: {
-					columnVisibilityModel: visibilityLeft
-				}
-			}}
-			sx={{
-				...sx,
-				position: 'absolute', top: 0, left: 0, width: '100%',
-				pointerEvents: 'none',
-				'& .Pinnable': {
-					backgroundColor: theme.palette.background.default,
-					pointerEvents: 'auto'
-				},
-				'& .MuiDataGrid-overlay': {
-					display: 'none'
-				}
-			}}
-		/> : null }
-		{ hasRight ? <DataGrid
-			{...{columns: columnsRight, rows, pageSize, ...props}}
-			hideFooter
-			disableExtendRowFullWidth
-			initialState={{
-				columns: {
-					columnVisibilityModel: visibilityRight
-				}
-			}}
-			sx={{
-				...sx,
-				position: 'absolute', top: 0, right: 0, width: '100%',
-				pointerEvents: 'none',
-				'& .Pinnable': {
-					backgroundColor: theme.palette.background.default,
-					pointerEvents: 'auto'
-				},
-				'& .MuiDataGrid-overlay': {
-					display: 'none'
-				},
-				'& .MuiDataGrid-columnHeadersInner': {
-					flexDirection: 'row-reverse'
-				},
-				'& .MuiDataGrid-row': {
-					flexDirection: 'row-reverse'
-				}
-			}}
-		/> : null }
+		<Suspense fallback={<StyledCircularProgress />}>
+			<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
+			{ hasLeft ? <DataGrid
+				{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
+				hideFooter
+				disableExtendRowFullWidth
+				initialState={initialStateLeft}
+				sx={sxLeft}
+			/> : null }
+			{ hasRight ? <DataGrid
+				{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
+				hideFooter
+				disableExtendRowFullWidth
+				initialState={initialSateRight}
+				sx={sxRight}
+			/> : null }
+		</Suspense>
 	</Box>)
 })
 
+/*const areEqual = (p, n) => {
+	if(Object.keys(p).length !== Object.keys(n).length) return false;
+	return Object.keys(p).map(k => {
+		let res = p[k] === n[k];
+		if(!res && k !== 'rows') console.log(k, p[k], n[k])
+		return res;
+	}).every(r => r)
+}*/
 
 
-export default PinnableDataGrid;
+export default memo(PinnableDataGrid/*, areEqual*/);

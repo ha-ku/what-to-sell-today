@@ -11,7 +11,7 @@ module.exports = withPlugins([withPWA], {
 //module.exports = {
 	pwa: {
 		dest: 'public',
-		runtimeCaching,
+		runtimeCaching
 	},
 	webpack5: true,
 	experimental: {
@@ -36,14 +36,13 @@ module.exports = withPlugins([withPWA], {
 		};
 		/*config.resolve.alias = {
 			...config.resolve.alias,
-			'@mui/styled-engine': '@mui/styled-engine-sc',
-			'@material-ui/styled-engine': '@mui/styled-engine-sc'
+			'react-dom$': 'react-dom/profiling'
 		};*/
 		config.module.rules.push({
 			test: /\.svg$/,
-			use: ['@svgr/webpack'],
+			use: ['@svgr/webpack']
 		})
 		return config;
-	},
+	}
 //}
 });
