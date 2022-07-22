@@ -3,6 +3,6 @@
 		{ "source": "/", "destination": "/what-to-sell-today" }
 	],
 	"redirects": [
-		{ "source": "/marketReport", "destination": "https://aws-cf.ha-ku.cyou/marketReport"}
+		{ "source": "/marketReportPbf", "destination": "https://aws-cf.ha-ku.cyou/marketReportPbf"}
 	]
 }

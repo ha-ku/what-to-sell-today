@@ -22,7 +22,8 @@ module.exports = withPlugins([withPWA], {
 			'@mui/icons-material': {
 				transform: '@mui/icons-material/{{member}}'
 			}
-		}
+		},
+		runtime: 'experimental-edge'
 	},
 	webpack: (config) => {
 		config.resolve.fallback = {

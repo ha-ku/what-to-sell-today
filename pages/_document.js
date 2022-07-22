@@ -1,13 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { extractCritical } from '@emotion/server' // change here
 import { Fragment } from "react";
 
 export default class MyDocument extends Document {
-  static async getInitialProps ({ renderPage }) {
-    const page = await renderPage()
-    const styles = extractCritical(page.html) // change here
-    return { ...page, ...styles }
-  }
   render() {
     return (
         <Html>
@@ -64,9 +58,9 @@ export default class MyDocument extends Document {
 			<link rel='apple-touch-startup-image' href='/images/apple_splash_640.png' sizes='640x1136' />
 			*/}
             {
-              ["www.gstatic.cn", "www.recaptcha.net", "aws-cf.ha-ku.cyou"].map(domain => (<Fragment key={domain}>
-                <link rel="preconnect" href={`https://${domain}`}/>
-                <link rel="dns-prefetch" href={`https://${domain}`}/>
+              ["www.gstatic.com", "fonts.gstatic.com", "www.recaptcha.net", "aws-cf.ha-ku.cyou"].map(domain => (<Fragment key={domain}>
+                <link rel="preconnect" href={`https://${domain}`} crossorigin="anonymous" />
+                <link rel="dns-prefetch" href={`https://${domain}`} />
               </Fragment>))
             }
           </Head>

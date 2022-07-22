@@ -17,7 +17,8 @@ import useSources from "../modules/useSources";
 import MixedRecaptcha from "../modules/MixedRecaptcha";
 import useHandler from "../modules/useHandler";
 import useWindowSize from '../modules/useWindowSize';
-import { reportDecoder } from "../avro/marketReportTypes.mjs";
+import Pbf from 'pbf';
+import {Report} from '../protobuf/MarketReport';
 
 
 import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';
@@ -35,6 +36,7 @@ import mixPlugin from "colord/plugins/mix";
 import ItemName from "../modules/ItemName";
 import ItemVolumns from "../modules/ItemVolumns";
 import ItemHistPerCost from "../modules/ItemHistPerCost";
+import lpstream from "length-prefixed-stream";
 extend([mixPlugin]);
 
 
@@ -104,8 +106,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 	const [drawer, handleDrawer] = useHandler(false, () => (d => !d)),
 		[clipBarOpen, setClipBarOpen] = useState(false),
-		doCopy = useCallback((value) =>
-			navigator.clipboard.writeText(value).then(() => setClipBarOpen(true))
+		doCopy = useCallback(({target: {innerText}}) =>
+			navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
 		, []),
 		[page, setPage] = useState(0);
 
@@ -263,9 +265,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
 			})
 
-			let decoder = reportDecoder(),
-				controller = new AbortController();
-			decoder.on('data', (message) => {
+			let controller = new AbortController(),
+				decoder = lpstream.decode();
+			decoder.on('data', (_message) => {
+				const message = Report.read(new Pbf(_message))
 				console.log(message);
 				if(message.err) {
 					if (message.err.code === 403 && recaptchaVersion === 3) {
@@ -277,7 +280,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						setProgress(0);
 						setBuffer(0);
 					}
-					decoder.destroy();
 					return;
 				}
 				setBuffer(b => b+1);
@@ -312,7 +314,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					itemListName: listSource + 'List',
 					recaptchaVersion: 'v' + recaptchaVersion,
 				}
-				let url = `${window.location.origin}/marketReport?${
+				let url = `${window.location.origin}/marketReportPbf?${
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
 						.map(pair =>  pair.join('=')).join('&')
 				}`
@@ -320,13 +322,13 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				try {
 					let response = await window.fetch(url, {signal: controller.signal})
 					let reader = response.body.getReader();
-					reader.read().then(function onData({done, value}) {
-						if(decoder.destroyed)
+					reader.read().then(function onReaderData({done, value}) {
+						if(controller.signal.aborted)
 							return;
 						if (done)
 							return decoder.end();
 						decoder.write(value);
-						reader.read().then(onData)
+						reader.read().then(onReaderData)
 					})
 				} catch(err) {
 					if(err.code !== 20)
@@ -337,8 +339,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 			return () => {
 				//console.log('effect callback');
-				controller.abort();
 				decoder.destroy();
+				controller.abort();
 			}
 		}
 	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow]);
@@ -458,6 +460,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 	);
 }
 
+
+/*export const config = {
+	runtime: 'experimental-edge'
+};*/
 
 
 export default whatToSellToday

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message Record {
+  int32 price = 1;
+  int32 quantity = 2;
+  string seller = 3;
+}
+
+message ServerQualityReport {
+  Record lowestPrice = 1;
+  float meanLowPrice = 2;
+  float meanLowHistoryPrice = 3;
+  repeated int32 volumns = 4;
+}
+
+message ServerReport {
+  ServerQualityReport nq = 1;
+  ServerQualityReport hq = 2;
+  ServerQualityReport all = 3;
+  int64 lastUploadTime = 4;
+}
+
+message Error {
+  int32 code = 1;
+  string content = 2;
+}
+
+message Report {
+  string name = 1;
+  int32 ID = 2;
+  string enName = 3;
+  float cost = 4;
+  int64 lastUploadTime = 5;
+  ServerQualityReport nq = 6;
+  ServerQualityReport hq = 7;
+  ServerQualityReport all = 8;
+  ServerReport defaultServer = 9;
+  Error err = 10;
+}
