@@ -83,6 +83,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
 			setPage(0);
 			setReports([]);
+			setProgress(0);
+			setBuffer(0);
 			setTimeout(() => setShouldUpdate(true), 0)
 			return value;
 		}, 'source'),
@@ -189,7 +191,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					withTime={sources[listSource].withTime}
 					id={params.id}
 					value={params.value}
-					getValue={params.getValue}
+					enName={params.getValue(params.id, "enName")}
+					level={params.getValue(params.id, "level")}
+					defaultLastUploadTime={params.getValue(params.id, "defaultLastUploadTime")}
+					lastUploadTime={params.getValue(params.id, "lastUploadTime")}
 					onClick={doCopy}
 					primary={theme.palette.text.primary}
 					warning={theme.palette.warning.main}

@@ -9,7 +9,7 @@ import {memo, useState} from "react";
 
 const dateFormat = new Intl.DateTimeFormat('zh-CN', {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", hour12: false});
 
-function ItemName({id, value, getValue, withTime, onClick, primary, warning}) {
+function ItemName({id, value, enName, level, defaultLastUploadTime, lastUploadTime, withTime, onClick, primary, warning}) {
 
 	const {t} = useTranslate('grid')
 	const [openLink, setOpenLink] = useState(false);
@@ -20,7 +20,7 @@ function ItemName({id, value, getValue, withTime, onClick, primary, warning}) {
 				<Box component="span" sx={{maxWidth: withTime ? '109px' : '169px', overflow: "hidden", textOverflow: "ellipsis"}}>
 					{t("itemName", {
 						name: value,
-						enName: getValue(id, "enName")
+						enName: enName
 					})}
 				</Box>
 			</Button>
@@ -37,19 +37,19 @@ function ItemName({id, value, getValue, withTime, onClick, primary, warning}) {
 				</StyledIconButton>
 			</Collapse></Box>
 		{withTime ?
-			t("level", {level: getValue(id, "level")})
+			t("level", {level})
 			: null
 		}
 		<Box sx={{ flexGrow: 1 }} />
 		<Tooltip title={<p>
 			{t("updateAt")}<br />
 			<br />
-			{t("updateLocalAt")}: {dateFormat.format(getValue(id, "defaultLastUploadTime"))}<br />
-			{t("updateGlobalAt")}: {dateFormat.format(getValue(id, "lastUploadTime"))}
+			{t("updateLocalAt")}: {dateFormat.format(defaultLastUploadTime)}<br />
+			{t("updateGlobalAt")}: {dateFormat.format(lastUploadTime)}
 		</p>} placement="right">
 			<AccessTimeIcon sx={{
 				color: colord(primary).mix(warning, Math.min(
-					(new Date().getTime()-getValue(id, "defaultLastUploadTime")) / 43200000, 1
+					(new Date().getTime()-defaultLastUploadTime) / 43200000, 1
 				)).toHex()
 			}}/>
 		</Tooltip>
