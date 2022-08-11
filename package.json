@@ -21,7 +21,7 @@
     "@mui/x-data-grid": "^5.15.1",
     "avsc": "^5.7.4",
     "clsx": "^1.2.1",
-    "colord": "^2.9.2",
+    "colord": "^2.9.3",
     "flat": "^5.0.2",
     "form-data": "^4.0.0",
     "https-proxy-agent": "^5.0.1",
