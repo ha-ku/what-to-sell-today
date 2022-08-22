@@ -9,7 +9,9 @@ import Chain from 'stream-chain';
 import { parentPort } from 'worker_threads';
 import WorkerStream from './jsonParserStream.mjs';
 
-import TYPE from "./arvoType.mjs";
+//import TYPE from "./arvoType.mjs";
+import TYPE from '../protobuf/MarketReport.js';
+import Pbf from 'pbf';
 
 const STREAM_OPTIONS = {writableObjectMode: false, readableObjectMode: false};
 const extendOptions = (options) => Object.assign({}, STREAM_OPTIONS, options ?? {});
@@ -19,7 +21,7 @@ let parseLists = {};
 //const HISTORY_REG = new RegExp(`^items\\.\\d*\\.(${HISTORY_PROPERTIES.join('|')})\\b`);
 const HISTORY_KEYS = ["hq", "pricePerUnit", "quantity", "timestamp", "entries", "itemID", "items"];
 const HISTORY_KEYS_SET = new Set(HISTORY_KEYS)
-parseLists.history = (stream) => {
+parseLists.History = (stream) => {
 	const aWeekAgo = new Date().getTime() / 1000 - 604800;
 	return new Chain([
 		stream,
@@ -47,14 +49,16 @@ parseLists.history = (stream) => {
 			let result = Object.assign({entries: []}, rec.value);
 			if(result.entries.length && result.entries[result.entries.length - 1].timestamp < aWeekAgo)
 				result.entries.pop();
+			const pbf = new Pbf();
+			TYPE.History.write(result, pbf);
 			//console.log('abnormal', result.entries.filter(rec => rec.timestamp < aWeekAgo).map(rec => JSON.stringify(rec)));
-			return TYPE.history.toBuffer(result)
+			return pbf.finish();
 		}
 	], extendOptions())
 }
 
 const MARKET_PROPERTIES = ['pricePerUnit', 'quantity', 'hq', 'retainerName'];
-parseLists.market = (stream) => {
+parseLists.Market = (stream) => {
 	//windowSize = windowSize ?? Number.MAX_SAFE_INTEGER;
 	const MARKET_REG = new RegExp(`^items\\.\\d*.(listings\\.\\d*\\.(${MARKET_PROPERTIES.join('|')})|itemID|lastUploadTime)\\b`)
 	return new Chain([
@@ -71,7 +75,11 @@ parseLists.market = (stream) => {
 			once: true
 		})),
 		new StreamArray(STREAM_OPTIONS),
-		rec => TYPE.market.toBuffer(Object.assign({listings: []}, rec.value))
+		rec => {
+			const pbf = new Pbf()
+			TYPE.Market.write({listings: [], ...(rec.value)}, pbf);
+			return pbf.finish();
+		}
 	], extendOptions())
 }
 

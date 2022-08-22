@@ -7,8 +7,9 @@ import { cpus } from 'os';
 import { Worker, MessageChannel } from 'worker_threads';
 import WorkerStream from './jsonParserStream.mjs';
 
-import TYPE from "./arvoType.mjs";
-
+//import TYPE from "./arvoType.mjs";
+import TYPE from "../protobuf/MarketReport.js";
+import Pbf from "pbf";
 
 const STREAM_OPTIONS = {
 	readableHighWaterMark: 128
@@ -80,12 +81,12 @@ const parseLists = (type) => {
 			})
 		return new Chain([
 			mainStream,
-			(buf) => TYPE[type].fromBuffer(buf)
+			(buf) => TYPE[type].read(new Pbf(buf))
 		]).on('end', () => console.timeEnd(`task ${taskNum} ${type} ${length} ID`));
 	}
 }
-const parseMarketLists = parseLists('market');
-const parseHistoryLists = parseLists('history');
+const parseMarketLists = parseLists('Market');
+const parseHistoryLists = parseLists('History');
 
 const joinByID = (streams, IDKey, handler) => {
 	let caches = new Array(streams.length).fill(0).map(() => new Map());
