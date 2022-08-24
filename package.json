@@ -29,7 +29,7 @@
     "mathjs": "^11.0.0",
     "next": "^12.2.5",
     "next-compose-plugins": "^2.2.1",
-    "next-pwa": "^5.5.5",
+    "next-pwa": "^5.6.0",
     "next-transpile-modules": "^9.0.0",
     "pbf": "^3.2.1",
     "react": "^18.0.0",
