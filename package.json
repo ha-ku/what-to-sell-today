@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.18.13",
-    "@emotion/react": "^11.10.0",
+    "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.3",
