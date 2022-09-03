@@ -201,7 +201,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				/>)
 		},
 		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
-			valueFormatter: ({value}) => Number(value.toFixed(1))},
+			valueFormatter: ({value}) => Number(value.toFixed(3))},
 		{field: "defaultLowest", headerName: t('defaultLowest'), width: 160,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},

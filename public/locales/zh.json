@@ -71,7 +71,8 @@
       "currency": "货币",
       "retainer": "雇员",
       "gathering": "采集",
-      "crafting": "生产"
+      "crafting": "生产",
+      "wondrousTail": "天书"
     },
     "companySeal": {
       "source": "军票",
@@ -111,6 +112,18 @@
     },
     "whiteCrafterScrips": {
       "source": "白票",
+      "action": "换"
+    },
+    "khloeBronze": {
+      "source": "铜奖",
+      "action": "换"
+    },
+    "khloeSilver": {
+      "source": "银奖",
+      "action": "换"
+    },
+    "khloeGold": {
+      "source": "金奖",
       "action": "换"
     }
   }

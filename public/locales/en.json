@@ -71,7 +71,8 @@
       "currency": "currency",
       "retainer": "retainer",
       "gathering": "gathering",
-      "crafting": "crafting"
+      "crafting": "crafting",
+      "wondrousTail": "wondrous tail"
     },
     "companySeal": {
       "source": "Company Seals",
@@ -111,6 +112,18 @@
     },
     "whiteCrafterScrips": {
       "source": "White Crafter Scrips",
+      "action": "exchange with"
+    },
+    "khloeBronze": {
+      "source": "Khloe Bronze Cert",
+      "action": "exchange with"
+    },
+    "khloeSilver": {
+      "source": "Khloe Silver Cert",
+      "action": "exchange with"
+    },
+    "khloeGold": {
+      "source": "Khloe Gold Cert",
       "action": "exchange with"
     }
   }

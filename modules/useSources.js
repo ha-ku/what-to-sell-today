@@ -14,6 +14,9 @@ function useSources(shouldStart, setError) {
 		allegoryList: [],
 		whiteGathererScripsList: [],
 		whiteCrafterScripsList: [],
+		khloeBronzeList: [],
+		khloeSilverList: [],
+		khloeGoldList: [],
 	});
 	const sources = useMemo(() => ({
 		companySeal: {target: 'companySeal.source', action: 'companySeal.action', withTime: false, source: JSONSources.companySealList, category: 'category.currency'},
@@ -26,6 +29,9 @@ function useSources(shouldStart, setError) {
 		map: {target: 'map.source', action: 'map.action', withTime: false, source: JSONSources.mapList, category: 'category.gathering'},
 		whiteGathererScrips: {target: 'whiteGathererScrips.source', action: 'whiteGathererScrips.action', withTime: false, source: JSONSources.whiteGathererScripsList, category: 'category.gathering'},
 		whiteCrafterScrips: {target: 'whiteCrafterScrips.source', action: 'whiteCrafterScrips.action', withTime: false, source: JSONSources.whiteCrafterScripsList, category: 'category.crafting'},
+		khloeBronze: {target: 'khloeBronze.source', action: 'khloeBronze.action', withTime: false, source: JSONSources.khloeBronzeList, category: 'category.wondrousTail'},
+		khloeSilver: {target: 'khloeSilver.source', action: 'khloeSilver.action', withTime: false, source: JSONSources.khloeSilverList, category: 'category.wondrousTail'},
+		khloeGold: {target: 'khloeGold.source', action: 'khloeGold.action', withTime: false, source: JSONSources.khloeGoldList, category: 'category.wondrousTail'},
 	}), [JSONSources]);
 	useEffect(() => {
 		if(shouldStart) {
