@@ -3251,10 +3251,10 @@ make-dir@^3.0.2, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@^11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-11.2.0.tgz#06ade7425287bf69c3210158853996a55861e07e"
-  integrity sha512-4x1LUP1tkNWWvaZiPO+rF9rKE5q4o541FF4m8ZIk1PlmSyHDGRAKutjA67rICK4DXWEY1gpumPOvaq3xuQHT6Q==
+mathjs@^11.2.1:
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-11.2.1.tgz#725d2e769eb036214530ff532cea4a464efdc75e"
+  integrity sha512-V5lqIPExHtFi56LUf0Gyz0wyuJmSbXUM3liZcCDNpj4OKQaUlpQuAymC8x9mFNqajWOgxqS1HZ7Z5B76Hbwrtw==
   dependencies:
     "@babel/runtime" "^7.19.0"
     complex.js "^2.1.1"
