@@ -30,7 +30,7 @@
     "next": "^13.0.1",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.6.0",
-    "next-transpile-modules": "^9.1.0",
+    "next-transpile-modules": "^10.0.0",
     "pbf": "^3.2.1",
     "react": "^18.0.0",
     "react-async-script": "^1.2.0",
