@@ -58,7 +58,8 @@ const NONE = '无',
 		mining: {level: '', gathering: '', perception: '', },
 		fish: {level: '', gathering: '', perception: '', },
 		hunting: {level: '', averageItemLevel: '', },
-	};
+	},
+	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' ');
 
 const lowestComparator = (v1, v2) =>
 		isNaN(v1) ? -1 :
@@ -319,7 +320,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					itemListName: listSource + 'List',
 					recaptchaVersion: 'v' + recaptchaVersion,
 				}
-				let url = `${window.location.origin}/marketReportPbf?${
+				let url = `https://${ENDPOINTS[Math.floor(Math.random() * ENDPOINTS.length)]}-cf.ha-ku.cyou/marketReportPbfCfProxy?${
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
 						.map(pair =>  pair.join('=')).join('&')
 				}`
