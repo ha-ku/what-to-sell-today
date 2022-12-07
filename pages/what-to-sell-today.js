@@ -42,7 +42,7 @@ extend([mixPlugin]);
 
 
 const NONE = '无',
-	RETRY = 3,
+	RETRY = 1,
 	PRICE_WINDOW = 5,
 	QUALITY = 'nq',
 	WORLD = worlds[0],
@@ -273,6 +273,12 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 			let controller = new AbortController(),
 				decoder = lpstream.decode();
+			const handleDecoderEnd = () => {
+				setShouldUpdate(false);
+				setRetry(0);
+				setProgress(0);
+				setBuffer(0);
+			}
 			decoder.on('data', (_message) => {
 				const message = Report.read(new Pbf(_message))
 				console.log(message);
@@ -285,6 +291,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						setShouldUpdate(false);
 						setProgress(0);
 						setBuffer(0);
+						decoder.off('end', handleDecoderEnd);
 					}
 					return;
 				}
@@ -299,12 +306,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					setProgress(p => p+1);
 				});
 			});
-			decoder.on('end', () => {
-				setShouldUpdate(false);
-				setRetry(0);
-				setProgress(0);
-				setBuffer(0);
-			})
+			decoder.on('end', handleDecoderEnd);
 
 			async function doMarketReport() {
 				let token = await executeRecaptcha('marketReport')
@@ -369,15 +371,18 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		...(rep.level !== undefined ? {level : rep.level} : {} )
 	})), [fullReports]);
 
-	if(error) {
-		if(retry < RETRY) {
-			setRetry(retry => retry + 1);
-			setTimeout(() => {
-				setError(null);
-				setShouldUpdate(true);
-			}, 2500);
+	useEffect(() => {
+		if(error) {
+			if(retry < RETRY) {
+				let ID = setTimeout(() => {
+					setError(null);
+					setRetry(retry => retry + 1);
+					setShouldUpdate(true);
+				}, 2500);
+				return () => clearTimeout(ID);
+			}
 		}
-	}
+	}, [error, retry]);
 	const gridMemorizeProps = useMemo(() => ({
 		sx: {
 			'& .MuiDataGrid-footerContainer': {
@@ -459,9 +464,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					<CloseIcon fontSize="small"/>
 				</IconButton>
 			} />
-			{
-				error ? <ErrorCover {...{retry: retry < RETRY, error}}/> : null
-			}
+			<ErrorCover open={error} {...{retry: retry < RETRY, error}}/>
 		</>
 	);
 }

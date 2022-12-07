@@ -60,6 +60,7 @@ function getReports(req, resp) {
 			if (e.message !== 'abort') {
 				console.log(e);
 				resp.write({err: e});
+				context.ac.abort();
 			}
 			console.log('end')
 			resp.end();

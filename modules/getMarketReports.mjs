@@ -16,9 +16,9 @@ const QUAL_OPTIONS = ['hq', 'nq', 'all'];
 
 const REQUEST_OPTIONS = {
 	agent: new https.Agent({
-		keepAlive: true,
-		//timeout: 3000
-	})
+		keepAlive: true
+	}),
+	timeout: 5000
 };
 const rateLimiter = new RateLimiter(13);
 

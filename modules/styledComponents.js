@@ -1,18 +1,16 @@
 import {styled} from "@mui/material/styles";
-import {Button, CircularProgress, FormControlLabel} from "@mui/material";
+import {Button, CircularProgress, FormControlLabel, Backdrop} from "@mui/material";
 
 const StyledCircularProgress = styled((props) => (<CircularProgress color="secondary" size={30} thickness={3.6} {...props}/>))`
-	&& {
-		margin: 12px;
-	}
+  && {
+    margin: 12px;
+  }
 `;
-const StyledLoadingContainer = styled('div')`
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+const StyledLoadingContainer = styled(Backdrop)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledCellContainer = styled('span')`
   display: inline-flex;
