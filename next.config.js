@@ -1,19 +1,16 @@
-const withPlugins = require("next-compose-plugins");
-const withPWA = require("next-pwa");
-const runtimeCaching = require('next-pwa/cache')
+const runtimeCaching = require('next-pwa/cache');
+const withPWA = require("next-pwa")({
+	dest: 'public',
+	runtimeCaching
+});
 //const withTM = require('next-transpile-modules')(['@mui/icons-material', '@mui/material', '@mui/system']);
 //const withSvgr = require("next-plugin-svgr");
 /* const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: false, //process.env.ANALYZE === 'true',
 })*/
 
-module.exports = withPlugins([withPWA], {
+module.exports = withPWA({
 //module.exports = {
-	pwa: {
-		dest: 'public',
-		runtimeCaching
-	},
-	webpack5: true,
 	experimental: {
 		modularizeImports: {
 			'@mui/material': {
