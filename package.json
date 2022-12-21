@@ -42,7 +42,7 @@
     "redis": "^4.5.1",
     "stream-chain": "^2.2.5",
     "stream-json": "^1.7.5",
-    "use-local-storage-state": "^18.1.1",
+    "use-local-storage-state": "^18.1.2",
     "webpack": "^5.75.0"
   },
   "devDependencies": {
