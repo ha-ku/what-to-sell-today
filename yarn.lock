@@ -4278,10 +4278,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-local-storage-state@^18.1.1:
-  version "18.1.1"
-  resolved "https://registry.npmjs.org/use-local-storage-state/-/use-local-storage-state-18.1.1.tgz#40e535aebed7770258e0a3a7b6923a86d9c0c52f"
-  integrity sha512-09bl6q3mkSlkEt8KeBPCmdPEWEojWYF70Qbz+7wkfQX1feaFITM9m84+h0Jr6Cnf/IvpahkFh7UbX2VNN3ioTQ==
+use-local-storage-state@^18.1.2:
+  version "18.1.2"
+  resolved "https://registry.yarnpkg.com/use-local-storage-state/-/use-local-storage-state-18.1.2.tgz#f131c0aa3803742ca261c547cdfd9d61e848581d"
+  integrity sha512-V+kYQNC5R0N/JDpsg6b4ED5UaItKJcSvbne68DwJDZWHxGMQBiF41ATktFIOyet3PIq30d2qtzVp/2aB6hQ8Bg==
 
 util-deprecate@^1.0.1:
   version "1.0.2"
