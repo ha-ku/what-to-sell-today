@@ -27,7 +27,7 @@
     "iojson": "^1.0.4",
     "length-prefixed-stream": "^2.0.0",
     "mathjs": "^11.5.0",
-    "next": "^13.1.1",
+    "next": "^13.1.2",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.6.0",
     "next-transpile-modules": "^10.0.0",
