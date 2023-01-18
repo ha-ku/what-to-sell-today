@@ -12,15 +12,15 @@ const withPWA = require("next-pwa")({
 module.exports = withPWA({
 //module.exports = {
 	experimental: {
-		modularizeImports: {
-			'@mui/material': {
-				transform: '@mui/material/{{member}}'
-			},
-			'@mui/icons-material': {
-				transform: '@mui/icons-material/{{member}}'
-			}
-		},
 		runtime: 'experimental-edge'
+	},
+	modularizeImports: {
+		'@mui/material': {
+			transform: '@mui/material/{{member}}'
+		},
+		'@mui/icons-material': {
+			transform: '@mui/icons-material/{{member}}'
+		}
 	},
 	webpack: (config) => {
 		config.resolve.fallback = {
