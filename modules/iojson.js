@@ -18,10 +18,11 @@ export function exportJSON(data = {}, filename) {
 /**
  * Import JSON
  */
-export function importJSON() {
+export function importJSON(format = '.json') {
 	return new Promise((resolve, reject) => {
 		let input = document.createElement('input')
 		input.type = 'file'
+		input.accept = format;
 		input.onchange = (event) => {
 			let files = event.target.files
 			if (!files || !files.length) {
