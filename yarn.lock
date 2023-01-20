@@ -1360,6 +1360,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@mui/x-data-grid@^5.17.20":
+  version "5.17.20"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-5.17.20.tgz#ab50eadc330f10cdc056910598229ebcdcd3b062"
+  integrity sha512-khOe5l2deUBxUCkY9qKzevjIcg0l2rab2GjVwRfpJ/FUlV9cEsTvA9fSv4ylo6BsPfENBH6GPjZwxkr5GsXYgw==
 "@mui/x-data-grid@^5.17.19":
   version "5.17.20"
   resolved "https://registry.npmjs.org/@mui/x-data-grid/-/x-data-grid-5.17.20.tgz#ab50eadc330f10cdc056910598229ebcdcd3b062"
