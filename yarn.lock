@@ -3664,10 +3664,10 @@ react-dom@^18.0.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-google-recaptcha-v3@^1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.10.1.tgz#5b125bc0dec123206431860e8800e188fc735aff"
-  integrity sha512-K3AYzSE0SasTn+XvV2tq+6YaxM+zQypk9rbCgG4OVUt7Rh4ze9basIKefoBz9sC0CNslJj9N1uwTTgRMJQbQJQ==
+react-google-recaptcha-v3@^1.9.8:
+  version "1.9.8"
+  resolved "https://registry.npmjs.org/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.9.8.tgz#934ad21edcbfeb51fb66a218cf74addfbff48816"
+  integrity sha512-1AuwvNjcGxMQTBMgsu4XI+Tzh/9En8xdVE/OS48l2Z8VsaCtb8eLh2RcMv/bxgt+UbHzPfQ2JynPBxB1+hYkJA==
   dependencies:
     hoist-non-react-statics "^3.3.2"
 
