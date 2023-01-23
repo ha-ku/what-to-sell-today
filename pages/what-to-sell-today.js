@@ -18,7 +18,7 @@ import MixedRecaptcha from "../modules/MixedRecaptcha";
 import useHandler from "../modules/useHandler";
 import useWindowSize from '../modules/useWindowSize';
 import Pbf from 'pbf';
-import {Report} from '../protobuf/MarketReport';
+import {Report} from '../backend/protobuf/MarketReport';
 
 
 import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';

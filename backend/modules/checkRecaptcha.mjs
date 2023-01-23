@@ -1,5 +1,7 @@
 import https from "https";
 import process from "process";
+import { config } from 'dotenv';
+config();
 
 const SECRET = {
 	v2: process.env.WTST_RECAPTCHA_KEY_V2,

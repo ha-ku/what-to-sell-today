@@ -1,0 +1,17 @@
+{
+  "name": "what-to-sell-today-backend",
+  "version": "0.0.1",
+  "description": "Backend to compare FFXIV item price in various list.",
+  "main": "protobuf/marketReportServer.mjs",
+  "author": "haku",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "length-prefixed-stream": "^2.0.0",
+    "mathjs": "^11.5.0",
+    "pbf": "^3.2.1",
+    "redis": "^4.5.1",
+    "stream-chain": "^2.2.5",
+    "stream-json": "^1.7.5"
+  }
+}
