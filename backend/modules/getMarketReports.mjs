@@ -16,18 +16,19 @@ const QUAL_OPTIONS = ['hq', 'nq', 'all'];
 
 const REQUEST_OPTIONS = {
 	agent: new https.Agent({
-		keepAlive: true
+		keepAlive: true,
+		maxSockets: 8,
+		scheduling: 'fifo'
 	}),
 	timeout: 5000
 };
-const rateLimiter = new RateLimiter(13);
+const rateLimiter = new RateLimiter(10);
 
 
 async function getServerMarketLists(IDs, server, windowSize, context) {
-	const recent = (hists, ID) => {
+	const recent = (hists) => {
 		const DAYS = [1,2,3,4,5,6,7]
 		const aWeekAgo = new Date().getTime() / 1000 - 604800
-		console.log('hists 5:', ID, hists.slice(0,5).map(hist => ({time: (aWeekAgo + 604800 - hist.timestamp) / 86400, num: hist.quantity})));
 		let v = [0,0,0,0,0,0,0]
 		hists.forEach((hist) => {
 			if(hist.timestamp < aWeekAgo)
@@ -37,7 +38,6 @@ async function getServerMarketLists(IDs, server, windowSize, context) {
 					v[day - 1] += hist.quantity
 			})
 		})
-		console.log('volumns:', ID, v)
 		return v
 		/*const v = hists.reduce((acc, hist) => {
 			while(hist.timestamp < now - DAYS[acc.day] * 86400) {

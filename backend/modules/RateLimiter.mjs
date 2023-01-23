@@ -3,7 +3,7 @@ import https from 'https';
 export default class RateLimiter {
 	constructor(rate = 20) {
 		this.RATE_LIMIT_SEC = rate;
-		this.RETRY = 1;
+		this.RETRY = 2;
 		this.POOL = [
 			{
 				prefix: '',
@@ -61,7 +61,6 @@ export default class RateLimiter {
 				upstream.queue = upstream.queue.filter(req => !req.args.find(arg => arg.signal).signal.aborted)
 				return;
 			}
-			console.log(args[1].timeout);
 			console.log('send', args[0]);
 			const req = https.get(...args);
 			const doRetry = (code) => {
@@ -70,7 +69,7 @@ export default class RateLimiter {
 				if(retry >= this.RETRY)
 					reject({code: 502, content: `rate limiter keep receiving ${code} from upstream`});
 				else
-					this.queue({args: savedArgs, retry: retry + 1, resolve, reject, urgent: true})
+					setTimeout(() => this.queue({args: savedArgs, retry: retry + 1, resolve, reject, urgent: true}), 500 + Math.floor(Math.random()*1000*retry))
 			}
 			req.on('response', (resp) => {
 
