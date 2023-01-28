@@ -78,10 +78,6 @@
       "source": "军票",
       "action": "换"
     },
-    "aphorism": {
-      "source": "经典",
-      "action": "换"
-    },
     "botany": {
       "source": "伐木",
       "action": "砍"

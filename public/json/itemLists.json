@@ -1213,13 +1213,6 @@
 		{"name":"魔匠魔晶石玖型","cost":250,"ID":33926,"enName":"Craftsman's Cunning Materia IX"},
 		{"name":"巨匠魔晶石玖型","cost":250,"ID":33927,"enName":"Craftsman's Command Materia IX"}
 	],
-	"aphorismList": [
-		{"name":"遗烈乡研磨剂","cost":20,"enName":"Alchemical Abrasive","ID":36219},
-		{"name":"萨维奈绢丝","cost":20,"enName":"Thavnairian Thread","ID":36221},
-		{"name":"两栖犀的粗皮","cost":20,"enName":"Amynodon Hide","ID":36222},
-		{"name":"萨维奈木贼草","cost":20,"enName":"Thavnairian Horsetail","ID":36220},
-		{"name":"遗烈乡骸炭","cost":20,"enName":"Alchemical Charcoal","ID":36218}
-	],
 	"khloeBronzeList":[
 		{"name":"魔法棱晶（魔石精）","cost":0.05,"ID":36117,"enName":"Magicked Prism (Spriggan)"},
 		{"name":"魔法棱晶（鲶鱼精头）","cost":0.05,"ID":33709,"enName":"Magicked Prism (Namazu)"},
