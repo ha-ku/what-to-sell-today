@@ -16,8 +16,7 @@ const QUAL_OPTIONS = ['hq', 'nq', 'all'];
 
 const REQUEST_OPTIONS = {
 	agent: new https.Agent({
-		keepAlive: true,
-		maxSockets: 8,
+		keepAlive: true,		maxSockets: 8,
 		scheduling: 'fifo'
 	}),
 	timeout: 5000

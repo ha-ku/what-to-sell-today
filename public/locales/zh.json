@@ -125,6 +125,10 @@
     "khloeGold": {
       "source": "金奖",
       "action": "换"
+    },
+    "wolfMark": {
+      "source": "狼印",
+      "action": "换"
     }
   }
 }

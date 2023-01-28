@@ -125,6 +125,10 @@
     "khloeGold": {
       "source": "Khloe Gold Cert",
       "action": "exchange with"
+    },
+    "wolfMark": {
+      "source": "Wolf Mark",
+      "action": "exchange with"
     }
   }
 }
