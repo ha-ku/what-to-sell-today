@@ -1,49 +1,75 @@
+// noinspection RequiredAttributes
+
 import {
 	AppBar,
-	Box,
+	Box, Collapse,
 	FormControl,
-	IconButton,
-	ListSubheader,
-	MenuItem,
-	TextField,
+	IconButton, ListItemText,
+	MenuItem, Select,
 	Toolbar,
 	Typography, useMediaQuery
 } from "@mui/material";
-import {Help as HelpIcon, Menu as MenuIcon, Translate as TranslateIcon} from "@mui/icons-material";
+import {
+	ArrowDropDown as ArrowDropDownIcon,
+	ArrowDropUp as ArrowDropUpIcon,
+	Help as HelpIcon,
+	Menu as MenuIcon,
+	Translate as TranslateIcon
+} from "@mui/icons-material";
 import HelpDialog from "./HelpDialog";
 import {memo, useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
 import useTranslate from "./useTranslate";
+import {useTheme} from "@mui/material/styles";
+import {colord} from "colord";
 
 
 function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 	//console.log('rerender NavBar');
-	const [help, setHelp] = useState(false),
-		headers = Object.keys(sources).reduce((acc, sourceName) => {
-			const source = sources[sourceName];
-			if(!acc.hasOwnProperty(source.category)) {
-				acc[source.category] = {};
-			}
-			acc[source.category][sourceName] = sources[sourceName];
+	const headers = Object.keys(sources).reduce((acc, sourceName) => {
+			const category = sources[sourceName].category;
+			acc[category] = [...(acc[category] ?? []), sourceName];
 			return acc;
 		}, {});
 
-	const [selectOpen, setSelectOpen] = useState(false);
-	const SelectProps = {
-		open: selectOpen,
-		onOpen: () => setSelectOpen(true),
-		onClose: () => setSelectOpen(false)
-	}
+	const [helpOpen, setHelpOpen] = useState(false),
+		[open, setOpen] = useState(false);
+
 	useHotkeys('up,down', (event) => {
-		if(!selectOpen) {
-			setSelectOpen(true);
+		if(!open) {
+			setOpen(true);
 			event.preventDefault();
 		}
-	}, [selectOpen]);
+	}, [open]);
 
 	const { FormattedMessage, locale, t } = useTranslate('navbar');
-
 	const isMobile = !useMediaQuery(t => t.breakpoints.up('sm'));
+
+	const theme = useTheme();
+
+	const [visibleSelectCategory, setVisibleSelectCategory] = useState(''),
+		[anchorEl, setAnchorEl] = useState(null),
+		onOpen = (e) => {
+			setOpen(true);
+			setAnchorEl(e.currentTarget);
+		},
+		onClose = (e) => {
+			if(typeof headers[e.currentTarget.getAttribute("data-value")] !== 'undefined' && e.type === 'click')
+				return;
+			setVisibleSelectCategory('');
+			setOpen(false)
+		},
+		onChange = function openSubMenu({target: {value}}) {
+			setVisibleSelectCategory(v => v === value ? '' : value);
+		},
+		selectProps = {
+			open, onOpen, onClose, onChange, size: "small", variant: "standard",
+			MenuProps: {
+				anchorEl,
+				anchorOrigin: { vertical: 'bottom', horizontal: 'left',},
+				transformOrigin: { vertical: 'top', horizontal: 'left',}
+			}
+		}
 
 	return (
 		<AppBar position="sticky" sx={{paddingTop: '4px'}} >
@@ -56,18 +82,41 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 						<FormattedMessage id="prefix" values={{action: t(sources[listSource].action)}} />
 					</Typography>
 					<FormControl>
-						<TextField select SelectProps={SelectProps} value={listSource} onChange={handleSource} size="small" variant="standard" sx={{flex: "none"}}>
-							{Object.keys(headers).reduce((acc, category) => {
-								return acc.concat(
-									(<ListSubheader key={category}>{t(category)}</ListSubheader>),
-									Object.keys(headers[category]).map(sourceName => (
-										<MenuItem value={sourceName} key={sourceName}>
-											<Typography variant="h6">{t(sources[sourceName].target)}</Typography>
-										</MenuItem>
-									))
-								)
-							}, [])}
-						</TextField>
+						<Select {...selectProps} value={listSource} >
+							{Object.keys(headers).reduce((acc, category) =>
+								[...acc,
+									(<MenuItem key={category} value={category} sx={{paddingRight: theme.spacing(1)}}>
+										<ListItemText sx={{marginRight: theme.spacing(1)}}>
+											<Typography variant="h6">{t(category)}</Typography>
+										</ListItemText>
+										{category === visibleSelectCategory ?
+											<ArrowDropUpIcon />
+											: <ArrowDropDownIcon />}
+									</MenuItem>),
+									(<Collapse
+										in={category === visibleSelectCategory}
+										sx={{
+											paddingLeft: theme.spacing(1),
+											backgroundColor: colord(theme.palette.background.paper)
+												.mix(theme.palette.primary.main, 0.15)
+												.toRgbString()
+										}}>
+										{headers[category].map((sourceName) =>
+											(<MenuItem value={sourceName} key={sourceName} onClick={
+												e => {
+													setOpen(false)
+													handleSource({target: {value: e.currentTarget.getAttribute('value')}});
+												}}>
+												<Typography variant="h6">{t(sources[sourceName].target)}</Typography>
+											</MenuItem>)
+										)}
+									</Collapse>)
+								],
+								[(<MenuItem key="hidden" value={listSource} sx={{display: 'none'}}>
+									<Typography variant="h6">{t(sources[listSource].target)}</Typography>
+								</MenuItem>)]
+							)}
+						</Select>
 					</FormControl>
 					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
 						<FormattedMessage id="postfix" values={{action: t(sources[listSource].action)}} />
@@ -77,10 +126,10 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 				<IconButton aria-label="switch language" onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')} >
 					<TranslateIcon />
 				</IconButton>
-				<IconButton aria-label="about" onClick={() => setHelp(h => !h)} >
+				<IconButton aria-label="about" onClick={() => setHelpOpen(h => !h)} >
 					<HelpIcon />
 				</IconButton>
-				<HelpDialog open={help} onClose={() => setHelp(false)}/>
+				<HelpDialog open={helpOpen} onClose={() => setHelpOpen(false)}/>
 			</Toolbar>
 		</AppBar>
 	);
