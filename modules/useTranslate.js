@@ -4,7 +4,7 @@ import {useMemo} from "react";
 
 
 
-const useTranslate = (ns = []) => {
+const useTranslate = (ns = '') => {
 	const intl = useIntl();
 	const t = useMemo(() =>
 			(key, param = {}) => intl.formatMessage(defineMessage({id: `${ns}.${key}`}), param)
