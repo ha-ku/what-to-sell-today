@@ -6,14 +6,8 @@ permissions:
   pull-requests: write
 on:
   pull_request:
-    types: [opened, reopened, edited]
     branches:
       - 'dev-deps'
-    tags:
-      - 'dependencies'
-  push:
-    branches:
-      - 'dependabot/npm_and_yarn/dev-deps/**'
     tags:
       - 'dependencies'
 jobs:
@@ -26,3 +20,4 @@ jobs:
           MERGE_METHOD: "rebase"
           MERGE_LABELS: "dependencies"
           MERGE_ERROR_FAIL: 1
+          PULL_REQUEST:
