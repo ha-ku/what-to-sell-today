@@ -18,7 +18,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.7",
     "@mui/system": "^5.11.8",
-    "@mui/x-data-grid": "^5.17.22",
+    "@mui/x-data-grid": "^5.17.23",
     "clsx": "^1.2.1",
     "colord": "^2.9.3",
     "flat": "^5.0.2",
