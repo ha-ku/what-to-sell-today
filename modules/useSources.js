@@ -1,38 +1,32 @@
 import {useState, useEffect, useMemo} from "react";
 
+
+
+const SOURCE_INFO = {
+	companySeal: {withTime: false, category: 'category.currency'},
+	wolfMark: {withTime: false, category: 'category.currency'},
+	botany: {withTime: true, category: 'category.retainer'},
+	mining: {withTime: true, category: 'category.retainer'},
+	fish: {withTime: true, category: 'category.retainer'},
+	hunting: {withTime: true, category: 'category.retainer'},
+	dye: {withTime: false, category: 'category.crafting'},
+	map: {withTime: false, category: 'category.gathering'},
+	whiteGathererScrips: {withTime: false, category: 'category.gathering'},
+	whiteCrafterScrips: {withTime: false, category: 'category.crafting'},
+	khloeBronze: {withTime: false, category: 'category.wondrousTail'},
+	khloeSilver: {withTime: false, category: 'category.wondrousTail'},
+	khloeGold: {withTime: false, category: 'category.wondrousTail'},
+	poetics: {withTime: false, category: 'category.currency'},
+}
 function useSources(shouldStart, setError) {
 
-	const [JSONSources, setJSONSources] = useState({
-		companySealList: [],
-		botanyList: [],
-		miningList: [],
-		fishList: [],
-		huntingList: [],
-		dyeList: [],
-		mapList: [],
-		allegoryList: [],
-		whiteGathererScripsList: [],
-		whiteCrafterScripsList: [],
-		khloeBronzeList: [],
-		khloeSilverList: [],
-		khloeGoldList: [],
-		wolfMarkList: [],
-	});
-	const sources = useMemo(() => ({
-		companySeal: {target: 'companySeal.source', action: 'companySeal.action', withTime: false, source: JSONSources.companySealList, category: 'category.currency'},
-		wolfMark: {target: 'wolfMark.source', action: 'wolfMark.action', withTime: false, source: JSONSources.wolfMarkList, category: 'category.currency'},
-		botany: {target: 'botany.source', action: 'botany.action', withTime: true, source: JSONSources.botanyList, category: 'category.retainer'},
-		mining: {target: 'mining.source', action: 'mining.action', withTime: true, source: JSONSources.miningList, category: 'category.retainer'},
-		fish: {target: 'fish.source', action: 'fish.action', withTime: true, source: JSONSources.fishList, category: 'category.retainer'},
-		hunting: {target: 'hunting.source', action: 'hunting.action', withTime: true, source: JSONSources.huntingList, category: 'category.retainer'},
-		dye: {target: 'dye.source', action: 'dye.action', withTime: false, source: JSONSources.dyeList, category: 'category.crafting'},
-		map: {target: 'map.source', action: 'map.action', withTime: false, source: JSONSources.mapList, category: 'category.gathering'},
-		whiteGathererScrips: {target: 'whiteGathererScrips.source', action: 'whiteGathererScrips.action', withTime: false, source: JSONSources.whiteGathererScripsList, category: 'category.gathering'},
-		whiteCrafterScrips: {target: 'whiteCrafterScrips.source', action: 'whiteCrafterScrips.action', withTime: false, source: JSONSources.whiteCrafterScripsList, category: 'category.crafting'},
-		khloeBronze: {target: 'khloeBronze.source', action: 'khloeBronze.action', withTime: false, source: JSONSources.khloeBronzeList, category: 'category.wondrousTail'},
-		khloeSilver: {target: 'khloeSilver.source', action: 'khloeSilver.action', withTime: false, source: JSONSources.khloeSilverList, category: 'category.wondrousTail'},
-		khloeGold: {target: 'khloeGold.source', action: 'khloeGold.action', withTime: false, source: JSONSources.khloeGoldList, category: 'category.wondrousTail'},
-	}), [JSONSources]);
+	const [JSONSources, setJSONSources] = useState(Object.fromEntries(Object.entries(SOURCE_INFO).map(([category]) => [`${category}List`, []])));
+	const sources = useMemo(() => Object.fromEntries(Object.entries(SOURCE_INFO).map(([category, value]) => [category, {
+		...value,
+		target:`${category}.source`,
+		action: `${category}.action`,
+		source: JSONSources[`${category}List`]
+	}] )), [JSONSources]);
 	useEffect(() => {
 		if(shouldStart) {
 			import('../public/json/itemLists.json')

@@ -125,6 +125,10 @@
     "wolfMark": {
       "source": "Wolf Mark",
       "action": "exchange with"
+    },
+    "poetics": {
+      "source": "Poetics",
+      "action": "exchange with"
     }
   }
 }

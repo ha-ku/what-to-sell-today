@@ -125,6 +125,10 @@
     "wolfMark": {
       "source": "狼印",
       "action": "换"
+    },
+    "poetics": {
+      "source": "诗学",
+      "action": "换"
     }
   }
 }
