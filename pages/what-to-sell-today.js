@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, startTransition, useCallback} from 'react';
+import {useState, useEffect, useMemo, startTransition, useCallback, useDeferredValue} from 'react';
 import Head from 'next/head';
 
 import {
@@ -98,7 +98,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 	const [isLoading, setShouldUpdate] = useState(true),
 		[error, setError] = useState(null),
 		[retry, setRetry] = useState(0),
-		[fetchingURL, setURL] = useState(null),
 		[queryInfo, setQueryInfo] = useState({
 			worldName: worldsName[worlds.indexOf(world)],
 			serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
@@ -120,7 +119,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		ssr: true,
 		defaultValue: JOB_INFO
 	});
-	const sources = useSources(!!fetchingURL, setError);
+	const sources = useSources(listSource, setError);
 	let fullReports = useMemo(() => {
 		//.log('pair ID');
 		const itemList = sources[listSource].source;
@@ -285,7 +284,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					handleDecoderEnd();
 					return;
 				}
-				console.log(_message.toString('hex'));
 				const message = Report.read(new Pbf(_message))
 				console.log(message);
 				if(message.err) {
@@ -331,7 +329,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
 						.map(pair =>  pair.join('=')).join('&')
 				}`
-				setURL(url);
 				try {
 					let response = await window.fetch(url, {signal: controller.signal})
 					await response.body.pipeTo(decoder.writable);
@@ -439,15 +436,14 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				sortModel={{value: sortModel, handler: handleSort}}
 			/>
 			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
-				{ !!fetchingURL ?
-					(<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
-						rows, columns, pageSize, page,
-						disableColumnMenu: true,
-						sortingOrder: SORTING_ORDER,
-						onSortModelChange: handleSort,
-						onPageChange: setPage,
-						onPageSizeChange: setPageSize,
-					}}/>) : <StyledCircularProgress />}
+				<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
+					rows, columns, pageSize, page,
+					disableColumnMenu: true,
+					sortingOrder: SORTING_ORDER,
+					onSortModelChange: handleSort,
+					onPageChange: setPage,
+					onPageSizeChange: setPageSize,
+				}}/>
 			</StyledGridContainer>
 			<MixedRecaptcha
 				version={recaptchaVersion}

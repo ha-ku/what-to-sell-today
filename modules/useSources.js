@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo} from "react";
+import {useState, useEffect, useMemo, startTransition} from "react";
 
 
 
@@ -18,7 +18,7 @@ const SOURCE_INFO = {
 	khloeGold: {withTime: false, category: 'category.wondrousTail'},
 	poetics: {withTime: false, category: 'category.currency'},
 }
-function useSources(shouldStart, setError) {
+function useSources(listSource, setError) {
 
 	const [JSONSources, setJSONSources] = useState(Object.fromEntries(Object.entries(SOURCE_INFO).map(([category]) => [`${category}List`, []])));
 	const sources = useMemo(() => Object.fromEntries(Object.entries(SOURCE_INFO).map(([category, value]) => [category, {
@@ -28,14 +28,12 @@ function useSources(shouldStart, setError) {
 		source: JSONSources[`${category}List`]
 	}] )), [JSONSources]);
 	useEffect(() => {
-		if(shouldStart) {
-			import('../public/json/itemLists.json')
-				.then(setJSONSources)
-				.catch(error => {
-					setError({code: '000', content: error.message});
-				})
-		}
-	}, [shouldStart]);
+		import(`../public/json/itemLists/${listSource}.json`)
+			.then(({default:json}) => startTransition(() => setJSONSources(J => ({...J, [`${listSource}List`]: json}))))
+			.catch(error => {
+				setError({code: '000', content: error.message});
+			})
+	}, [listSource]);
 
 	return sources;
 }

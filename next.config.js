@@ -6,7 +6,7 @@ const withPWA = require("next-pwa")({
 //const withTM = require('next-transpile-modules')(['@mui/icons-material', '@mui/material', '@mui/system']);
 //const withSvgr = require("next-plugin-svgr");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: false, //process.env.ANALYZE === 'true',
+	enabled: process.env.ANALYZE === 'true',
 })
 
 module.exports = withBundleAnalyzer(withPWA({
