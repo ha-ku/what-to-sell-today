@@ -22,7 +22,6 @@
     "clsx": "^1.2.1",
     "colord": "^2.9.3",
     "flat": "^5.0.2",
-    "length-prefixed-stream": "^2.0.0",
     "next": "^13.1.6",
     "next-pwa": "^5.6.0",
     "next-transpile-modules": "^10.0.0",
@@ -45,7 +44,6 @@
     "buffer": "^6.0.3",
     "events": "^3.3.0",
     "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
     "util": "^0.12.5"
   },
   "engines": {

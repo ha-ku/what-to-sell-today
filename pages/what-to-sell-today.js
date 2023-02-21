@@ -36,7 +36,7 @@ import mixPlugin from "colord/plugins/mix";
 import ItemName from "../modules/ItemName";
 import ItemVolumns from "../modules/ItemVolumns";
 import ItemHistPerCost from "../modules/ItemHistPerCost";
-import lpstream from "length-prefixed-stream";
+import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
 extend([mixPlugin]);
 
 
@@ -271,15 +271,21 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
 			})
 
-			let controller = new AbortController(),
-				decoder = lpstream.decode();
 			const handleDecoderEnd = () => {
 				setShouldUpdate(false);
 				setRetry(0);
 				setProgress(0);
 				setBuffer(0);
 			}
-			decoder.on('data', (_message) => {
+			let controller = new AbortController(),
+				decoder = lpstream.decode(),
+				reader = decoder.readable.getReader();
+			reader.read().then(function onData({done, value: _message}) {
+				if(done) {
+					handleDecoderEnd();
+					return;
+				}
+				console.log(_message.toString('hex'));
 				const message = Report.read(new Pbf(_message))
 				console.log(message);
 				if(message.err) {
@@ -291,7 +297,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						setShouldUpdate(false);
 						setProgress(0);
 						setBuffer(0);
-						decoder.off('end', handleDecoderEnd);
 					}
 					return;
 				}
@@ -305,8 +310,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					});
 					setProgress(p => p+1);
 				});
-			});
-			decoder.on('end', handleDecoderEnd);
+				return reader.read().then(onData);
+			})
 
 			async function doMarketReport() {
 				let token = await executeRecaptcha('marketReport')
@@ -329,15 +334,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				setURL(url);
 				try {
 					let response = await window.fetch(url, {signal: controller.signal})
-					let reader = response.body.getReader();
-					reader.read().then(function onReaderData({done, value}) {
-						if(controller.signal.aborted)
-							return;
-						if (done)
-							return decoder.end();
-						decoder.write(value);
-						reader.read().then(onReaderData)
-					})
+					await response.body.pipeTo(decoder.writable);
 				} catch(err) {
 					if(err.code !== 20)
 						setError(err);
@@ -347,7 +344,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 			return () => {
 				//console.log('effect callback');
-				decoder.destroy();
 				controller.abort();
 			}
 		}
