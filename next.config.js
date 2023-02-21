@@ -24,9 +24,7 @@ module.exports = withBundleAnalyzer(withPWA({
 	},
 	webpack: (config) => {
 		config.resolve.fallback = {
-			"buffer": require.resolve("buffer/"),
-			"events": require.resolve("events"),
-			"process": require.resolve("process/browser"),
+			buffer: require.resolve("buffer/"),
 		};
 		config.resolve.alias = {
 			...config.resolve.alias,
@@ -34,6 +32,8 @@ module.exports = withBundleAnalyzer(withPWA({
 			util: false,
 			zlib: false,
 			stream: false,
+			process: false,
+			events: false,
 		};
 		config.module.rules.push({
 			test: /\.svg$/,
