@@ -5,11 +5,11 @@ const withPWA = require("next-pwa")({
 });
 //const withTM = require('next-transpile-modules')(['@mui/icons-material', '@mui/material', '@mui/system']);
 //const withSvgr = require("next-plugin-svgr");
-/* const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: false, //process.env.ANALYZE === 'true',
-})*/
+})
 
-module.exports = withPWA({
+module.exports = withBundleAnalyzer(withPWA({
 //module.exports = {
 	experimental: {
 		runtime: 'experimental-edge'
@@ -24,18 +24,17 @@ module.exports = withPWA({
 	},
 	webpack: (config) => {
 		config.resolve.fallback = {
-			"stream": require.resolve("stream-browserify"),
 			"buffer": require.resolve("buffer/"),
-			"util": require.resolve("util/"),
 			"events": require.resolve("events"),
 			"process": require.resolve("process/browser"),
-			"zlib": require.resolve("browserify-zlib"),
-			"assert": require.resolve("assert/")
 		};
-		/*config.resolve.alias = {
+		config.resolve.alias = {
 			...config.resolve.alias,
-			'react-dom$': 'react-dom/profiling'
-		};*/
+			assert: false,
+			util: false,
+			zlib: false,
+			stream: false,
+		};
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: ['@svgr/webpack']
@@ -43,4 +42,4 @@ module.exports = withPWA({
 		return config;
 	}
 //}
-});
+}));
