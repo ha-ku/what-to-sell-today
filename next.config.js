@@ -3,7 +3,6 @@ const withPWA = require("next-pwa")({
 	dest: 'public',
 	runtimeCaching
 });
-//const withTM = require('next-transpile-modules')(['@mui/icons-material', '@mui/material', '@mui/system']);
 //const withSvgr = require("next-plugin-svgr");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',

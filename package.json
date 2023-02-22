@@ -24,7 +24,6 @@
     "flat": "^5.0.2",
     "next": "^13.1.6",
     "next-pwa": "^5.6.0",
-    "next-transpile-modules": "^10.0.0",
     "pbf": "^3.2.1",
     "react": "^18.0.0",
     "react-async-script": "^1.2.0",
