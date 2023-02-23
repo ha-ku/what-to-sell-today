@@ -1,8 +1,12 @@
 import {forwardRef, useMemo, Suspense, lazy, memo, useDeferredValue} from "react";
-import {Box} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
-import {StyledCircularProgress} from "./styledComponents";
+import {StyledCircularProgress, StyledGridContainer} from "./styledComponents";
+import {colord, extend} from "colord";
+import mixPlugin from "colord/plugins/mix";
+extend([mixPlugin]);
+
+
 const DataGrid = lazy(() => import('./DataGrid'));
 
 const addClassName = (item, key, className) => {
@@ -104,28 +108,27 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 	const rowsLeft = useDeferredValue(rows),
 		rowsRight = useDeferredValue(rows);
 
-	return (<Box sx={{
-		height: '100%', width: '100%',
-		position: 'relative', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'
-	}}>
-		<Suspense fallback={<StyledCircularProgress />}>
-			<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
-			{ hasLeft ? <DataGrid
-				{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
-				hideFooter
-				disableExtendRowFullWidth
-				initialState={initialStateLeft}
-				sx={sxLeft}
-			/> : null }
-			{ hasRight ? <DataGrid
-				{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
-				hideFooter
-				disableExtendRowFullWidth
-				initialState={initialSateRight}
-				sx={sxRight}
-			/> : null }
-		</Suspense>
-	</Box>)
+	return (
+		<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
+			<Suspense fallback={<StyledCircularProgress />}>
+				<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
+				{ hasLeft ? <DataGrid
+					{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
+					hideFooter
+					disableExtendRowFullWidth
+					initialState={initialStateLeft}
+					sx={sxLeft}
+				/> : null }
+				{ hasRight ? <DataGrid
+					{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
+					hideFooter
+					disableExtendRowFullWidth
+					initialState={initialSateRight}
+					sx={sxRight}
+				/> : null }
+			</Suspense>
+		</StyledGridContainer>
+	)
 })
 
 /*const areEqual = (p, n) => {

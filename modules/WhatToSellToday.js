@@ -22,7 +22,6 @@ import {Report} from '../backend/protobuf/MarketReport';
 
 
 import {worlds, servers, worldsName, serversName} from './worldsAndServers';
-import {StyledGridContainer} from './styledComponents'
 import ErrorCover from "./ErrorCover";
 import NavBar from "./NavBar";
 import SettingDrawer from "./SettingDrawer";
@@ -31,13 +30,10 @@ import useRem from "./useRem";
 import useTranslate from "./useTranslate";
 import {v2, v3} from "./recaptchaPublicKey";
 
-import {colord, extend} from "colord";
-import mixPlugin from "colord/plugins/mix";
 import ItemName from "./ItemName";
 import ItemVolumns from "./ItemVolumns";
 import ItemHistPerCost from "./ItemHistPerCost";
 import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
-extend([mixPlugin]);
 
 
 
@@ -435,16 +431,14 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				locale={{value: locale, handler: setLocale}}
 				sortModel={{value: sortModel, handler: handleSort}}
 			/>
-			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
-				<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
-					rows, columns, pageSize, page,
-					disableColumnMenu: true,
-					sortingOrder: SORTING_ORDER,
-					onSortModelChange: handleSort,
-					onPageChange: setPage,
-					onPageSizeChange: setPageSize,
-				}}/>
-			</StyledGridContainer>
+			<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
+				rows, columns, pageSize, page,
+				disableColumnMenu: true,
+				sortingOrder: SORTING_ORDER,
+				onSortModelChange: handleSort,
+				onPageChange: setPage,
+				onPageSizeChange: setPageSize,
+			}}/>
 			<MixedRecaptcha
 				version={recaptchaVersion}
 				onLoad={setExecuteRecaptcha}

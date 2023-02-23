@@ -27,6 +27,7 @@ const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} 
   width: calc(100vw - 20px);
   height: calc(100vh - 100px);
   margin: 20px 10px 10px;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
