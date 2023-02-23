@@ -1,12 +1,11 @@
-import {useState, useEffect, useMemo, startTransition, useCallback} from 'react';
-import Head from 'next/head';
+import {useState, useEffect, useMemo, startTransition, useCallback, Suspense} from 'react';
 
 import {
 	Close as CloseIcon,
 	ArrowDropUp as ArrowDropUpIcon,
 	ArrowDropDown as ArrowDropDownIcon,
 } from '@mui/icons-material';
-import {IconButton, Snackbar, useMediaQuery, LinearProgress} from '@mui/material';
+import {IconButton, Snackbar, useMediaQuery, LinearProgress, Skeleton, Backdrop} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 
 
@@ -155,7 +154,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 	useHotkeys('right', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
 	const { t ,locale } = useTranslate('grid')
-	const {t: navT} = useTranslate('navbar');
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 	const [v2Props, v3Props] = useMemo(() => ([
@@ -396,11 +394,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 	return (
 		<>
-			<Head>
-				<title>
-					{t("title", {action: navT(sources[listSource].action), target: navT(sources[listSource].target)})}
-				</title>
-			</Head>
 			{isLoading ?
 				<LinearProgress
 					variant="buffer"
@@ -411,26 +404,30 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				/>
 				: null
 			}
-			<NavBar
-				listSource={listSource}
-				handleSource={handleSource}
-				onMenu={handleDrawer}
-				sources={sources}
-				setLocale={setLocale}
-			/>
-			<SettingDrawer
-				open={{value: drawer, handler: handleDrawer}}
-				userDarkMode={{value: userDarkMode, handler: handleUserDarkMode}}
-				quality={{value: quality, handler: handleQuality}}
-				considerTime={{value: considerTime, handler: handleConsiderTime}}
-				world={{value: world, handler: setWorld}}
-				server={{value: server, handler: setServer}}
-				priceWindow={{value: priceWindow, handler: setPriceWindow}}
-				isLoading={{handler: setShouldUpdate}}
-				jobInfo={{value: jobInfo, handler: setJobInfo}}
-				locale={{value: locale, handler: setLocale}}
-				sortModel={{value: sortModel, handler: handleSort}}
-			/>
+			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={64} />}>
+				<NavBar
+					listSource={listSource}
+					handleSource={handleSource}
+					onMenu={handleDrawer}
+					sources={sources}
+					setLocale={setLocale}
+				/>
+			</Suspense>
+			<Suspense fallback={<Backdrop open={drawer} onClick={handleDrawer} />}>
+				<SettingDrawer
+					open={{value: drawer, handler: handleDrawer}}
+					userDarkMode={{value: userDarkMode, handler: handleUserDarkMode}}
+					quality={{value: quality, handler: handleQuality}}
+					considerTime={{value: considerTime, handler: handleConsiderTime}}
+					world={{value: world, handler: setWorld}}
+					server={{value: server, handler: setServer}}
+					priceWindow={{value: priceWindow, handler: setPriceWindow}}
+					isLoading={{handler: setShouldUpdate}}
+					jobInfo={{value: jobInfo, handler: setJobInfo}}
+					locale={{value: locale, handler: setLocale}}
+					sortModel={{value: sortModel, handler: handleSort}}
+				/>
+			</Suspense>
 			<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
 				rows, columns, pageSize, page,
 				disableColumnMenu: true,
@@ -445,11 +442,13 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				v2Props={v2Props}
 				v3Props={v3Props}
 			/>
-			<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={t('copyHint')} action={
-				<IconButton size="small" onClick={() => setClipBarOpen(false)} >
-					<CloseIcon fontSize="small"/>
-				</IconButton>
-			} />
+			<Suspense fallback={null}>
+				<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={t('copyHint')} action={
+					<IconButton size="small" onClick={() => setClipBarOpen(false)} >
+						<CloseIcon fontSize="small"/>
+					</IconButton>
+				} />
+			</Suspense>
 			<ErrorCover open={!!error} {...{retry: retry < RETRY, error}}/>
 		</>
 	);

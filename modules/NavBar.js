@@ -84,33 +84,33 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 					<FormControl>
 						<Select {...selectProps} value={listSource} >
 							{Object.keys(headers).reduce((acc, category) =>
-								[...acc,
-									(<MenuItem key={`${category}Title`} value={category} sx={{paddingRight: theme.spacing(1)}}>
-										<ListItemText sx={{marginRight: theme.spacing(1)}}>
-											<Typography variant="h6">{t(category)}</Typography>
-										</ListItemText>
-										{category === visibleSelectCategory ?
-											<ArrowDropUpIcon />
-											: <ArrowDropDownIcon />}
-									</MenuItem>),
-									(<Collapse in={category === visibleSelectCategory} key={`${category}SubMenu`}
-										sx={{
-											paddingLeft: theme.spacing(1),
-											backgroundColor: colord(theme.palette.background.paper)
-												.mix(theme.palette.primary.main, 0.15)
-												.toRgbString()
-										}}>
-										{headers[category].map((sourceName) =>
-											(<MenuItem value={sourceName} key={sourceName} onClick={
-												e => {
-													setOpen(false)
-													handleSource({target: {value: e.currentTarget.getAttribute('value')}});
-												}}>
-												<Typography variant="h6">{t(sources[sourceName].target)}</Typography>
-											</MenuItem>)
-										)}
-									</Collapse>)
-								],
+									[...acc,
+										(<MenuItem key={`${category}Title`} value={category} sx={{paddingRight: theme.spacing(1)}}>
+											<ListItemText sx={{marginRight: theme.spacing(1)}}>
+												<Typography variant="h6">{t(category)}</Typography>
+											</ListItemText>
+											{category === visibleSelectCategory ?
+												<ArrowDropUpIcon />
+												: <ArrowDropDownIcon />}
+										</MenuItem>),
+										(<Collapse in={category === visibleSelectCategory} key={`${category}SubMenu`}
+												   sx={{
+													   paddingLeft: theme.spacing(1),
+													   backgroundColor: colord(theme.palette.background.paper)
+														   .mix(theme.palette.primary.main, 0.15)
+														   .toRgbString()
+												   }}>
+											{headers[category].map((sourceName) =>
+												(<MenuItem value={sourceName} key={sourceName} onClick={
+													e => {
+														setOpen(false)
+														handleSource({target: {value: e.currentTarget.getAttribute('value')}});
+													}}>
+													<Typography variant="h6">{t(sources[sourceName].target)}</Typography>
+												</MenuItem>)
+											)}
+										</Collapse>)
+									],
 								[(<MenuItem key="hidden" value={listSource} sx={{display: 'none'}}>
 									<Typography variant="h6">{t(sources[listSource].target)}</Typography>
 								</MenuItem>)]

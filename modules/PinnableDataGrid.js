@@ -1,9 +1,10 @@
 import {forwardRef, useMemo, Suspense, lazy, memo, useDeferredValue} from "react";
 import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
-import {StyledCircularProgress, StyledGridContainer} from "./styledComponents";
+import {StyledGridContainer} from "./styledComponents";
 import {colord, extend} from "colord";
 import mixPlugin from "colord/plugins/mix";
+import {Skeleton} from "@mui/material";
 extend([mixPlugin]);
 
 
@@ -110,7 +111,9 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 
 	return (
 		<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
-			<Suspense fallback={<StyledCircularProgress />}>
+			<Suspense fallback={
+				<Skeleton variant="rounded" height="calc(100vh - 100px)" width="calc(100vw - 20px)" />
+			}>
 				<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
 				{ hasLeft ? <DataGrid
 					{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
