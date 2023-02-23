@@ -1,5 +1,6 @@
 const runtimeCaching = require('next-pwa/cache');
 const withPWA = require("next-pwa")({
+	disable: process.env.PWA_DISABLE,
 	dest: 'public',
 	runtimeCaching
 });
@@ -11,7 +12,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer(withPWA({
 //module.exports = {
 	experimental: {
-		runtime: 'experimental-edge'
+		//runtime: process.env.DEVELOPMENT ? 'nodejs' : 'experimental-edge',
 	},
 	modularizeImports: {
 		'@mui/material': {

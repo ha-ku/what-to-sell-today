@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, startTransition, useCallback, useDeferredValue} from 'react';
+import {useState, useEffect, useMemo, startTransition, useCallback} from 'react';
 import Head from 'next/head';
 
 import {
@@ -13,29 +13,29 @@ import {useTheme} from '@mui/material/styles';
 import { useHotkeys } from "react-hotkeys-hook";
 import useLocalStorageState from "use-local-storage-state";
 
-import useSources from "../modules/useSources";
-import MixedRecaptcha from "../modules/MixedRecaptcha";
-import useHandler from "../modules/useHandler";
-import useWindowSize from '../modules/useWindowSize';
+import useSources from "./useSources";
+import MixedRecaptcha from "./MixedRecaptcha";
+import useHandler from "./useHandler";
+import useWindowSize from './useWindowSize';
 import Pbf from 'pbf';
 import {Report} from '../backend/protobuf/MarketReport';
 
 
-import {worlds, servers, worldsName, serversName} from '../modules/worldsAndServers';
-import {StyledGridContainer, StyledCircularProgress } from '../modules/styledComponents'
-import ErrorCover from "../modules/ErrorCover";
-import NavBar from "../modules/NavBar";
-import SettingDrawer from "../modules/SettingDrawer";
-import PinnableDataGrid from "../modules/PinnableDataGrid";
-import useRem from "../modules/useRem";
-import useTranslate from "../modules/useTranslate";
-import {v2, v3} from "../modules/recaptchaPublicKey";
+import {worlds, servers, worldsName, serversName} from './worldsAndServers';
+import {StyledGridContainer} from './styledComponents'
+import ErrorCover from "./ErrorCover";
+import NavBar from "./NavBar";
+import SettingDrawer from "./SettingDrawer";
+import PinnableDataGrid from "./PinnableDataGrid";
+import useRem from "./useRem";
+import useTranslate from "./useTranslate";
+import {v2, v3} from "./recaptchaPublicKey";
 
 import {colord, extend} from "colord";
 import mixPlugin from "colord/plugins/mix";
-import ItemName from "../modules/ItemName";
-import ItemVolumns from "../modules/ItemVolumns";
-import ItemHistPerCost from "../modules/ItemHistPerCost";
+import ItemName from "./ItemName";
+import ItemVolumns from "./ItemVolumns";
+import ItemHistPerCost from "./ItemHistPerCost";
 import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
 extend([mixPlugin]);
 
@@ -456,7 +456,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					<CloseIcon fontSize="small"/>
 				</IconButton>
 			} />
-			<ErrorCover open={error} {...{retry: retry < RETRY, error}}/>
+			<ErrorCover open={!!error} {...{retry: retry < RETRY, error}}/>
 		</>
 	);
 }

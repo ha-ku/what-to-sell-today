@@ -134,9 +134,8 @@ dist
 # all pages and resources except wts
 /pages/**
 !/pages
-!/pages/_app.js
 !/pages/_document.js
-!/pages/what-to-sell-today.js
+!/pages/what-to-sell-today/
 
 /public/**
 !/public

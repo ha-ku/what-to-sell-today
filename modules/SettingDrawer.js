@@ -136,7 +136,7 @@ function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, qualit
 			<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 				<Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}} >
 					{Object.keys(jobInfo).map((job) => (
-						<StyledFormControlLabel label={t(job)} labelPlacement="top" control={
+						<StyledFormControlLabel key={job} label={t(job)} labelPlacement="top" control={
 							<Box key={job} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start'}} >
 								{Object.keys(jobInfo[job]).map((key, i) => (
 									<TextField key={key} label={t(key)} value={jobInfo[job][key]} onChange={

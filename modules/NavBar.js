@@ -85,7 +85,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 						<Select {...selectProps} value={listSource} >
 							{Object.keys(headers).reduce((acc, category) =>
 								[...acc,
-									(<MenuItem key={category} value={category} sx={{paddingRight: theme.spacing(1)}}>
+									(<MenuItem key={`${category}Title`} value={category} sx={{paddingRight: theme.spacing(1)}}>
 										<ListItemText sx={{marginRight: theme.spacing(1)}}>
 											<Typography variant="h6">{t(category)}</Typography>
 										</ListItemText>
@@ -93,8 +93,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 											<ArrowDropUpIcon />
 											: <ArrowDropDownIcon />}
 									</MenuItem>),
-									(<Collapse
-										in={category === visibleSelectCategory}
+									(<Collapse in={category === visibleSelectCategory} key={`${category}SubMenu`}
 										sx={{
 											paddingLeft: theme.spacing(1),
 											backgroundColor: colord(theme.palette.background.paper)
