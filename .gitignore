@@ -164,3 +164,4 @@ dist
 backend/node_modules/
 /cloudflareProxy/**
 /.env.local
+/analyze/

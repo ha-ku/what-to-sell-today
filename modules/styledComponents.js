@@ -23,10 +23,14 @@ const StyledCellContainer = styled('span')`
 const StyledCellSub = styled('span')`
   flex: 1;
 `
-const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
+const StyledMainContainer = styled('div')`
   width: calc(100vw - 20px);
   height: calc(100vh - 100px);
   margin: 20px 10px 10px;
+`
+const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
+  height: 100%;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -59,4 +63,4 @@ const StyledIcon = styled(({render: Render, fill, ...rest}) => (<Render {...rest
   fill: ${({fill}) => fill};
 `
 
-export {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledLoadingContainer, StyledFormControlLabel, StyledGridContainer, StyledCircularProgress, StyledButton};
+export {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledLoadingContainer, StyledFormControlLabel, StyledMainContainer, StyledGridContainer, StyledCircularProgress, StyledButton};

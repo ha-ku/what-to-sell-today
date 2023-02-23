@@ -1,11 +1,6 @@
-import {useState, useEffect, useMemo, startTransition, useCallback, Suspense} from 'react';
+import {useState, useEffect, useMemo, startTransition, useCallback, Suspense, lazy} from 'react';
 
-import {
-	Close as CloseIcon,
-	ArrowDropUp as ArrowDropUpIcon,
-	ArrowDropDown as ArrowDropDownIcon,
-} from '@mui/icons-material';
-import {IconButton, Snackbar, useMediaQuery, LinearProgress, Skeleton, Backdrop} from '@mui/material';
+import {useMediaQuery, Skeleton, Backdrop} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 
 
@@ -18,22 +13,24 @@ import useHandler from "./useHandler";
 import useWindowSize from './useWindowSize';
 import Pbf from 'pbf';
 import {Report} from '../backend/protobuf/MarketReport';
+import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
 
 
 import {worlds, servers, worldsName, serversName} from './worldsAndServers';
-import ErrorCover from "./ErrorCover";
-import NavBar from "./NavBar";
-import SettingDrawer from "./SettingDrawer";
-import PinnableDataGrid from "./PinnableDataGrid";
 import useRem from "./useRem";
 import useTranslate from "./useTranslate";
 import {v2, v3} from "./recaptchaPublicKey";
+import {StyledMainContainer} from "./styledComponents";
 
-import ItemName from "./ItemName";
-import ItemVolumns from "./ItemVolumns";
-import ItemHistPerCost from "./ItemHistPerCost";
-import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
-
+const ErrorCover = lazy(() => import('./ErrorCover'));
+const NavBar = lazy(() => import('./NavBar'));
+const SettingDrawer = lazy(() => import('./SettingDrawer'));
+const ItemName = lazy(() => import('./ItemName'));
+const ItemHistPerCost = lazy(() => import('./ItemHistPerCost'));
+const ItemVolumns = lazy(() => import('./ItemVolumns'));
+const LinearProgress = lazy(() => import('./LinearProgress'));
+const CopyHint = lazy(() => import('./CopyHint'));
+const PinnableDataGrid = lazy(() => import('./PinnableDataGrid'));
 
 
 const NONE = '无',
@@ -83,12 +80,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 			setBuffer(0);
 			setTimeout(() => setShouldUpdate(true), 0)
 			return value;
-		}, 'source'),
-		[sortModel, handleSort] = useHandler(undefined, gridSort =>
-				sortModel => JSON.stringify(gridSort) === JSON.stringify(sortModel) ?
-					sortModel
-					: gridSort
-			, 'sortModel');
+		}, 'source');
 
 	const [isLoading, setShouldUpdate] = useState(true),
 		[error, setError] = useState(null),
@@ -181,18 +173,20 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 	const columns = useMemo(() => ([
 		{field: "name", headerName: t('item'), width: 230, sortable: false,
 			renderCell: (params) =>
-				(<ItemName
-					withTime={sources[listSource].withTime}
-					id={params.id}
-					value={params.value}
-					enName={params.getValue(params.id, "enName")}
-					level={params.getValue(params.id, "level")}
-					defaultLastUploadTime={params.getValue(params.id, "defaultLastUploadTime")}
-					lastUploadTime={params.getValue(params.id, "lastUploadTime")}
-					onClick={doCopy}
-					primary={theme.palette.text.primary}
-					warning={theme.palette.warning.main}
-				/>)
+				(<Suspense fallback={<Skeleton variant="text" />}>
+					<ItemName
+						withTime={sources[listSource].withTime}
+						id={params.id}
+						value={params.value}
+						enName={params.getValue(params.id, "enName")}
+						level={params.getValue(params.id, "level")}
+						defaultLastUploadTime={params.getValue(params.id, "defaultLastUploadTime")}
+						lastUploadTime={params.getValue(params.id, "lastUploadTime")}
+						onClick={doCopy}
+						primary={theme.palette.text.primary}
+						warning={theme.palette.warning.main}
+					/>
+				</Suspense>)
 		},
 		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => Number(value.toFixed(3))},
@@ -205,12 +199,14 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			renderCell: (params) =>
-				(<ItemHistPerCost
-					value={params.value}
-					upperBound={params.getValue(params.id, "defaultMeanLow")}
-					lowerBound={params.getValue(params.id, "defaultLowest")?.price}
-					valueFormatter={noneOrFix}
-				/>),
+				(<Suspense fallback={<Skeleton variant="text" />}>
+					<ItemHistPerCost
+						value={params.value}
+						upperBound={params.getValue(params.id, "defaultMeanLow")}
+						lowerBound={params.getValue(params.id, "defaultLowest")?.price}
+						valueFormatter={noneOrFix}
+					/>
+				</Suspense>),
 			sortComparator: lowestComparator},
 		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
@@ -221,12 +217,14 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		{field: "defaultVolumes", headerName: t('volumes'), width: 150,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortable: false, renderCell: ({value}) => value?.length ?
-				(<ItemVolumns
-					value={value}
-					height={rowHeight}
-					color={theme.palette.secondary.main}
-					darkMode={theme.palette.mode === 'dark'}
-				/>) : NONE
+				(<Suspense fallback={<Skeleton variant="text" />}>
+					<ItemVolumns
+						value={value}
+						height={rowHeight}
+						color={theme.palette.secondary.main}
+						darkMode={theme.palette.mode === 'dark'}
+					/>
+				</Suspense>) : NONE
 		},
 		{field: "lowest", headerName: t('lowest'), width: 160,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
@@ -234,12 +232,14 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
 			renderCell: (params) =>
-				(<ItemHistPerCost
-					value={params.value}
-					upperBound={params.getValue(params.id, "meanLow")}
-					lowerBound={params.getValue(params.id, "lowest")?.price}
-					valueFormatter={noneOrFix}
-				/>),
+				(<Suspense fallback={<Skeleton variant="text" />}>
+					<ItemHistPerCost
+						value={params.value}
+						upperBound={params.getValue(params.id, "meanLow")}
+						lowerBound={params.getValue(params.id, "lowest")?.price}
+						valueFormatter={noneOrFix}
+					/>
+				</Suspense>),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
@@ -248,14 +248,21 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumes", headerName: t('volumes'), width: 150,
 			sortable: false, renderCell: ({value}) => value?.length ?
-				(<ItemVolumns
-					value={value}
-					height={rowHeight}
-					color={theme.palette.primary.main}
-					darkMode={theme.palette.mode === 'dark'}
-				/>) : NONE
+				(<Suspense fallback={<Skeleton variant="text" />}>
+					<ItemVolumns
+						value={value}
+						height={rowHeight}
+						color={theme.palette.primary.main}
+						darkMode={theme.palette.mode === 'dark'}
+					/>
+				</Suspense>) : NONE
 		}
 	]), [sources[listSource].withTime, rem, theme, rowHeight]);
+	const [sortModel, handleSort] = useHandler(undefined, gridSort =>
+			sortModel => JSON.stringify(gridSort) === JSON.stringify(sortModel) ?
+				sortModel
+				: gridSort
+		, 'sortModel')
 
 	useEffect(() => {
 		if(isLoading && executeRecaptcha) {
@@ -323,15 +330,13 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
 						.map(pair =>  pair.join('=')).join('&')
 				}`
-				try {
-					let response = await window.fetch(url, {signal: controller.signal})
-					await response.body.pipeTo(decoder.writable);
-				} catch(err) {
-					if(err.code !== 20)
-						setError(err);
-				}
+				let response = await window.fetch(url, {signal: controller.signal})
+				await response.body.pipeTo(decoder.writable);
 			}
-			doMarketReport()
+			doMarketReport().catch((err) => {
+				if(err.code !== 20)
+					setError(err);
+			})
 
 			return () => {
 				//console.log('effect callback');
@@ -370,40 +375,26 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 			}
 		}
 	}, [error, retry]);
+	const gridFooterContent = `"${queryInfo.worldName} ${queryInfo.serverName}"`
 	const gridMemorizeProps = useMemo(() => ({
-		sx: {
-			'& .MuiDataGrid-footerContainer': {
-				justifyContent: 'flex-end !important',
-					flexDirection: 'row-reverse'
-			},
-			'& .MuiDataGrid-columnHeaderTitleContainer .MuiIconButton-root': {
-				padding: '1px'
-			},
-			'& .MuiDataGrid-footerContainer::before': {
-				content: `"${queryInfo.worldName} ${queryInfo.serverName}"`
-			}
-		},
-		components: {
-			ColumnSortedAscendingIcon: ArrowDropUpIcon,
-			ColumnSortedDescendingIcon: ArrowDropDownIcon
-		},
 		pinnedColumns: {left: ['name']},
 		...(isSmallDevice ? { density: "compact" } : {}),
-		...(sortModel ? { sortModel } : {})
-	}), [queryInfo, isSmallDevice, sortModel]);
+	}), [isSmallDevice]);
 
 	return (
 		<>
-			{isLoading ?
-				<LinearProgress
-					variant="buffer"
-					value={progress / sources[listSource].source.length * 100}
-					valueBuffer={buffer / sources[listSource].source.length * 100}
-					color="secondary"
-					sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}}
-				/>
-				: null
-			}
+			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={4} sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}} />}>
+				{isLoading ?
+					<LinearProgress
+						variant="buffer"
+						value={progress / sources[listSource].source.length * 100}
+						valueBuffer={buffer / sources[listSource].source.length * 100}
+						color="secondary"
+						sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}}
+					/>
+					: null
+				}
+			</Suspense>
 			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={64} />}>
 				<NavBar
 					listSource={listSource}
@@ -428,14 +419,20 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					sortModel={{value: sortModel, handler: handleSort}}
 				/>
 			</Suspense>
-			<PinnableDataGrid hideFooterSelectedRowCount {...gridMemorizeProps} {...{
-				rows, columns, pageSize, page,
-				disableColumnMenu: true,
-				sortingOrder: SORTING_ORDER,
-				onSortModelChange: handleSort,
-				onPageChange: setPage,
-				onPageSizeChange: setPageSize,
-			}}/>
+			<StyledMainContainer>
+				<Suspense fallback={
+					<Skeleton variant="rounded" height="100%" width="100%" />
+				}>
+					<PinnableDataGrid hideFooterSelectedRowCount {...{
+						...gridMemorizeProps,
+						rows, columns, pageSize, page, gridFooterContent, sortModel, onSortModelChange: handleSort,
+						disableColumnMenu: true,
+						sortingOrder: SORTING_ORDER,
+						onPageChange: setPage,
+						onPageSizeChange: setPageSize,
+					}}/>
+				</Suspense>
+			</StyledMainContainer>
 			<MixedRecaptcha
 				version={recaptchaVersion}
 				onLoad={setExecuteRecaptcha}
@@ -443,13 +440,11 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				v3Props={v3Props}
 			/>
 			<Suspense fallback={null}>
-				<Snackbar open={clipBarOpen} autoHideDuration={1000} onClose={() => setClipBarOpen(false)} message={t('copyHint')} action={
-					<IconButton size="small" onClick={() => setClipBarOpen(false)} >
-						<CloseIcon fontSize="small"/>
-					</IconButton>
-				} />
+				<CopyHint open={clipBarOpen} setOpen={setClipBarOpen} />
 			</Suspense>
-			<ErrorCover open={!!error} {...{retry: retry < RETRY, error}}/>
+			<Suspense fallback={<Backdrop open={!!error} />}>
+				<ErrorCover open={!!error} {...{retry: retry < RETRY, error}}/>
+			</Suspense>
 		</>
 	);
 }

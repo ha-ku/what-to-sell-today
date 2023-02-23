@@ -1,14 +1,11 @@
-import {forwardRef, useMemo, Suspense, lazy, memo, useDeferredValue} from "react";
+import {forwardRef, useMemo, memo, useDeferredValue} from "react";
 import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
 import {StyledGridContainer} from "./styledComponents";
-import {colord, extend} from "colord";
-import mixPlugin from "colord/plugins/mix";
-import {Skeleton} from "@mui/material";
-extend([mixPlugin]);
+import {ArrowDropDown as ArrowDropDownIcon, ArrowDropUp as ArrowDropUpIcon} from "@mui/icons-material";
+import {DataGrid} from "@mui/x-data-grid";
 
-
-const DataGrid = lazy(() => import('./DataGrid'));
+import {colord} from "colord";
 
 const addClassName = (item, key, className) => {
 	switch (typeof item[key]) {
@@ -24,8 +21,26 @@ const addClassName = (item, key, className) => {
 	return item;
 }
 
-const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, onPageSizeChange, sx, onSortModelChange, ...props}, ref) => {
+const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize, onPageSizeChange, sx: _sx, components: _components, gridFooterContent, ..._props}, ref) => {
 	//console.log('rerender PinnableDataGrid');
+	const sx = {
+			'& .MuiDataGrid-footerContainer': {
+				justifyContent: 'flex-end !important',
+					flexDirection: 'row-reverse'
+			},
+			'& .MuiDataGrid-columnHeaderTitleContainer .MuiIconButton-root': {
+				padding: '1px'
+			},
+			'& .MuiDataGrid-footerContainer::before': {
+				content: gridFooterContent,
+			},
+			..._sx
+		},
+		components = {
+			ColumnSortedAscendingIcon: ArrowDropUpIcon,
+			ColumnSortedDescendingIcon: ArrowDropDownIcon,
+			..._components
+		};
 	const hasLeft = !!p?.left?.length,
 		hasRight = !!p?.right?.length;
 	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
@@ -74,7 +89,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 	], [columns, p]);
 
 	const theme = useTheme();
-	const [sxLeft, sxRight] = useMemo(() => [
+	const [sxLeft, sxRight] = [
 		{
 			...sx,
 			position: 'absolute', top: 0, left: 0, width: '100%',
@@ -105,31 +120,31 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, pageSize,
 				flexDirection: 'row-reverse'
 			}
 		}
-	], [sx, theme.palette.background.default]);
+	];
 	const rowsLeft = useDeferredValue(rows),
 		rowsRight = useDeferredValue(rows);
+	const props = {
+		..._props,
+		components,
+	}
 
 	return (
 		<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
-			<Suspense fallback={
-				<Skeleton variant="rounded" height="calc(100vh - 100px)" width="calc(100vw - 20px)" />
-			}>
-				<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onSortModelChange, onPageSizeChange, ...props}} ref={ref}/>
-				{ hasLeft ? <DataGrid
-					{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
-					hideFooter
-					disableExtendRowFullWidth
-					initialState={initialStateLeft}
-					sx={sxLeft}
-				/> : null }
-				{ hasRight ? <DataGrid
-					{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
-					hideFooter
-					disableExtendRowFullWidth
-					initialState={initialSateRight}
-					sx={sxRight}
-				/> : null }
-			</Suspense>
+			<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onPageSizeChange, ...props}} ref={ref}/>
+			{ hasLeft ? <DataGrid
+				{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
+				hideFooter
+				disableExtendRowFullWidth
+				initialState={initialStateLeft}
+				sx={sxLeft}
+			/> : null }
+			{ hasRight ? <DataGrid
+				{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
+				hideFooter
+				disableExtendRowFullWidth
+				initialState={initialSateRight}
+				sx={sxRight}
+			/> : null }
 		</StyledGridContainer>
 	)
 })

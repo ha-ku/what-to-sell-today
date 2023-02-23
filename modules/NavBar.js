@@ -21,7 +21,9 @@ import {memo, useState} from "react";
 import {useHotkeys} from "react-hotkeys-hook";
 import useTranslate from "./useTranslate";
 import {useTheme} from "@mui/material/styles";
-import {colord} from "colord";
+import {colord, extend} from "colord";
+import mixPlugin from "colord/plugins/mix";
+extend([mixPlugin]);
 
 
 function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
