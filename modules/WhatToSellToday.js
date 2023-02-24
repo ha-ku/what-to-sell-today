@@ -1,6 +1,6 @@
 import {useState, useEffect, useMemo, startTransition, useCallback, Suspense, lazy} from 'react';
 
-import {useMediaQuery, Skeleton, Backdrop} from '@mui/material';
+import {Skeleton, Backdrop} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 
 
@@ -10,7 +10,6 @@ import useLocalStorageState from "use-local-storage-state";
 import useSources from "./useSources";
 import MixedRecaptcha from "./MixedRecaptcha";
 import useHandler from "./useHandler";
-import useWindowSize from './useWindowSize';
 import Pbf from 'pbf';
 import {Report} from '../backend/protobuf/MarketReport';
 import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
@@ -74,7 +73,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
 		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
-			setPage(0);
 			setReports([]);
 			setProgress(0);
 			setBuffer(0);
@@ -97,8 +95,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		[clipBarOpen, setClipBarOpen] = useState(false),
 		doCopy = useCallback(({target: {innerText}}) =>
 			navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
-		, []),
-		[page, setPage] = useState(0);
+		, []);
 
 	const theme = useTheme();
 
@@ -131,19 +128,30 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		}
 		return newFullReports;
 	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
+	const rows = useMemo(() => fullReports.map((rep) => ({
+		id: rep.ID,
+		name: rep.name,
+		enName: rep.enName,
+		cost: rep.cost,
+		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
+		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
+		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
+		defaultVolumes: rep.defaultServer[quality]?.volumns,
+		lowest: rep[quality]?.lowestPrice,
+		meanLow: rep[quality]?.meanLowPrice,
+		histLow: rep[quality]?.meanLowHistoryPrice,
+		volumes: rep[quality]?.volumns,
+		lastUploadTime: rep.lastUploadTime,
+		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
+		...(rep.level !== undefined ? {level : rep.level} : {} )
+	})), [fullReports]);
 	useHotkeys('f5', (event) => {
 		if(!error && !isLoading) {
 			event.preventDefault();
 			setShouldUpdate(true);
 		}
 	}, [error, isLoading]);
-	const { height } = useWindowSize();
-	const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
-	const rowHeight = isSmallDevice ? 36 : 52;
-	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / rowHeight ), 5) : 5);
-	useHotkeys('left', () => setPage(page => Math.max(page-1, 0)));
-	useHotkeys('right', () => setPage(page => Math.min(page+1, Math.ceil(reports.length / pageSize) - 1)), [reports, pageSize]);
 
 	const { t ,locale } = useTranslate('grid')
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
@@ -220,7 +228,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemVolumns
 						value={value}
-						height={rowHeight}
+						height={52}
 						color={theme.palette.secondary.main}
 						darkMode={theme.palette.mode === 'dark'}
 					/>
@@ -251,13 +259,13 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemVolumns
 						value={value}
-						height={rowHeight}
+						height={52}
 						color={theme.palette.primary.main}
 						darkMode={theme.palette.mode === 'dark'}
 					/>
 				</Suspense>) : NONE
 		}
-	]), [sources[listSource].withTime, rem, theme, rowHeight]);
+	]), [sources[listSource].withTime, rem, theme]);
 	const [sortModel, handleSort] = useHandler(undefined, gridSort =>
 			sortModel => JSON.stringify(gridSort) === JSON.stringify(sortModel) ?
 				sortModel
@@ -345,23 +353,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		}
 	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow]);
 
-	const rows = useMemo(() => fullReports.map((rep) => ({
-		id: rep.ID,
-		name: rep.name,
-		enName: rep.enName,
-		cost: rep.cost,
-		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
-		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
-		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
-		defaultVolumes: rep.defaultServer[quality]?.volumns,
-		lowest: rep[quality]?.lowestPrice,
-		meanLow: rep[quality]?.meanLowPrice,
-		histLow: rep[quality]?.meanLowHistoryPrice,
-		volumes: rep[quality]?.volumns,
-		lastUploadTime: rep.lastUploadTime,
-		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
-		...(rep.level !== undefined ? {level : rep.level} : {} )
-	})), [fullReports]);
 
 	useEffect(() => {
 		if(error) {
@@ -376,10 +367,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		}
 	}, [error, retry]);
 	const gridFooterContent = `"${queryInfo.worldName} ${queryInfo.serverName}"`
-	const gridMemorizeProps = useMemo(() => ({
-		pinnedColumns: {left: ['name']},
-		...(isSmallDevice ? { density: "compact" } : {}),
-	}), [isSmallDevice]);
 
 	return (
 		<>
@@ -424,12 +411,11 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					<Skeleton variant="rounded" height="100%" width="100%" />
 				}>
 					<PinnableDataGrid hideFooterSelectedRowCount {...{
-						...gridMemorizeProps,
-						rows, columns, pageSize, page, gridFooterContent, sortModel, onSortModelChange: handleSort,
+						rows, columns, gridFooterContent,
+						sortModel, onSortModelChange: handleSort,
 						disableColumnMenu: true,
 						sortingOrder: SORTING_ORDER,
-						onPageChange: setPage,
-						onPageSizeChange: setPageSize,
+						pinnedColumns: {left: ['name']},
 					}}/>
 				</Suspense>
 			</StyledMainContainer>
