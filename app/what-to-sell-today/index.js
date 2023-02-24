@@ -61,7 +61,7 @@ export default function Index() {
 		<>
 			<ThemeProvider theme={theme}>
 				<Script strategy="afterInteractive">{`window.recaptchaOptions = {useRecaptchaNet: true};`}</Script>
-				<CssBaseline />
+				<CssBaseline  enableColorScheme />
 				<SvgDefsProvider>
 					<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
 						<WhatToSellToday userDarkMode={userDarkMode} handleUserDarkMode={handleUserDarkMode} setLocale={setLocale}/>
