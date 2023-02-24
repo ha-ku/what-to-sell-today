@@ -194,7 +194,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						primary={theme.palette.text.primary}
 						warning={theme.palette.warning.main}
 					/>
-				</Suspense>)
+				</Suspense>),
+			pin: 'left'
 		},
 		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => Number(value.toFixed(3))},
@@ -406,7 +407,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					sortModel={{value: sortModel, handler: handleSort}}
 				/>
 			</Suspense>
-			<StyledMainContainer>
+			<StyledMainContainer sx={{margin: "20px 10px 10px"}}>
 				<Suspense fallback={
 					<Skeleton variant="rounded" height="100%" width="100%" />
 				}>
@@ -415,7 +416,6 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						sortModel, onSortModelChange: handleSort,
 						disableColumnMenu: true,
 						sortingOrder: SORTING_ORDER,
-						pinnedColumns: {left: ['name']},
 					}}/>
 				</Suspense>
 			</StyledMainContainer>

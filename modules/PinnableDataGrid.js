@@ -1,4 +1,4 @@
-import {forwardRef, useMemo, memo, useDeferredValue, useState} from "react";
+import {forwardRef, memo, useDeferredValue, useState} from "react";
 import {useTheme} from '@mui/material/styles';
 import clsx from "clsx";
 import {StyledGridContainer} from "./styledComponents";
@@ -8,19 +8,17 @@ import {DataGrid} from "@mui/x-data-grid";
 import {colord} from "colord";
 import {useHotkeys} from "react-hotkeys-hook";
 import useWindowSize from "./useWindowSize";
+import {Box} from "@mui/material";
 
-const addClassName = (item, key, className) => {
-	switch (typeof item[key]) {
+const newClassName = (item, name, newClass) => {
+	switch (typeof item[name]) {
 		case "string":
-			item[key] = clsx(item[key], className);
-			break;
+			return {[name]: clsx(item[name], newClass)};
 		case "function":
-			item[key] = (p) => clsx(item[key](p), className);
-			break;
+			return {[name]: clsx(item[name], newClass)};
 		default:
-			item[key] = className
+			return {[name]: newClass};
 	}
-	return item;
 }
 
 const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, components: _components, gridFooterContent, ..._props}, ref) => {
@@ -28,7 +26,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 	const sx = {
 			'& .MuiDataGrid-footerContainer': {
 				justifyContent: 'flex-end !important',
-					flexDirection: 'row-reverse'
+				flexDirection: 'row-reverse'
 			},
 			'& .MuiDataGrid-columnHeaderTitleContainer .MuiIconButton-root': {
 				padding: '1px'
@@ -38,135 +36,92 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 			},
 			..._sx
 		},
-		components = {
-			ColumnSortedAscendingIcon: ArrowDropUpIcon,
-			ColumnSortedDescendingIcon: ArrowDropDownIcon,
-			..._components
-		};
-	const hasLeft = !!p?.left?.length,
-		hasRight = !!p?.right?.length;
-	const pinnedColumns = {left: p.left ?? [], right: p.right ?? []},
-		baseVisibility = columns.reduce((acc, c) => {
-			acc[c.field] = false;
-			return acc;
-		}, {});
-	const [columnsLeft, columnsRight, initialStateLeft, initialSateRight, cuttedColumns] = useMemo(() => [
-		columns.map(c => {
-			if(pinnedColumns.left.includes(c.field)) {
-				let col = {...c}
-				addClassName(col, 'headerClassName', 'Pinnable');
-				addClassName(col, 'cellClassName', 'Pinnable');
-				return col;
-			}
-			return c;
-		}),
-		columns.map(c => {
-			if(pinnedColumns.right.includes(c.field)) {
-				let col = {...c}
-				addClassName(c, 'headerClassName', 'Pinnable');
-				addClassName(c, 'cellClassName', 'Pinnable');
-				return col;
-			}
-			return c;
-		}),{
-			columns: {
-				columnVisibilityModel: pinnedColumns.left.reduce((acc, key) => {
-					delete acc[key]
-					return acc;
-				}, {...baseVisibility})
-			}
-		},{
-			columns: {
-				columnVisibilityModel: pinnedColumns.right.reduce((acc, key) => {
-					delete acc[key]
-					return acc;
-				}, {...baseVisibility})
-			}
+		pinnedColumns = columns.map(c =>
+			(c.pin === 'left' || c.pin === 'right') ?
+				{
+					...c,
+					...newClassName(c, 'headerClassName', `Pinned${c.pin.replace(c.pin[0], c.pin[0].toUpperCase())}`),
+					...newClassName(c, 'cellClassName', `Pinned${c.pin.replace(c.pin[0], c.pin[0].toUpperCase())}`),
+				} : c
+		), initialStateLeft = {
+		columns: {
+			columnVisibilityModel: Object.fromEntries(
+				columns.filter(c => c.pin !== 'left').map(c => [c.field, false])
+			)
 		},
-		columns.map(col =>
-			(pinnedColumns.left.some(key => key === col.field) || pinnedColumns.right.some(key => key === col.field)) ?
-				{...col, renderCell: () => null, renderHeader: () => null}
+		}, initialStateRight = {
+			columns: {
+				columnVisibilityModel: Object.fromEntries(
+					columns.filter(c => c.pin !== 'right').map(c => [c.field, false])
+				)
+			},
+		}, cuttedColumns = columns.map(col =>
+			(col.pin === 'left' || col.pin === 'right') ?
+				{
+					...col,
+					renderCell: () => null,
+					renderHeader: () => null,
+					valueFormatter: () => '',
+				}
 				: col
 		),
-	], [columns, p]);
-
-	const theme = useTheme();
-	const [sxLeft, sxRight] = [
-		{
-			...sx,
-			position: 'absolute', top: 0, left: 0, width: '100%',
-			pointerEvents: 'none',
-			'& .Pinnable': {
-				backgroundColor: theme.palette.background.default,
-				pointerEvents: 'auto'
-			},
-			'& .MuiDataGrid-overlay': {
-				display: 'none'
-			}
-		},
-		{
-			...sx,
-			position: 'absolute', top: 0, right: 0, width: '100%',
-			pointerEvents: 'none',
-			'& .Pinnable': {
-				backgroundColor: theme.palette.background.default,
-				pointerEvents: 'auto'
-			},
-			'& .MuiDataGrid-overlay': {
-				display: 'none'
-			},
-			'& .MuiDataGrid-columnHeadersInner': {
-				flexDirection: 'row-reverse'
-			},
-			'& .MuiDataGrid-row': {
-				flexDirection: 'row-reverse'
-			}
-		}
-	];
-	const rowsLeft = useDeferredValue(rows),
+		rowsLeft = useDeferredValue(rows),
 		rowsRight = useDeferredValue(rows);
 
-	const { height } = useWindowSize();
-	const [pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / 52 ), 5) : 5),
+	const theme = useTheme(),
+		{height} = useWindowSize(),
+		[pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / 52), 5) : 5),
 		[page, setPage] = useState(0);
+
 	useHotkeys('left', () => setPage(page => Math.max(page-1, 0)));
 	useHotkeys('right', () => setPage(page => Math.min(page+1, Math.ceil(rows.length / pageSize) - 1)), [rows, pageSize]);
 
 	const props = {
-		..._props,
-		components, page, setPage
+		..._props, page, setPage,
+		components: {
+			ColumnSortedAscendingIcon: ArrowDropUpIcon,
+			ColumnSortedDescendingIcon: ArrowDropDownIcon,
+			..._components
+		},
+
+		columns: pinnedColumns,
+		sx: {
+			..._sx,
+			'& .PinnedLeft': {
+				backgroundColor: theme.palette.background.default,
+				pointerEvents: 'auto'
+			},
+			'& .PinnedRight': {
+				backgroundColor: theme.palette.background.default,
+				pointerEvents: 'auto'
+			},
+			'& .MuiDataGrid-overlay': {
+				display: 'none'
+			}
+		},
 	}
 
 	return (
-		<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
-			<DataGrid autoPageSize {...{columns: cuttedColumns, rows, sx, onPageSizeChange: setPageSize, ...props}} ref={ref}/>
-			{ hasLeft ? <DataGrid
-				{...{columns: columnsLeft, rows: rowsLeft, pageSize, ...props}}
-				hideFooter
-				disableExtendRowFullWidth
-				initialState={initialStateLeft}
-				sx={sxLeft}
-			/> : null }
-			{ hasRight ? <DataGrid
-				{...{columns: columnsRight, rows: rowsRight, pageSize, ...props}}
-				hideFooter
-				disableExtendRowFullWidth
-				initialState={initialSateRight}
-				sx={sxRight}
-			/> : null }
-		</StyledGridContainer>
+		<>
+			<DataGrid autoPageSize {...{rows, onPageSizeChange: setPageSize, ...props, columns: cuttedColumns, sx}} ref={ref}/>
+			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
+				{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
+					{...{rows: rowsLeft, pageSize, ...props}}
+					hideFooter
+					disableExtendRowFullWidth
+					initialState={initialStateLeft}
+				/> : <Box /> }
+				{ pinnedColumns.some(c => c.pin === 'right') ? <DataGrid
+					{...{rows: rowsRight, pageSize, ...props}}
+					hideFooter
+					disableExtendRowFullWidth
+					initialState={initialStateRight}
+				/> : <Box /> }
+			</StyledGridContainer>
+		</>
 	)
 })
 
-const areEqual = (p, n) => {
-	if(Object.keys(p).length !== Object.keys(n).length)
-		return false;
-	return Object.entries(p).every(([key, pValue]) =>
-		key === 'pinnedColumns' ?
-			JSON.stringify(pValue) === JSON.stringify(n[key])
-			: pValue === n[key]
-	)
-}
 
 
-export default memo(PinnableDataGrid, areEqual);
+export default memo(PinnableDataGrid);

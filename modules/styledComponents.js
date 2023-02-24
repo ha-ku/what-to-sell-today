@@ -26,16 +26,19 @@ const StyledCellSub = styled('span')`
 const StyledMainContainer = styled('div')`
   width: calc(100vw - 20px);
   height: calc(100vh - 100px);
-  margin: 20px 10px 10px;
+  position: relative;
 `
 const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
   height: 100%;
   width: 100%;
-  position: relative;
+  top: 0;
+  left: 0;
+  position: absolute;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
 
   && .default-server {
     background-color: ${({defaultColor}) => defaultColor};
