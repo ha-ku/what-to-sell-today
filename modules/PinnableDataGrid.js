@@ -103,7 +103,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 
 	return (
 		<>
-			<DataGrid autoPageSize {...{rows, onPageSizeChange: setPageSize, ...props, columns: cuttedColumns, sx}} ref={ref}/>
+			<DataGrid autoPageSize {...{rows, onPageSizeChange: setPageSize, page, onPageChange: setPage, ...props, columns: cuttedColumns, sx}} ref={ref}/>
 			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
 					{...{rows: rowsLeft, pageSize, ...props}}
