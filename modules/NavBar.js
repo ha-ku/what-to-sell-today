@@ -74,7 +74,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 		}
 
 	return (
-		<AppBar position="sticky" sx={{paddingTop: '4px'}} >
+		<AppBar position="sticky" >
 			<Toolbar>
 				<IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenu}>
 					<MenuIcon />
