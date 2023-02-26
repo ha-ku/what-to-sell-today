@@ -23,12 +23,16 @@ const StyledCellContainer = styled('span')`
 const StyledCellSub = styled('span')`
   flex: 1;
 `
-const StyledMainContainer = styled('div')`
+const StyledMainContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
   width: calc(100vw - 20px);
   height: calc(100vh - 100px);
   position: relative;
+
+  && .default-server {
+    background-color: ${({defaultColor}) => defaultColor};
+  }
 `
-const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
+const StyledGridContainer = styled('div')`
   height: 100%;
   width: 100%;
   top: 0;
@@ -39,10 +43,6 @@ const StyledGridContainer = styled(({defaultColor, ...rest}) => (<div {...rest} 
   justify-content: space-between;
   align-items: flex-start;
   pointer-events: none;
-
-  && .default-server {
-    background-color: ${({defaultColor}) => defaultColor};
-  }
 `;
 const StyledButton = styled(Button)`
   && {
