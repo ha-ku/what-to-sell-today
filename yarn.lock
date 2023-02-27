@@ -1335,10 +1335,10 @@
     prop-types "^15.8.1"
     reselect "^4.1.6"
 
-"@next/bundle-analyzer@^13.2.0":
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.2.0.tgz#f7fa232a03a7fac7e5bbaf4f69a569b7337b7e3d"
-  integrity sha512-ygZLD/hEMQ1ea0/Crp66AZ6PDHCBffgkO410X5d165c+Nlgnn6hf2M+gOML6GndDm+Gh0yWR7LLL/VIVpF/oyg==
+"@next/bundle-analyzer@^13.2.1":
+  version "13.2.1"
+  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.2.1.tgz#a80bf24adef2380233c9e3cd9f5c77849c851b36"
+  integrity sha512-ex5CyyqWfBaDE0eguyhWlWZAsg2n9zN1c/YK4FNui7C/cKnjib5FcZeVNeKU9PfSYXDDT9onIhWkhsMNQwIGVg==
   dependencies:
     webpack-bundle-analyzer "4.7.0"
 
