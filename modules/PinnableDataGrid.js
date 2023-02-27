@@ -21,7 +21,7 @@ const newClassName = (item, name, newClass) => {
 	}
 }
 
-const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, components: _components, gridFooterContent, ..._props}, ref) => {
+const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, components: _slots, gridFooterContent, ..._props}, ref) => {
 	//console.log('rerender PinnableDataGrid');
 	const sx = {
 			'& .MuiDataGrid-footerContainer': {
@@ -61,7 +61,6 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 					...col,
 					renderCell: () => null,
 					renderHeader: () => null,
-					valueFormatter: () => '',
 				}
 				: col
 		),
@@ -70,18 +69,26 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 
 	const theme = useTheme(),
 		{height} = useWindowSize(),
-		[pageSize, setPageSize] = useState(height ? Math.max(Math.floor((height - 226) / 52), 5) : 5),
-		[page, setPage] = useState(0);
+		[paginationModel, setPaginationModel] = useState({
+			pageSize: height ? Math.max(Math.floor((height - 226) / 52), 5) : 5,
+			page: 0
+		});
 
-	useHotkeys('left', () => setPage(page => Math.max(page-1, 0)));
-	useHotkeys('right', () => setPage(page => Math.min(page+1, Math.ceil(rows.length / pageSize) - 1)), [rows, pageSize]);
+	useHotkeys('left', () => setPaginationModel(model => ({
+		...model,
+		page: Math.max(model.page - 1, 0)
+	})));
+	useHotkeys('right', () => setPaginationModel(model => ({
+		...model,
+		page: Math.min(model.page + 1, Math.ceil(rows.length / model.pageSize) - 1)
+	})), [rows]);
 
 	const props = {
-		..._props, page, setPage,
-		components: {
-			ColumnSortedAscendingIcon: ArrowDropUpIcon,
-			ColumnSortedDescendingIcon: ArrowDropDownIcon,
-			..._components
+		..._props, paginationModel,
+		slots: {
+			columnSortedAscendingIcon: ArrowDropUpIcon,
+			columnSortedDescendingIcon: ArrowDropDownIcon,
+			...(_slots ?? {}),
 		},
 
 		columns: pinnedColumns,
@@ -103,18 +110,20 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 
 	return (
 		<>
-			<DataGrid autoPageSize {...{rows, onPageSizeChange: setPageSize, page, onPageChange: setPage, ...props, columns: cuttedColumns, sx}} ref={ref}/>
+			<DataGrid autoPageSize {...{rows, onPaginationModelChange: setPaginationModel, ...props, columns: cuttedColumns, sx}} ref={ref}/>
 			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
-					{...{rows: rowsLeft, pageSize, ...props}}
+					{...{rows: rowsLeft, ...props}}
 					hideFooter
-					disableExtendRowFullWidth
+					showCellVerticalBorder
+					showColumnVerticalBorder
 					initialState={initialStateLeft}
 				/> : <Box /> }
 				{ pinnedColumns.some(c => c.pin === 'right') ? <DataGrid
-					{...{rows: rowsRight, pageSize, ...props}}
+					{...{rows: rowsRight, ...props}}
 					hideFooter
-					disableExtendRowFullWidth
+					showCellVerticalBorder
+					showColumnVerticalBorder
 					initialState={initialStateRight}
 				/> : <Box /> }
 			</StyledGridContainer>

@@ -186,10 +186,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 						withTime={sources[listSource].withTime}
 						id={params.id}
 						value={params.value}
-						enName={params.getValue(params.id, "enName")}
-						level={params.getValue(params.id, "level")}
-						defaultLastUploadTime={params.getValue(params.id, "defaultLastUploadTime")}
-						lastUploadTime={params.getValue(params.id, "lastUploadTime")}
+						enName={params.row.enName}
+						level={params.row.level}
+						defaultLastUploadTime={params.row.defaultLastUploadTime}
+						lastUploadTime={params.row.lastUploadTime}
 						onClick={doCopy}
 						primary={theme.palette.text.primary}
 						warning={theme.palette.warning.main}
@@ -211,8 +211,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemHistPerCost
 						value={params.value}
-						upperBound={params.getValue(params.id, "defaultMeanLow")}
-						lowerBound={params.getValue(params.id, "defaultLowest")?.price}
+						upperBound={params.row.defaultMeanLow}
+						lowerBound={params.row.defaultLowest?.price}
 						valueFormatter={noneOrFix}
 					/>
 				</Suspense>),
@@ -220,8 +220,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			valueGetter: (params) => {
-				let price = params.getValue(params.id, 'defaultHistLow');
-				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+				let price = params.row.defaultHistLow;
+				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "defaultVolumes", headerName: t('volumes'), width: 150,
 			cellClassName: "default-server", headerClassName: "default-server",
@@ -244,16 +244,16 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemHistPerCost
 						value={params.value}
-						upperBound={params.getValue(params.id, "meanLow")}
-						lowerBound={params.getValue(params.id, "lowest")?.price}
+						upperBound={params.row.meanLow}
+						lowerBound={params.row.lowest?.price}
 						valueFormatter={noneOrFix}
 					/>
 				</Suspense>),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
-				let price = params.getValue(params.id, 'histLow');
-				return isNaN(price) ? undefined : (price / params.getValue(params.id, 'cost'));
+				let price = params.row.histLow;
+				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumes", headerName: t('volumes'), width: 150,
 			sortable: false, renderCell: ({value}) => value?.length ?
