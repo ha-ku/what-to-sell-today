@@ -20,6 +20,7 @@ import useRem from "./useRem";
 import useTranslate from "./useTranslate";
 import {v2, v3} from "./recaptchaPublicKey";
 import {StyledMainContainer} from "./styledComponents";
+import {colord} from "colord";
 
 const ErrorCover = lazy(() => import('./ErrorCover'));
 const NavBar = lazy(() => import('./NavBar'));
@@ -407,7 +408,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					sortModel={{value: sortModel, handler: handleSort}}
 				/>
 			</Suspense>
-			<StyledMainContainer sx={{margin: "20px 10px 10px"}}>
+			<StyledMainContainer sx={{margin: "20px 10px 10px"}} defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				<Suspense fallback={
 					<Skeleton variant="rounded" height="100%" width="100%" />
 				}>

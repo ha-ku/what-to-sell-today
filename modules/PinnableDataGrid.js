@@ -5,7 +5,6 @@ import {StyledGridContainer} from "./styledComponents";
 import {ArrowDropDown as ArrowDropDownIcon, ArrowDropUp as ArrowDropUpIcon} from "@mui/icons-material";
 import {DataGrid} from "@mui/x-data-grid";
 
-import {colord} from "colord";
 import {useHotkeys} from "react-hotkeys-hook";
 import useWindowSize from "./useWindowSize";
 import {Box} from "@mui/material";
@@ -111,7 +110,7 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 	return (
 		<>
 			<DataGrid autoPageSize {...{rows, onPaginationModelChange: setPaginationModel, ...props, columns: cuttedColumns, sx}} ref={ref}/>
-			<StyledGridContainer defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
+			<StyledGridContainer>
 				{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
 					{...{rows: rowsLeft, ...props}}
 					hideFooter
