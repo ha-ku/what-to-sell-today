@@ -7,7 +7,6 @@ import {useTheme} from '@mui/material/styles';
 import { useHotkeys } from "react-hotkeys-hook";
 import useLocalStorageState from "use-local-storage-state";
 
-import useSources from "./useSources";
 import MixedRecaptcha from "./MixedRecaptcha";
 import useHandler from "./useHandler";
 import Pbf from 'pbf';
@@ -51,7 +50,27 @@ const NONE = '无',
 		fish: {level: '', gathering: '', perception: '', },
 		hunting: {level: '', averageItemLevel: '', },
 	},
-	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' ');
+	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' '),
+	SOURCE_INFO = Object.fromEntries(Object.entries({
+		companySeal: {withTime: false, category: 'category.currency'},
+		wolfMark: {withTime: false, category: 'category.currency'},
+		botany: {withTime: true, category: 'category.retainer'},
+		mining: {withTime: true, category: 'category.retainer'},
+		fish: {withTime: true, category: 'category.retainer'},
+		hunting: {withTime: true, category: 'category.retainer'},
+		dye: {withTime: false, category: 'category.crafting'},
+		map: {withTime: false, category: 'category.gathering'},
+		whiteGathererScrips: {withTime: false, category: 'category.gathering'},
+		whiteCrafterScrips: {withTime: false, category: 'category.crafting'},
+		khloeBronze: {withTime: false, category: 'category.wondrousTail'},
+		khloeSilver: {withTime: false, category: 'category.wondrousTail'},
+		khloeGold: {withTime: false, category: 'category.wondrousTail'},
+		poetics: {withTime: false, category: 'category.currency'},
+	}).map(([source, value]) => [source, {
+		...value,
+		target:`${source}.source`,
+		action: `${source}.action`
+	}] ));
 
 const lowestComparator = (v1, v2) =>
 		isNaN(v1) ? -1 :
@@ -67,14 +86,16 @@ const getactualAmount = ({perception, averageItemLevel}, item) => {
 
 function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
-	const [reports, setReports] = useState([]),
+	const [reports, setReports] = useState(new Map()),
+		[sourceLength, setSourceLength] = useState(Number.MAX_SAFE_INTEGER),
 		[priceWindow, setPriceWindow] = useLocalStorageState('priceWindow', {ssr: true, defaultValue: PRICE_WINDOW}),
 		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
 		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
 		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
 		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
-			setReports([]);
+			setReports(new Map());
+			setSourceLength(Number.MAX_SAFE_INTEGER);
 			setProgress(0);
 			setBuffer(0);
 			setTimeout(() => setShouldUpdate(true), 0)
@@ -104,48 +125,20 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 		ssr: true,
 		defaultValue: JOB_INFO
 	});
-	const sources = useSources(listSource, setError);
-	let fullReports = useMemo(() => {
-		//.log('pair ID');
-		const itemList = sources[listSource].source;
-		return itemList.length ?
-			reports.map(report => Object.assign(report, itemList.find(item => item.ID === report.ID))) : [];
-	}, [sources[listSource], reports]);
-	fullReports = useMemo(() => {
+
+
+	let rows = useMemo(() => {
 		//console.log('recalculate cost')
-		let newFullReports = fullReports;
-		if(sources[listSource].withTime) {
-			const job = Object.assign(...Object.keys(jobInfo[listSource]).map(key =>({
-				[key]: jobInfo[listSource][key].length ?
-					Number(jobInfo[listSource][key])
-					: Number.MAX_SAFE_INTEGER
-			})));
-			newFullReports = newFullReports.filter(item =>
-				(item.level <= job.level) && !(item.threshold > (job.gathering ?? job.averageItemLevel))
-			)
-			newFullReports.forEach(item => {
-				item.cost = (considerTime ? getActualTime(job, item) : 60) / getactualAmount(job, item)
-			})
-		}
-		return newFullReports;
-	}, [fullReports, sources[listSource].withTime, jobInfo, considerTime]);
-	const rows = useMemo(() => fullReports.map((rep) => ({
-		id: rep.ID,
-		name: rep.name,
-		enName: rep.enName,
-		cost: rep.cost,
-		defaultLowest: rep.defaultServer[quality]?.lowestPrice,
-		defaultMeanLow: rep.defaultServer[quality]?.meanLowPrice,
-		defaultHistLow: rep.defaultServer[quality]?.meanLowHistoryPrice,
-		defaultVolumes: rep.defaultServer[quality]?.volumns,
-		lowest: rep[quality]?.lowestPrice,
-		meanLow: rep[quality]?.meanLowPrice,
-		histLow: rep[quality]?.meanLowHistoryPrice,
-		volumes: rep[quality]?.volumns,
-		lastUploadTime: rep.lastUploadTime,
-		defaultLastUploadTime: rep.defaultServer.lastUploadTime,
-		...(rep.level !== undefined ? {level : rep.level} : {} )
-	})), [fullReports]);
+		const job = jobInfo[listSource];
+		if(!job)
+			return [...reports.entries()].map(([, item]) => item);
+		return [...reports.entries()].filter(([, item]) =>
+			(item.level <= job.level) && !(item.threshold > (job.gathering ?? job.averageItemLevel))
+		).map(([, item]) => ({
+			...item,
+			cost: (considerTime ? getActualTime(job, item) : 60) / getactualAmount(job, item)
+		}))
+	}, [reports, jobInfo[listSource], considerTime]);
 	useHotkeys('f5', (event) => {
 		if(!error && !isLoading) {
 			event.preventDefault();
@@ -184,7 +177,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 			renderCell: (params) =>
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemName
-						withTime={sources[listSource].withTime}
+						withTime={SOURCE_INFO[listSource].withTime}
 						id={params.id}
 						value={params.value}
 						enName={params.row.enName}
@@ -267,7 +260,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					/>
 				</Suspense>) : NONE
 		}
-	]), [sources[listSource].withTime, rem, theme]);
+	]), [SOURCE_INFO[listSource].withTime, rem, theme]);
 	const [sortModel, handleSort] = useHandler(undefined, gridSort =>
 			sortModel => JSON.stringify(gridSort) === JSON.stringify(sortModel) ?
 				sortModel
@@ -281,55 +274,28 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
 			})
 
-			const handleDecoderEnd = () => {
-				setShouldUpdate(false);
-				setRetry(0);
-				setProgress(0);
-				setBuffer(0);
-			}
 			let controller = new AbortController(),
 				decoder = lpstream.decode(),
 				reader = decoder.readable.getReader();
-			reader.read().then(function onData({done, value: _message}) {
-				if(done) {
-					handleDecoderEnd();
-					return;
-				}
-				const message = Report.read(new Pbf(_message))
-				console.log(message);
-				if(message.err) {
-					if (message.err.code === 403 && recaptchaVersion === 3) {
-						setExecuteRecaptcha({execute: null});
-						setRecaptchaVersion(2);
-					} else {
-						setError(message.err);
-						setShouldUpdate(false);
-						setProgress(0);
-						setBuffer(0);
-					}
-					return;
-				}
-				setBuffer(b => b+1);
-				startTransition(() => {
-					setReports(reports => {
-						let newRep = [...reports];
-						let i = reports.findIndex(r => r.ID === message.ID);
-						i === -1 ? newRep.push(message) : newRep[i] = message;
-						return newRep;
-					});
-					setProgress(p => p+1);
-				});
-				return reader.read().then(onData);
-			})
 
-			async function doMarketReport() {
-				let token = await executeRecaptcha('marketReport')
-					.catch(err => {
-						console.log('recaptcha error:', err);
-						return new Promise((res, rej) => {
-							setTimeout(() => executeRecaptcha('marketReport').then(res).catch(rej), 200)
-						})
-					})
+			(async () =>{
+				const [_JSON, _token] = await Promise.allSettled([
+					import(`../public/json/itemLists/${listSource}.json`).then(({default: v}) => v),
+					executeRecaptcha('marketReport')
+				]);
+				const source = _JSON.value, token = _token.value;
+				setSourceLength(source.length);
+				if (_JSON.reason) {
+					console.log('fetch source error:', _token.reason);
+					setError({code: '000', content: _JSON.reason});
+					return;
+				}
+				if (_token.reason) {
+					console.log('recaptcha error:', _token.reason);
+					setError({code: '000', content: _token.reason});
+					return;
+				}
+
 				let query = {
 					world, server, priceWindow, token,
 					qual: quality,
@@ -338,22 +304,68 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				}
 				let url = `https://${ENDPOINTS[Math.floor(Math.random() * ENDPOINTS.length)]}-cf.ha-ku.cyou/marketReportPbfCfProxy?${
 					Object.entries(query).filter(pair => pair[1] !== null && typeof pair[1] !== 'undefined')
-						.map(pair =>  pair.join('=')).join('&')
+						.map(pair => pair.join('=')).join('&')
 				}`
-				let response = await window.fetch(url, {signal: controller.signal})
-				await response.body.pipeTo(decoder.writable);
-			}
-			doMarketReport().catch((err) => {
-				if(err.code !== 20)
-					setError(err);
-			})
+				async function onData({done, value: _message}) {
+					if (done) {
+						setShouldUpdate(false);
+						setRetry(0);
+						setProgress(0);
+						setBuffer(0);
+						return;
+					}
+					const message = Report.read(new Pbf(_message))
+					console.log(message);
+					if (message.err) {
+						if (message.err.code === 403 && recaptchaVersion === 3) {
+							setExecuteRecaptcha({execute: null});
+							setRecaptchaVersion(2);
+						} else {
+							setError(message.err);
+							setShouldUpdate(false);
+							setProgress(0);
+							setBuffer(0);
+						}
+						return;
+					}
+					setBuffer(b => b + 1);
+					startTransition(() => {
+						setReports(r =>
+							new Map(r.set(message.ID, {
+								...(source.find(item => item.ID === message.ID)),
+								...message,
+								id: message.ID,
+								defaultLastUploadTime: message.defaultServer.lastUploadTime,
+								defaultLowest: message.defaultServer[quality]?.lowestPrice,
+								defaultMeanLow: message.defaultServer[quality]?.meanLowPrice,
+								defaultHistLow: message.defaultServer[quality]?.meanLowHistoryPrice,
+								defaultVolumes: message.defaultServer[quality]?.volumns,
+								lowest: message[quality]?.lowestPrice,
+								meanLow: message[quality]?.meanLowPrice,
+								histLow: message[quality]?.meanLowHistoryPrice,
+								volumes: message[quality]?.volumns,
+							}))
+						);
+						setProgress(p => p + 1);
+					});
+					return onData(await reader.read());
+				}
+				try {
+					let response = await window.fetch(url, {signal: controller.signal});
+					reader.read().then(onData);
+					await response.body.pipeTo(decoder.writable);
+				} catch (err) {
+					if (err.code !== 20)
+						setError(err);
+				}
+			})()
 
 			return () => {
 				//console.log('effect callback');
 				controller.abort();
 			}
 		}
-	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow]);
+	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow, quality]);
 
 
 	useEffect(() => {
@@ -376,8 +388,8 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				{isLoading ?
 					<LinearProgress
 						variant="buffer"
-						value={progress / sources[listSource].source.length * 100}
-						valueBuffer={buffer / sources[listSource].source.length * 100}
+						value={progress / sourceLength * 100}
+						valueBuffer={buffer / sourceLength * 100}
 						color="secondary"
 						sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}}
 					/>
@@ -389,7 +401,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					listSource={listSource}
 					handleSource={handleSource}
 					onMenu={handleDrawer}
-					sources={sources}
+					sources={SOURCE_INFO}
 					setLocale={setLocale}
 				/>
 			</Suspense>

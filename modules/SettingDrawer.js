@@ -139,8 +139,11 @@ function SettingDrawer({open, isLoading, locale, sortModel, userDarkMode, qualit
 						<StyledFormControlLabel key={job} label={t(job)} labelPlacement="top" control={
 							<Box key={job} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start'}} >
 								{Object.keys(jobInfo[job]).map((key, i) => (
-									<TextField key={key} label={t(key)} value={jobInfo[job][key]} onChange={
-										({target: {value}}) => NUMERIC.test(value) ? setJobInfo((jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: value} })) : null
+									<TextField key={key} label={t(key)} {...(jobInfo[job][key] === Number.MAX_SAFE_INTEGER ? {} : {value: jobInfo[job][key]})} onChange={
+										({target: {value}}) =>
+											NUMERIC.test(value) ?
+												setJobInfo((jobInfo) => ({ ...jobInfo, [job]: {...(jobInfo[job]), [key]: Number(value)} }))
+												: null
 									} variant="standard" size="small" sx={{width: '100px', marginRight: i === Object.keys(jobInfo[job]).length - 1 ? '0px' : '10px'}} />
 								))}
 							</Box>
