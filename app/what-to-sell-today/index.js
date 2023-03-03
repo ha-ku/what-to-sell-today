@@ -2,18 +2,20 @@
 
 //import { createGlobalStyle } from 'styled-components';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {CssBaseline, useMediaQuery} from "@mui/material";
+import {CssBaseline, Skeleton, useMediaQuery} from "@mui/material";
 import Script from 'next/script';
 
-import useLocalStorageState from "use-local-storage-state";
 import {IntlProvider} from 'react-intl';
 import flatten from 'flat';
 
 import {SvgDefsProvider} from "../../modules/useSvgDefs";
 import ZH_MESSAGE from '../../public/locales/zh.json';
 import EN_MESSAGE from '../../public/locales/en.json';
-import useHandler from "../../modules/useHandler";
 import WhatToSellToday from "../../modules/WhatToSellToday";
+import {Provider, useSelector} from "react-redux";
+import getStore from "../../modules/store";
+import {PersistGate} from "redux-persist/integration/react";
+import {configSelectors} from "../../modules/config/configSlice";
 
 
 const THEME = {
@@ -42,11 +44,21 @@ const THEME = {
 const LOCALE = 'zh';
 const zhMessage = flatten(ZH_MESSAGE);
 const enMessage = flatten(EN_MESSAGE);
-
-export default function Index() {
-	const [userDarkMode, handleUserDarkMode] = useHandler('auto', ({target: {value}}) => value, 'userDarkMode')//useLocalStorageState('userDarkMode', {ssr: true, defaultValue: 'auto'});
+const {store, persistor} = getStore();
+const withPersistRedux = (Component) =>
+	(props) => (
+		<>
+			<Provider store={store}>
+				<PersistGate loading={<Skeleton variant="rectangular" width="100%" height="100%" />} persistor={persistor} >
+					<Component {...props}/>
+				</PersistGate>
+			</Provider>
+		</>
+	)
+export default withPersistRedux(function Index() {
+	const userDarkMode = useSelector(configSelectors.userDarkMode);
 	const autoDarkMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
-	const [locale, setLocale] = useLocalStorageState('locale', {ssr: true, defaultValue: LOCALE});
+	const locale = useSelector(configSelectors.locale);
 	const message = locale === 'zh' ? zhMessage : enMessage
 
 	const theme = createTheme({
@@ -64,10 +76,10 @@ export default function Index() {
 				<CssBaseline  enableColorScheme />
 				<SvgDefsProvider>
 					<IntlProvider locale={locale} messages={message} defaultLocale={LOCALE} >
-						<WhatToSellToday userDarkMode={userDarkMode} handleUserDarkMode={handleUserDarkMode} setLocale={setLocale}/>
+						<WhatToSellToday />
 					</IntlProvider>
 				</SvgDefsProvider>
 			</ThemeProvider>
 		</>
 	)
-}
+})

@@ -5,7 +5,6 @@ import {useTheme} from '@mui/material/styles';
 
 
 import { useHotkeys } from "react-hotkeys-hook";
-import useLocalStorageState from "use-local-storage-state";
 
 import MixedRecaptcha from "./MixedRecaptcha";
 import useHandler from "./useHandler";
@@ -20,6 +19,8 @@ import useTranslate from "./useTranslate";
 import {v2, v3} from "./recaptchaPublicKey";
 import {StyledMainContainer} from "./styledComponents";
 import {colord} from "colord";
+import {useSelector, useDispatch} from "react-redux";
+import {configAction, configSelectors} from "./config/configSlice";
 
 const ErrorCover = lazy(() => import('./ErrorCover'));
 const NavBar = lazy(() => import('./NavBar'));
@@ -34,22 +35,8 @@ const PinnableDataGrid = lazy(() => import('./PinnableDataGrid'));
 
 const NONE = '无',
 	RETRY = 1,
-	PRICE_WINDOW = 5,
-	QUALITY = 'nq',
-	WORLD = worlds[0],
-	SERVER = worlds.reduce((a, w, i) => {
-		a[w] = servers[i][0];
-		return a;
-	}, {}),
 	SOURCE = 'companySeal',
-	CONSIDER_TIME = true,
 	SORTING_ORDER = ['desc', 'asc', null],
-	JOB_INFO = {
-		botany: {level: '', gathering: '', perception: '', },
-		mining: {level: '', gathering: '', perception: '', },
-		fish: {level: '', gathering: '', perception: '', },
-		hunting: {level: '', averageItemLevel: '', },
-	},
 	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' '),
 	SOURCE_INFO = Object.fromEntries(Object.entries({
 		companySeal: {withTime: false, category: 'category.currency'},
@@ -84,15 +71,15 @@ const getactualAmount = ({perception, averageItemLevel}, item) => {
 	return item.amount[Math.max( ...(levels.filter(n => n <= (perception ?? averageItemLevel))) )]
 }
 
-function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
+function whatToSellToday(){
 
 	const [reports, setReports] = useState(new Map()),
 		[sourceLength, setSourceLength] = useState(Number.MAX_SAFE_INTEGER),
-		[priceWindow, setPriceWindow] = useLocalStorageState('priceWindow', {ssr: true, defaultValue: PRICE_WINDOW}),
-		[world, setWorld] = useLocalStorageState('world', {ssr: true, defaultValue: WORLD}),
-		[server, setServer] = useLocalStorageState('server', {ssr: true, defaultValue: SERVER[WORLD]}),
-		[quality, handleQuality] = useHandler(QUALITY, ({target: {value}}) => value, 'quality'),
-		[considerTime, handleConsiderTime] = useHandler(CONSIDER_TIME, ({target: {checked}}) => checked, 'considerTime'),
+		priceWindow = useSelector(configSelectors.priceWindow),
+		world = useSelector(configSelectors.world),
+		server = useSelector(configSelectors.server),
+		quality = useSelector(configSelectors.quality),
+		considerTime = useSelector(configSelectors.considerTime),
 		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
 			setReports(new Map());
 			setSourceLength(Number.MAX_SAFE_INTEGER);
@@ -121,10 +108,7 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 
 	const theme = useTheme();
 
-	const [jobInfo, setJobInfo] = useLocalStorageState("jobInfo", {
-		ssr: true,
-		defaultValue: JOB_INFO
-	});
+	const jobInfo = useSelector(configSelectors.jobInfo);
 
 
 	let rows = useMemo(() => {
@@ -261,11 +245,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				</Suspense>) : NONE
 		}
 	]), [SOURCE_INFO[listSource].withTime, rem, theme]);
-	const [sortModel, handleSort] = useHandler(undefined, gridSort =>
-			sortModel => JSON.stringify(gridSort) === JSON.stringify(sortModel) ?
-				sortModel
-				: gridSort
-		, 'sortModel')
+	const sortModel = useSelector(configSelectors.sortModel),
+		{setSortModel} = configAction,
+		dispatch = useDispatch(),
+		handleSort = useMemo(() => (sort) => dispatch(setSortModel(sort)), [dispatch, setSortModel]);
 
 	useEffect(() => {
 		if(isLoading && executeRecaptcha) {
@@ -402,22 +385,13 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 					handleSource={handleSource}
 					onMenu={handleDrawer}
 					sources={SOURCE_INFO}
-					setLocale={setLocale}
 				/>
 			</Suspense>
 			<Suspense fallback={<Backdrop open={drawer} onClick={handleDrawer} />}>
 				<SettingDrawer
-					open={{value: drawer, handler: handleDrawer}}
-					userDarkMode={{value: userDarkMode, handler: handleUserDarkMode}}
-					quality={{value: quality, handler: handleQuality}}
-					considerTime={{value: considerTime, handler: handleConsiderTime}}
-					world={{value: world, handler: setWorld}}
-					server={{value: server, handler: setServer}}
-					priceWindow={{value: priceWindow, handler: setPriceWindow}}
-					isLoading={{handler: setShouldUpdate}}
-					jobInfo={{value: jobInfo, handler: setJobInfo}}
-					locale={{value: locale, handler: setLocale}}
-					sortModel={{value: sortModel, handler: handleSort}}
+					open={drawer}
+					onClose={handleDrawer}
+					setShouldUpdate={setShouldUpdate}
 				/>
 			</Suspense>
 			<StyledMainContainer sx={{margin: "20px 10px 10px"}} defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
@@ -426,9 +400,10 @@ function whatToSellToday({userDarkMode, handleUserDarkMode, setLocale}){
 				}>
 					<PinnableDataGrid hideFooterSelectedRowCount {...{
 						rows, columns, gridFooterContent,
-						sortModel, onSortModelChange: handleSort,
+						onSortModelChange: handleSort,
 						disableColumnMenu: true,
 						sortingOrder: SORTING_ORDER,
+						...(sortModel ? {sortModel} : {})
 					}}/>
 				</Suspense>
 			</StyledMainContainer>

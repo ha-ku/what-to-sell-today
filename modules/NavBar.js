@@ -22,12 +22,16 @@ import {useHotkeys} from "react-hotkeys-hook";
 import useTranslate from "./useTranslate";
 import {useTheme} from "@mui/material/styles";
 import {colord, extend} from "colord";
+import {useDispatch} from 'react-redux';
 import mixPlugin from "colord/plugins/mix";
+import {configAction} from "./config/configSlice";
 extend([mixPlugin]);
 
 
-function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
+function NavBar({ listSource, handleSource, onMenu, sources}) {
 	//console.log('rerender NavBar');
+	const {setLocale} = configAction,
+		dispatch = useDispatch();
 	const headers = Object.keys(sources).reduce((acc, sourceName) => {
 			const category = sources[sourceName].category;
 			acc[category] = [...(acc[category] ?? []), sourceName];
@@ -124,7 +128,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 					</Typography>
 				</Box>
 				<Box sx={{ flexGrow: 1 }} />
-				<IconButton aria-label="switch language" onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')} >
+				<IconButton aria-label="switch language" onClick={() => dispatch(setLocale(locale === 'zh' ? 'en' : 'zh'))} >
 					<TranslateIcon />
 				</IconButton>
 				<IconButton aria-label="about" onClick={() => setHelpOpen(h => !h)} >
