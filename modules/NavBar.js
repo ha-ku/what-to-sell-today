@@ -79,7 +79,7 @@ function NavBar({ listSource, handleSource, onMenu, sources, setLocale}) {
 				<IconButton edge="start" color="inherit" aria-label="menu" onClick={onMenu}>
 					<MenuIcon />
 				</IconButton>
-				<Box sx={{display: 'inline-flex', flexDirection: isMobile && locale !=='zh' ? 'column' : 'row'}}>
+				<Box sx={{display: 'inline-flex', flexDirection: isMobile && locale !=='zh' ? 'column' : 'row', paddingTop: '4px'}}>
 					<Typography variant={isMobile && locale !=='zh' ? 'subtitle2' : 'h6'} sx={{whiteSpace: 'pre', flex: "none", ...(isMobile && locale !=='zh' ? {lineHeight: 1} : {})}} >
 						<FormattedMessage id="prefix" values={{action: t(sources[listSource].action)}} />
 					</Typography>
