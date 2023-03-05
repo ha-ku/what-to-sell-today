@@ -1,4 +1,4 @@
-import {useState, useEffect, useDeferredValue} from 'react';
+import {useState, useEffect, useDeferredValue, startTransition} from 'react';
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -7,10 +7,12 @@ function useWindowSize() {
   });
   useEffect(() => {
     function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      startTransition(() => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      })
     }
     window.addEventListener("resize", handleResize);
     handleResize();
