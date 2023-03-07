@@ -85,11 +85,11 @@ function whatToSellToday(){
 			setSourceLength(Number.MAX_SAFE_INTEGER);
 			setProgress(0);
 			setBuffer(0);
-			setTimeout(() => setShouldUpdate(true), 0)
+			setTimeout(() => setUpdate(true), 0)
 			return value;
 		}, 'source');
 
-	const [isLoading, setShouldUpdate] = useState(true),
+	const [update, setUpdate] = useState(true),
 		[error, setError] = useState(null),
 		[retry, setRetry] = useState(0),
 		[queryInfo, setQueryInfo] = useState({
@@ -124,11 +124,11 @@ function whatToSellToday(){
 		}))
 	}, [reports, jobInfo[listSource], considerTime]);
 	useHotkeys('f5', (event) => {
-		if(!error && !isLoading) {
+		if(!error && !update) {
 			event.preventDefault();
-			setShouldUpdate(true);
+			setUpdate(true);
 		}
-	}, [error, isLoading]);
+	}, [error, update]);
 
 
 	const { t ,locale } = useTranslate('grid')
@@ -251,7 +251,7 @@ function whatToSellToday(){
 		handleSort = useMemo(() => (sort) => dispatch(setSortModel(sort)), [dispatch, setSortModel]);
 
 	useEffect(() => {
-		if(isLoading && executeRecaptcha) {
+		if(update && executeRecaptcha) {
 			setQueryInfo({
 				worldName: worldsName[worlds.indexOf(world)],
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
@@ -291,7 +291,7 @@ function whatToSellToday(){
 				}`
 				async function onData({done, value: _message}) {
 					if (done) {
-						setShouldUpdate(false);
+						setUpdate(false);
 						setRetry(0);
 						setProgress(0);
 						setBuffer(0);
@@ -305,7 +305,7 @@ function whatToSellToday(){
 							setRecaptchaVersion(2);
 						} else {
 							setError(message.err);
-							setShouldUpdate(false);
+							setUpdate(false);
 							setProgress(0);
 							setBuffer(0);
 						}
@@ -348,7 +348,7 @@ function whatToSellToday(){
 				controller.abort();
 			}
 		}
-	}, [isLoading, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow, quality]);
+	}, [update, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow, quality]);
 
 
 	useEffect(() => {
@@ -357,7 +357,7 @@ function whatToSellToday(){
 				let ID = setTimeout(() => {
 					setError(null);
 					setRetry(retry => retry + 1);
-					setShouldUpdate(true);
+					setUpdate(true);
 				}, 2500);
 				return () => clearTimeout(ID);
 			}
@@ -368,7 +368,7 @@ function whatToSellToday(){
 	return (
 		<>
 			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={4} sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}} />}>
-				{isLoading ?
+				{update ?
 					<LinearProgress
 						variant="buffer"
 						value={progress / sourceLength * 100}
@@ -391,7 +391,7 @@ function whatToSellToday(){
 				<SettingDrawer
 					open={drawer}
 					onClose={handleDrawer}
-					setShouldUpdate={setShouldUpdate}
+					setUpdate={setUpdate}
 				/>
 			</Suspense>
 			<StyledMainContainer sx={{margin: "20px 10px 10px"}} defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>

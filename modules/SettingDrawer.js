@@ -27,7 +27,7 @@ import {configAction, configSelectors} from "./config/configSlice";
 const NUMERIC = new RegExp(/^[0-9]*$/);
 
 
-function SettingDrawer({open, onClose, setShouldUpdate}) {
+function SettingDrawer({open, onClose, setUpdate}) {
 	//console.log('rerender SettingDrawer');
 	const { t, FormattedMessage } = useTranslate('drawer');
 
@@ -63,7 +63,7 @@ function SettingDrawer({open, onClose, setShouldUpdate}) {
 		<Drawer anchor="left" open={open} onClose={() => {
 			dispatch(setGlobalConfig());
 			if(world !== localWorld || server !== localServer || priceWindow !== localPriceWindow)
-				setShouldUpdate(true);
+				setUpdate(true);
 			onClose();
 		}} autoWidth PaperProps={{sx: {padding: '20px'}}}>
 			<Typography variant="h5" >
