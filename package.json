@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
-    "@mui/system": "^5.11.11",
+    "@mui/system": "^5.11.12",
     "@mui/x-data-grid": "^6.0.0",
     "clsx": "^1.2.1",
     "colord": "^2.9.3",
