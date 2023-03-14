@@ -1,6 +1,6 @@
 const runtimeCaching = require('next-pwa/cache');
-const withPWA = require("next-pwa")({
-	disable: process.env.DEVELOPMENT,
+const withPWA = require("@murkrage/next-pwa")({
+	disable: process.env.DEVELOPMENT === 'true',
 	dest: 'public',
 	runtimeCaching
 });

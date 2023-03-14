@@ -19,6 +19,7 @@
     "@mui/material": "^5.11.12",
     "@mui/system": "^5.11.11",
     "@mui/x-data-grid": "^6.0.1",
+    "@murkrage/next-pwa": "^5.7.1",
     "clsx": "^1.2.1",
     "colord": "^2.9.3",
     "flat": "^5.0.2",

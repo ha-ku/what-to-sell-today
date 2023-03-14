@@ -1335,6 +1335,18 @@
     prop-types "^15.8.1"
     reselect "^4.1.7"
 
+"@murkrage/next-pwa@^5.7.1":
+  version "5.7.1"
+  resolved "https://registry.npmjs.org/@murkrage/next-pwa/-/next-pwa-5.7.1.tgz#4a2938efbe27e25b0374fde55834b4abc555f02a"
+  integrity sha512-2N0MSuIdty+Hvw5XbOY1D4cUqEY6Ct0Bd+NTmR1x/GbPPRxJfM+HuGM5EHW9hUYLwzUmFbMXEIdh2I3jRRiTZg==
+  dependencies:
+    babel-loader "^8.2.5"
+    clean-webpack-plugin "^4.0.0"
+    globby "^11.0.4"
+    terser-webpack-plugin "^5.3.3"
+    workbox-webpack-plugin "^6.5.4"
+    workbox-window "^6.5.4"
+
 "@next/bundle-analyzer@^13.2.4":
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.2.4.tgz#ad319bf566528f8afee34df07574fd97170b03f2"
