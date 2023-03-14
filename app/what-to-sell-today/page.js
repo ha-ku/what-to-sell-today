@@ -28,6 +28,7 @@ export const metadata = {
 			{url: '/icons/icon-180x180.png', sizes: '180x180', type: 'image/png'},
 		],
 	},
+	manifest: '/manifest.json',
 	twitter: {
 		card: 'summary',
 		title: 'What to Sell Today',
