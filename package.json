@@ -32,7 +32,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.9.8",
     "react-hotkeys-hook": "^4.3.8",
-    "react-intl": "^6.2.10",
+    "react-intl": "^6.3.0",
     "use-local-storage-state": "^18.2.1",
     "webpack": "^5.76.1"
   },
