@@ -18,7 +18,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
     "@mui/system": "^5.11.13",
-    "@mui/x-data-grid": "^6.0.1",
+    "@mui/x-data-grid": "^6.0.2",
     "@murkrage/next-pwa": "^5.7.1",
     "clsx": "^1.2.1",
     "colord": "^2.9.3",
