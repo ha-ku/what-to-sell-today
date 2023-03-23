@@ -34,7 +34,7 @@
     "react-hotkeys-hook": "^4.3.8",
     "react-intl": "^6.3.2",
     "use-local-storage-state": "^18.2.1",
-    "webpack": "^5.76.2"
+    "webpack": "^5.76.3"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.2.4",
