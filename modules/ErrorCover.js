@@ -1,7 +1,12 @@
 import {StyledCircularProgress, StyledLoadingContainer} from "./styledComponents";
 import useTranslate from "./useTranslate";
+import {useSelector} from "react-redux";
+import {reportSelectors} from "./report/reportSlice";
 
-const ErrorCover = ({open, retry, error}) => {
+const ErrorCover = () => {
+	const open = Boolean(useSelector(reportSelectors.error));
+	const shouldRetry = useSelector(reportSelectors.shouldRetry);
+	const error = useSelector(reportSelectors.error);
 
 	const { FormattedMessage } = useTranslate('error');
 
@@ -12,7 +17,7 @@ const ErrorCover = ({open, retry, error}) => {
 				<FormattedMessage id="msg" values={{code: error?.code}} />
 			</span>
 			<span>
-			{retry ?
+			{shouldRetry ?
 				<FormattedMessage id="retry" />
 				: <FormattedMessage id="retryFail" />
 			}

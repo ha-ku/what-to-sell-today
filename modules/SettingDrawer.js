@@ -17,17 +17,18 @@ import {
 import {DownloadForOffline as DownloadForOfflineIcon, Restore as RestoreIcon} from "@mui/icons-material";
 import {servers, serversName, worlds, worldsName} from "./worldsAndServers";
 import useTranslate from "./useTranslate";
-import {memo, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {exportJSON, importJSON} from "./iojson";
 import {useDispatch, useSelector} from "react-redux";
 import {configAction, configSelectors} from "./config/configSlice";
+import {reportAction} from "./report/reportSlice";
 
 
 
 const NUMERIC = new RegExp(/^[0-9]*$/);
 
 
-function SettingDrawer({open, onClose, setUpdate}) {
+function SettingDrawer({open, onClose}) {
 	//console.log('rerender SettingDrawer');
 	const { t, FormattedMessage } = useTranslate('drawer');
 
@@ -63,7 +64,7 @@ function SettingDrawer({open, onClose, setUpdate}) {
 		<Drawer anchor="left" open={open} onClose={() => {
 			dispatch(setGlobalConfig());
 			if(world !== localWorld || server !== localServer || priceWindow !== localPriceWindow)
-				setUpdate(true);
+				dispatch(reportAction.startUpdate());
 			onClose();
 		}} autoWidth PaperProps={{sx: {padding: '20px'}}}>
 			<Typography variant="h5" >
@@ -165,4 +166,4 @@ function SettingDrawer({open, onClose, setUpdate}) {
 }
 
 
-export default memo(SettingDrawer)
+export default SettingDrawer

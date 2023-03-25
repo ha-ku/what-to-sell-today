@@ -1,13 +1,12 @@
 import {useState, useEffect, useMemo, startTransition, useCallback, Suspense, lazy} from 'react';
 
-import {Skeleton, Backdrop} from '@mui/material';
+import {Skeleton, Backdrop, Fade} from '@mui/material';
 import {useTheme} from '@mui/material/styles';
 
 
 import { useHotkeys } from "react-hotkeys-hook";
 
 import MixedRecaptcha from "./MixedRecaptcha";
-import useHandler from "./useHandler";
 import Pbf from 'pbf';
 import {Report} from '../backend/protobuf/MarketReport';
 import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
@@ -21,10 +20,10 @@ import {StyledMainContainer} from "./styledComponents";
 import {colord} from "colord";
 import {useSelector, useDispatch} from "react-redux";
 import {configAction, configSelectors} from "./config/configSlice";
+import {reportAction, reportSelectors} from "./report/reportSlice";
 
 const ErrorCover = lazy(() => import('./ErrorCover'));
 const NavBar = lazy(() => import('./NavBar'));
-const SettingDrawer = lazy(() => import('./SettingDrawer'));
 const ItemName = lazy(() => import('./ItemName'));
 const ItemHistPerCost = lazy(() => import('./ItemHistPerCost'));
 const ItemVolumns = lazy(() => import('./ItemVolumns'));
@@ -34,30 +33,8 @@ const PinnableDataGrid = lazy(() => import('./PinnableDataGrid'));
 
 
 const NONE = '无',
-	RETRY = 1,
-	SOURCE = 'companySeal',
 	SORTING_ORDER = ['desc', 'asc', null],
-	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' '),
-	SOURCE_INFO = Object.fromEntries(Object.entries({
-		companySeal: {withTime: false, category: 'category.currency'},
-		wolfMark: {withTime: false, category: 'category.currency'},
-		botany: {withTime: true, category: 'category.retainer'},
-		mining: {withTime: true, category: 'category.retainer'},
-		fish: {withTime: true, category: 'category.retainer'},
-		hunting: {withTime: true, category: 'category.retainer'},
-		dye: {withTime: false, category: 'category.crafting'},
-		map: {withTime: false, category: 'category.gathering'},
-		whiteGathererScrips: {withTime: false, category: 'category.gathering'},
-		whiteCrafterScrips: {withTime: false, category: 'category.crafting'},
-		khloeBronze: {withTime: false, category: 'category.wondrousTail'},
-		khloeSilver: {withTime: false, category: 'category.wondrousTail'},
-		khloeGold: {withTime: false, category: 'category.wondrousTail'},
-		poetics: {withTime: false, category: 'category.currency'},
-	}).map(([source, value]) => [source, {
-		...value,
-		target:`${source}.source`,
-		action: `${source}.action`
-	}] ));
+	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' ');
 
 const lowestComparator = (v1, v2) =>
 		isNaN(v1) ? -1 :
@@ -74,34 +51,24 @@ const getactualAmount = ({perception, averageItemLevel}, item) => {
 function whatToSellToday(){
 
 	const [reports, setReports] = useState(new Map()),
-		[sourceLength, setSourceLength] = useState(Number.MAX_SAFE_INTEGER),
+		sourceLength = useSelector(reportSelectors.sourceLength),
 		priceWindow = useSelector(configSelectors.priceWindow),
 		world = useSelector(configSelectors.world),
 		server = useSelector(configSelectors.server),
 		quality = useSelector(configSelectors.quality),
 		considerTime = useSelector(configSelectors.considerTime),
-		[listSource, handleSource] = useHandler(SOURCE, ({target: {value}}) => {
-			setReports(new Map());
-			setSourceLength(Number.MAX_SAFE_INTEGER);
-			setProgress(0);
-			setBuffer(0);
-			setTimeout(() => setUpdate(true), 0)
-			return value;
-		}, 'source');
+		listSource = useSelector(reportSelectors.listSource);
 
-	const [update, setUpdate] = useState(true),
-		[error, setError] = useState(null),
-		[retry, setRetry] = useState(0),
+	const update = useSelector(reportSelectors.update),
+		error = useSelector(reportSelectors.error),
 		[queryInfo, setQueryInfo] = useState({
 			worldName: worldsName[worlds.indexOf(world)],
 			serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
 		});
 
-	const [progress, setProgress] = useState(0),
-		[buffer, setBuffer] = useState(0);
+	const progress = useSelector(reportSelectors.progress);
 
-	const [drawer, handleDrawer] = useHandler(false, () => (d => !d)),
-		[clipBarOpen, setClipBarOpen] = useState(false),
+	const [clipBarOpen, setClipBarOpen] = useState(false),
 		doCopy = useCallback(({target: {innerText}}) =>
 			navigator.clipboard.writeText(innerText).then(() => setClipBarOpen(true))
 		, []);
@@ -113,7 +80,7 @@ function whatToSellToday(){
 
 	let rows = useMemo(() => {
 		//console.log('recalculate cost')
-		const job = jobInfo[listSource];
+		const job = jobInfo[listSource.name];
 		if(!job)
 			return [...reports.entries()].map(([, item]) => item);
 		return [...reports.entries()].filter(([, item]) =>
@@ -122,11 +89,11 @@ function whatToSellToday(){
 			...item,
 			cost: (considerTime ? getActualTime(job, item) : 60) / getactualAmount(job, item)
 		}))
-	}, [reports, jobInfo[listSource], considerTime]);
+	}, [reports, jobInfo[listSource.name], considerTime]);
 	useHotkeys('f5', (event) => {
 		if(!error && !update) {
 			event.preventDefault();
-			setUpdate(true);
+			dispatch(reportAction.startUpdate());
 		}
 	}, [error, update]);
 
@@ -161,7 +128,7 @@ function whatToSellToday(){
 			renderCell: (params) =>
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemName
-						withTime={SOURCE_INFO[listSource].withTime}
+						withTime={listSource.withTime}
 						id={params.id}
 						value={params.value}
 						enName={params.row.enName}
@@ -244,7 +211,7 @@ function whatToSellToday(){
 					/>
 				</Suspense>) : NONE
 		}
-	]), [SOURCE_INFO[listSource].withTime, rem, theme]);
+	]), [listSource.withTime, rem, theme]);
 	const sortModel = useSelector(configSelectors.sortModel),
 		{setSortModel} = configAction,
 		dispatch = useDispatch(),
@@ -252,6 +219,7 @@ function whatToSellToday(){
 
 	useEffect(() => {
 		if(update && executeRecaptcha) {
+			setReports(new Map());
 			setQueryInfo({
 				worldName: worldsName[worlds.indexOf(world)],
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]
@@ -263,26 +231,26 @@ function whatToSellToday(){
 
 			(async () =>{
 				const [_JSON, _token] = await Promise.allSettled([
-					import(`../public/json/itemLists/${listSource}.json`).then(({default: v}) => v),
+					import(`../public/json/itemLists/${listSource.name}.json`).then(({default: v}) => v),
 					executeRecaptcha('marketReport')
 				]);
 				const source = _JSON.value, token = _token.value;
-				setSourceLength(source.length);
+				dispatch(reportAction.setSourceLength(source.length));
 				if (_JSON.reason) {
 					console.log('fetch source error:', _token.reason);
-					setError({code: '000', content: _JSON.reason});
+					dispatch(reportAction.handleError({code: '000', content: _JSON.reason}));
 					return;
 				}
 				if (_token.reason) {
 					console.log('recaptcha error:', _token.reason);
-					setError({code: '000', content: _token.reason});
+					dispatch(reportAction.handleError({code: '000', content: _token.reason}));
 					return;
 				}
 
 				let query = {
 					world, server, priceWindow, token,
 					qual: quality,
-					itemListName: listSource + 'List',
+					itemListName: listSource.name + 'List',
 					recaptchaVersion: 'v' + recaptchaVersion,
 				}
 				let url = `https://${ENDPOINTS[Math.floor(Math.random() * ENDPOINTS.length)]}-cf.ha-ku.cyou/marketReportPbfCfProxy?${
@@ -291,10 +259,7 @@ function whatToSellToday(){
 				}`
 				async function onData({done, value: _message}) {
 					if (done) {
-						setUpdate(false);
-						setRetry(0);
-						setProgress(0);
-						setBuffer(0);
+						dispatch(reportAction.finishUpdate(false));
 						return;
 					}
 					const message = Report.read(new Pbf(_message))
@@ -304,14 +269,11 @@ function whatToSellToday(){
 							setExecuteRecaptcha({execute: null});
 							setRecaptchaVersion(2);
 						} else {
-							setError(message.err);
-							setUpdate(false);
-							setProgress(0);
-							setBuffer(0);
+							dispatch(reportAction.handleError(message.err));
 						}
 						return;
 					}
-					setBuffer(b => b + 1);
+					dispatch(reportAction.incrementProgress({received: 1}));
 					startTransition(() => {
 						setReports(r =>
 							new Map(r.set(message.ID, {
@@ -329,7 +291,7 @@ function whatToSellToday(){
 								volumes: message[quality]?.volumns,
 							}))
 						);
-						setProgress(p => p + 1);
+						dispatch(reportAction.incrementProgress({parsed: 1}));
 					});
 					return onData(await reader.read());
 				}
@@ -339,7 +301,7 @@ function whatToSellToday(){
 					await response.body.pipeTo(decoder.writable);
 				} catch (err) {
 					if (err.code !== 20)
-						setError(err);
+						dispatch(reportAction.handleError(err));
 				}
 			})()
 
@@ -351,48 +313,24 @@ function whatToSellToday(){
 	}, [update, listSource, executeRecaptcha, recaptchaVersion, world, server, priceWindow, quality]);
 
 
-	useEffect(() => {
-		if(error) {
-			if(retry < RETRY) {
-				let ID = setTimeout(() => {
-					setError(null);
-					setRetry(retry => retry + 1);
-					setUpdate(true);
-				}, 2500);
-				return () => clearTimeout(ID);
-			}
-		}
-	}, [error, retry]);
 	const gridFooterContent = `"${queryInfo.worldName} ${queryInfo.serverName}"`
 
 	return (
 		<>
 			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={4} sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}} />}>
-				{update ?
+				<Fade in={update} enter={false} unmountOnExit >
 					<LinearProgress
 						variant="buffer"
-						value={progress / sourceLength * 100}
-						valueBuffer={buffer / sourceLength * 100}
+						value={progress.parsed / sourceLength * 100}
+						valueBuffer={progress.received / sourceLength * 100}
 						color="secondary"
-						sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000}}
+						sx={{position: "fixed", top: 0, left: 0, width: '100%', zIndex: 2000
+						}}
 					/>
-					: null
-				}
+				</Fade>
 			</Suspense>
 			<Suspense fallback={<Skeleton variant="rectangular" width="100%" height={64} />}>
-				<NavBar
-					listSource={listSource}
-					handleSource={handleSource}
-					onMenu={handleDrawer}
-					sources={SOURCE_INFO}
-				/>
-			</Suspense>
-			<Suspense fallback={<Backdrop open={drawer} onClick={handleDrawer} />}>
-				<SettingDrawer
-					open={drawer}
-					onClose={handleDrawer}
-					setUpdate={setUpdate}
-				/>
+				<NavBar listSource={listSource} />
 			</Suspense>
 			<StyledMainContainer sx={{margin: "20px 10px 10px"}} defaultColor={colord(theme.palette.secondary.main).alpha(0.2).toHex()}>
 				<Suspense fallback={
@@ -417,7 +355,7 @@ function whatToSellToday(){
 				<CopyHint open={clipBarOpen} setOpen={setClipBarOpen} />
 			</Suspense>
 			<Suspense fallback={<Backdrop open={!!error} />}>
-				<ErrorCover open={!!error} {...{retry: retry < RETRY, error}}/>
+				<ErrorCover/>
 			</Suspense>
 		</>
 	);
@@ -427,6 +365,4 @@ function whatToSellToday(){
 /*export const config = {
 	runtime: 'experimental-edge'
 };*/
-
-
 export default whatToSellToday
