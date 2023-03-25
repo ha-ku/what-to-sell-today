@@ -37,7 +37,7 @@ export function importJSON(format = '.json') {
 			let reader = new FileReader()
 			reader.onload = (event) => {
 				try {
-					let config = JSON.parse(event.target.result)
+					let config = JSON.parse(event.target.result.toString())
 					resolve(config)
 				} catch (e) {
 					reject(e)
