@@ -219,7 +219,9 @@ function whatToSellToday(){
 
 	useEffect(() => {
 		if(update && executeRecaptcha) {
-			setReports(new Map());
+			if(update === 2){
+				setReports(new Map());
+			}
 			setQueryInfo({
 				worldName: worldsName[worlds.indexOf(world)],
 				serverName: serversName[worlds.indexOf(world)][servers[worlds.indexOf(world)].indexOf(server)]

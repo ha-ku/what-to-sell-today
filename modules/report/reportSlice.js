@@ -27,7 +27,7 @@ export const SOURCE_INFO = Object.fromEntries(Object.entries({
 		action: `${sourceName}.action`
 	}] ));
 const initialState = {
-		update: true,
+		update: 1,
 		error: null,
 		retry: 0,
 		sourceLength: Number.MAX_SAFE_INTEGER,
@@ -53,10 +53,10 @@ export const reportSlice = createSlice({
 	reducers: {
 		startUpdate: (state) => {
 			state.progress = {...initialState.progress};
-			state.update = true;
+			state.update = 1;
 		},
 		finishUpdate: (state) => {
-			state.update = false;
+			state.update = 0;
 			state.retry = 0;
 		},
 		setSourceLength: (state, {payload: sourceLength}) => {
@@ -68,23 +68,27 @@ export const reportSlice = createSlice({
 		},
 		handleListSource: (state, {payload: name}) => {
 			if(SOURCE_INFO.hasOwnProperty(name)) {
-				state.listSource = SOURCE_INFO[name];
-				state.sourceLength = initialState.sourceLength;
 				state.retry = 0;
 				state.progress = {...initialState.progress};
-				state.update = true;
+				if(state.listSource.name === name) {
+					state.update = 1;
+					return;
+				}
+				state.listSource = SOURCE_INFO[name];
+				state.sourceLength = initialState.sourceLength;
+				state.update = 2;
 			}
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(handleError.pending, (state, {meta: {error}}) => {
-			state.update = false;
+			state.update = 0;
 			state.error = error;
 		});
 		builder.addCase(handleError.fulfilled, (state) => {
 			state.retry += 1;
 			state.progress = {...initialState.progress};
-			state.update = true;
+			state.update = 1;
 			state.error = null;
 		})
 	}
