@@ -6,23 +6,23 @@ permissions:
   pull-requests: write
 on:
   pull_request:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
     branches:
       - 'dev-deps'
-    tags:
-      - 'dependencies'
-  push:
-    branches:
-      - 'dependabot/npm_and_yarn/dev-deps/**'
     tags:
       - 'dependencies'
 jobs:
   do_rebase:
     runs-on: ubuntu-latest
     steps:
-      - uses: "pascalgn/automerge-action@v0.15.3"
+      -
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.7
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_METHOD: "rebase"
-          MERGE_LABELS: "dependencies"
-          MERGE_ERROR_FAIL: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
