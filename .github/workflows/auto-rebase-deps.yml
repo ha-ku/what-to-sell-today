@@ -6,14 +6,9 @@ permissions:
   pull-requests: write
 on:
   pull_request:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
     branches:
       - 'dev-deps'
-    tags:
-      - 'dependencies'
-  push:
-    branches:
-      - 'dependabot/npm_and_yarn/dev-deps/**'
     tags:
       - 'dependencies'
 jobs:
