@@ -5,20 +5,23 @@ permissions:
   discussions: write
   pull-requests: write
 on:
-  push:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
     branches:
-      - 'dependabot/npm_and_yarn/dev-deps/**'
+      - 'dev-deps'
     tags:
       - 'dependencies'
 jobs:
   do_rebase:
     runs-on: ubuntu-latest
     steps:
+      -
       - name: Checkout the latest code
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+
       - name: Automatic Rebase
         uses: cirrus-actions/rebase@1.7
         env:
