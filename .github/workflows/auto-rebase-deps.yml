@@ -11,11 +11,16 @@ on:
       - 'dev-deps'
     tags:
       - 'dependencies'
+  push:
+    branches:
+      - 'dependabot/npm_and_yarn/dev-deps/**'
+    tags:
+      - 'dependencies'
 jobs:
   do_rebase:
     runs-on: ubuntu-latest
     steps:
-      -
+
       - name: Checkout the latest code
         uses: actions/checkout@v2
         with:
