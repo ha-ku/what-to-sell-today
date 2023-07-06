@@ -1,7 +1,8 @@
 import buffer from "buffer";
 const {Buffer} = buffer;
-import {TransformStream} from 'stream/web';
+import {TransformStream as _TransformStream} from 'stream/web';
 
+const TStream = typeof TransformStream !== 'undefined' ? TransformStream : _TransformStream;
 function encodeLength(l){
 	if(l < 0xfd) {
 		const b = Buffer.alloc(1);
@@ -20,7 +21,7 @@ function encodeLength(l){
 	return b;
 }
 function encode() {
-	return new TransformStream({
+	return new TStream({
 		transform(chunk, controller) {
 			chunk = Buffer.from(chunk);
 			controller.enqueue(encodeLength(chunk.length))
@@ -49,7 +50,7 @@ function decodeLength(b) {
 }
 
 function decode() {
-	return new TransformStream({
+	return new TStream({
 		transform(chunk, controller) {
 			chunk = Buffer.from(chunk);
 			if(this.b) {
