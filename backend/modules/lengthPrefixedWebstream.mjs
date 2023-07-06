@@ -1,6 +1,6 @@
 import buffer from "buffer";
 const {Buffer} = buffer;
-
+import {TransformStream} from 'stream/web';
 
 function encodeLength(l){
 	if(l < 0xfd) {
