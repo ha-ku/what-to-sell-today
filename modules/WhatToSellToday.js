@@ -21,6 +21,7 @@ import {colord} from "colord";
 import {useSelector, useDispatch} from "react-redux";
 import {configAction, configSelectors} from "./config/configSlice";
 import {reportAction, reportSelectors} from "./report/reportSlice";
+import ItemLowest from "./itemLowest";
 
 const ErrorCover = lazy(() => import('./ErrorCover'));
 const NavBar = lazy(() => import('./NavBar'));
@@ -32,16 +33,14 @@ const CopyHint = lazy(() => import('./CopyHint'));
 const PinnableDataGrid = lazy(() => import('./PinnableDataGrid'));
 
 
-const NONE = '无',
-	SORTING_ORDER = ['desc', 'asc', null],
+const SORTING_ORDER = ['desc', 'asc', null],
 	ENDPOINTS = process.env.NEXT_PUBLIC_WTST_ENDPOINTS.split(' ');
 
 const lowestComparator = (v1, v2) =>
 		isNaN(v1) ? -1 :
 			isNaN(v2) ? 1 :
-				v1 - v2,
-	noneOrFix = ({value}) => (isNaN(value) || value === null) ? NONE : Number(value.toFixed(1)),
-	getDetailPrice = ({value}) => value ? `${value.price} ( x${value.quantity} ${value.seller})` : NONE;
+				v1 - v2;
+
 const getActualTime = (job, item) => (60 - Math.min(Math.floor(Math.max(job.level-item.level, 0) / 10), 2) * 10)
 const getactualAmount = ({perception, averageItemLevel}, item) => {
 	const levels = Object.keys(item.amount).map(n => Number(n))
@@ -98,7 +97,8 @@ function whatToSellToday(){
 	}, [error, update]);
 
 
-	const { t ,locale } = useTranslate('grid')
+	const { t ,locale } = useTranslate('grid'),
+		noneOrFix = ({value}) => (isNaN(value) || value === null) ? t('none') : Number(value.toFixed(1));
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 	const [v2Props, v3Props] = useMemo(() => ([
@@ -124,7 +124,7 @@ function whatToSellToday(){
 
 	const rem = useRem();
 	const columns = useMemo(() => ([
-		{field: "name", headerName: t('item'), width: 230, sortable: false,
+		{field: "name", headerName: t('item'), width: 220, sortable: false,
 			renderCell: (params) =>
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemName
@@ -136,17 +136,20 @@ function whatToSellToday(){
 						defaultLastUploadTime={params.row.defaultLastUploadTime}
 						lastUploadTime={params.row.lastUploadTime}
 						onClick={doCopy}
-						primary={theme.palette.text.primary}
-						warning={theme.palette.warning.main}
 					/>
 				</Suspense>),
 			pin: 'left'
 		},
 		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => Number(value.toFixed(3))},
-		{field: "defaultLowest", headerName: t('defaultLowest'), width: 160,
+		{field: "defaultLowest", headerName: t('defaultLowest'), width: 94,
 			cellClassName: "default-server", headerClassName: "default-server",
-			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price), valueFormatter: getDetailPrice},
+			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price),
+			renderCell: (params) =>
+				(<Suspense>
+					<ItemLowest {...params.row.defaultLowest}/>
+				</Suspense>)
+		},
 		{field: "defaultMeanLow", headerName: t('defaultMeanLow'), width: 54 + 4 * 0.875 * rem,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
@@ -168,20 +171,25 @@ function whatToSellToday(){
 				let price = params.row.defaultHistLow;
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumes", headerName: t('volumes'), width: 150,
+		{field: "defaultVolumes", headerName: t('volumes'), width: 112,
 			cellClassName: "default-server", headerClassName: "default-server",
 			sortable: false, renderCell: ({value}) => value?.length ?
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemVolumns
 						value={value}
-						height={52}
+						height={52} width={112}
 						color={theme.palette.secondary.main}
 						darkMode={theme.palette.mode === 'dark'}
 					/>
-				</Suspense>) : NONE
+				</Suspense>) : t('none')
 		},
-		{field: "lowest", headerName: t('lowest'), width: 160,
-			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),  valueFormatter: getDetailPrice},
+		{field: "lowest", headerName: t('lowest'), width: 94,
+			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),
+			renderCell: (params) =>
+				(<Suspense>
+					<ItemLowest {...params.row.lowest} />
+				</Suspense>)
+		},
 		{field: "meanLow", headerName: t('meanLow'), width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
@@ -200,16 +208,16 @@ function whatToSellToday(){
 				let price = params.row.histLow;
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "volumes", headerName: t('volumes'), width: 150,
+		{field: "volumes", headerName: t('volumes'), width: 112,
 			sortable: false, renderCell: ({value}) => value?.length ?
 				(<Suspense fallback={<Skeleton variant="text" />}>
 					<ItemVolumns
 						value={value}
-						height={52}
+						height={52} width={112}
 						color={theme.palette.primary.main}
 						darkMode={theme.palette.mode === 'dark'}
 					/>
-				</Suspense>) : NONE
+				</Suspense>) : t('none')
 		}
 	]), [listSource.withTime, rem, theme]);
 	const sortModel = useSelector(configSelectors.sortModel),

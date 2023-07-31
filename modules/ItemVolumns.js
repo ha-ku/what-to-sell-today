@@ -4,7 +4,7 @@ import {StyledCellContainer, StyledCellSub} from "./styledComponents";
 import {memo} from "react";
 
 
-function ItemVolumns({value, height, color, darkMode}) {
+function ItemVolumns({value, height, width, color, darkMode}) {
 	return (<>
 		<Box sx={{
 			position: 'relative',
@@ -15,7 +15,7 @@ function ItemVolumns({value, height, color, darkMode}) {
 				left: -10,
 				top: 0
 			}}>
-				<LineChart {...{ height, width: 150, color, darkMode}} data={value.map((v, i) => [i, v])}/>
+				<LineChart {...{ height, width, color, darkMode}} data={value.map((v, i) => [i, v])}/>
 			</Box>
 		</Box>
 		<StyledCellContainer>

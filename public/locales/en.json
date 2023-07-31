@@ -37,9 +37,8 @@
     "title": "What to {action} {target} today?",
     "item": "Name",
     "level": "(level {level})",
-    "updateAt": "Updated at",
-    "updateLocalAt": "Current world",
-    "updateGlobalAt": "Whole DC",
+    "updateLocalAt": "Current world update time",
+    "updateGlobalAt": "Whole DC update time",
     "cost": "Cost",
     "defaultLowest": "World min.",
     "defaultMeanLow": "Min. average",
@@ -49,9 +48,10 @@
     "meanLow": "Min. average",
     "histLow": "History min.",
     "histPerCost": "Price per cost",
-    "volumes": "1/3/7 days transaction",
+    "volumes": "1/3/7d Volume",
     "itemName": "{enName}",
-    "copyHint": "Item name copied!"
+    "copyHint": "Item name copied!",
+    "none": "none"
   },
   "helper": {
     "title": "What's this?",

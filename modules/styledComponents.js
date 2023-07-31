@@ -1,18 +1,19 @@
 import {styled} from "@mui/material/styles";
-import {Button, CircularProgress, FormControlLabel, Backdrop} from "@mui/material";
+import {Button, CircularProgress, FormControlLabel, Backdrop, Tooltip} from "@mui/material";
+import {tooltipClasses} from "@mui/material/Tooltip";
 
-const StyledCircularProgress = styled((props) => (<CircularProgress color="secondary" size={30} thickness={3.6} {...props}/>))`
+export const StyledCircularProgress = styled((props) => (<CircularProgress color="secondary" size={30} thickness={3.6} {...props}/>))`
   && {
     margin: 12px;
   }
 `;
-const StyledLoadingContainer = styled(Backdrop)`
+export const StyledLoadingContainer = styled(Backdrop)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-const StyledCellContainer = styled('span')`
+export const StyledCellContainer = styled('span')`
   display: inline-flex;
   position: relative;
   flex-direction: row;
@@ -20,10 +21,10 @@ const StyledCellContainer = styled('span')`
   align-items: center;
   width: 100%;
 `
-const StyledCellSub = styled('span')`
+export const StyledCellSub = styled('span')`
   flex: 1;
 `
-const StyledMainContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
+export const StyledMainContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
   width: calc(100vw - 20px);
   height: calc(100vh - 100px);
   position: relative;
@@ -32,7 +33,7 @@ const StyledMainContainer = styled(({defaultColor, ...rest}) => (<div {...rest} 
     background-color: ${({defaultColor}) => defaultColor};
   }
 `
-const StyledGridContainer = styled('div')`
+export const StyledGridContainer = styled('div')`
   height: 100%;
   width: 100%;
   top: 0;
@@ -44,26 +45,34 @@ const StyledGridContainer = styled('div')`
   align-items: flex-start;
   pointer-events: none;
 `;
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   && {
     align-self: flex-start;
     margin: 15px 0;
   }
 `;
-const StyledFormControlLabel = styled(FormControlLabel)`
+export const StyledFormControlLabel = styled(FormControlLabel)`
   && {
     align-items: flex-start;
     justify-content: flex-start;
   }
 `;
-const StyledIconButton = styled(Button)`
+export const StyledIconButton = styled(Button)`
   && {
     min-width: 0;
+	margin-right: 4px;
   }
 `
-const StyledIcon = styled(({render: Render, fill, ...rest}) => (<Render {...rest} />))`
+export const StyledIcon = styled(({render: Render, fill, ...rest}) => (<Render {...rest} />))`
   height: 1em;
   fill: ${({fill}) => fill};
 `
 
-export {StyledCellSub, StyledIcon, StyledIconButton, StyledCellContainer, StyledLoadingContainer, StyledFormControlLabel, StyledMainContainer, StyledGridContainer, StyledCircularProgress, StyledButton};
+export const StyledTooltip = styled(({ className, children, ...props }) => (
+	<Tooltip {...props} classes={{ popper: className }}  children={children}/>
+))(({theme}) => ({
+	[`& .${tooltipClasses.tooltip}`]: {
+		backgroundColor: theme.palette.background.default,
+		padding: 0
+	},
+}));

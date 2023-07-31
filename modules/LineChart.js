@@ -53,11 +53,11 @@ const LineChart = function({width, height, data, color, darkMode}) {
 	return (
 		<Root transform="scale(1, -1)" viewBox={`0 0 ${width} ${height}`} {...{width, height, color}}>
 			<defs>
-				<clipPath id={`clip-${id}`}>
+				<clipPath id={`LineChart-${id}`}>
 					<path d={clip} />
 				</clipPath>
 			</defs>
-			<path d={area} strokeWidth={0} fill="currentcolor" fillOpacity={darkMode ? 0.2 : 0.2} filter="url(#verticalBlur)" clipPath={`url(#clip-${id})`}/>
+			<path d={area} strokeWidth={0} fill="currentcolor" fillOpacity={darkMode ? 0.2 : 0.2} filter="url(#verticalBlur)" clipPath={`url(#LineChart-${id})`}/>
 		</Root>
 	);
 }

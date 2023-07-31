@@ -36,22 +36,22 @@
   "grid": {
     "title": "今天{target}{action}点什么划算？",
     "item": "物品",
-    "level": "({level}级)",
-    "updateAt": "更新于",
-    "updateLocalAt": "本服",
-    "updateGlobalAt": "全服",
+    "level": "{level}级",
+    "updateLocalAt": "本服更新时间",
+    "updateGlobalAt": "全服更新时间",
     "cost": "成本",
     "defaultLowest": "本服最低",
     "defaultMeanLow": "平均低价",
     "defaultHistLow": "成交均价",
     "defaultHistPerCost": "单位成本价",
-    "lowest": "全服最低价",
+    "lowest": "全服最低",
     "meanLow": "平均低价",
     "histLow": "成交均价",
     "histPerCost": "单位成本价",
     "volumes": "1/3/7日成交",
     "itemName": "{name}",
-    "copyHint": "已拷贝至剪贴板"
+    "copyHint": "已拷贝至剪贴板",
+    "none": "无"
   },
   "helper": {
     "title": "这是什么？",
