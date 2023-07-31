@@ -37,7 +37,7 @@ function ItemName({id, value, enName, level, defaultLastUploadTime, lastUploadTi
 		<Box sx={{flex: '0 0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}} >
 			<Avatar variant="rounded" src={`https://universalis-ffxiv.github.io/universalis-assets/icon2x/${id}.png`} sx={{width: 32, height: 32, marginRight: 1}} alt={enName}></Avatar>
 			<Button variant="text" sx={{textTransform: 'initial', minWidth: 0}} onClick={onClick} >
-				<Box component="span" sx={{maxWidth: withTime ? '109px' : '169px', overflow: "hidden", textOverflow: "ellipsis"}}>
+				<Box component="span" sx={{maxWidth: '116px', overflow: "hidden", textOverflow: "ellipsis"}}>
 					{t("itemName", {
 						name: value,
 						enName: enName

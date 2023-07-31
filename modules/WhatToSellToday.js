@@ -46,6 +46,12 @@ const getactualAmount = ({perception, averageItemLevel}, item) => {
 	const levels = Object.keys(item.amount).map(n => Number(n))
 	return item.amount[Math.max( ...(levels.filter(n => n <= (perception ?? averageItemLevel))) )]
 }
+const withSuspense = (renderer, fallbackToTextSkeleton) => (
+	args =>
+	(<Suspense {...(fallbackToTextSkeleton ? {fallback: <Skeleton variant="text" />} : {})}>
+		{renderer(args)}
+	</Suspense>)
+)
 
 function whatToSellToday(){
 
@@ -123,11 +129,11 @@ function whatToSellToday(){
 	]), [locale, theme.palette.mode])
 
 	const rem = useRem();
+	const defaultServerClass = {cellClassName: "default-server", headerClassName: "default-server"};
 	const columns = useMemo(() => ([
 		{field: "name", headerName: t('item'), width: 220, sortable: false,
-			renderCell: (params) =>
-				(<Suspense fallback={<Skeleton variant="text" />}>
-					<ItemName
+			renderCell: withSuspense((params) =>
+				(<ItemName
 						withTime={listSource.withTime}
 						id={params.id}
 						value={params.value}
@@ -136,72 +142,64 @@ function whatToSellToday(){
 						defaultLastUploadTime={params.row.defaultLastUploadTime}
 						lastUploadTime={params.row.lastUploadTime}
 						onClick={doCopy}
-					/>
-				</Suspense>),
+					/>), true),
 			pin: 'left'
 		},
 		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => Number(value.toFixed(3))},
-		{field: "defaultLowest", headerName: t('defaultLowest'), width: 94,
-			cellClassName: "default-server", headerClassName: "default-server",
+		{field: "defaultLowest", headerName: t('defaultLowest'), width: 94, ...defaultServerClass,
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price),
-			renderCell: (params) =>
-				(<Suspense>
-					<ItemLowest {...params.row.defaultLowest}/>
-				</Suspense>)
+			renderCell: withSuspense((params) => params.row.defaultLowest ?
+				(<ItemLowest {...params.row.defaultLowest}/>)
+				: t('none')
+			, true)
 		},
-		{field: "defaultMeanLow", headerName: t('defaultMeanLow'), width: 54 + 4 * 0.875 * rem,
-			cellClassName: "default-server", headerClassName: "default-server",
+		{field: "defaultMeanLow", headerName: t('defaultMeanLow'), width: 54 + 4 * 0.875 * rem, ...defaultServerClass,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem,
-			cellClassName: "default-server", headerClassName: "default-server",
-			renderCell: (params) =>
-				(<Suspense fallback={<Skeleton variant="text" />}>
-					<ItemHistPerCost
+		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem, ...defaultServerClass,
+			renderCell: withSuspense((params) =>
+				(<ItemHistPerCost
 						value={params.value}
 						upperBound={params.row.defaultMeanLow}
 						lowerBound={params.row.defaultLowest?.price}
 						valueFormatter={noneOrFix}
 					/>
-				</Suspense>),
+				), true),
 			sortComparator: lowestComparator},
-		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem,
-			cellClassName: "default-server", headerClassName: "default-server",
+		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem, ...defaultServerClass,
 			valueGetter: (params) => {
 				let price = params.row.defaultHistLow;
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumes", headerName: t('volumes'), width: 112,
-			cellClassName: "default-server", headerClassName: "default-server",
-			sortable: false, renderCell: ({value}) => value?.length ?
-				(<Suspense fallback={<Skeleton variant="text" />}>
-					<ItemVolumns
-						value={value}
-						height={52} width={112}
-						color={theme.palette.secondary.main}
-						darkMode={theme.palette.mode === 'dark'}
-					/>
-				</Suspense>) : t('none')
+		{field: "defaultVolumes", headerName: t('volumes'), width: 112, ...defaultServerClass,
+			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
+					(<ItemVolumns
+							value={value}
+							height={52} width={112}
+							color={theme.palette.secondary.main}
+							darkMode={theme.palette.mode === 'dark'}
+						/>
+					) : t('none'))
+				, true)
 		},
 		{field: "lowest", headerName: t('lowest'), width: 94,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),
-			renderCell: (params) =>
-				(<Suspense>
-					<ItemLowest {...params.row.lowest} />
-				</Suspense>)
+			renderCell: withSuspense((params) => (params.row.lowest ?
+					(<ItemLowest {...params.row.lowest} />)
+					: t('none'))
+				, true)
 		},
 		{field: "meanLow", headerName: t('meanLow'), width: 54 + 4 * 0.875 * rem,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
-			renderCell: (params) =>
-				(<Suspense fallback={<Skeleton variant="text" />}>
-					<ItemHistPerCost
+			renderCell: withSuspense((params) =>
+					(<ItemHistPerCost
 						value={params.value}
 						upperBound={params.row.meanLow}
 						lowerBound={params.row.lowest?.price}
 						valueFormatter={noneOrFix}
-					/>
-				</Suspense>),
+					/>)
+				, true),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
@@ -209,15 +207,14 @@ function whatToSellToday(){
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumes", headerName: t('volumes'), width: 112,
-			sortable: false, renderCell: ({value}) => value?.length ?
-				(<Suspense fallback={<Skeleton variant="text" />}>
-					<ItemVolumns
+			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
+					(<ItemVolumns
 						value={value}
 						height={52} width={112}
 						color={theme.palette.primary.main}
 						darkMode={theme.palette.mode === 'dark'}
-					/>
-				</Suspense>) : t('none')
+					/>) : t('none'))
+				, true)
 		}
 	]), [listSource.withTime, rem, theme]);
 	const sortModel = useSelector(configSelectors.sortModel),
@@ -247,7 +244,7 @@ function whatToSellToday(){
 				const source = _JSON.value, token = _token.value;
 				dispatch(reportAction.setSourceLength(source.length));
 				if (_JSON.reason) {
-					console.log('fetch source error:', _token.reason);
+					console.log('fetch source error:', _JSON.reason);
 					dispatch(reportAction.handleError({code: '000', content: _JSON.reason}));
 					return;
 				}
