@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 import LineChart from "./LineChart";
-import {StyledCellContainer, StyledCellSub} from "./styledComponents";
+import {StyledCellContainer, StyledGrowingCell} from "./styledComponents";
 import {memo} from "react";
 
 
@@ -20,9 +20,9 @@ function ItemVolumns({value, height, width, color, darkMode}) {
 		</Box>
 		<StyledCellContainer>
 			{[1, 3, 7].map(vI =>
-				(<StyledCellSub key={vI}>
+				(<StyledGrowingCell key={vI}>
 					{value[vI-1]}
-				</StyledCellSub>)
+				</StyledGrowingCell>)
 			)}
 		</StyledCellContainer>
 	</>);

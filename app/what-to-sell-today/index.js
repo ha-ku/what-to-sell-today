@@ -21,11 +21,11 @@ import {configSelectors} from "../../modules/config/configSlice";
 const THEME = {
 	palette: {
 		primary: {
-			main: '#64b5f6',
+			main: '#636fb6',
 			contrastText: '#ffffff'
 		},
 		secondary: {
-			main: '#FF986A',
+			main: '#6fb663',
 		},
 		tonalOffset: 0.3
 	},

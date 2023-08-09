@@ -21,8 +21,11 @@ export const StyledCellContainer = styled('span')`
   align-items: center;
   width: 100%;
 `
-export const StyledCellSub = styled('span')`
-  flex: 1;
+export const StyledGrowingCell = styled('span')`
+  flex: 1 0 auto;
+`
+export const StyledSolidCell = styled('span')`
+  flex: 0 0 auto;
 `
 export const StyledMainContainer = styled(({defaultColor, ...rest}) => (<div {...rest} />))`
   width: calc(100vw - 20px);

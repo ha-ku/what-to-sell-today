@@ -26,7 +26,7 @@ import ItemLowest from "./itemLowest";
 const ErrorCover = lazy(() => import('./ErrorCover'));
 const NavBar = lazy(() => import('./NavBar'));
 const ItemName = lazy(() => import('./ItemName'));
-const ItemHistPerCost = lazy(() => import('./ItemHistPerCost'));
+const ItemMeanLow = lazy(() => import('./ItemMeanLow'));
 const ItemVolumns = lazy(() => import('./ItemVolumns'));
 const LinearProgress = lazy(() => import('./LinearProgress'));
 const CopyHint = lazy(() => import('./CopyHint'));
@@ -131,7 +131,7 @@ function whatToSellToday(){
 	const rem = useRem();
 	const defaultServerClass = {cellClassName: "default-server", headerClassName: "default-server"};
 	const columns = useMemo(() => ([
-		{field: "name", headerName: t('item'), width: 220, sortable: false,
+		{field: "name", headerName: t('item'), width: 105 + 0.875*rem*8, sortable: false,
 			renderCell: withSuspense((params) =>
 				(<ItemName
 						withTime={listSource.withTime}
@@ -145,37 +145,36 @@ function whatToSellToday(){
 					/>), true),
 			pin: 'left'
 		},
-		{field: "cost", headerName: t('cost'), width: 34 + 2 * 0.875 * rem, sortable: false,
+		{field: "cost", headerName: t('cost'), width: 21 + 5 * 0.52 * 0.875 * rem, sortable: false,
 			valueFormatter: ({value}) => Number(value.toFixed(3))},
 		{field: "defaultLowest", headerName: t('defaultLowest'), width: 94, ...defaultServerClass,
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price),
 			renderCell: withSuspense((params) => params.row.defaultLowest ?
-				(<ItemLowest {...params.row.defaultLowest}/>)
+				(<ItemLowest {...params.row.defaultLowest} color="secondary" />)
 				: t('none')
 			, true)
 		},
-		{field: "defaultMeanLow", headerName: t('defaultMeanLow'), width: 54 + 4 * 0.875 * rem, ...defaultServerClass,
-			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultHistLow", headerName: t('defaultHistLow'), width: 54 + 4 * 0.875 * rem, ...defaultServerClass,
+		{field: 'defaultMeanLow', headerName: t('defaultMeanLow'), width: 41 + 2*8*0.52*rem, ...defaultServerClass,
+			sortable: false,
 			renderCell: withSuspense((params) =>
-				(<ItemHistPerCost
-						value={params.value}
-						upperBound={params.row.defaultMeanLow}
-						lowerBound={params.row.defaultLowest?.price}
+				(<ItemMeanLow
+						value={params.row.defaultMeanLow}
+						hist={params.row.defaultHistLow}
+						lowest={params.row.defaultLowest?.price}
 						valueFormatter={noneOrFix}
 					/>
-				), true),
-			sortComparator: lowestComparator},
+				), true)
+		},
 		{field: "defaultHistPerCost", headerName: t('defaultHistPerCost'), width: 54 + 5 * 0.875 * rem, ...defaultServerClass,
 			valueGetter: (params) => {
 				let price = params.row.defaultHistLow;
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "defaultVolumes", headerName: t('volumes'), width: 112, ...defaultServerClass,
+		{field: "defaultVolumes", headerName: t('volumes'), width: 21 + 3*6*0.52*0.875*rem, ...defaultServerClass,
 			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
 					(<ItemVolumns
 							value={value}
-							height={52} width={112}
+							height={52} width={21 + 3*6*0.52*0.875*rem}
 							color={theme.palette.secondary.main}
 							darkMode={theme.palette.mode === 'dark'}
 						/>
@@ -185,32 +184,31 @@ function whatToSellToday(){
 		{field: "lowest", headerName: t('lowest'), width: 94,
 			sortComparator: (v1, v2) => lowestComparator(v1.price, v2.price),
 			renderCell: withSuspense((params) => (params.row.lowest ?
-					(<ItemLowest {...params.row.lowest} />)
+					(<ItemLowest {...params.row.lowest} color="primary" />)
 					: t('none'))
 				, true)
 		},
-		{field: "meanLow", headerName: t('meanLow'), width: 54 + 4 * 0.875 * rem,
-			sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "histLow", headerName: t('histLow'), width: 54 + 4 * 0.875 * rem,
+		{field: 'meanLow', headerName: t('meanLow'), width: 41 + 2*8*0.52*rem,
+			sortable: false,
 			renderCell: withSuspense((params) =>
-					(<ItemHistPerCost
-						value={params.value}
-						upperBound={params.row.meanLow}
-						lowerBound={params.row.lowest?.price}
+				(<ItemMeanLow
+						value={params.row.meanLow}
+						hist={params.row.histLow}
+						lowest={params.row.lowest?.price}
 						valueFormatter={noneOrFix}
-					/>)
-				, true),
-			sortComparator: lowestComparator, valueFormatter: noneOrFix},
+					/>
+				), true)
+		},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
 			valueGetter: (params) => {
 				let price = params.row.histLow;
 				return isNaN(price) ? undefined : (price / params.row.cost);
 			}, sortComparator: lowestComparator, valueFormatter: noneOrFix},
-		{field: "volumes", headerName: t('volumes'), width: 112,
+		{field: "volumes", headerName: t('volumes'), width: 21 + 3*6*0.52*0.875*rem,
 			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
 					(<ItemVolumns
 						value={value}
-						height={52} width={112}
+						height={52} width={21 + 3*6*0.52*0.875*rem}
 						color={theme.palette.primary.main}
 						darkMode={theme.palette.mode === 'dark'}
 					/>) : t('none'))
