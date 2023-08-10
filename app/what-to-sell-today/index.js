@@ -21,7 +21,7 @@ import {configSelectors} from "../../modules/config/configSlice";
 const THEME = {
 	palette: {
 		primary: {
-			main: '#636fb6',
+			main: '#42a4f5',
 			contrastText: '#ffffff'
 		},
 		secondary: {
