@@ -15,7 +15,7 @@ function ItemVolumns({value, height, width, color, darkMode}) {
 				left: -10,
 				top: 0
 			}}>
-				<LineChart {...{ height, width, color, darkMode}} data={value.map((v, i) => [i, v])}/>
+				<LineChart {...{ height, width, color, darkMode}} data={[0,...value].map((v, i) => [i, v])}/>
 			</Box>
 		</Box>
 		<StyledCellContainer>
