@@ -3,7 +3,7 @@ import Context from "./requestContext.mjs";
 import checkRecaptcha from "./checkRecaptcha.mjs";
 import getMarketReports from "./getMarketReports.mjs";
 
-import itemLists from '../../public/json/itemLists.json' assert { type: "json" };
+import * as itemLists from './itemLists.mjs';
 
 const WINDOW_SIZE = 5,
 	DEFAULT_WORLD = 'LuXingNiao',
