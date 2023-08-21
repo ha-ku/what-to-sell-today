@@ -6,7 +6,7 @@ import {CssBaseline, Skeleton, useMediaQuery} from "@mui/material";
 import Script from 'next/script';
 
 import {IntlProvider} from 'react-intl';
-import flatten from 'flat';
+import {flatten} from 'flat';
 
 import {SvgDefsProvider} from "../../modules/useSvgDefs";
 import ZH_MESSAGE from '../../public/locales/zh.json';
