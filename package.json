@@ -39,7 +39,7 @@
     "react-intl": "^6.4.7",
     "react-redux": "^8.1.2",
     "redux-persist": "^6.0.0",
-    "use-local-storage-state": "^19.0.4",
+    "use-local-storage-state": "^19.1.0",
     "webpack": "^5.88.2"
   },
   "devDependencies": {
