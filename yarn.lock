@@ -2708,10 +2708,10 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-flat@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/flat/-/flat-6.0.0.tgz#91dc171d2a361cf353e40afdaa3c40655cd10bb3"
-  integrity sha512-/aYW7n5yD9HyW9ZHCzW2LGSpyTmbXEdRWdH5ded6K/a2ETgowOripjBqJorQ4/PBa3VPFub28fNruWp+onmIUg==
+flat@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/flat/-/flat-6.0.1.tgz#09070cf918293b401577f20843edeadf4d3e8755"
+  integrity sha512-/3FfIa8mbrg3xE7+wAhWeV+bd7L2Mof+xtZb5dRDKZ+wDvYJK4WDYeIOuOhre5Yv5aQObZrlbRmk3RTSiuQBtw==
 
 for-each@^0.3.3:
   version "0.3.3"
