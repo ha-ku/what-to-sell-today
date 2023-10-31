@@ -1458,10 +1458,10 @@
     workbox-webpack-plugin "^6.5.4"
     workbox-window "^6.5.4"
 
-"@next/bundle-analyzer@^14.0.0":
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-14.0.0.tgz#40b1681ec9958cb17da44a81584ffefc70d1e70f"
-  integrity sha512-a1Wbs0eXCMj30vxTfaGEO4DP3NjrqN+ge6rMhKZ43VtsXEjiVX95d7XFr7VkNps9lvlkofBF54RnIHhTJ2Ls0Q==
+"@next/bundle-analyzer@^14.0.1":
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-14.0.1.tgz#0b371a00a4c252596669319e2fdda2d3cff4b52b"
+  integrity sha512-AbZZnj4gZ1ZQFppZxAC9e8+skj0rFiSvY6E6Ut+ydS1r6oizR7PMu/7o02psIm4ekAsmp2O1Eq8IowHQgPWPCQ==
   dependencies:
     webpack-bundle-analyzer "4.7.0"
 
