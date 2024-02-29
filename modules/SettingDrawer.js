@@ -3,13 +3,13 @@ import {
 	Backdrop,
 	Box,
 	Button,
-	Drawer,
 	FormControl,
 	FormControlLabel,
 	FormLabel,
 	MenuItem,
 	Radio,
 	RadioGroup,
+	SwipeableDrawer,
 	Switch,
 	TextField,
 	Typography
@@ -61,7 +61,7 @@ function SettingDrawer({open, onClose}) {
 	}, [importing]);
 
 	return (
-		<Drawer anchor="left" open={open} onClose={() => {
+		<SwipeableDrawer anchor="left" open={open} onClose={() => {
 			dispatch(setGlobalConfig());
 			if(world !== localWorld || server !== localServer || priceWindow !== localPriceWindow)
 				dispatch(reportAction.startUpdate());
@@ -161,7 +161,7 @@ function SettingDrawer({open, onClose}) {
 			<Backdrop open={!!importing}>
 				<StyledCircularProgress />
 			</Backdrop>
-		</Drawer>
+		</SwipeableDrawer>
 	);
 }
 
