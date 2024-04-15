@@ -63,6 +63,8 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 				}
 				: col
 		),
+		widthLeft = columns.filter(c => c.pin === 'left').reduce((a, n) => a + n.width, 0) + 2,
+		widthRight = columns.filter(c => c.pin === 'right').reduce((a, n) => a + n.width, 0) + 2,
 		rowsLeft = useDeferredValue(rows),
 		rowsRight = useDeferredValue(rows);
 
@@ -89,8 +91,6 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 			columnSortedDescendingIcon: ArrowDropDownIcon,
 			...(_slots ?? {}),
 		},
-
-		columns: pinnedColumns,
 		sx: {
 			..._sx,
 			'& .PinnedLeft': {
@@ -105,26 +105,31 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 				display: 'none'
 			}
 		},
+		columns: pinnedColumns,
 	}
 
 	return (
 		<>
 			<DataGrid autoPageSize {...{rows, onPaginationModelChange: setPaginationModel, ...props, columns: cuttedColumns, sx}} ref={ref}/>
 			<StyledGridContainer>
-				{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
-					{...{rows: rowsLeft, ...props}}
-					hideFooter
-					showCellVerticalBorder
-					showColumnVerticalBorder
-					initialState={initialStateLeft}
-				/> : <Box /> }
-				{ pinnedColumns.some(c => c.pin === 'right') ? <DataGrid
-					{...{rows: rowsRight, ...props}}
-					hideFooter
-					showCellVerticalBorder
-					showColumnVerticalBorder
-					initialState={initialStateRight}
-				/> : <Box /> }
+				<Box sx={{width: widthLeft}}>
+					{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
+						{...{rows: rowsLeft, ...props}}
+						hideFooter
+						showCellVerticalBorder
+						showColumnVerticalBorder
+						initialState={initialStateLeft}
+					/> : null }
+				</Box>
+				<Box sx={{width: widthRight}}>
+					{ pinnedColumns.some(c => c.pin === 'right') ? <DataGrid
+						{...{rows: rowsRight, ...props}}
+						hideFooter
+						showCellVerticalBorder
+						showColumnVerticalBorder
+						initialState={initialStateRight}
+					/> : null }
+				</Box>
 			</StyledGridContainer>
 		</>
 	)

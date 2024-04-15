@@ -33,8 +33,8 @@ function ItemName({id, value, enName, level, defaultLastUploadTime, lastUploadTi
 	const outdatedRatio = min((new Date().getTime() - defaultLastUploadTime) / 43200000, 1);
 	const r = 40;
 
-	return (<>
-		<Box sx={{flex: '0 0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}} >
+	return (<Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+		<Box sx={{flexGrow: 0, display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}} >
 			<Avatar variant="rounded" src={`https://universalis-ffxiv.github.io/universalis-assets/icon2x/${id}.png`} sx={{width: 32, height: 32, marginRight: 1}} alt={enName}></Avatar>
 			<Button variant="text" sx={{textTransform: 'initial', minWidth: 0}} onClick={onClick} >
 				<Box component="span" sx={{maxWidth: '116px', overflow: "hidden", textOverflow: "ellipsis"}}>
@@ -107,7 +107,7 @@ function ItemName({id, value, enName, level, defaultLastUploadTime, lastUploadTi
 				<InfoOutlinedIcon />
 			</Badge>
 		</StyledTooltip>
-	</>)
+	</Box>)
 }
 
 

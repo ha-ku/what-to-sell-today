@@ -66,6 +66,9 @@ export default withPersistRedux(function Index() {
 		palette: {
 			...THEME.palette,
 			mode: userDarkMode === 'auto' ? autoDarkMode : userDarkMode
+		},
+		components: {
+			MuiDataGrid: {}
 		}
 	});
 
