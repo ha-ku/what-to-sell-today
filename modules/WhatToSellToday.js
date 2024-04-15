@@ -104,7 +104,7 @@ function whatToSellToday(){
 
 
 	const { t ,locale } = useTranslate('grid'),
-		noneOrFix = ({value}) => (isNaN(value) || value === null || value === 0) ? t('none') : Number(value.toFixed(1));
+		noneOrFix = (value) => (isNaN(value) || value === null || value === 0) ? t('none') : Number(value.toFixed(1));
 	const [recaptchaVersion, setRecaptchaVersion] = useState(3);
 	const [{execute: executeRecaptcha}, setExecuteRecaptcha] = useState({execute: null});
 	const [v2Props, v3Props] = useMemo(() => ([
@@ -146,7 +146,7 @@ function whatToSellToday(){
 			pin: 'left'
 		},
 		{field: "cost", headerName: t('cost'), width: 21 + 5 * 0.52 * 0.875 * rem, sortable: false,
-			valueFormatter: ({value}) => Number(value.toFixed(3))},
+			valueFormatter: (value) => Number(value.toFixed(3))},
 		{field: "defaultLowest", headerName: t('defaultLowest'), width: 94, ...defaultServerClass,
 			sortComparator: (v1, v2) => lowestComparator(v1?.price, v2?.price),
 			renderCell: withSuspense((params) => params.row.defaultLowest ?
@@ -166,14 +166,14 @@ function whatToSellToday(){
 				), true)
 		},
 		{field: "defaultHistPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem, ...defaultServerClass,
-			valueGetter: (params) => isNaN(params.row.defaultHistLow) ?
+			valueGetter: (_, row) => isNaN(row.defaultHistLow) ?
 				undefined
-				: (params.row.defaultHistLow / params.row.cost),
+				: (row.defaultHistLow / row.cost),
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "defaultDailyVolumns", headerName: t('dailyRevenue'), width: 54 + 4 * 0.875 * rem, ...defaultServerClass,
-			valueGetter: (params) => isNaN(params.row.defaultHistLow) ?
+			valueGetter: (_, row) => isNaN(row.defaultHistLow) ?
 				undefined
-				: (params.row.defaultHistLow / params.row.cost) * params.row.defaultVolumes[params.row.defaultVolumes.length-1] / 7,
+				: (row.defaultHistLow / row.cost) * row.defaultVolumes[row.defaultVolumes.length-1] / 7,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "defaultVolumes", headerName: t('volumes'), width: 21 + 3*6*0.52*0.875*rem, ...defaultServerClass,
 			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
@@ -205,15 +205,15 @@ function whatToSellToday(){
 				), true)
 		},
 		{field: "histPerCost", headerName: t('histPerCost'), width: 54 + 5 * 0.875 * rem,
-			valueGetter: (params) =>
-				isNaN(params.row.histLow) ?
+			valueGetter: (_, row) =>
+				isNaN(row.histLow) ?
 					undefined
-					: (params.row.histLow / params.row.cost)
+					: (row.histLow / row.cost)
 			, sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "dailyVolumns", headerName: t('dailyRevenue'), width: 54 + 4 * 0.875 * rem,
-			valueGetter: (params) => isNaN(params.row.histLow) ?
+			valueGetter: (_, row) => isNaN(row.histLow) ?
 				undefined
-				: (params.row.histLow / params.row.cost) * params.row.volumes[params.row.volumes.length-1] / 7,
+				: (row.histLow / row.cost) * row.volumes[row.volumes.length-1] / 7,
 			sortComparator: lowestComparator, valueFormatter: noneOrFix},
 		{field: "volumes", headerName: t('volumes'), width: 21 + 3*6*0.52*0.875*rem,
 			sortable: false, renderCell: withSuspense(({value}) => (value?.length ?
