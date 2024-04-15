@@ -28,7 +28,7 @@ const NavBar = lazy(() => import('./NavBar'));
 const ItemName = lazy(() => import('./ItemName'));
 const ItemMeanLow = lazy(() => import('./ItemMeanLow'));
 const ItemVolumns = lazy(() => import('./ItemVolumns'));
-const LinearProgress = lazy(() => import('./LinearProgress'));
+const LinearProgress = lazy(() => import('@mui/material/LinearProgress'));
 const CopyHint = lazy(() => import('./CopyHint'));
 const PinnableDataGrid = lazy(() => import('./PinnableDataGrid'));
 
