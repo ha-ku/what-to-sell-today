@@ -30,7 +30,7 @@
     "next": "^14.2.3",
     "next-pwa": "^5.6.0",
     "pbf": "^3.2.1",
-    "react": "^18.3.0",
+    "react": "^18.3.1",
     "react-async-script": "^1.2.0",
     "react-dom": "^18.0.0",
     "react-google-recaptcha": "^3.1.0",
