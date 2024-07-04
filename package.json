@@ -29,7 +29,7 @@
     "is-plain-object": "^5.0.0",
     "next": "^14.2.4",
     "next-pwa": "^5.6.0",
-    "pbf": "^3.2.1",
+    "pbf": "^3.3.0",
     "react": "^18.3.1",
     "react-async-script": "^1.2.0",
     "react-dom": "^18.3.1",
