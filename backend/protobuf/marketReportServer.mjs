@@ -1,7 +1,7 @@
 import getReports from "../modules/getReports.mjs";
 import Chain from "stream-chain";
 import Pbf from "pbf";
-import MarketReport from './MarketReport.js';
+import MarketReport from './MarketReport.mjs';
 import lpstream from '../modules/lengthPrefixedWebstream.mjs';
 
 

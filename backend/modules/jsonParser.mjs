@@ -8,7 +8,7 @@ import { Worker, MessageChannel } from 'worker_threads';
 import WorkerStream from './jsonParserStream.mjs';
 
 //import TYPE from "./arvoType.mjs";
-import TYPE from "../protobuf/MarketReport.js";
+import TYPE from "../protobuf/MarketReport.mjs";
 import Pbf from "pbf";
 
 const STREAM_OPTIONS = {
