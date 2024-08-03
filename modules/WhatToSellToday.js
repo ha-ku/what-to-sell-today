@@ -8,7 +8,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 import MixedRecaptcha from "./MixedRecaptcha";
 import Pbf from 'pbf';
-import {Report} from '../backend/protobuf/MarketReport';
+import {readReport} from '../backend/protobuf/MarketReport.mjs';
 import lpstream from "../backend/modules/lengthPrefixedWebstream.mjs";
 
 
@@ -278,7 +278,7 @@ function whatToSellToday(){
 						dispatch(reportAction.finishUpdate(false));
 						return;
 					}
-					const message = Report.read(new Pbf(_message))
+					const message = readReport(new Pbf(new Uint8Array(_message)))
 					console.log(message);
 					if (message.err) {
 						if (message.err.code === 403 && recaptchaVersion === 3) {

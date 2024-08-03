@@ -37,9 +37,9 @@ message ServerQualityReport {
 }
 
 message ServerReport {
-  ServerQualityReport nq = 1;
-  ServerQualityReport hq = 2;
-  ServerQualityReport all = 3;
+  optional ServerQualityReport nq = 1;
+  optional ServerQualityReport hq = 2;
+  optional ServerQualityReport all = 3;
   int64 lastUploadTime = 4;
 }
 
@@ -54,9 +54,9 @@ message Report {
   string enName = 3;
   float cost = 4;
   int64 lastUploadTime = 5;
-  ServerQualityReport nq = 6;
-  ServerQualityReport hq = 7;
-  ServerQualityReport all = 8;
+  optional ServerQualityReport nq = 6;
+  optional ServerQualityReport hq = 7;
+  optional ServerQualityReport all = 8;
   ServerReport defaultServer = 9;
-  Error err = 10;
+  optional Error err = 10;
 }

@@ -6,11 +6,11 @@
   "author": "haku",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "mathjs": "^11.5.0",
-    "pbf": "^3.2.1",
-    "redis": "^4.5.1",
+    "dotenv": "^16.4.5",
+    "mathjs": "^13.0.3",
+    "pbf": "^4.0.1",
+    "redis": "^4.7.0",
     "stream-chain": "^2.2.5",
-    "stream-json": "^1.7.5"
+    "stream-json": "^1.8.0"
   }
 }
