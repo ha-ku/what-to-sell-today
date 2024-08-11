@@ -112,7 +112,12 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 		<>
 			<DataGrid autoPageSize {...{rows, onPaginationModelChange: setPaginationModel, ...props, columns: cuttedColumns, sx}} ref={ref}/>
 			<StyledGridContainer>
-				<Box sx={{width: widthLeft}}>
+				<Box sx={{
+					width: widthLeft,
+					'& .MuiDataGrid-filler': {
+						display: 'none'
+					}
+				}}>
 					{ pinnedColumns.some(c => c.pin === 'left') ? <DataGrid
 						{...{rows: rowsLeft, ...props}}
 						hideFooter
@@ -121,7 +126,12 @@ const PinnableDataGrid = forwardRef(({pinnedColumns: p, columns, rows, sx: _sx, 
 						initialState={initialStateLeft}
 					/> : null }
 				</Box>
-				<Box sx={{width: widthRight}}>
+				<Box sx={{
+					width: widthRight,
+					'& .MuiDataGrid-filler': {
+						display: 'none'
+					}
+				}}>
 					{ pinnedColumns.some(c => c.pin === 'right') ? <DataGrid
 						{...{rows: rowsRight, ...props}}
 						hideFooter

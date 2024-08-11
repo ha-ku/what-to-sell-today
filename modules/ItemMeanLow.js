@@ -11,7 +11,7 @@ function ItemMeanLow({value, hist, lowest, valueFormatter}) {
 	return (<>
 		<StyledCellContainer>
 			<StyledGrowingCell>
-				{valueFormatter({value: hist})}
+				{valueFormatter(hist)}
 			</StyledGrowingCell>
 			<StyledSolidCell>
 				<Chip icon={!hist || (hist > (value > 0 ? value : Number.MAX_SAFE_INTEGER)) ?
@@ -20,7 +20,7 @@ function ItemMeanLow({value, hist, lowest, valueFormatter}) {
 							(<NorthEastOutlinedIcon color="success" fontSize="small" />)
 							: null
 					)
-				} label={valueFormatter({value})} variant="outlined"
+				} label={valueFormatter(value)} variant="outlined"
 					  color={!hist || (hist > (value > 0 ? value : Number.MAX_SAFE_INTEGER)) ? "warning" :
 						  (hist < (lowest ?? Number.MAX_SAFE_INTEGER) ? "success"
 								  : "default"
