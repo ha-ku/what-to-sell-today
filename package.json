@@ -18,7 +18,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/system": "^6.1.0",
-    "@mui/x-data-grid": "^7.16.0",
+    "@mui/x-data-grid": "^7.17.0",
     "@murkrage/next-pwa": "^5.7.1",
     "@reduxjs/toolkit": "^2.2.7",
     "clsx": "^2.1.1",
