@@ -1462,22 +1462,22 @@
     prop-types "^15.8.1"
     react-is "^18.3.1"
 
-"@mui/x-data-grid@^7.17.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.17.0.tgz#26cb4b0b978e44e4488e2a0f2a4dd6810c147b74"
-  integrity sha512-d3pFdrQlNR+8waol7iM6LlNIpvqo9SgYeKcMIOSQ3etpue9iRFNy8s1HCHd9Nxnhzgr+fqMy/v3bXZnd196qig==
+"@mui/x-data-grid@^7.18.0":
+  version "7.18.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.18.0.tgz#9be96110e0334eb347b09eef68f1d61d3720bb13"
+  integrity sha512-41UjJbRxWk+Yk/lfvaO55Pwo5p+F5s3rOTiHLl53ikCT5GuJ5OCCvik0Bi3c6DzTuUBdrEucae2618rydc2DGw==
   dependencies:
     "@babel/runtime" "^7.25.6"
     "@mui/utils" "^5.16.6"
-    "@mui/x-internals" "7.17.0"
+    "@mui/x-internals" "7.18.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     reselect "^5.1.1"
 
-"@mui/x-internals@7.17.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.17.0.tgz#c5731b8deb07107fbc406e62277aaa5c3f0db0a7"
-  integrity sha512-FLlAGSJl/vsuaA/8hPGazXFppyzIzxApJJDZMoTS0geUmHd0hyooISV2ltllLmrZ/DGtHhI08m8GGnHL6/vVeg==
+"@mui/x-internals@7.18.0":
+  version "7.18.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.18.0.tgz#f079968d4f7ea93e63be9faf6ba8558d6f12923b"
+  integrity sha512-lzCHOWIR0cAIY1bGrWSprYerahbnH5C31ql/2OWCEjcngL2NAV1M6oKI2Vp4HheqzJ822c60UyWyapvyjSzY/A==
   dependencies:
     "@babel/runtime" "^7.25.6"
     "@mui/utils" "^5.16.6"
