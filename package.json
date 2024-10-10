@@ -36,7 +36,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-google-recaptcha-v3": "^1.9.8",
     "react-hotkeys-hook": "^4.5.1",
-    "react-intl": "^6.7.1",
+    "react-intl": "^6.7.2",
     "react-redux": "^9.1.2",
     "redux-persist": "^6.0.0",
     "use-local-storage-state": "^19.4.0",
