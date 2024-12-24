@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
-    "@mui/system": "^6.2.1",
+    "@mui/system": "^6.3.0",
     "@mui/x-data-grid": "^7.23.3",
     "@murkrage/next-pwa": "^5.7.1",
     "@reduxjs/toolkit": "^2.5.0",
