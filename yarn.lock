@@ -1549,22 +1549,23 @@
     prop-types "^15.8.1"
     react-is "^19.0.0"
 
-"@mui/x-data-grid@^7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.25.0.tgz#04617d72ad86ce7fac256834ca2c7f04228b6c88"
-  integrity sha512-e9ZLbCgnDiADFiDyXo91ucZFHEMkKBNpwpkaTq5KohzefJfMpMQjTEbJeueSfBG2G1Q1Am2TPeBqrNeReIA7RQ==
+"@mui/x-data-grid@^7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.26.0.tgz#6e516bc215633213ff040e1dfb7a88f4b3a02613"
+  integrity sha512-9RNQeT2OL6jBOCE0MSUH11ol3fV5Zs9MkGxUIAGXcy/Fui0rZRNFO1yLmWDZU5yvskiNmUZJHWV/qXh++ZFarA==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
-    "@mui/x-internals" "7.25.0"
+    "@mui/x-internals" "7.26.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     reselect "^5.1.1"
+    use-sync-external-store "^1.0.0"
 
-"@mui/x-internals@7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.25.0.tgz#981a5365391190ab3aa0e9c7a346315b3d1f621c"
-  integrity sha512-tBUN54YznAkmtCIRAOl35Kgl0MjFDIjUbzIrbWRgVSIR3QJ8bXnVSkiRBi+P91SZEl9+ZW0rDj+osq7xFJV0kg==
+"@mui/x-internals@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.26.0.tgz#e8c3060582c102127ab55b0a93e881930dac107b"
+  integrity sha512-VxTCYQcZ02d3190pdvys2TDg9pgbvewAVakEopiOgReKAUhLdRlgGJHcOA/eAuGLyK1YIo26A6Ow6ZKlSRLwMg==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
@@ -4461,7 +4462,7 @@ use-local-storage-state@^19.5.0:
   resolved "https://registry.yarnpkg.com/use-local-storage-state/-/use-local-storage-state-19.5.0.tgz#25bf46dd45b491020c03db516b46a4ff93b3a923"
   integrity sha512-sUJAyFvsmqMpBhdwaRr7GTKkkoxb6PWeNVvpBDrLuwQF1PpbJRKIbOYeLLeqJI7B3wdfFlLLCBbmOdopiSTBOw==
 
-use-sync-external-store@^1.4.0:
+use-sync-external-store@^1.0.0, use-sync-external-store@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.4.0.tgz#adbc795d8eeb47029963016cefdf89dc799fcebc"
   integrity sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==
