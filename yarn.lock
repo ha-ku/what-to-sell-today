@@ -1529,7 +1529,7 @@
     prop-types "^15.8.1"
     react-is "^18.3.1"
 
-"@mui/utils@^5.16.6 || ^6.0.0", "@mui/utils@^6.4.8":
+"@mui/utils@^5.16.6 || ^6.0.0 || ^7.0.0 || ^7.0.0-beta", "@mui/utils@^6.4.8":
   version "6.4.8"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-6.4.8.tgz#f80ee0c0ac47f1cd47c2031a5fb87243322b6bf3"
   integrity sha512-C86gfiZ5BfZ51KqzqoHi1WuuM2QdSKoFhbkZeAfQRB+jCc4YNhhj11UXFVMMsqBgZ+Zy8IHNJW3M9Wj/LOwRXQ==
@@ -1541,26 +1541,26 @@
     prop-types "^15.8.1"
     react-is "^19.0.0"
 
-"@mui/x-data-grid@^7.27.3":
-  version "7.27.3"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.27.3.tgz#6eeb9490fd06d3336d3f5caecd336c49bc09b7e3"
-  integrity sha512-7zbDbFrhV6ODjyn3ImOZG34nbMbCvmHgqYTYP273TNAj8hMy4BiLyiKFFZTzVddIj3KQ6qLzBpByhqifGgEDOg==
+"@mui/x-data-grid@^7.28.0":
+  version "7.28.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-7.28.0.tgz#b080b58824e2946dc1eabe5edb28a4e9ba293511"
+  integrity sha512-rOAUB0m1kL2hmgodScJu5AI0AjbVBJtG7erRZ3IhDyk73oRRlgnKttWNks9iIuVCNxXbCbBkvH06rqxgkkuCsQ==
   dependencies:
     "@babel/runtime" "^7.25.7"
-    "@mui/utils" "^5.16.6 || ^6.0.0"
-    "@mui/x-internals" "7.26.0"
+    "@mui/utils" "^5.16.6 || ^6.0.0 || ^7.0.0 || ^7.0.0-beta"
+    "@mui/x-internals" "7.28.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     reselect "^5.1.1"
     use-sync-external-store "^1.0.0"
 
-"@mui/x-internals@7.26.0":
-  version "7.26.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.26.0.tgz#e8c3060582c102127ab55b0a93e881930dac107b"
-  integrity sha512-VxTCYQcZ02d3190pdvys2TDg9pgbvewAVakEopiOgReKAUhLdRlgGJHcOA/eAuGLyK1YIo26A6Ow6ZKlSRLwMg==
+"@mui/x-internals@7.28.0":
+  version "7.28.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.28.0.tgz#b0a04f4c0f53f2f91d13a46f357f731b77c832c5"
+  integrity sha512-p4GEp/09bLDumktdIMiw+OF4p+pJOOjTG0VUvzNxjbHB9GxbBKoMcHrmyrURqoBnQpWIeFnN/QAoLMFSpfwQbw==
   dependencies:
     "@babel/runtime" "^7.25.7"
-    "@mui/utils" "^5.16.6 || ^6.0.0"
+    "@mui/utils" "^5.16.6 || ^6.0.0 || ^7.0.0 || ^7.0.0-beta"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
