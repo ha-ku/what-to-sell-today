@@ -36,6 +36,7 @@ module.exports = withBundleAnalyzer(withPWA({
 			process: false,
 			events: false,
 		};
+		config.resolve.conditionNames = ['mui-modern', '...'];
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: ['@svgr/webpack']

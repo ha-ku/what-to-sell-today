@@ -15,9 +15,9 @@
     "@babel/core": "^7.26.10",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.8",
-    "@mui/material": "^6.4.8",
-    "@mui/system": "^6.4.8",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/system": "^7.0.0",
     "@mui/x-data-grid": "^7.28.1",
     "@murkrage/next-pwa": "^5.7.1",
     "@reduxjs/toolkit": "^2.6.1",
@@ -53,7 +53,7 @@
     "util": "^0.12.5"
   },
   "engines": {
-    "node": "^20.x"
+    "node": "^22.x"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

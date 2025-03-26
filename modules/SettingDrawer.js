@@ -61,16 +61,18 @@ function SettingDrawer({open, onClose}) {
 	}, [importing]);
 
 	return (
-		<SwipeableDrawer anchor="left" open={open} onClose={() => {
+        <SwipeableDrawer anchor="left" open={open} onClose={() => {
 			dispatch(setGlobalConfig());
 			if(world !== localWorld || server !== localServer || priceWindow !== localPriceWindow)
 				dispatch(reportAction.startUpdate());
 			onClose();
-		}} autoWidth PaperProps={{sx: {padding: '20px'}}}>
-			<Typography variant="h5" >
+		}} autoWidth slotProps={{
+            paper: {sx: {padding: '20px'}}
+        }}>
+            <Typography variant="h5" >
 				<FormattedMessage id="appearance" />
 			</Typography>
-			<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+            <FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 				<FormLabel id="theme-label">{t('theme')}</FormLabel>
 				<RadioGroup value={userDarkMode} onChange={({target: {value}}) => dispatch(setUserDarkMode(value))} row aria-labelledby="theme-label" >
 					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('day')} value="light"/>
@@ -78,11 +80,10 @@ function SettingDrawer({open, onClose}) {
 					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('auto')} value="auto"/>
 				</RadioGroup>
 			</FormControl>
-
-			<Typography variant="h5" mt={3} >
+            <Typography variant="h5" mt={3} >
 				<FormattedMessage id="calculationParam" />
 			</Typography>
-			<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+            <FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 				<FormLabel id="quality-label">{t('quality')}</FormLabel>
 				<RadioGroup value={quality} onChange={({target: {value}}) => dispatch(setQuality(value))} row aria-labelledby="quality-label" >
 					<FormControlLabel control={<Radio color="secondary" size="small" />} label={t('HQ')} value="hq"/>
@@ -97,11 +98,10 @@ function SettingDrawer({open, onClose}) {
 					dispatch(setLocalPriceWindow((value.length && (isNaN(window) || window <= 0 || window >= 10)) ? undefined : value));
 				}} variant="standard" margin="dense" sx={{width: '160px'}}/>
 			</FormControl>
-
-			<Typography variant="h5" mt={3} >
+            <Typography variant="h5" mt={3} >
 				<FormattedMessage id="retainerInfo" />
 			</Typography>
-			<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+            <FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 				<Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start'}} >
 					{Object.keys(localJobInfo).map((job) => (
 						<StyledFormControlLabel key={job} label={t(job)} labelPlacement="top" control={
@@ -119,11 +119,10 @@ function SettingDrawer({open, onClose}) {
 					))}
 				</Box>
 			</FormControl>
-
-			<Typography variant="h5" mt={3} >
+            <Typography variant="h5" mt={3} >
 				<FormattedMessage id="characterInfo" />
 			</Typography>
-			<FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
+            <FormControl sx={{marginTop: '15px', marginLeft: '15px'}} >
 				<Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
 					<TextField select label={t('DC')} value={localWorld} onChange={({target: {value}}) => dispatch(setLocalWorld(value))} variant="standard" margin="dense" sx={{marginRight: "10px"}}>{
 						worlds.map((world, i) =>
@@ -141,10 +140,8 @@ function SettingDrawer({open, onClose}) {
 					}</TextField>
 				</Box>
 			</FormControl>
-
-			<Box sx={{flex: '1 1 auto'}} />
-
-			<Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <Box sx={{flex: '1 1 auto'}} />
+            <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
 				<Button variant="text" startIcon={<DownloadForOfflineIcon />} onClick={() => {
 					let settings = {
 						userDarkMode,  quality, considerTime, locale, sortModel,
@@ -158,11 +155,11 @@ function SettingDrawer({open, onClose}) {
 					<FormattedMessage id="import" />
 				</Button>
 			</Box>
-			<Backdrop open={!!importing}>
+            <Backdrop open={!!importing}>
 				<StyledCircularProgress />
 			</Backdrop>
-		</SwipeableDrawer>
-	);
+        </SwipeableDrawer>
+    );
 }
 
 
