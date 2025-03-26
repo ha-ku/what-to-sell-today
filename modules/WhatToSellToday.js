@@ -181,7 +181,6 @@ function whatToSellToday(){
 							value={value}
 							height={52} width={21 + 3*6*0.52*0.875*rem}
 							color={theme.palette.secondary.main}
-							darkMode={theme.palette.mode === 'dark'}
 						/>
 					) : t('none'))
 				, true)
@@ -221,11 +220,10 @@ function whatToSellToday(){
 						value={value}
 						height={52} width={21 + 3*6*0.52*0.875*rem}
 						color={theme.palette.primary.main}
-						darkMode={theme.palette.mode === 'dark'}
 					/>) : t('none'))
 				, true)
 		}
-	]), [listSource.withTime, rem, theme]);
+	]), [listSource.withTime, rem, theme.palette.primary.main]);
 	const sortModel = useSelector(configSelectors.sortModel),
 		{setSortModel} = configAction,
 		dispatch = useDispatch(),

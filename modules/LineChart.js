@@ -8,7 +8,7 @@ const Root = styled(({color, ...props}) => (<svg {...props} />))`
 	color: ${({color}) => color} ;
 `;
 
-const LineChart = function({width, height, data, color, darkMode}) {
+const LineChart = function({width, height, data, color}) {
 	const offset = height / 3;
 	useSvgDefs('verticalBlur', () => (
 		<filter id="verticalBlur">
@@ -57,7 +57,7 @@ const LineChart = function({width, height, data, color, darkMode}) {
 					<path d={clip} />
 				</clipPath>
 			</defs>
-			<path d={area} strokeWidth={0} fill="currentcolor" fillOpacity={darkMode ? 0.2 : 0.2} filter="url(#verticalBlur)" clipPath={`url(#LineChart-${id})`}/>
+			<path d={area} strokeWidth={0} fill="currentcolor" fillOpacity={0.2} filter="url(#verticalBlur)" clipPath={`url(#LineChart-${id})`}/>
 		</Root>
 	);
 }
