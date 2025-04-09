@@ -40,7 +40,7 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "use-local-storage-state": "^19.5.0",
-    "webpack": "^5.99.1"
+    "webpack": "^5.99.5"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.2.5",
