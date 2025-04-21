@@ -3828,10 +3828,10 @@ react-hotkeys-hook@^5.0.1:
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.0.1.tgz#9c0495d2958201e9fea087fed6d86a69e5297eca"
   integrity sha512-TysTwXrUSj6QclMZIEoxCfvy/6EsoZcrfE970aUVa9fO3c3vcms+IVjv3ljbhUPM/oY1iEoun7O2W8v8INl5hw==
 
-react-intl@^7.1.10:
-  version "7.1.10"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-7.1.10.tgz#2853eac0fac10a3dac5d60d6ca48428444a6d179"
-  integrity sha512-I5eB73BAqBbkd2M3wL8gTSE/xFvJRmxZcjS1HMnBT3KXya2PUSI7nDO/tlapX8khchoDoliliMsmyIURB/ww1g==
+react-intl@^7.1.11:
+  version "7.1.11"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-7.1.11.tgz#6155602c46621ad9b67dd31750d00908e1e0b516"
+  integrity sha512-tnVoRCWvW5Ie2ikYSdPF7z3+880yCe/9xPmitFeRPw3RYDcCfR4m8ZYa4MBq19W4adt9Z+PQA4FaMBCJ7E+HCQ==
   dependencies:
     "@formatjs/ecma402-abstract" "2.3.4"
     "@formatjs/icu-messageformat-parser" "2.11.2"
