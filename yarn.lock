@@ -1005,7 +1005,7 @@
     "@babel/helper-validator-option" "^7.21.0"
     "@babel/plugin-transform-typescript" "^7.21.0"
 
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.27.1", "@babel/runtime@^7.27.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.27.1", "@babel/runtime@^7.27.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.27.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.6.tgz#ec4070a04d76bae8ddbb10770ba55714a417b7c6"
   integrity sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==
@@ -1501,26 +1501,26 @@
     prop-types "^15.8.1"
     react-is "^19.1.0"
 
-"@mui/x-data-grid@^8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.5.1.tgz#452b22c8cd1649337dd633a4cf61cb8595559d38"
-  integrity sha512-Ukodx8cOc/GR4+2zr4DRNBJJOlyeJNaxK4hggWv7VchDL7Jf70dLZO7oLXPhEFG05Yna81RatL/UFsRYIdWI1Q==
+"@mui/x-data-grid@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.5.2.tgz#1788587711d2e49fabe3b8f6ccd5e38ef762f4b1"
+  integrity sha512-4KzawLZqRKp3KcGKsTDVz7zkEjACllQD5Zb8ds1QKlA6C3/oIoSU7PsemFLj+RL3rT5aORsLMBl97/egQ5tUhA==
   dependencies:
-    "@babel/runtime" "^7.27.4"
+    "@babel/runtime" "^7.27.6"
     "@mui/utils" "^7.1.1"
-    "@mui/x-internals" "8.5.1"
+    "@mui/x-internals" "8.5.2"
     clsx "^2.1.1"
     prop-types "^15.8.1"
-    reselect "^5.1.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-internals@8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.5.1.tgz#71b72e0816d986b1b344a1d48e5518b0472cf905"
-  integrity sha512-7rAWK7SB6FxEIXKgsHsJjIzeeKOLxFJ16gePgZVWlvyew+xDb4P0fgjwW3ThcJjgvkUm0UhGGfLh/JP8l514IA==
+"@mui/x-internals@8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.5.2.tgz#fba1bbbff2866ed118761c8fc4fcc7909d167f53"
+  integrity sha512-5YhB2AekK7G8d0YrAjg3WNf0uy3V73JD98WNxJhbIlCraQgl8QOQzr2zNO7MAf/X7mZQtjpjuAsiG3+gI2NVyg==
   dependencies:
-    "@babel/runtime" "^7.27.4"
+    "@babel/runtime" "^7.27.6"
     "@mui/utils" "^7.1.1"
+    reselect "^5.1.1"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
