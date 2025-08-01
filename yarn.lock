@@ -1010,10 +1010,10 @@
     "@babel/helper-validator-option" "^7.21.0"
     "@babel/plugin-transform-typescript" "^7.21.0"
 
-"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.27.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
-  version "7.27.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.6.tgz#ec4070a04d76bae8ddbb10770ba55714a417b7c6"
-  integrity sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.27.4", "@babel/runtime@^7.27.6", "@babel/runtime@^7.28.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+  version "7.28.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.2.tgz#2ae5a9d51cc583bd1f5673b3bb70d6d819682473"
+  integrity sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==
 
 "@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.27.2":
   version "7.27.2"
@@ -1525,26 +1525,36 @@
     prop-types "^15.8.1"
     react-is "^19.1.0"
 
-"@mui/x-data-grid@^8.9.1":
-  version "8.9.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.9.1.tgz#750266625c56c5655649c9ead5c8b2263ae7e286"
-  integrity sha512-N1R3bcxaIpiXqZl7E9nu2b3zp1DC9w5cyaeSJiGhkPpgjKcuogJlL5tMp7UMyUE2h+c0i+1ANMUzD+chHZ6lhg==
+"@mui/x-data-grid@^8.9.2":
+  version "8.9.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.9.2.tgz#80f29db494c4e3d4056d58469ad63bc51f1386f5"
+  integrity sha512-LXyRiF0U60enI/FMFPd0Ct9rP5PIIvUUWnTDqJ5IDSj7cDuD6/cG4E3RcV76iN9j+tALWMZKjeTkBGxQjZ078A==
   dependencies:
-    "@babel/runtime" "^7.27.6"
+    "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.2.0"
-    "@mui/x-internals" "8.8.0"
+    "@mui/x-internals" "8.9.2"
+    "@mui/x-virtualizer" "0.1.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-internals@8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.8.0.tgz#ffaf6cd1cfdd7dd7376236637312deac83a94e85"
-  integrity sha512-qTRK5oINkAjZ7sIHpSnESLNq1xtQUmmfmGscYUSEP0uHoYh6pKkNWH9+7yzggRHuTv+4011VBwN9s+efrk+xZg==
+"@mui/x-internals@8.9.2":
+  version "8.9.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.9.2.tgz#3ad4ca4f945af4fd7ebc11cc2be127d5095abbdc"
+  integrity sha512-qQl0sacWirbvQUdJOrUecsBQkI+vxI3/E1K/Wst6n/rb8ajelsGLMFLQ1PBig73xBT2vADmdcf3XerfH7TKPqQ==
   dependencies:
-    "@babel/runtime" "^7.27.6"
+    "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.2.0"
     reselect "^5.1.1"
+    use-sync-external-store "^1.5.0"
+
+"@mui/x-virtualizer@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.0.tgz#5ffa6c8425a4cf72db8a3a5e31bd00b76577a327"
+  integrity sha512-fugd4tRJTTZpP2NFAxrngQQQhy1SDQq5wzMb6PJC1Y3b6THDw3P4vFuKxHmmfbPuCXLrxDifG0a8Q4LncBt1zA==
+  dependencies:
+    "@babel/runtime" "^7.27.4"
+    "@mui/x-internals" "8.9.2"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
