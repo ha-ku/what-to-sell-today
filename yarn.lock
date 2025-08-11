@@ -1525,36 +1525,37 @@
     prop-types "^15.8.1"
     react-is "^19.1.1"
 
-"@mui/x-data-grid@^8.9.2":
-  version "8.9.2"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.9.2.tgz#80f29db494c4e3d4056d58469ad63bc51f1386f5"
-  integrity sha512-LXyRiF0U60enI/FMFPd0Ct9rP5PIIvUUWnTDqJ5IDSj7cDuD6/cG4E3RcV76iN9j+tALWMZKjeTkBGxQjZ078A==
+"@mui/x-data-grid@^8.10.0":
+  version "8.10.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.10.0.tgz#22f96e314e3c40db296db99120a8fe3255299ae9"
+  integrity sha512-NMOZyDcE9vqn0qEv0z6DqkXwzIOj4ZFy4QC0RcUjEvBmjwdRc3KCh9XSWAuqmpc23B4M9cydVVkt0CBfOJKwsQ==
   dependencies:
     "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.2.0"
-    "@mui/x-internals" "8.9.2"
-    "@mui/x-virtualizer" "0.1.0"
+    "@mui/x-internals" "8.10.0"
+    "@mui/x-virtualizer" "0.1.1"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-internals@8.9.2":
-  version "8.9.2"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.9.2.tgz#3ad4ca4f945af4fd7ebc11cc2be127d5095abbdc"
-  integrity sha512-qQl0sacWirbvQUdJOrUecsBQkI+vxI3/E1K/Wst6n/rb8ajelsGLMFLQ1PBig73xBT2vADmdcf3XerfH7TKPqQ==
+"@mui/x-internals@8.10.0":
+  version "8.10.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.10.0.tgz#ecc9d2367ad1125c78d1505ed959b7f5db25713b"
+  integrity sha512-stYhWBeCKfV2/ltAWShZ3ZJ51otbqpMpC+krWWoIsxM8TuvGzwXw5YMU9L2fTb8hRstsiOCQfEzIn12Ii7+N0Q==
   dependencies:
     "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.2.0"
     reselect "^5.1.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-virtualizer@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.0.tgz#5ffa6c8425a4cf72db8a3a5e31bd00b76577a327"
-  integrity sha512-fugd4tRJTTZpP2NFAxrngQQQhy1SDQq5wzMb6PJC1Y3b6THDw3P4vFuKxHmmfbPuCXLrxDifG0a8Q4LncBt1zA==
+"@mui/x-virtualizer@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.1.tgz#370585de7bd19cb07dbb6f6f0f2bd97e73dc7340"
+  integrity sha512-pZ84wPu/97Z6g2HF7D4t8X5GSgc+Gr3EoJJpGv1SP3mAX2OcZtYhXiUyQzvHPm2jvDQuxIIzwXT3hMIEgdDPPQ==
   dependencies:
     "@babel/runtime" "^7.27.4"
-    "@mui/x-internals" "8.9.2"
+    "@mui/utils" "^7.2.0"
+    "@mui/x-internals" "8.10.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
