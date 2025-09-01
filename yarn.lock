@@ -1525,37 +1525,37 @@
     prop-types "^15.8.1"
     react-is "^19.1.1"
 
-"@mui/x-data-grid@^8.10.2":
-  version "8.10.2"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.10.2.tgz#834e7ce38b27cd5132a0560dad2e058c1e95ec88"
-  integrity sha512-3RnGJ/J55yQxao97TbjUZO8WadLNhEZLLqUjCsJq+O2TN1XNFj5LaCkG+5xGmVhP+OsAhlTm5UDht7wX6/T1Mg==
+"@mui/x-data-grid@^8.11.0":
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.11.0.tgz#a5278012305c4e86007bece8ec436dece8fee03c"
+  integrity sha512-08U4Nm5bZca0AFyz3twQh2N2vR3RTjY5vQMBEDeHy4XxNxsWuV5ZGbh2hR7vP9o1oBdMXEOkEQmm2+kUh4Busg==
   dependencies:
     "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.3.1"
-    "@mui/x-internals" "8.10.2"
-    "@mui/x-virtualizer" "0.1.3"
+    "@mui/x-internals" "8.11.0"
+    "@mui/x-virtualizer" "0.1.4"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-internals@8.10.2":
-  version "8.10.2"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.10.2.tgz#5f0e618b5219b30909dc0dea23c68d24f8e60707"
-  integrity sha512-dlC0BQRRBdiWtqn1yDppaHYRUjU3OuPWTxy0UtqxDaJjJf4pfR8ALr243nbxgJAFqvQyWPWyO4A6p9x9eJMJEQ==
+"@mui/x-internals@8.11.0":
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.11.0.tgz#9aad2e21d0da0edbd702a9fc99ee461f57378dd2"
+  integrity sha512-SFPMLMkNWSEOxIgKMQ9RqEL01klb1lwIdd4f4d18fJNrJOlTxeIDWd6eVllS5sRLdKVsE5FC1802V+yLe6W+pQ==
   dependencies:
     "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.3.1"
     reselect "^5.1.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-virtualizer@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.3.tgz#04b8ae17872592e8bc408c251861421e2def7f5b"
-  integrity sha512-hD/hPoyFP6L/s/ewsni01xVHp2HfaDkrtNxgk8g87bJlZRZL6HbksaDMwkdHYHdTe/lm+9oe+zuA46NRM0eoIA==
+"@mui/x-virtualizer@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.4.tgz#5906f76cb6e3dfce5ea8004296d2e9f70d92ec65"
+  integrity sha512-UHW4yuCo4KpRvSvVsBxx//8wifN8kQZ7P0KPOfy2hu935iAXtRUNMVGGN8kbKyxVpDYQLXBz80doYAJnja61Ew==
   dependencies:
     "@babel/runtime" "^7.28.2"
     "@mui/utils" "^7.3.1"
-    "@mui/x-internals" "8.10.2"
+    "@mui/x-internals" "8.11.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
