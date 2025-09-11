@@ -1513,7 +1513,7 @@
   dependencies:
     "@babel/runtime" "^7.28.3"
 
-"@mui/utils@^7.3.1", "@mui/utils@^7.3.2":
+"@mui/utils@^7.3.2":
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-7.3.2.tgz#361775d72c557a03115150e8aec4329c7ef14563"
   integrity sha512-4DMWQGenOdLnM3y/SdFQFwKsCLM+mqxzvoWp9+x2XdEzXapkznauHLiXtSohHs/mc0+5/9UACt1GdugCX2te5g==
@@ -1525,37 +1525,37 @@
     prop-types "^15.8.1"
     react-is "^19.1.1"
 
-"@mui/x-data-grid@^8.11.1":
-  version "8.11.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.11.1.tgz#9f0c581bde603db63072a51d24e08e7381236828"
-  integrity sha512-+DUdiQC07BD4PrxvDeP31toTUb+BNF2jSJuhXsUdmg8mEC2F9m2A7VSXbeZVYaz+IOs/MPeM03BpLCN637owRg==
+"@mui/x-data-grid@^8.11.2":
+  version "8.11.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.11.2.tgz#6ab6ef37a3b40b2da10201522d38e7491c864a37"
+  integrity sha512-GSMDD4SuqTtsbZQMnTDFlVtewbPINmxTcGDeMQpJAQG8DMgV24UaoT1FYTqJiBkqnib6avz8ME0q/6i6BQGt3w==
   dependencies:
     "@babel/runtime" "^7.28.2"
-    "@mui/utils" "^7.3.1"
-    "@mui/x-internals" "8.11.1"
-    "@mui/x-virtualizer" "0.1.5"
+    "@mui/utils" "^7.3.2"
+    "@mui/x-internals" "8.11.2"
+    "@mui/x-virtualizer" "0.1.6"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-internals@8.11.1":
-  version "8.11.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.11.1.tgz#12a89eb1ff9bf6f824b33dc737fe7a729fddaac5"
-  integrity sha512-/l0VpgdgYhC7DzqdWaQcuv3wX7cr+o3DBnoKa/t/Vze3y/Wh2VeNSJY/TsW2dIVkFAA9dsjUEMjclT7ScZTDqA==
+"@mui/x-internals@8.11.2":
+  version "8.11.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-8.11.2.tgz#d05e68f42e485a7b1a73d716281476192cfc87df"
+  integrity sha512-3BFZ0Njgih+eWQBzSsdKEkRMlHtKRGFWz+/CGUrSBb5IApO0apkUSvG4v5augNYASsjksqWOXVlds7Wwznd0Lg==
   dependencies:
     "@babel/runtime" "^7.28.2"
-    "@mui/utils" "^7.3.1"
+    "@mui/utils" "^7.3.2"
     reselect "^5.1.1"
     use-sync-external-store "^1.5.0"
 
-"@mui/x-virtualizer@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.5.tgz#8d497d8d4a276a4b940782d1b0fce4a434b606bb"
-  integrity sha512-Dph10sn5DztOTORk+PTxiVONKfDQOtLRoQXpln2PxjP5DWiYeUkLU8fJRQGth5U7UhYf3AFm29j5K64oN4pVFw==
+"@mui/x-virtualizer@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.1.6.tgz#6e90edf351760624f4e830058ebd7c42c14935e6"
+  integrity sha512-rZBS1+Y8micorIDs06REFsjQGMW+CJ0OiRnko32R2fvC7Wy5FrgZ/PK5im1vXG6a86lSg5YLKT9wr59/6NqRjQ==
   dependencies:
     "@babel/runtime" "^7.28.2"
-    "@mui/utils" "^7.3.1"
-    "@mui/x-internals" "8.11.1"
+    "@mui/utils" "^7.3.2"
+    "@mui/x-internals" "8.11.2"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
