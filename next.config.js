@@ -12,7 +12,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer(withPWA({
 //module.exports = {
 	experimental: {
-		appDir: true
 		//runtime: process.env.DEVELOPMENT ? 'nodejs' : 'experimental-edge',
 	},
 	modularizeImports: {
