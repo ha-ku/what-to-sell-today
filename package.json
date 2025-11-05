@@ -20,7 +20,7 @@
     "@mui/system": "^7.3.3",
     "@mui/x-data-grid": "^8.16.0",
     "@murkrage/next-pwa": "^5.7.1",
-    "@reduxjs/toolkit": "^2.9.2",
+    "@reduxjs/toolkit": "^2.10.1",
     "clsx": "^2.1.1",
     "colord": "^2.9.3",
     "deepmerge": "^4.3.0",
