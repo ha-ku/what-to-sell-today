@@ -1535,15 +1535,15 @@
     prop-types "^15.8.1"
     react-is "^19.2.0"
 
-"@mui/x-data-grid@^8.19.0":
-  version "8.19.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.19.0.tgz#c550bf476dd8386c95543e9627a64d44cd47130d"
-  integrity sha512-jxt+d6Fms5Z/gPcSC6mpfCOsGw6YfKu7iiP8Q58RDPEh+I7C9XQfta7tPtNhcCNV1zJ7xBN7aQhslh8Rnadz5w==
+"@mui/x-data-grid@^8.20.0":
+  version "8.20.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.20.0.tgz#299e767294df7d9e697d0faab96a284c8bb215ba"
+  integrity sha512-PXZOZjxEcD3XL26EQN+wBS8/f5dY2JhprHk0Cm8hjoapvuFYChDPl1hA3QrbU0rpWNIOKotsLrnNBpXNgzQzKQ==
   dependencies:
     "@babel/runtime" "^7.28.4"
     "@mui/utils" "^7.3.5"
     "@mui/x-internals" "8.19.0"
-    "@mui/x-virtualizer" "0.2.9"
+    "@mui/x-virtualizer" "0.2.10"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.6.0"
@@ -1558,10 +1558,10 @@
     reselect "^5.1.1"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-virtualizer@0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.2.9.tgz#96813414f0254e24d80c04ce50a42076978fa876"
-  integrity sha512-++V8H8UQaDT2xsZn4eyNK4n55bsH9ncOuCatA238RptQa19uryLDVKqgSFhNbZ61aVUQ29Xel6q2rJVdS+J64Q==
+"@mui/x-virtualizer@0.2.10":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.2.10.tgz#f5deaa0e79baeb7ba85e3a606e66fe6dcc2bd2c1"
+  integrity sha512-PGZeWFQzyw3IuxuoDT8NewwSseO6PxR86iC7WGMfmUwJ3s1Z2XL83PXlAxLeqJ4Oi9Y4+4wQ7m6bLAKg7VQ3kg==
   dependencies:
     "@babel/runtime" "^7.28.4"
     "@mui/utils" "^7.3.5"
