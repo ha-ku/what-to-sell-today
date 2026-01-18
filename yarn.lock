@@ -3834,10 +3834,10 @@ react-google-recaptcha@^3.1.0:
     prop-types "^15.5.0"
     react-async-script "^1.2.0"
 
-react-hotkeys-hook@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.2.1.tgz#a47ff1105057bf06de079624ec582a6d124be48e"
-  integrity sha512-xbKh6zJxd/vJHT4Bw4+0pBD662Fk20V+VFhLqciCg+manTVO4qlqRqiwFOYelfHN9dBvWj9vxaPkSS26ZSIJGg==
+react-hotkeys-hook@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.2.3.tgz#251ddc60ead2b68498af999b07dba2bf278b8999"
+  integrity sha512-Q27F8EuImYJOVSXAjSQrQPj9cx4GSNY+WdSdk5tSNN085H8/a00W6LZp0PrytEDwF6iT0pGTJeVEDKPRpEK2Bg==
 
 react-intl@^8.1.0:
   version "8.1.0"
