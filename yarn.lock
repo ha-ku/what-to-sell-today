@@ -1531,10 +1531,10 @@
     prop-types "^15.8.1"
     react-is "^19.2.3"
 
-"@mui/x-data-grid@^8.27.3":
-  version "8.27.3"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.27.3.tgz#1a82e06df8327d09c8585692441f7200dc720b00"
-  integrity sha512-4JhwMBLGpaSyg8tqnYkegk4gfXovqxT+gRlm2Lb8f3WDFUPsVGL5c/bMi7MSRkYJ2h1pGXaLKaYORLR62xuRAQ==
+"@mui/x-data-grid@^8.27.5":
+  version "8.27.5"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.27.5.tgz#bf9afa8ea9e158fc997ae4df0dc3b1223921ad7e"
+  integrity sha512-jlm/ldbPtw3i0rQGXUSXPjNlvjaMz9PVYFHq7n2ZyR8kUDVAdPE1m5mP1k/wuwiAznR74drihKjx8AUgbRSdQQ==
   dependencies:
     "@babel/runtime" "^7.28.4"
     "@mui/utils" "^7.3.5"
