@@ -1558,6 +1558,18 @@
     prop-types "^15.8.1"
     react-is "^19.2.4"
 
+"@mui/utils@9.0.1", "@mui/utils@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-9.0.1.tgz#044c89f0f7e61e77f82f9496535744fc5d5a5128"
+  integrity sha512-f3UO3jNN1pYg5zxqXC81Bvv8hx5ACcYc0387382ZI7M5ono1heIwHYLrKsz85myguWdeVKPRZGmDdynWUBjK2g==
+  dependencies:
+    "@babel/runtime" "^7.29.2"
+    "@mui/types" "^9.0.0"
+    "@types/prop-types" "^15.7.15"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    react-is "^19.2.4"
+
 "@mui/utils@^7.3.9":
   version "7.3.9"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-7.3.9.tgz#8af5093fc93c2e582fa3d047f561c7b690509bc2"
@@ -1570,25 +1582,13 @@
     prop-types "^15.8.1"
     react-is "^19.2.3"
 
-"@mui/utils@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-9.0.1.tgz#044c89f0f7e61e77f82f9496535744fc5d5a5128"
-  integrity sha512-f3UO3jNN1pYg5zxqXC81Bvv8hx5ACcYc0387382ZI7M5ono1heIwHYLrKsz85myguWdeVKPRZGmDdynWUBjK2g==
+"@mui/x-data-grid@^9.2.0":
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.2.0.tgz#0107bbcb8f0e1e3ed20fb2d470e7a9cd625ca670"
+  integrity sha512-N5d54S7ca6e8jcht3286j3j6Wij56Cl8SOFa1v3BbR6WTQEZmviTF4HlHoO+L5OhnHB1tLHVpTlFIv31dJ9VHg==
   dependencies:
     "@babel/runtime" "^7.29.2"
-    "@mui/types" "^9.0.0"
-    "@types/prop-types" "^15.7.15"
-    clsx "^2.1.1"
-    prop-types "^15.8.1"
-    react-is "^19.2.4"
-
-"@mui/x-data-grid@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.1.0.tgz#ad428369e8fab39aa1b221b8ea6382028cc5b80b"
-  integrity sha512-PcOfqdffQFDZ+6oCc5sEvOR6r3R24P1RTeVeF4YkEasEQU5gEzicNIzk9DmfGeDpQKALwSccbgZgYE/5cVongA==
-  dependencies:
-    "@babel/runtime" "^7.29.2"
-    "@mui/utils" "9.0.0"
+    "@mui/utils" "9.0.1"
     "@mui/x-internals" "^9.1.0"
     "@mui/x-virtualizer" "9.0.0-alpha.5"
     clsx "^2.1.1"
