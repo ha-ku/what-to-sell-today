@@ -3709,10 +3709,10 @@ path-type@^4.0.0:
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-pbf@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/pbf/-/pbf-4.0.2.tgz#70f71a5c4df774438c1db482630146decb03e2d9"
-  integrity sha512-J0ajxARhZfpUEebxYs1vhMGMuLSXtBe1e+fFPDrf2uA2hgo+UshKfNUWOz92HJNz6/NFEXseQPddnHkTreWRqg==
+pbf@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/pbf/-/pbf-5.0.0.tgz#8f05c6b8242296b2a3a627a270c1ea73125031b6"
+  integrity sha512-HFx0doswd4f/TcMbK4x8ZpnRdjdYnqxvpY+gYfxGA0hZwSAwtasDugdm8RvqjHAFmEXtdCZBEywpDwuMdwgBFg==
   dependencies:
     resolve-protobuf-schema "^2.1.0"
 
