@@ -1037,14 +1037,14 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@base-ui/utils@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@base-ui/utils/-/utils-0.2.9.tgz#f6fe1704722a072721704f487a48754dbfe8f96b"
-  integrity sha512-x/PDDCYzoqPpjrdyb3VcyylTI2IjUXEtYDGi5foh7KsnmNJIIaVwA2GLgDH1dps1GgXiJbA60hM+AyuTfQzIvw==
+"@base-ui/utils@^0.3.0":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@base-ui/utils/-/utils-0.3.1.tgz#329b4fbd5e66a78a93df68223061224f474e5c0f"
+  integrity sha512-gFFiltORVmW/N6IILTGxizP3PBpVpysqML1ALY5Vk0mH+7faVkCknOU31goYHN5Aoek2dkjxva1XOD2Ce9WuIg==
   dependencies:
     "@babel/runtime" "^7.29.2"
     "@floating-ui/utils" "^0.2.11"
-    reselect "^5.1.1"
+    reselect "^5.2.0"
     use-sync-external-store "^1.6.0"
 
 "@discoveryjs/json-ext@0.5.7":
@@ -1573,7 +1573,7 @@
     prop-types "^15.8.1"
     react-is "^19.2.3"
 
-"@mui/utils@^9.0.1", "@mui/utils@^9.1.1":
+"@mui/utils@^9.1.1":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-9.1.1.tgz#94dbb62dbaadad0d890ca0501838ce578d17da04"
   integrity sha512-qSNfnkzZMptaaWFFklpDf4NPJztgwsMDVfM/sSDt+wq4ssYSBhLYwwjuB6eS/+p2IUYbeRzHluzXbw0Zn7aI4A==
@@ -1585,39 +1585,41 @@
     prop-types "^15.8.1"
     react-is "^19.2.6"
 
-"@mui/x-data-grid@^9.6.0":
-  version "9.6.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.6.0.tgz#239fc3da21f99f72107f9a9e7f0da53ed485d2e5"
-  integrity sha512-T2Zp264VERDPBUobdqODEi8YqcgZpCDgzrb5p0w5e+DHHjgacizuZBL8PuWORxvJR0j5ucUn64+Fq9ZgoI4WBw==
+"@mui/x-data-grid@^9.7.0":
+  version "9.7.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.7.0.tgz#83b6cd7ae9d9c8a8dc8a09954f91e75b8673610b"
+  integrity sha512-VqcYklIlhK1GSvHdsBzk6NxqQguzquqSyxL+yNEUwZpJgLIDJp16/kxV1wTaFJN8uRhUSo8SOnsVIsBr6zZwVg==
   dependencies:
     "@babel/runtime" "^7.29.7"
-    "@mui/utils" "^9.0.1"
-    "@mui/x-internals" "^9.6.0"
-    "@mui/x-virtualizer" "9.0.0-alpha.10"
+    "@base-ui/utils" "^0.3.0"
+    "@mui/utils" "^9.1.1"
+    "@mui/x-internals" "^9.7.0"
+    "@mui/x-virtualizer" "0.5.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-internals@^9.6.0":
-  version "9.6.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.6.0.tgz#5f9e65adf0d45146437a2f1e32530d8f27df4763"
-  integrity sha512-lBh+4P2CRyspoFbBwCemTFIYmAAX8esznDsYYDGgV0+Id9z7Xi5pRZUAFY33XodYgTnMPiN4TJyfd8bfJbPNzg==
+"@mui/x-internals@^9.7.0":
+  version "9.7.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.7.0.tgz#98543d43e769a24da6ea055e7364abd02bc4e6be"
+  integrity sha512-fdBwh96L78QFZXB1oS2v8y33gXap3A6Tc0+AJYxYzLsRwx05WnaWhtHEwNV2x7zLXLaZ4ux0CCAJIgZ6kTP4FA==
   dependencies:
     "@babel/runtime" "^7.29.7"
-    "@base-ui/utils" "^0.2.9"
-    "@mui/utils" "^9.0.1"
+    "@base-ui/utils" "^0.3.0"
+    "@mui/utils" "^9.1.1"
     core-js-pure "^3.49.0"
     reselect "^5.2.0"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-virtualizer@9.0.0-alpha.10":
-  version "9.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-9.0.0-alpha.10.tgz#99b70332a665e11ee4939ce30dc96c02c0d586ae"
-  integrity sha512-Et1wloXfxD/z037Wk6H0lGFcFzH4o/+5VL+faLgkE1IZHzV64PEg7Z4OLoi9vwSMsfOB35OBVNjBajiepD8L+w==
+"@mui/x-virtualizer@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.5.0.tgz#50198d6319453f17b4d4edb660bbbce3724f92bd"
+  integrity sha512-L87mSQnUtPGoAX8AZstQEr2I2/8hy41FWOQoL3g6iG/UzvF+VP8zJ9pF07qiEg+sH+iwnAxShLRlCrqEBS1qSw==
   dependencies:
     "@babel/runtime" "^7.29.7"
-    "@mui/utils" "^9.0.1"
-    "@mui/x-internals" "^9.6.0"
+    "@base-ui/utils" "^0.3.0"
+    "@mui/utils" "^9.1.1"
+    "@mui/x-internals" "^9.7.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
@@ -3974,7 +3976,7 @@ require-from-string@^2.0.2:
   resolved "https://registry.npmjs.org/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
 
-reselect@^5.1.0, reselect@^5.1.1:
+reselect@^5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-5.1.1.tgz#c766b1eb5d558291e5e550298adb0becc24bb72e"
   integrity sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==
