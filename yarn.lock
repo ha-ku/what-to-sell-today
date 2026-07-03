@@ -1585,41 +1585,40 @@
     prop-types "^15.8.1"
     react-is "^19.2.6"
 
-"@mui/x-data-grid@^9.7.0":
-  version "9.7.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.7.0.tgz#83b6cd7ae9d9c8a8dc8a09954f91e75b8673610b"
-  integrity sha512-VqcYklIlhK1GSvHdsBzk6NxqQguzquqSyxL+yNEUwZpJgLIDJp16/kxV1wTaFJN8uRhUSo8SOnsVIsBr6zZwVg==
+"@mui/x-data-grid@^9.8.0":
+  version "9.8.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.8.0.tgz#691205461a9db3bc48db33507d2dfb1038abaa51"
+  integrity sha512-WFUyV/6cEY8kwpFbP2tuHrfK59qAY5Z7eqb2XJevEg1InxB+FlgckBiUy0LnqQjVIuFPc34PZMFYm5ttmyjMZw==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
     "@mui/utils" "^9.1.1"
-    "@mui/x-internals" "^9.7.0"
-    "@mui/x-virtualizer" "0.5.0"
+    "@mui/x-internals" "^9.8.0"
+    "@mui/x-virtualizer" "0.5.1"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-internals@^9.7.0":
-  version "9.7.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.7.0.tgz#98543d43e769a24da6ea055e7364abd02bc4e6be"
-  integrity sha512-fdBwh96L78QFZXB1oS2v8y33gXap3A6Tc0+AJYxYzLsRwx05WnaWhtHEwNV2x7zLXLaZ4ux0CCAJIgZ6kTP4FA==
+"@mui/x-internals@^9.8.0":
+  version "9.8.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.8.0.tgz#59f64d52721a958bd57b9f4fe897a6f8c6b68615"
+  integrity sha512-eVwqPAoxxQ0WEa5+lUeCdHLdfQbUNeOQ3wPMc3S3+yGecymH6J0FfGPDPSBnFkFNVhXAaRXElKNP8Uvoz5d4Vw==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
     "@mui/utils" "^9.1.1"
-    core-js-pure "^3.49.0"
     reselect "^5.2.0"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-virtualizer@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.5.0.tgz#50198d6319453f17b4d4edb660bbbce3724f92bd"
-  integrity sha512-L87mSQnUtPGoAX8AZstQEr2I2/8hy41FWOQoL3g6iG/UzvF+VP8zJ9pF07qiEg+sH+iwnAxShLRlCrqEBS1qSw==
+"@mui/x-virtualizer@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.5.1.tgz#e2a3227fb07f91e0e1a83677623d83a3fb047784"
+  integrity sha512-N64zzE2AJK7ZTi4nkQXmFmEuouwXA8LJyXdOW+/0Kq0R14uX6N/xKL8rGtafyjNftsUdgVwJJ7gqccgBaiWsXw==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
     "@mui/utils" "^9.1.1"
-    "@mui/x-internals" "^9.7.0"
+    "@mui/x-internals" "^9.8.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
@@ -2455,11 +2454,6 @@ core-js-compat@^3.25.1:
   integrity sha512-welaYuF7ZtbYKGrIy7y3eb40d37rG1FvzEOfe7hSLd2iD6duMDqUhRfSvCGyC46HhR6Y8JXXdZ2lnRUMkPBpvg==
   dependencies:
     browserslist "^4.21.4"
-
-core-js-pure@^3.49.0:
-  version "3.49.0"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.49.0.tgz#ff8436b7251a3832f5fdbbe3e10f7f2e58e51fb1"
-  integrity sha512-XM4RFka59xATyJv/cS3O3Kml72hQXUeGRuuTmMYFxwzc9/7C8OYTaIR/Ji+Yt8DXzsFLNhat15cE/JP15HrCgw==
 
 cosmiconfig@^7.0.0:
   version "7.1.0"
