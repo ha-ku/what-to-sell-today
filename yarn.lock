@@ -1573,7 +1573,7 @@
     prop-types "^15.8.1"
     react-is "^19.2.3"
 
-"@mui/utils@^9.1.1", "@mui/utils@^9.2.0":
+"@mui/utils@^9.2.0":
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-9.2.0.tgz#1da604f8fcfb6964e20e3a93f4ad3b719f73c843"
   integrity sha512-OsUH5zhlSOM4xmLl53+agug1M1UyWb4zxFxWQCqwKTKUeQPvTENtg3JhrroBD2qpCLKsX5W/DYGERJ4mBUbc8g==
@@ -1585,40 +1585,40 @@
     prop-types "^15.8.1"
     react-is "^19.2.6"
 
-"@mui/x-data-grid@^9.8.0":
-  version "9.8.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.8.0.tgz#691205461a9db3bc48db33507d2dfb1038abaa51"
-  integrity sha512-WFUyV/6cEY8kwpFbP2tuHrfK59qAY5Z7eqb2XJevEg1InxB+FlgckBiUy0LnqQjVIuFPc34PZMFYm5ttmyjMZw==
+"@mui/x-data-grid@^9.9.0":
+  version "9.9.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.9.0.tgz#d096af111b9a47c2847cdcc48c36c80cebc5bc05"
+  integrity sha512-HN9dsojdIvoXTGgS1tAqSYXVOsFeOe7zO+e27bu2N/B5tbBq8cClUT63Vj3CYVn/VBXphOtnnKW2aqLQ+g9JWg==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
-    "@mui/utils" "^9.1.1"
-    "@mui/x-internals" "^9.8.0"
-    "@mui/x-virtualizer" "0.5.1"
+    "@mui/utils" "^9.2.0"
+    "@mui/x-internals" "^9.9.0"
+    "@mui/x-virtualizer" "0.6.0"
     clsx "^2.1.1"
     prop-types "^15.8.1"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-internals@^9.8.0":
-  version "9.8.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.8.0.tgz#59f64d52721a958bd57b9f4fe897a6f8c6b68615"
-  integrity sha512-eVwqPAoxxQ0WEa5+lUeCdHLdfQbUNeOQ3wPMc3S3+yGecymH6J0FfGPDPSBnFkFNVhXAaRXElKNP8Uvoz5d4Vw==
+"@mui/x-internals@^9.9.0":
+  version "9.9.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.9.0.tgz#adcd60c490573e1ad81e8d4a26acf6f4e48bc9be"
+  integrity sha512-RMddUd59Qie2o4dralFUcp4Hzu0HOyeYqjh2t3zkpURX1CGX2tUbYZxCwC5UjLJ/PBcSqmSDrGalx7Z8UQFX+g==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
-    "@mui/utils" "^9.1.1"
+    "@mui/utils" "^9.2.0"
     reselect "^5.2.0"
     use-sync-external-store "^1.6.0"
 
-"@mui/x-virtualizer@0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.5.1.tgz#e2a3227fb07f91e0e1a83677623d83a3fb047784"
-  integrity sha512-N64zzE2AJK7ZTi4nkQXmFmEuouwXA8LJyXdOW+/0Kq0R14uX6N/xKL8rGtafyjNftsUdgVwJJ7gqccgBaiWsXw==
+"@mui/x-virtualizer@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.6.0.tgz#c77270a3475547b739adfb2c8aaf8d26df2ba2fa"
+  integrity sha512-6LsLn+JFg3tkDdtxfa/KoCRMzzLxPdCHp4sXSMyFO+GOGuamTHe+7xijJVADD7a0dlGKUNCVFFBRDffmZXYqZA==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.0"
-    "@mui/utils" "^9.1.1"
-    "@mui/x-internals" "^9.8.0"
+    "@mui/utils" "^9.2.0"
+    "@mui/x-internals" "^9.9.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
