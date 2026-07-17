@@ -1176,10 +1176,10 @@
   resolved "https://registry.yarnpkg.com/@formatjs/fast-memoize/-/fast-memoize-3.1.7.tgz#5f79b3756e4bcb5faee47b3a2f01216e1212c9e4"
   integrity sha512-zXfhLpvA6T7+efdt9JLbBwZ00tT7NsBMDVnDu8rpHeNNv8KfRZAMo2gkG0k9lK/Nzc//3kJ9pImsfuJxk3KhUA==
 
-"@formatjs/icu-messageformat-parser@3.5.14":
-  version "3.5.14"
-  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-3.5.14.tgz#6e7089718db1f690a0d18f7c6bc238b991a5eb6c"
-  integrity sha512-jDvgtoLqe3U6yzoBlToMTkWBe38qSi7LN7kFlnXzd5ig8nn+4tSlED0xtEtdYakZVZGJJY2rW1D5xS3BFZh6kA==
+"@formatjs/icu-messageformat-parser@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-3.5.15.tgz#2c01caddd2c91ab7f4207a9bda2f57d97150b61f"
+  integrity sha512-5o4grXKotAB3JqQuisLApHG43g17N+paoRTa92Jiz35Zvfemq0cVf4EDvuxyHAzmsJji7igaEowicLO/VmfJ8Q==
   dependencies:
     "@formatjs/icu-skeleton-parser" "2.1.11"
 
@@ -1188,14 +1188,14 @@
   resolved "https://registry.yarnpkg.com/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-2.1.11.tgz#09226edf55a18e3fea80304d2cc95aaeb0095436"
   integrity sha512-j8cUmOJzVgkHuS0QiQ6ga76UIoLOFSAMWhs7aZJztH3aAdCOAE6vpC8KVvFB4cU10ON0y2/5oOVmPJ43s2lTwA==
 
-"@formatjs/intl@4.1.16":
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-4.1.16.tgz#85f4e365e5e242b2a76e533ad60da2d9bb6111cd"
-  integrity sha512-EJe0wdORNZyzzqOmZs+sqFTL27iTcgNR6aiNT5+OscakcKvA673MyJ4SO9p5L+RQpPDw3v+jWidpo/Jaz14khg==
+"@formatjs/intl@4.1.17":
+  version "4.1.17"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-4.1.17.tgz#8b78b589d54757348530752afd46a91003899509"
+  integrity sha512-IxluRkzOZH8ahaDip5g8YH9kJi1munUZi9i1BJs1wVFQIY2pROoCSiOlybZegyiPsZlMaYfADkD99zP2xmBfjQ==
   dependencies:
     "@formatjs/fast-memoize" "3.1.7"
-    "@formatjs/icu-messageformat-parser" "3.5.14"
-    intl-messageformat "11.2.11"
+    "@formatjs/icu-messageformat-parser" "3.5.15"
+    intl-messageformat "11.2.12"
 
 "@img/colour@^1.0.0":
   version "1.0.0"
@@ -3104,13 +3104,13 @@ internal-slot@^1.0.3, internal-slot@^1.0.4:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-intl-messageformat@11.2.11:
-  version "11.2.11"
-  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-11.2.11.tgz#5d767ca14101bd6a31ac1d7244bac7a266838e1f"
-  integrity sha512-aDG5bvFRbQvRoT2Bh9FV6yV8t7o0MjEGknZ6pnin5Wt52PJwaBOHDfvz+oPEe78Pl3InQYKugBgCdXijLj6viQ==
+intl-messageformat@11.2.12:
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-11.2.12.tgz#10a5b8ffd5cbe0bb233cb7d9adc18ba901b8f429"
+  integrity sha512-KW70Xxfcvy7vV3qODfvShWkFDPMqKDAa4N+hSyVBWGNtVhTUFYaqlD/l88DaYPKiVcPP4rPQ3qnH7i5K82Mg7g==
   dependencies:
     "@formatjs/fast-memoize" "3.1.7"
-    "@formatjs/icu-messageformat-parser" "3.5.14"
+    "@formatjs/icu-messageformat-parser" "3.5.15"
 
 is-arguments@^1.0.4:
   version "1.1.1"
@@ -3856,14 +3856,14 @@ react-hotkeys-hook@^5.3.3:
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.3.3.tgz#e44fd66134eb95d37f5ac435ad073fd5364ac2fb"
   integrity sha512-aswgyWUnE25hmhzHTfKDmKzsaSE5DJ4LKaU/o6rQSXkDd/1Bh9TfAFQbHkf6fLy11HvlYkp+cDDarGdhmCDhoQ==
 
-react-intl@^10.1.16:
-  version "10.1.16"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.1.16.tgz#d011d367275bd2337ea720ebab04a8a589d11b24"
-  integrity sha512-wt9lV390x/Fbqx9A1X4F+daxOzBb2LRybc2vNVS6FpI81TnV/LBlN29W3BBeh2b8cP3aWrofyrAhdViE1AD5pQ==
+react-intl@^10.1.17:
+  version "10.1.17"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.1.17.tgz#3bd9a524d75fef174b460b53dca6b3b889eb31cc"
+  integrity sha512-OxI0y3+fOeVNGGFEPNlsb0yNwUrLDJGTaXvfzSSkQugqgBD4Lm831EKZhG+2fVPLh1aAKva3phPm93fp1dergw==
   dependencies:
-    "@formatjs/icu-messageformat-parser" "3.5.14"
-    "@formatjs/intl" "4.1.16"
-    intl-messageformat "11.2.11"
+    "@formatjs/icu-messageformat-parser" "3.5.15"
+    "@formatjs/intl" "4.1.17"
+    intl-messageformat "11.2.12"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
