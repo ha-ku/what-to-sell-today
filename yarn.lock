@@ -3843,10 +3843,10 @@ react-hotkeys-hook@^5.3.3:
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.3.3.tgz#e44fd66134eb95d37f5ac435ad073fd5364ac2fb"
   integrity sha512-aswgyWUnE25hmhzHTfKDmKzsaSE5DJ4LKaU/o6rQSXkDd/1Bh9TfAFQbHkf6fLy11HvlYkp+cDDarGdhmCDhoQ==
 
-react-intl@^10.1.25:
-  version "10.1.25"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.1.25.tgz#3ded142e491f5cadd479e7e33922be070d8489c1"
-  integrity sha512-otONc4Dqk0HNDdM1xVtjVm1pfeADRDZUnNMOiDZBYCYTz4FxYcid6Y2PrzeY3+FspW6ieObXtc3+VFUJYbDDGg==
+react-intl@^10.1.26:
+  version "10.1.26"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.1.26.tgz#263b29a967fa498828000c08b143150a09646162"
+  integrity sha512-3Sf4enrUzJqyPpH/NxIJtlwrNzuR7Cu1qey/ZxKXs3XGUxmwyAV2OZUTL4cFY3L+ebUBtkB1mf0KzpvmQ6ZfFA==
   dependencies:
     "@formatjs/icu-messageformat-parser" "3.5.17"
     "@formatjs/intl" "4.1.20"
