@@ -1188,10 +1188,10 @@
   resolved "https://registry.yarnpkg.com/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-2.1.11.tgz#09226edf55a18e3fea80304d2cc95aaeb0095436"
   integrity sha512-j8cUmOJzVgkHuS0QiQ6ga76UIoLOFSAMWhs7aZJztH3aAdCOAE6vpC8KVvFB4cU10ON0y2/5oOVmPJ43s2lTwA==
 
-"@formatjs/intl@4.1.20":
-  version "4.1.20"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-4.1.20.tgz#77ae9244db6dd8d81b822685fe777300af4e3858"
-  integrity sha512-q3gaFvc1mXrl0fcSY2QKSS+WzJxpbIXs48O+QLA3UsRtIwVhazvxtLrLGKEse5Mq4U8hAYyTB6Y9buU2ZRFz/w==
+"@formatjs/intl@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-4.2.0.tgz#fadf90f2b1d02faaa68fa770f66a1f384e82653b"
+  integrity sha512-FbiaRjnQjjqo8FzayDEuuFLj+lCrSEDEmeXXGRpBUioaukr/+4djq4TYIpXnsVh2DWqYyOrMu8cLpc/rGmVHlw==
   dependencies:
     "@formatjs/fast-memoize" "3.1.7"
     "@formatjs/icu-messageformat-parser" "3.5.17"
@@ -3843,13 +3843,13 @@ react-hotkeys-hook@^5.3.3:
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.3.3.tgz#e44fd66134eb95d37f5ac435ad073fd5364ac2fb"
   integrity sha512-aswgyWUnE25hmhzHTfKDmKzsaSE5DJ4LKaU/o6rQSXkDd/1Bh9TfAFQbHkf6fLy11HvlYkp+cDDarGdhmCDhoQ==
 
-react-intl@^10.1.26:
-  version "10.1.26"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.1.26.tgz#263b29a967fa498828000c08b143150a09646162"
-  integrity sha512-3Sf4enrUzJqyPpH/NxIJtlwrNzuR7Cu1qey/ZxKXs3XGUxmwyAV2OZUTL4cFY3L+ebUBtkB1mf0KzpvmQ6ZfFA==
+react-intl@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-10.2.0.tgz#576783362ada9bc9a8ced594b1d8ff1225a08f2f"
+  integrity sha512-b7wiqmo/fWQZ5Et7f8Qsh58rD+6STV/KrX4NuVjmpGFAxk2vqgEwGKDlW0uRfWG2mg4zt7sWnxvOBfLPMDkMYA==
   dependencies:
     "@formatjs/icu-messageformat-parser" "3.5.17"
-    "@formatjs/intl" "4.1.20"
+    "@formatjs/intl" "4.2.0"
     intl-messageformat "11.2.14"
 
 react-is@^16.13.1, react-is@^16.7.0:
