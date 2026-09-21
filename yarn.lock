@@ -1607,40 +1607,40 @@
     prop-types "^15.8.1"
     react-is "^19.2.8"
 
-"@mui/x-data-grid@^9.13.0":
-  version "9.13.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.13.0.tgz#ecf884310d7031f112a1334fc2cb0a051cc085cb"
-  integrity sha512-7eXNgwSMGIwv+KiCuunzr1Rt3bZE1ubuCDukWUcie4XHV54Adn+M0dJBowU4+VVpY2WMF7BEnL8pVdq96csA4g==
+"@mui/x-data-grid@^9.14.0":
+  version "9.14.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-9.14.0.tgz#b4a90c435fda46d2f624e540d219e8723e455440"
+  integrity sha512-DvQpyg3rkNs4GePo3x8NARoeco/EU7IaFLj4hNoAkuD5sWXMKNWLKERWLZvihVani2ypYYJ56FV4SmbNkFuv/g==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.2"
     "@mui/utils" "^9.4.0"
-    "@mui/x-internals" "^9.13.0"
-    "@mui/x-virtualizer" "0.7.1"
+    "@mui/x-internals" "^9.14.0"
+    "@mui/x-virtualizer" "0.7.2"
     clsx "^2.1.1"
     prop-types "^15.8.1"
-    use-sync-external-store "^1.6.0"
+    use-sync-external-store "^1.7.0"
 
-"@mui/x-internals@^9.13.0":
-  version "9.13.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.13.0.tgz#320cf718cccaa36734c913a9c05b6c5a4acd203c"
-  integrity sha512-TAxYhWSQR351zhUO709ShsGlvbI9RSsh6zIn99tLmkxKav+QFoxAlullzd79dQOxjUsau6spw/hmYcB+zLGipQ==
+"@mui/x-internals@^9.14.0":
+  version "9.14.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-9.14.0.tgz#c1866a908a9a00d7a640ae61bf385d07ac3044fe"
+  integrity sha512-m4XkKIihP+uWvz18BgSOHtwxCBWtE3Qi2X9hZUdEGW5mk50umziYaCLn9B/3cT9qBU7LirEC8agqpWxDSYjaNw==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.2"
     "@mui/utils" "^9.4.0"
     reselect "^5.2.0"
-    use-sync-external-store "^1.6.0"
+    use-sync-external-store "^1.7.0"
 
-"@mui/x-virtualizer@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.7.1.tgz#4645e9ccc79aab08a136ef62dea83b4bd71103a4"
-  integrity sha512-WNkwOr1g2PrtaEtQzDYVaFEHlPj983UA3JuazBw+pANTlUifaD2IQIfD/5QCVr3dOal5eOByfWecp+IPH2A9zA==
+"@mui/x-virtualizer@0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.7.2.tgz#c0741c64a1ab33e236ba3a834add4feb83236fd2"
+  integrity sha512-8JYK1KZe7rVMzBRxvEZYt0BYS5zXRDV0HPXqTSwe4TPPuldCjTII7IvlzkSC8yS24+2iDlYo5kBKdTJ8uzfMjg==
   dependencies:
     "@babel/runtime" "^7.29.7"
     "@base-ui/utils" "^0.3.2"
     "@mui/utils" "^9.4.0"
-    "@mui/x-internals" "^9.13.0"
+    "@mui/x-internals" "^9.14.0"
 
 "@murkrage/next-pwa@^5.7.1":
   version "5.7.1"
@@ -4462,10 +4462,10 @@ use-local-storage-state@^20.0.0:
   resolved "https://registry.yarnpkg.com/use-local-storage-state/-/use-local-storage-state-20.0.0.tgz#b58047e39aee78f59013f04c275d258fbb10d872"
   integrity sha512-PSaIAivHEv1+XtOr7FwyCYRx5fVf+3uW0d2rr/pbc7zWarHu7U4JQZs5KPaHxAaUVTwPYVJyL0ysdChVV0GR2Q==
 
-use-sync-external-store@^1.4.0, use-sync-external-store@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz#b174bfa65cb2b526732d9f2ac0a408027876f32d"
-  integrity sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==
+use-sync-external-store@^1.4.0, use-sync-external-store@^1.6.0, use-sync-external-store@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.7.0.tgz#6dcb66ef569e02f186af6b3d575f414ce746e18f"
+  integrity sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==
 
 util@^0.12.5:
   version "0.12.5"
