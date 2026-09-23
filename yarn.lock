@@ -1176,10 +1176,10 @@
   resolved "https://registry.yarnpkg.com/@formatjs/fast-memoize/-/fast-memoize-3.1.7.tgz#5f79b3756e4bcb5faee47b3a2f01216e1212c9e4"
   integrity sha512-zXfhLpvA6T7+efdt9JLbBwZ00tT7NsBMDVnDu8rpHeNNv8KfRZAMo2gkG0k9lK/Nzc//3kJ9pImsfuJxk3KhUA==
 
-"@formatjs/icu-messageformat-parser@3.5.19":
-  version "3.5.19"
-  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-3.5.19.tgz#fdbf1c4c515f4651ad15ea8753ef1fe37db5bb68"
-  integrity sha512-a5PAqgd3QPUge635SxrjPLIlTErcGwm3AMyTdmZXl0IqWXTdCx9AnuioEmvEZAV2HpeFdynLPXMvHv7dXGEWWw==
+"@formatjs/icu-messageformat-parser@3.5.20":
+  version "3.5.20"
+  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-3.5.20.tgz#2775334b80cb20a4e2cfc2fe92bc1e0554567be0"
+  integrity sha512-DUzCb2iskGDKvLU7P+nz/rjpmN59luoTRbWHFFNYNnZTxWCKvwPI94rNll99TGZaI6XoTbDF0QGegk21GFrQZQ==
   dependencies:
     "@formatjs/icu-skeleton-parser" "2.1.12"
 
@@ -1188,14 +1188,14 @@
   resolved "https://registry.yarnpkg.com/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-2.1.12.tgz#5471028b1f2516c63456aba92d109a0d230d2a0f"
   integrity sha512-ca7tZMLpfHX3sUD7hP6gE/qr6Iq89EDd3ZLeRhbsB7r0UD55DGJq+tmFLzrGrnx5StahUevQmQQVtbDRHsfDHA==
 
-"@formatjs/intl@6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-6.1.1.tgz#0ec3e0e58f3a232d3a20bb84ec2468161d78f485"
-  integrity sha512-kKxt7HZrmlSChntA4OAD5DlaDcKeUJOOvWKA/7ORiM1dQ+GYuiIz6FuDOkMeo/aVzSJ6hA25etFAtCnHEalqJw==
+"@formatjs/intl@6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl/-/intl-6.1.2.tgz#15cc4bacc230c052d79007a939a0f7eb72e23981"
+  integrity sha512-YH3Ldfa2vmavWgBlCyrT9WiobphTXlNHnHxhhB6nLSUOxmitJ6Bzqzg61uBcnc6yhKTU+YRo8hLhEatOZrVJUg==
   dependencies:
     "@formatjs/fast-memoize" "3.1.7"
-    "@formatjs/icu-messageformat-parser" "3.5.19"
-    intl-messageformat "12.1.1"
+    "@formatjs/icu-messageformat-parser" "3.5.20"
+    intl-messageformat "12.1.2"
 
 "@img/colour@^1.1.0":
   version "1.1.0"
@@ -3106,13 +3106,13 @@ internal-slot@^1.0.3, internal-slot@^1.0.4:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-intl-messageformat@12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-12.1.1.tgz#12f89441e870754cee7fb312b346b4ec51656c25"
-  integrity sha512-ZNwni2Ihmge8FZ0O+n7JQXHNAZfFGN/ovLrIxyfFK/bEsnHV2bG3W75Z24GdKmMepiq21SiMfANNPze+xjSCHA==
+intl-messageformat@12.1.2:
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-12.1.2.tgz#4aa9fb0615303d17d6c97d0114f47590a6eb541e"
+  integrity sha512-Y7ZnMtT/04nVJnjf1/x/AkfP5we/iN0AhckDdlFPtnetk6/VTuj2OPW5SE7steMd3UNaOtky4KJJY6jwyvWfJg==
   dependencies:
     "@formatjs/fast-memoize" "3.1.7"
-    "@formatjs/icu-messageformat-parser" "3.5.19"
+    "@formatjs/icu-messageformat-parser" "3.5.20"
 
 is-arguments@^1.0.4:
   version "1.1.1"
@@ -3848,14 +3848,14 @@ react-hotkeys-hook@^5.3.3:
   resolved "https://registry.yarnpkg.com/react-hotkeys-hook/-/react-hotkeys-hook-5.3.3.tgz#e44fd66134eb95d37f5ac435ad073fd5364ac2fb"
   integrity sha512-aswgyWUnE25hmhzHTfKDmKzsaSE5DJ4LKaU/o6rQSXkDd/1Bh9TfAFQbHkf6fLy11HvlYkp+cDDarGdhmCDhoQ==
 
-react-intl@^12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-12.1.1.tgz#df53542b3af4e88f41ad317cd061f39ed8e3013c"
-  integrity sha512-W+i+eifLA3ZTVmAtdfjU7+2dBPAapJeaFwHGKeEyVv1xYUft6tBEU5z1dmgvJlkgs6mn8phFHP5wQQIfU1SjCQ==
+react-intl@^12.1.2:
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-12.1.2.tgz#a8ff8778e7ba95234bfefc5ebab74b5801c3c66d"
+  integrity sha512-+vRvVasUvksPtilKw00ayU5/HrXD+/XmlN7CG5782nkK8GhUc59uw4GsAzqBkf90Ei6a+4JSAgB1AFLS7kEDDg==
   dependencies:
-    "@formatjs/icu-messageformat-parser" "3.5.19"
-    "@formatjs/intl" "6.1.1"
-    intl-messageformat "12.1.1"
+    "@formatjs/icu-messageformat-parser" "3.5.20"
+    "@formatjs/intl" "6.1.2"
+    intl-messageformat "12.1.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
